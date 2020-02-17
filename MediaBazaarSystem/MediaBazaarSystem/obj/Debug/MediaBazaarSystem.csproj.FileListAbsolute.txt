@@ -1,0 +1,11 @@
+C:\Users\Gebruiker\Documents\GitHub\MediaBazaar\mediabazaar\MediaBazaarSystem\MediaBazaarSystem\bin\Debug\MediaBazaarSystem.exe.config
+C:\Users\Gebruiker\Documents\GitHub\MediaBazaar\mediabazaar\MediaBazaarSystem\MediaBazaarSystem\bin\Debug\MediaBazaarSystem.exe
+C:\Users\Gebruiker\Documents\GitHub\MediaBazaar\mediabazaar\MediaBazaarSystem\MediaBazaarSystem\bin\Debug\MediaBazaarSystem.pdb
+C:\Users\Gebruiker\Documents\GitHub\MediaBazaar\mediabazaar\MediaBazaarSystem\MediaBazaarSystem\obj\Debug\MediaBazaarSystem.csprojAssemblyReference.cache
+C:\Users\Gebruiker\Documents\GitHub\MediaBazaar\mediabazaar\MediaBazaarSystem\MediaBazaarSystem\obj\Debug\MediaBazaarSystem.formLogin.resources
+C:\Users\Gebruiker\Documents\GitHub\MediaBazaar\mediabazaar\MediaBazaarSystem\MediaBazaarSystem\obj\Debug\MediaBazaarSystem.Properties.Resources.resources
+C:\Users\Gebruiker\Documents\GitHub\MediaBazaar\mediabazaar\MediaBazaarSystem\MediaBazaarSystem\obj\Debug\MediaBazaarSystem.csproj.GenerateResource.cache
+C:\Users\Gebruiker\Documents\GitHub\MediaBazaar\mediabazaar\MediaBazaarSystem\MediaBazaarSystem\obj\Debug\MediaBazaarSystem.exe
+C:\Users\Gebruiker\Documents\GitHub\MediaBazaar\mediabazaar\MediaBazaarSystem\MediaBazaarSystem\obj\Debug\MediaBazaarSystem.pdb
+C:\Users\Gebruiker\Documents\GitHub\MediaBazaar\mediabazaar\MediaBazaarSystem\MediaBazaarSystem\obj\Debug\MediaBazaarSystem.AdministrationSystem.resources
+C:\Users\Gebruiker\Documents\GitHub\MediaBazaar\mediabazaar\MediaBazaarSystem\MediaBazaarSystem\obj\Debug\MediaBazaarSystem.EmployeeSystem.resources
