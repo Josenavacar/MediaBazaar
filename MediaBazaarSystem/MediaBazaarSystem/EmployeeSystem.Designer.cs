@@ -35,6 +35,12 @@
             this.btnViewAllWorkShifts = new System.Windows.Forms.Button();
             this.lbWorkSchedule = new System.Windows.Forms.ListBox();
             this.tabPageStatistics = new System.Windows.Forms.TabPage();
+            this.btnViewAllDepartments = new System.Windows.Forms.Button();
+            this.btnViewAll = new System.Windows.Forms.Button();
+            this.btnSearch = new System.Windows.Forms.Button();
+            this.txtBoxSearch = new System.Windows.Forms.TextBox();
+            this.btnViewAllProducts = new System.Windows.Forms.Button();
+            this.btnViewAllEmployees = new System.Windows.Forms.Button();
             this.lbEmployeeStatistics = new System.Windows.Forms.ListBox();
             this.dataGridViewEmployeeStats = new System.Windows.Forms.DataGridView();
             this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -44,6 +50,7 @@
             this.Column5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabPageProfile = new System.Windows.Forms.TabPage();
+            this.lblEmployeeName = new System.Windows.Forms.Label();
             this.pictureBoxEmployeePhoto = new System.Windows.Forms.PictureBox();
             this.label6 = new System.Windows.Forms.Label();
             this.lblEmail = new System.Windows.Forms.Label();
@@ -58,13 +65,6 @@
             this.txtBoxFirstName = new System.Windows.Forms.TextBox();
             this.btnUpdateProfile = new System.Windows.Forms.Button();
             this.lbEmployeeInfo = new System.Windows.Forms.ListBox();
-            this.lblEmployeeName = new System.Windows.Forms.Label();
-            this.btnViewAllEmployees = new System.Windows.Forms.Button();
-            this.btnViewAllProducts = new System.Windows.Forms.Button();
-            this.txtBoxSearch = new System.Windows.Forms.TextBox();
-            this.btnSearch = new System.Windows.Forms.Button();
-            this.btnViewAll = new System.Windows.Forms.Button();
-            this.btnViewAllDepartments = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabPageHome.SuspendLayout();
             this.tabPageStatistics.SuspendLayout();
@@ -87,7 +87,7 @@
             // 
             // tabPageHome
             // 
-            this.tabPageHome.BackColor = System.Drawing.Color.Tan;
+            this.tabPageHome.BackColor = System.Drawing.SystemColors.Menu;
             this.tabPageHome.Controls.Add(this.dtpWorkSchedule);
             this.tabPageHome.Controls.Add(this.btnViewAllWorkShifts);
             this.tabPageHome.Controls.Add(this.lbWorkSchedule);
@@ -107,7 +107,7 @@
             // 
             // btnViewAllWorkShifts
             // 
-            this.btnViewAllWorkShifts.BackColor = System.Drawing.Color.Peru;
+            this.btnViewAllWorkShifts.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.btnViewAllWorkShifts.Location = new System.Drawing.Point(242, 559);
             this.btnViewAllWorkShifts.Name = "btnViewAllWorkShifts";
             this.btnViewAllWorkShifts.Size = new System.Drawing.Size(385, 39);
@@ -128,7 +128,7 @@
             // 
             // tabPageStatistics
             // 
-            this.tabPageStatistics.BackColor = System.Drawing.Color.Tan;
+            this.tabPageStatistics.BackColor = System.Drawing.SystemColors.Menu;
             this.tabPageStatistics.Controls.Add(this.btnViewAllDepartments);
             this.tabPageStatistics.Controls.Add(this.btnViewAll);
             this.tabPageStatistics.Controls.Add(this.btnSearch);
@@ -143,12 +143,70 @@
             this.tabPageStatistics.TabIndex = 2;
             this.tabPageStatistics.Text = "Statistics";
             // 
+            // btnViewAllDepartments
+            // 
+            this.btnViewAllDepartments.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.btnViewAllDepartments.Location = new System.Drawing.Point(462, 464);
+            this.btnViewAllDepartments.Name = "btnViewAllDepartments";
+            this.btnViewAllDepartments.Size = new System.Drawing.Size(232, 42);
+            this.btnViewAllDepartments.TabIndex = 8;
+            this.btnViewAllDepartments.Text = "View All Departments";
+            this.btnViewAllDepartments.UseVisualStyleBackColor = false;
+            // 
+            // btnViewAll
+            // 
+            this.btnViewAll.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.btnViewAll.Location = new System.Drawing.Point(462, 530);
+            this.btnViewAll.Name = "btnViewAll";
+            this.btnViewAll.Size = new System.Drawing.Size(232, 42);
+            this.btnViewAll.TabIndex = 7;
+            this.btnViewAll.Text = "View All ...";
+            this.btnViewAll.UseVisualStyleBackColor = false;
+            // 
+            // btnSearch
+            // 
+            this.btnSearch.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.btnSearch.Location = new System.Drawing.Point(645, 17);
+            this.btnSearch.Name = "btnSearch";
+            this.btnSearch.Size = new System.Drawing.Size(190, 42);
+            this.btnSearch.TabIndex = 6;
+            this.btnSearch.Text = "Search";
+            this.btnSearch.UseVisualStyleBackColor = false;
+            // 
+            // txtBoxSearch
+            // 
+            this.txtBoxSearch.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtBoxSearch.Location = new System.Drawing.Point(32, 23);
+            this.txtBoxSearch.Name = "txtBoxSearch";
+            this.txtBoxSearch.Size = new System.Drawing.Size(595, 32);
+            this.txtBoxSearch.TabIndex = 5;
+            // 
+            // btnViewAllProducts
+            // 
+            this.btnViewAllProducts.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.btnViewAllProducts.Location = new System.Drawing.Point(158, 464);
+            this.btnViewAllProducts.Name = "btnViewAllProducts";
+            this.btnViewAllProducts.Size = new System.Drawing.Size(232, 42);
+            this.btnViewAllProducts.TabIndex = 4;
+            this.btnViewAllProducts.Text = "View All Products";
+            this.btnViewAllProducts.UseVisualStyleBackColor = false;
+            // 
+            // btnViewAllEmployees
+            // 
+            this.btnViewAllEmployees.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.btnViewAllEmployees.Location = new System.Drawing.Point(158, 530);
+            this.btnViewAllEmployees.Name = "btnViewAllEmployees";
+            this.btnViewAllEmployees.Size = new System.Drawing.Size(232, 42);
+            this.btnViewAllEmployees.TabIndex = 3;
+            this.btnViewAllEmployees.Text = "View All Employees";
+            this.btnViewAllEmployees.UseVisualStyleBackColor = false;
+            // 
             // lbEmployeeStatistics
             // 
             this.lbEmployeeStatistics.BackColor = System.Drawing.Color.WhiteSmoke;
             this.lbEmployeeStatistics.FormattingEnabled = true;
             this.lbEmployeeStatistics.ItemHeight = 21;
-            this.lbEmployeeStatistics.Location = new System.Drawing.Point(32, 267);
+            this.lbEmployeeStatistics.Location = new System.Drawing.Point(32, 309);
             this.lbEmployeeStatistics.Name = "lbEmployeeStatistics";
             this.lbEmployeeStatistics.Size = new System.Drawing.Size(803, 130);
             this.lbEmployeeStatistics.TabIndex = 2;
@@ -168,7 +226,7 @@
             this.dataGridViewEmployeeStats.Name = "dataGridViewEmployeeStats";
             this.dataGridViewEmployeeStats.RowHeadersWidth = 51;
             this.dataGridViewEmployeeStats.RowTemplate.Height = 24;
-            this.dataGridViewEmployeeStats.Size = new System.Drawing.Size(803, 156);
+            this.dataGridViewEmployeeStats.Size = new System.Drawing.Size(803, 187);
             this.dataGridViewEmployeeStats.TabIndex = 1;
             // 
             // Column1
@@ -215,7 +273,7 @@
             // 
             // tabPageProfile
             // 
-            this.tabPageProfile.BackColor = System.Drawing.Color.Tan;
+            this.tabPageProfile.BackColor = System.Drawing.SystemColors.Menu;
             this.tabPageProfile.Controls.Add(this.lblEmployeeName);
             this.tabPageProfile.Controls.Add(this.pictureBoxEmployeePhoto);
             this.tabPageProfile.Controls.Add(this.label6);
@@ -238,12 +296,22 @@
             this.tabPageProfile.TabIndex = 1;
             this.tabPageProfile.Text = "Profile";
             // 
+            // lblEmployeeName
+            // 
+            this.lblEmployeeName.AutoSize = true;
+            this.lblEmployeeName.Font = new System.Drawing.Font("Century Gothic", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblEmployeeName.Location = new System.Drawing.Point(15, 23);
+            this.lblEmployeeName.Name = "lblEmployeeName";
+            this.lblEmployeeName.Size = new System.Drawing.Size(283, 21);
+            this.lblEmployeeName.TabIndex = 15;
+            this.lblEmployeeName.Text = "Hello (here goes the user\'s name)";
+            // 
             // pictureBoxEmployeePhoto
             // 
             this.pictureBoxEmployeePhoto.Image = ((System.Drawing.Image)(resources.GetObject("pictureBoxEmployeePhoto.Image")));
             this.pictureBoxEmployeePhoto.Location = new System.Drawing.Point(526, 23);
             this.pictureBoxEmployeePhoto.Name = "pictureBoxEmployeePhoto";
-            this.pictureBoxEmployeePhoto.Size = new System.Drawing.Size(297, 239);
+            this.pictureBoxEmployeePhoto.Size = new System.Drawing.Size(297, 263);
             this.pictureBoxEmployeePhoto.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBoxEmployeePhoto.TabIndex = 13;
             this.pictureBoxEmployeePhoto.TabStop = false;
@@ -361,73 +429,11 @@
             this.lbEmployeeInfo.Size = new System.Drawing.Size(330, 533);
             this.lbEmployeeInfo.TabIndex = 0;
             // 
-            // lblEmployeeName
-            // 
-            this.lblEmployeeName.AutoSize = true;
-            this.lblEmployeeName.Font = new System.Drawing.Font("Century Gothic", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblEmployeeName.Location = new System.Drawing.Point(15, 23);
-            this.lblEmployeeName.Name = "lblEmployeeName";
-            this.lblEmployeeName.Size = new System.Drawing.Size(283, 21);
-            this.lblEmployeeName.TabIndex = 15;
-            this.lblEmployeeName.Text = "Hello (here goes the user\'s name)";
-            // 
-            // btnViewAllEmployees
-            // 
-            this.btnViewAllEmployees.Location = new System.Drawing.Point(158, 530);
-            this.btnViewAllEmployees.Name = "btnViewAllEmployees";
-            this.btnViewAllEmployees.Size = new System.Drawing.Size(232, 42);
-            this.btnViewAllEmployees.TabIndex = 3;
-            this.btnViewAllEmployees.Text = "View All Employees";
-            this.btnViewAllEmployees.UseVisualStyleBackColor = true;
-            // 
-            // btnViewAllProducts
-            // 
-            this.btnViewAllProducts.Location = new System.Drawing.Point(158, 464);
-            this.btnViewAllProducts.Name = "btnViewAllProducts";
-            this.btnViewAllProducts.Size = new System.Drawing.Size(232, 42);
-            this.btnViewAllProducts.TabIndex = 4;
-            this.btnViewAllProducts.Text = "View All Products";
-            this.btnViewAllProducts.UseVisualStyleBackColor = true;
-            // 
-            // txtBoxSearch
-            // 
-            this.txtBoxSearch.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtBoxSearch.Location = new System.Drawing.Point(32, 23);
-            this.txtBoxSearch.Name = "txtBoxSearch";
-            this.txtBoxSearch.Size = new System.Drawing.Size(595, 32);
-            this.txtBoxSearch.TabIndex = 5;
-            // 
-            // btnSearch
-            // 
-            this.btnSearch.Location = new System.Drawing.Point(645, 17);
-            this.btnSearch.Name = "btnSearch";
-            this.btnSearch.Size = new System.Drawing.Size(190, 42);
-            this.btnSearch.TabIndex = 6;
-            this.btnSearch.Text = "Search";
-            this.btnSearch.UseVisualStyleBackColor = true;
-            // 
-            // btnViewAll
-            // 
-            this.btnViewAll.Location = new System.Drawing.Point(462, 530);
-            this.btnViewAll.Name = "btnViewAll";
-            this.btnViewAll.Size = new System.Drawing.Size(232, 42);
-            this.btnViewAll.TabIndex = 7;
-            this.btnViewAll.Text = "View All ...";
-            this.btnViewAll.UseVisualStyleBackColor = true;
-            // 
-            // btnViewAllDepartments
-            // 
-            this.btnViewAllDepartments.Location = new System.Drawing.Point(462, 464);
-            this.btnViewAllDepartments.Name = "btnViewAllDepartments";
-            this.btnViewAllDepartments.Size = new System.Drawing.Size(232, 42);
-            this.btnViewAllDepartments.TabIndex = 8;
-            this.btnViewAllDepartments.Text = "View All Departments";
-            this.btnViewAllDepartments.UseVisualStyleBackColor = true;
-            // 
             // EmployeeSystem
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.SystemColors.WindowFrame;
             this.ClientSize = new System.Drawing.Size(908, 682);
             this.Controls.Add(this.tabControl1);
             this.Font = new System.Drawing.Font("Century Gothic", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
