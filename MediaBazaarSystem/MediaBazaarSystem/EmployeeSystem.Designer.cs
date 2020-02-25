@@ -29,12 +29,12 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(EmployeeSystem));
-            this.tabControl1 = new System.Windows.Forms.TabControl();
-            this.tabPageHome = new System.Windows.Forms.TabPage();
+            this.tbControlEmp = new System.Windows.Forms.TabControl();
+            this.tbPageHome = new System.Windows.Forms.TabPage();
             this.dtpWorkSchedule = new System.Windows.Forms.DateTimePicker();
             this.btnViewAllWorkShifts = new System.Windows.Forms.Button();
             this.lbWorkSchedule = new System.Windows.Forms.ListBox();
-            this.tabPageStatistics = new System.Windows.Forms.TabPage();
+            this.tbPageStatistics = new System.Windows.Forms.TabPage();
             this.btnViewAllDepartments = new System.Windows.Forms.Button();
             this.btnViewAll = new System.Windows.Forms.Button();
             this.btnSearch = new System.Windows.Forms.Button();
@@ -49,7 +49,7 @@
             this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.tabPageProfile = new System.Windows.Forms.TabPage();
+            this.tbPageProfile = new System.Windows.Forms.TabPage();
             this.lblEmployeeName = new System.Windows.Forms.Label();
             this.pictureBoxEmployeePhoto = new System.Windows.Forms.PictureBox();
             this.label6 = new System.Windows.Forms.Label();
@@ -65,38 +65,38 @@
             this.txtBoxFirstName = new System.Windows.Forms.TextBox();
             this.btnUpdateProfile = new System.Windows.Forms.Button();
             this.lbEmployeeInfo = new System.Windows.Forms.ListBox();
-            this.tabControl1.SuspendLayout();
-            this.tabPageHome.SuspendLayout();
-            this.tabPageStatistics.SuspendLayout();
+            this.tbControlEmp.SuspendLayout();
+            this.tbPageHome.SuspendLayout();
+            this.tbPageStatistics.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewEmployeeStats)).BeginInit();
-            this.tabPageProfile.SuspendLayout();
+            this.tbPageProfile.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxEmployeePhoto)).BeginInit();
             this.SuspendLayout();
             // 
-            // tabControl1
+            // tbControlEmp
             // 
-            this.tabControl1.Controls.Add(this.tabPageHome);
-            this.tabControl1.Controls.Add(this.tabPageStatistics);
-            this.tabControl1.Controls.Add(this.tabPageProfile);
-            this.tabControl1.Font = new System.Drawing.Font("Century Gothic", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tabControl1.Location = new System.Drawing.Point(12, 12);
-            this.tabControl1.Name = "tabControl1";
-            this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(878, 653);
-            this.tabControl1.TabIndex = 1;
+            this.tbControlEmp.Controls.Add(this.tbPageHome);
+            this.tbControlEmp.Controls.Add(this.tbPageStatistics);
+            this.tbControlEmp.Controls.Add(this.tbPageProfile);
+            this.tbControlEmp.Font = new System.Drawing.Font("Century Gothic", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbControlEmp.Location = new System.Drawing.Point(12, 12);
+            this.tbControlEmp.Name = "tbControlEmp";
+            this.tbControlEmp.SelectedIndex = 0;
+            this.tbControlEmp.Size = new System.Drawing.Size(878, 653);
+            this.tbControlEmp.TabIndex = 1;
             // 
-            // tabPageHome
+            // tbPageHome
             // 
-            this.tabPageHome.BackColor = System.Drawing.SystemColors.Menu;
-            this.tabPageHome.Controls.Add(this.dtpWorkSchedule);
-            this.tabPageHome.Controls.Add(this.btnViewAllWorkShifts);
-            this.tabPageHome.Controls.Add(this.lbWorkSchedule);
-            this.tabPageHome.Location = new System.Drawing.Point(4, 30);
-            this.tabPageHome.Name = "tabPageHome";
-            this.tabPageHome.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageHome.Size = new System.Drawing.Size(870, 619);
-            this.tabPageHome.TabIndex = 0;
-            this.tabPageHome.Text = "Home";
+            this.tbPageHome.BackColor = System.Drawing.SystemColors.Menu;
+            this.tbPageHome.Controls.Add(this.dtpWorkSchedule);
+            this.tbPageHome.Controls.Add(this.btnViewAllWorkShifts);
+            this.tbPageHome.Controls.Add(this.lbWorkSchedule);
+            this.tbPageHome.Location = new System.Drawing.Point(4, 30);
+            this.tbPageHome.Name = "tbPageHome";
+            this.tbPageHome.Padding = new System.Windows.Forms.Padding(3);
+            this.tbPageHome.Size = new System.Drawing.Size(870, 619);
+            this.tbPageHome.TabIndex = 0;
+            this.tbPageHome.Text = "Home";
             // 
             // dtpWorkSchedule
             // 
@@ -126,22 +126,22 @@
             this.lbWorkSchedule.Size = new System.Drawing.Size(834, 464);
             this.lbWorkSchedule.TabIndex = 0;
             // 
-            // tabPageStatistics
+            // tbPageStatistics
             // 
-            this.tabPageStatistics.BackColor = System.Drawing.SystemColors.Menu;
-            this.tabPageStatistics.Controls.Add(this.btnViewAllDepartments);
-            this.tabPageStatistics.Controls.Add(this.btnViewAll);
-            this.tabPageStatistics.Controls.Add(this.btnSearch);
-            this.tabPageStatistics.Controls.Add(this.txtBoxSearch);
-            this.tabPageStatistics.Controls.Add(this.btnViewAllProducts);
-            this.tabPageStatistics.Controls.Add(this.btnViewAllEmployees);
-            this.tabPageStatistics.Controls.Add(this.lbEmployeeStatistics);
-            this.tabPageStatistics.Controls.Add(this.dataGridViewEmployeeStats);
-            this.tabPageStatistics.Location = new System.Drawing.Point(4, 30);
-            this.tabPageStatistics.Name = "tabPageStatistics";
-            this.tabPageStatistics.Size = new System.Drawing.Size(870, 619);
-            this.tabPageStatistics.TabIndex = 2;
-            this.tabPageStatistics.Text = "Statistics";
+            this.tbPageStatistics.BackColor = System.Drawing.SystemColors.Menu;
+            this.tbPageStatistics.Controls.Add(this.btnViewAllDepartments);
+            this.tbPageStatistics.Controls.Add(this.btnViewAll);
+            this.tbPageStatistics.Controls.Add(this.btnSearch);
+            this.tbPageStatistics.Controls.Add(this.txtBoxSearch);
+            this.tbPageStatistics.Controls.Add(this.btnViewAllProducts);
+            this.tbPageStatistics.Controls.Add(this.btnViewAllEmployees);
+            this.tbPageStatistics.Controls.Add(this.lbEmployeeStatistics);
+            this.tbPageStatistics.Controls.Add(this.dataGridViewEmployeeStats);
+            this.tbPageStatistics.Location = new System.Drawing.Point(4, 30);
+            this.tbPageStatistics.Name = "tbPageStatistics";
+            this.tbPageStatistics.Size = new System.Drawing.Size(870, 619);
+            this.tbPageStatistics.TabIndex = 2;
+            this.tbPageStatistics.Text = "Statistics";
             // 
             // btnViewAllDepartments
             // 
@@ -271,30 +271,30 @@
             this.Column6.Name = "Column6";
             this.Column6.Width = 125;
             // 
-            // tabPageProfile
+            // tbPageProfile
             // 
-            this.tabPageProfile.BackColor = System.Drawing.SystemColors.Menu;
-            this.tabPageProfile.Controls.Add(this.lblEmployeeName);
-            this.tabPageProfile.Controls.Add(this.pictureBoxEmployeePhoto);
-            this.tabPageProfile.Controls.Add(this.label6);
-            this.tabPageProfile.Controls.Add(this.lblEmail);
-            this.tabPageProfile.Controls.Add(this.txtBoxEmail);
-            this.tabPageProfile.Controls.Add(this.lblAddress);
-            this.tabPageProfile.Controls.Add(this.lblAge);
-            this.tabPageProfile.Controls.Add(this.lblLastName);
-            this.tabPageProfile.Controls.Add(this.lblFirstName);
-            this.tabPageProfile.Controls.Add(this.txtBoxAddress);
-            this.tabPageProfile.Controls.Add(this.txtBoxLastName);
-            this.tabPageProfile.Controls.Add(this.txtBoxAge);
-            this.tabPageProfile.Controls.Add(this.txtBoxFirstName);
-            this.tabPageProfile.Controls.Add(this.btnUpdateProfile);
-            this.tabPageProfile.Controls.Add(this.lbEmployeeInfo);
-            this.tabPageProfile.Location = new System.Drawing.Point(4, 30);
-            this.tabPageProfile.Name = "tabPageProfile";
-            this.tabPageProfile.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageProfile.Size = new System.Drawing.Size(870, 619);
-            this.tabPageProfile.TabIndex = 1;
-            this.tabPageProfile.Text = "Profile";
+            this.tbPageProfile.BackColor = System.Drawing.SystemColors.Menu;
+            this.tbPageProfile.Controls.Add(this.lblEmployeeName);
+            this.tbPageProfile.Controls.Add(this.pictureBoxEmployeePhoto);
+            this.tbPageProfile.Controls.Add(this.label6);
+            this.tbPageProfile.Controls.Add(this.lblEmail);
+            this.tbPageProfile.Controls.Add(this.txtBoxEmail);
+            this.tbPageProfile.Controls.Add(this.lblAddress);
+            this.tbPageProfile.Controls.Add(this.lblAge);
+            this.tbPageProfile.Controls.Add(this.lblLastName);
+            this.tbPageProfile.Controls.Add(this.lblFirstName);
+            this.tbPageProfile.Controls.Add(this.txtBoxAddress);
+            this.tbPageProfile.Controls.Add(this.txtBoxLastName);
+            this.tbPageProfile.Controls.Add(this.txtBoxAge);
+            this.tbPageProfile.Controls.Add(this.txtBoxFirstName);
+            this.tbPageProfile.Controls.Add(this.btnUpdateProfile);
+            this.tbPageProfile.Controls.Add(this.lbEmployeeInfo);
+            this.tbPageProfile.Location = new System.Drawing.Point(4, 30);
+            this.tbPageProfile.Name = "tbPageProfile";
+            this.tbPageProfile.Padding = new System.Windows.Forms.Padding(3);
+            this.tbPageProfile.Size = new System.Drawing.Size(870, 619);
+            this.tbPageProfile.TabIndex = 1;
+            this.tbPageProfile.Text = "Profile";
             // 
             // lblEmployeeName
             // 
@@ -435,17 +435,17 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.WindowFrame;
             this.ClientSize = new System.Drawing.Size(908, 682);
-            this.Controls.Add(this.tabControl1);
+            this.Controls.Add(this.tbControlEmp);
             this.Font = new System.Drawing.Font("Century Gothic", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Name = "EmployeeSystem";
             this.Text = "EmployeeSystem";
-            this.tabControl1.ResumeLayout(false);
-            this.tabPageHome.ResumeLayout(false);
-            this.tabPageStatistics.ResumeLayout(false);
-            this.tabPageStatistics.PerformLayout();
+            this.tbControlEmp.ResumeLayout(false);
+            this.tbPageHome.ResumeLayout(false);
+            this.tbPageStatistics.ResumeLayout(false);
+            this.tbPageStatistics.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewEmployeeStats)).EndInit();
-            this.tabPageProfile.ResumeLayout(false);
-            this.tabPageProfile.PerformLayout();
+            this.tbPageProfile.ResumeLayout(false);
+            this.tbPageProfile.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxEmployeePhoto)).EndInit();
             this.ResumeLayout(false);
 
@@ -453,12 +453,12 @@
 
         #endregion
 
-        private System.Windows.Forms.TabControl tabControl1;
-        private System.Windows.Forms.TabPage tabPageHome;
+        private System.Windows.Forms.TabControl tbControlEmp;
+        private System.Windows.Forms.TabPage tbPageHome;
         private System.Windows.Forms.DateTimePicker dtpWorkSchedule;
         private System.Windows.Forms.Button btnViewAllWorkShifts;
         private System.Windows.Forms.ListBox lbWorkSchedule;
-        private System.Windows.Forms.TabPage tabPageStatistics;
+        private System.Windows.Forms.TabPage tbPageStatistics;
         private System.Windows.Forms.ListBox lbEmployeeStatistics;
         private System.Windows.Forms.DataGridView dataGridViewEmployeeStats;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
@@ -467,7 +467,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Column4;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column5;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column6;
-        private System.Windows.Forms.TabPage tabPageProfile;
+        private System.Windows.Forms.TabPage tbPageProfile;
         private System.Windows.Forms.PictureBox pictureBoxEmployeePhoto;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label lblEmail;
