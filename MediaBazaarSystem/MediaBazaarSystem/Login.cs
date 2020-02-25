@@ -16,5 +16,12 @@ namespace MediaBazaarSystem
         {
             InitializeComponent();
         }
+
+        private void btnLogin_Click(object sender, EventArgs e)
+        {
+            Form next = new EmployeeSystem();
+            next.Show();
+            this.Hide();
+        }
     }
 }

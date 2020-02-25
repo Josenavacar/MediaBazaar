@@ -12,24 +12,37 @@ namespace MediaBazaarSystem
         private List<Employee> employees;
         private List<Manager> managers;
 
-        public void AddEmployee()
+        public String NAME
         {
-
+            get { return this.name; }
+            private set { this.name = value; }
         }
 
-        public void AddManager()
+        public Department(String name)
         {
+            employees = new List<Employee>();
+            managers = new List<Manager>();
+            NAME = name;
+        }
 
+        public void AddEmployee(Employee employee)
+        {
+            employees.Add(employee);
+        }
+
+        public void AddManager(Manager manager)
+        {
+            managers.Add(manager);
         }
 
         public List<Employee> GetEmployees()
         {
-            return null;
+            return employees;
         }
 
         public List<Manager> GetManagers()
         {
-            return null;
+            return managers;
         }
 
         //public List<Staff> GetStaffs()
