@@ -29,6 +29,10 @@ namespace MediaBazaarSystem
         {
             employees.Add(employee);
         }
+        public void DeleteEmployee(Employee employee)
+        {
+            employees.Remove(employee);
+        }
 
         public void AddManager(Manager manager)
         {
@@ -43,6 +47,19 @@ namespace MediaBazaarSystem
         public List<Manager> GetManagers()
         {
             return managers;
+        }
+
+        public Employee GetEmployee(String firstname, String lastname)
+        {
+            Employee ans = null;
+            foreach(Employee aux in employees)
+            {
+                if(aux.FirstN == firstname && aux.LastN == lastname)
+                {
+                    ans = aux;
+                }
+            }
+            return ans;
         }
 
         //public List<Staff> GetStaffs()

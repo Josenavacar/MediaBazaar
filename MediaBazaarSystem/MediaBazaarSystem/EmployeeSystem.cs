@@ -12,9 +12,11 @@ namespace MediaBazaarSystem
 {
     public partial class EmployeeSystem : Form
     {
-        public EmployeeSystem()
+        Department dep;
+        public EmployeeSystem(Department dep)
         {
             InitializeComponent();
+            this.dep = dep;
         }
     }
 }
