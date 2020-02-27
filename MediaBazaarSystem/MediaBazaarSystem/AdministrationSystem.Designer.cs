@@ -67,12 +67,12 @@
             this.btnUpdateProfile = new System.Windows.Forms.Button();
             this.lbEmployeeInfo = new System.Windows.Forms.ListBox();
             this.tbPageEmpManagement = new System.Windows.Forms.TabPage();
+            this.btnUpdate = new System.Windows.Forms.Button();
             this.btnViewEmployeeDetails = new System.Windows.Forms.Button();
             this.btnAddEmployee = new System.Windows.Forms.Button();
             this.btnUpdateEmployee = new System.Windows.Forms.Button();
             this.lbEmployees = new System.Windows.Forms.ListBox();
             this.btnFireEmployee = new System.Windows.Forms.Button();
-            this.btnUpdate = new System.Windows.Forms.Button();
             this.tbControlAdmin.SuspendLayout();
             this.tbPageHome.SuspendLayout();
             this.tbPageStatistics.SuspendLayout();
@@ -464,6 +464,17 @@
             this.tbPageEmpManagement.TabIndex = 3;
             this.tbPageEmpManagement.Text = "Employee Management";
             // 
+            // btnUpdate
+            // 
+            this.btnUpdate.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.btnUpdate.Location = new System.Drawing.Point(611, 19);
+            this.btnUpdate.Name = "btnUpdate";
+            this.btnUpdate.Size = new System.Drawing.Size(239, 48);
+            this.btnUpdate.TabIndex = 8;
+            this.btnUpdate.Text = "Update List";
+            this.btnUpdate.UseVisualStyleBackColor = false;
+            this.btnUpdate.Click += new System.EventHandler(this.btnUpdate_Click);
+            // 
             // btnViewEmployeeDetails
             // 
             this.btnViewEmployeeDetails.BackColor = System.Drawing.SystemColors.ActiveCaption;
@@ -517,17 +528,7 @@
             this.btnFireEmployee.TabIndex = 3;
             this.btnFireEmployee.Text = "Fire Employee";
             this.btnFireEmployee.UseVisualStyleBackColor = false;
-            // 
-            // btnUpdate
-            // 
-            this.btnUpdate.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.btnUpdate.Location = new System.Drawing.Point(611, 19);
-            this.btnUpdate.Name = "btnUpdate";
-            this.btnUpdate.Size = new System.Drawing.Size(239, 48);
-            this.btnUpdate.TabIndex = 8;
-            this.btnUpdate.Text = "Update List";
-            this.btnUpdate.UseVisualStyleBackColor = false;
-            this.btnUpdate.Click += new System.EventHandler(this.btnUpdate_Click);
+            this.btnFireEmployee.Click += new System.EventHandler(this.btnFireEmployee_Click);
             // 
             // AdministrationSystem
             // 

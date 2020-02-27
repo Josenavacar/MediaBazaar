@@ -59,5 +59,12 @@ namespace MediaBazaarSystem
             Employee emp = dep.GetEmployee(firstName, lastName);
             return emp;
         }
+
+        private void btnFireEmployee_Click(object sender, EventArgs e)
+        {
+            Employee fired = SearchEmp();
+            dep.DeleteEmployee(fired);
+            MessageBox.Show("Employee Fired.");
+        }
     }
 }
