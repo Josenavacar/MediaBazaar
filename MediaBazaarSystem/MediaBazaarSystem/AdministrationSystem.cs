@@ -28,32 +28,56 @@ namespace MediaBazaarSystem
         private void btnViewEmployeeDetails_Click(object sender, EventArgs e)
         {
             Employee emp = SearchEmp();
-            ViewEmployee form1 = new ViewEmployee(emp);
-            form1.Show();
+            if (emp != null)
+            {
+                ViewEmployee form1 = new ViewEmployee(emp);
+                form1.Show();
+            }
         }
 
         private void btnUpdateEmployee_Click(object sender, EventArgs e)
         {
             Employee emp = SearchEmp();
-            Employee_Add form1 = new Employee_Add(dep, emp);
-            form1.Show();
+            if(emp != null)
+            {
+                Employee_Add form1 = new Employee_Add(dep, emp);
+                form1.Show();
+            }
+            
         }
 
         private Employee SearchEmp()
         {
-            String aux = lbEmployees.SelectedItem.ToString();
-            String[] name = aux.Split(','); //Splits the string by the comma.
-            String firstName = name[1].Trim();
-            String lastName = name[0].Trim();
-            Employee emp = dep.GetEmployee(firstName, lastName);
-            return emp;
+            if (lbEmployees.SelectedItem != null)
+            {
+                String aux = lbEmployees.SelectedItem.ToString();
+                String[] name = aux.Split(','); //Splits the string by the comma.
+                String firstName = name[1].Trim();
+                String lastName = name[0].Trim();
+                Employee emp = dep.GetEmployee(firstName, lastName);
+
+                if(emp == null)
+                {
+                    MessageBox.Show("Employee not found.");
+                }
+
+                return emp;
+            }
+            else
+            {
+                MessageBox.Show("Employee not selected.");
+                return null;
+            }
         }
 
         private void btnFireEmployee_Click(object sender, EventArgs e)
         {
             Employee fired = SearchEmp();
-            dep.DeleteEmployee(fired);
-            MessageBox.Show("Employee Fired.");
+            if (fired != null)
+            {
+                dep.DeleteEmployee(fired);
+                MessageBox.Show("Employee Fired.");
+            }
         }
 
         private void Refresh_Tick(object sender, EventArgs e)
@@ -68,7 +92,10 @@ namespace MediaBazaarSystem
                 lbEmployees.Items.Add(aux);
             }
 
-            lbEmployees.SelectedIndex = aux1;
+            if (lbEmployees.Items.Count > 0)
+            {
+                lbEmployees.SelectedIndex = aux1;
+            }
         }
     }
 }

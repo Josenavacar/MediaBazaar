@@ -40,27 +40,34 @@ namespace MediaBazaarSystem
 
         private void button1_Click(object sender, EventArgs e)
         {
-            String FirstN = tbFirstN.Text.ToString();
-            String LastN = tbLastN.Text.ToString();
-            int age = Convert.ToInt32(numAge.Value);
-            String address = tbAddress.Text.ToString();
-            String role = cbPosition.SelectedItem.ToString();
-            double salary = Convert.ToDouble(tbSalary.Text);
-            int hoursAvailable = Convert.ToInt32(tbHours.Text);
-
-            Employee newEmployee = new Employee(FirstN, LastN, age, address, role, salary, hoursAvailable);
-            if (emp == null)
+            if (dep.GetEmployee(tbFirstN.Text, tbLastN.Text) != null && emp == null)
             {
-                dep.AddEmployee(newEmployee);
-                MessageBox.Show("Employee successfully added");
+                MessageBox.Show("Employee already registered.");
             }
             else
             {
-                dep.DeleteEmployee(emp);
-                dep.AddEmployee(newEmployee);
-                MessageBox.Show("Employee successfully edited");
+                String FirstN = tbFirstN.Text.ToString();
+                String LastN = tbLastN.Text.ToString();
+                int age = Convert.ToInt32(numAge.Value);
+                String address = tbAddress.Text.ToString();
+                String role = cbPosition.SelectedItem.ToString();
+                double salary = Convert.ToDouble(tbSalary.Text);
+                int hoursAvailable = Convert.ToInt32(tbHours.Text);
+
+                Employee newEmployee = new Employee(FirstN, LastN, age, address, role, salary, hoursAvailable);
+                if (emp == null)
+                {
+                    dep.AddEmployee(newEmployee);
+                    MessageBox.Show("Employee successfully added");
+                }
+                else
+                {
+                    dep.DeleteEmployee(emp);
+                    dep.AddEmployee(newEmployee);
+                    MessageBox.Show("Employee successfully edited");
+                }
+                this.Hide();
             }
-            this.Hide();
         }
     }
 }
