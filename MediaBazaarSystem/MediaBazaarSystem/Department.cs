@@ -12,6 +12,12 @@ namespace MediaBazaarSystem
         private List<Employee> employees;
         private List<Manager> managers;
 
+        public int DepartmentID
+        {
+            get;
+            set;
+        }
+
         public void AddEmployee()
         {
 

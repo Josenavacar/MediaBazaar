@@ -14,6 +14,12 @@ namespace MediaBazaarSystem
         protected int age;
         protected String address;
 
+        public Department Department
+        {
+            get;
+            set;
+        }
+
         public override string ToString()
         {
             return "ID: " + this.ID + ". Name: " + this.firstName + this.lastName + ". Age: " + this.age + ". Address: " + this.address;
