@@ -49,15 +49,16 @@ namespace MediaBazaarSystem
             int hoursAvailable = Convert.ToInt32(tbHours.Text);
 
             Employee newEmployee = new Employee(FirstN, LastN, age, address, role, salary, hoursAvailable);
-            dep.AddEmployee(newEmployee);
             if (emp == null)
             {
+                dep.AddEmployee(newEmployee);
                 MessageBox.Show("Employee successfully added");
             }
             else
             {
-                MessageBox.Show("Employee successfully edited");
                 dep.DeleteEmployee(emp);
+                dep.AddEmployee(newEmployee);
+                MessageBox.Show("Employee successfully edited");
             }
             this.Hide();
         }

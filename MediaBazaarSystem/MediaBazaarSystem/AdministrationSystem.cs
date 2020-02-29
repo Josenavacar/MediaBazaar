@@ -25,17 +25,6 @@ namespace MediaBazaarSystem
             form1.Show();
         }
 
-        private void btnUpdate_Click(object sender, EventArgs e)
-        {
-            lbEmployees.Items.Clear();
-            List<Employee> list = dep.GetEmployees();
-            foreach(Employee emp in list)
-            {
-                String aux = emp.LastN + ", " + emp.FirstN;
-                lbEmployees.Items.Add(aux);
-            }
-        }
-
         private void btnViewEmployeeDetails_Click(object sender, EventArgs e)
         {
             Employee emp = SearchEmp();
@@ -65,6 +54,21 @@ namespace MediaBazaarSystem
             Employee fired = SearchEmp();
             dep.DeleteEmployee(fired);
             MessageBox.Show("Employee Fired.");
+        }
+
+        private void Refresh_Tick(object sender, EventArgs e)
+        {
+            int aux1 = lbEmployees.SelectedIndex;
+
+            lbEmployees.Items.Clear();
+            List<Employee> list = dep.GetEmployees();
+            foreach (Employee emp in list)
+            {
+                String aux = emp.LastN + ", " + emp.FirstN;
+                lbEmployees.Items.Add(aux);
+            }
+
+            lbEmployees.SelectedIndex = aux1;
         }
     }
 }

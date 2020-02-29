@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AdministrationSystem));
             this.tbControlAdmin = new System.Windows.Forms.TabControl();
             this.tbPageHome = new System.Windows.Forms.TabPage();
@@ -67,12 +68,12 @@
             this.btnUpdateProfile = new System.Windows.Forms.Button();
             this.lbEmployeeInfo = new System.Windows.Forms.ListBox();
             this.tbPageEmpManagement = new System.Windows.Forms.TabPage();
-            this.btnUpdate = new System.Windows.Forms.Button();
             this.btnViewEmployeeDetails = new System.Windows.Forms.Button();
             this.btnAddEmployee = new System.Windows.Forms.Button();
             this.btnUpdateEmployee = new System.Windows.Forms.Button();
             this.lbEmployees = new System.Windows.Forms.ListBox();
             this.btnFireEmployee = new System.Windows.Forms.Button();
+            this.Refresh = new System.Windows.Forms.Timer(this.components);
             this.tbControlAdmin.SuspendLayout();
             this.tbPageHome.SuspendLayout();
             this.tbPageStatistics.SuspendLayout();
@@ -452,7 +453,6 @@
             // tbPageEmpManagement
             // 
             this.tbPageEmpManagement.BackColor = System.Drawing.SystemColors.Menu;
-            this.tbPageEmpManagement.Controls.Add(this.btnUpdate);
             this.tbPageEmpManagement.Controls.Add(this.btnViewEmployeeDetails);
             this.tbPageEmpManagement.Controls.Add(this.btnAddEmployee);
             this.tbPageEmpManagement.Controls.Add(this.btnUpdateEmployee);
@@ -463,17 +463,6 @@
             this.tbPageEmpManagement.Size = new System.Drawing.Size(870, 621);
             this.tbPageEmpManagement.TabIndex = 3;
             this.tbPageEmpManagement.Text = "Employee Management";
-            // 
-            // btnUpdate
-            // 
-            this.btnUpdate.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.btnUpdate.Location = new System.Drawing.Point(611, 19);
-            this.btnUpdate.Name = "btnUpdate";
-            this.btnUpdate.Size = new System.Drawing.Size(239, 48);
-            this.btnUpdate.TabIndex = 8;
-            this.btnUpdate.Text = "Update List";
-            this.btnUpdate.UseVisualStyleBackColor = false;
-            this.btnUpdate.Click += new System.EventHandler(this.btnUpdate_Click);
             // 
             // btnViewEmployeeDetails
             // 
@@ -529,6 +518,12 @@
             this.btnFireEmployee.Text = "Fire Employee";
             this.btnFireEmployee.UseVisualStyleBackColor = false;
             this.btnFireEmployee.Click += new System.EventHandler(this.btnFireEmployee_Click);
+            // 
+            // Refresh
+            // 
+            this.Refresh.Enabled = true;
+            this.Refresh.Interval = 1500;
+            this.Refresh.Tick += new System.EventHandler(this.Refresh_Tick);
             // 
             // AdministrationSystem
             // 
@@ -598,6 +593,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Column6;
         private System.Windows.Forms.Button btnAssignEmployee;
         private System.Windows.Forms.Button btnViewEmployeeDetails;
-        private System.Windows.Forms.Button btnUpdate;
+        private System.Windows.Forms.Timer Refresh;
     }
 }
