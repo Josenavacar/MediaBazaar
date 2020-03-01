@@ -31,9 +31,9 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(EmployeeSystem));
             this.tbControlEmp = new System.Windows.Forms.TabControl();
             this.tbPageHome = new System.Windows.Forms.TabPage();
+            this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.dtpWorkSchedule = new System.Windows.Forms.DateTimePicker();
             this.btnViewAllWorkShifts = new System.Windows.Forms.Button();
-            this.lbWorkSchedule = new System.Windows.Forms.ListBox();
             this.tbPageStatistics = new System.Windows.Forms.TabPage();
             this.btnViewAllDepartments = new System.Windows.Forms.Button();
             this.btnViewAll = new System.Windows.Forms.Button();
@@ -65,8 +65,14 @@
             this.txtBoxFirstName = new System.Windows.Forms.TextBox();
             this.btnUpdateProfile = new System.Windows.Forms.Button();
             this.lbEmployeeInfo = new System.Windows.Forms.ListBox();
+            this.clmnEmployeeName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clmnHoursWorked = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clmnHoursAvailable = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clmnRole = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Time = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tbControlEmp.SuspendLayout();
             this.tbPageHome.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.tbPageStatistics.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewEmployeeStats)).BeginInit();
             this.tbPageProfile.SuspendLayout();
@@ -88,15 +94,31 @@
             // tbPageHome
             // 
             this.tbPageHome.BackColor = System.Drawing.SystemColors.Menu;
+            this.tbPageHome.Controls.Add(this.dataGridView1);
             this.tbPageHome.Controls.Add(this.dtpWorkSchedule);
             this.tbPageHome.Controls.Add(this.btnViewAllWorkShifts);
-            this.tbPageHome.Controls.Add(this.lbWorkSchedule);
             this.tbPageHome.Location = new System.Drawing.Point(4, 30);
             this.tbPageHome.Name = "tbPageHome";
             this.tbPageHome.Padding = new System.Windows.Forms.Padding(3);
             this.tbPageHome.Size = new System.Drawing.Size(870, 619);
             this.tbPageHome.TabIndex = 0;
             this.tbPageHome.Text = "Home";
+            // 
+            // dataGridView1
+            // 
+            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.clmnEmployeeName,
+            this.clmnHoursWorked,
+            this.clmnHoursAvailable,
+            this.clmnRole,
+            this.Time});
+            this.dataGridView1.Location = new System.Drawing.Point(99, 29);
+            this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.RowHeadersWidth = 51;
+            this.dataGridView1.RowTemplate.Height = 24;
+            this.dataGridView1.Size = new System.Drawing.Size(679, 173);
+            this.dataGridView1.TabIndex = 4;
             // 
             // dtpWorkSchedule
             // 
@@ -114,17 +136,6 @@
             this.btnViewAllWorkShifts.TabIndex = 2;
             this.btnViewAllWorkShifts.Text = "View All Work Shifts";
             this.btnViewAllWorkShifts.UseVisualStyleBackColor = false;
-            // 
-            // lbWorkSchedule
-            // 
-            this.lbWorkSchedule.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.lbWorkSchedule.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbWorkSchedule.FormattingEnabled = true;
-            this.lbWorkSchedule.ItemHeight = 23;
-            this.lbWorkSchedule.Location = new System.Drawing.Point(18, 20);
-            this.lbWorkSchedule.Name = "lbWorkSchedule";
-            this.lbWorkSchedule.Size = new System.Drawing.Size(834, 464);
-            this.lbWorkSchedule.TabIndex = 0;
             // 
             // tbPageStatistics
             // 
@@ -429,6 +440,41 @@
             this.lbEmployeeInfo.Size = new System.Drawing.Size(330, 533);
             this.lbEmployeeInfo.TabIndex = 0;
             // 
+            // clmnEmployeeName
+            // 
+            this.clmnEmployeeName.HeaderText = "Employee";
+            this.clmnEmployeeName.MinimumWidth = 6;
+            this.clmnEmployeeName.Name = "clmnEmployeeName";
+            this.clmnEmployeeName.Width = 125;
+            // 
+            // clmnHoursWorked
+            // 
+            this.clmnHoursWorked.HeaderText = "Hours Worked";
+            this.clmnHoursWorked.MinimumWidth = 6;
+            this.clmnHoursWorked.Name = "clmnHoursWorked";
+            this.clmnHoursWorked.Width = 125;
+            // 
+            // clmnHoursAvailable
+            // 
+            this.clmnHoursAvailable.HeaderText = "Hours Available";
+            this.clmnHoursAvailable.MinimumWidth = 6;
+            this.clmnHoursAvailable.Name = "clmnHoursAvailable";
+            this.clmnHoursAvailable.Width = 125;
+            // 
+            // clmnRole
+            // 
+            this.clmnRole.HeaderText = "Role";
+            this.clmnRole.MinimumWidth = 6;
+            this.clmnRole.Name = "clmnRole";
+            this.clmnRole.Width = 125;
+            // 
+            // Time
+            // 
+            this.Time.HeaderText = "Time";
+            this.Time.MinimumWidth = 6;
+            this.Time.Name = "Time";
+            this.Time.Width = 125;
+            // 
             // EmployeeSystem
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 17F);
@@ -441,6 +487,7 @@
             this.Text = "EmployeeSystem";
             this.tbControlEmp.ResumeLayout(false);
             this.tbPageHome.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.tbPageStatistics.ResumeLayout(false);
             this.tbPageStatistics.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewEmployeeStats)).EndInit();
@@ -457,7 +504,6 @@
         private System.Windows.Forms.TabPage tbPageHome;
         private System.Windows.Forms.DateTimePicker dtpWorkSchedule;
         private System.Windows.Forms.Button btnViewAllWorkShifts;
-        private System.Windows.Forms.ListBox lbWorkSchedule;
         private System.Windows.Forms.TabPage tbPageStatistics;
         private System.Windows.Forms.ListBox lbEmployeeStatistics;
         private System.Windows.Forms.DataGridView dataGridViewEmployeeStats;
@@ -489,5 +535,11 @@
         private System.Windows.Forms.TextBox txtBoxSearch;
         private System.Windows.Forms.Button btnViewAllProducts;
         private System.Windows.Forms.Button btnViewAllEmployees;
+        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn clmnEmployeeName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn clmnHoursWorked;
+        private System.Windows.Forms.DataGridViewTextBoxColumn clmnHoursAvailable;
+        private System.Windows.Forms.DataGridViewTextBoxColumn clmnRole;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Time;
     }
 }

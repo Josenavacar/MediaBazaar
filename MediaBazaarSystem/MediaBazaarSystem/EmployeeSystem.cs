@@ -7,37 +7,37 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using MySql.Data.MySqlClient;
+using System.Data.SqlClient;
 
 namespace MediaBazaarSystem
 {
     public partial class EmployeeSystem : Form
     {
-        List<string> myList = new List<string>();
-
         public EmployeeSystem(String employeeID)
         {
+            DateTimePicker dateTimePicker = new DateTimePicker();
             InitializeComponent();
-            //myList = employees;
 
-            lbWorkSchedule.Items.Add( employeeID );
+            string connectionString = @"Data Source=(local);Initial Catalog=MediaBazaar;Integrated Security=True;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False;Column Encryption Setting=enabled";
+            string sql = "SELECT FirstName, HoursWorked, HoursAvailable, Name FROM [User] JOIN Role ON [User].RoleId = Role.Id";
+            SqlConnection connection = new SqlConnection( connectionString );
+            SqlCommand cmd = new SqlCommand( sql, connection );
+            SqlDataReader reader = cmd.ExecuteReader();
+            connection.Open();
 
-            //foreach(String employee in myList)
-            //{
-            //    lbWorkSchedule.Items.Add(employee);
-            //}
-
-
-
-            //string connectionString = "Data Source=.;Initial Catalog=pubs;Integrated Security=True";
-            //string sql = "SELECT * FROM Authors";
-            //SqlConnection connection = new SqlConnection( connectionString );
-            //SqlDataAdapter dataadapter = new SqlDataAdapter( sql, connection );
-            //DataSet ds = new DataSet();
-            //connection.Open();
-            //dataadapter.Fill( ds, "Authors_table" );
-            //connection.Close();
-            //dataGridView1.DataSource = ds;
-            //dataGridView1.DataMember = "Authors_table";
+            while( reader.Read() )
+            {
+                DataGridViewRow row = ( DataGridViewRow ) dataGridView1.Rows[ 0 ].Clone();
+                row.Cells[ 0 ].Value = reader.GetValue( 0 ).ToString(); // First Name
+                row.Cells[ 1 ].Value = reader.GetValue( 1 ).ToString(); // Hours Worked
+                row.Cells[ 2 ].Value = reader.GetValue( 2 ).ToString(); // Hours Avialbel
+                row.Cells[ 3 ].Value = reader.GetValue( 3 ).ToString(); // Role
+                row.Cells[ 4 ].Value = dateTimePicker.Value.ToString();
+                dataGridView1.Rows.Add( row );
+                dataGridView1.Controls.Add( dateTimePicker );
+                dateTimePicker.Format = DateTimePickerFormat.Time;
+            }
         }
     }
 }

@@ -14,11 +14,10 @@ namespace MediaBazaarSystem
 {
     public partial class formLogin : Form
     {
-        List<String> employees = new List<String>();
-
         public formLogin()
         {
             InitializeComponent();
+            txtBoxPassword.PasswordChar = Convert.ToChar("*");
         }
 
         private void btnLogin_Click( object sender, EventArgs e )
@@ -26,7 +25,6 @@ namespace MediaBazaarSystem
             String email = txtBoxEmail.Text;
             String password = txtBoxPassword.Text;
             String toDecryptPassword = "";
-            
 
             using( SqlConnection connection = new SqlConnection( @"Data Source=(local);Initial Catalog=MediaBazaar;Integrated Security=True;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False;Column Encryption Setting=enabled" ) )
             {
@@ -45,66 +43,26 @@ namespace MediaBazaarSystem
                     // else show error message
                     if( reader.Read() == true )
                     {
-                        for( int i = 0; i < reader.FieldCount; i++ )
-                        {
-                            employees.Add(Convert.ToString( reader.GetValue( i ) ));
-                        }
-
                         // The number is based on the column... 
-                        //E.g. password is column 2 and email is column 1
-                        toDecryptPassword = reader.GetString( 6 ) ;
+                        //E.g. password is column 6 and email is column 5
+                        toDecryptPassword = reader.GetString( 6 ) ; 
 
                         if( Cryptography.Decrypt( toDecryptPassword ) == password )
                         {
-                            MessageBox.Show( "Login successfull" );
-                            //EmployeeSystem employeeSystem = new EmployeeSystem( employees );
-                            //employeeSystem.Show();
-
-                            //string connectionString = "Data Source=.;Initial Catalog=pubs;Integrated Security=True";
-                            //string sql = "SELECT * FROM Authors";
-                            //SqlConnection connecton = new SqlConnection( connectionString );
-                            //SqlDataAdapter dataadapter = new SqlDataAdapter( sql, connecton );
-                            //DataSet ds = new DataSet();
-                            //connection.Open();
-                            //dataadapter.Fill( ds, "Authors_table" );
-                            //connection.Close();
-                            //dataGridView1.DataSource = ds;
-                            //dataGridView1.DataMember = "Authors_table";
-
-                            //using( SqlDataAdapter sda = new SqlDataAdapter( cmd, connection ) )
-                            //{
-                            //    DataTable dt = new DataTable();
-                            //    sda.Fill( dt );
-
-                            //    if( dt.Rows.Count > 0 )
-                            //    {
-                                    
-                            //        String employeeID = dt.Rows[ 0 ][ "Id" ].ToString();
-                            //        MessageBox.Show( employeeID );
-                            //        //EmployeeSystem employeeSystem = new EmployeeSystem( employeeID );
-                            //        //employeeSystem.Show();
-                            //    }
-                            //    else
-                            //    {
-                            //        MessageBox.Show( "Please Check your Username & password" );
-                            //    }
-
-                            //    dt.Dispose();
-
-                            //}
-
+                            String employeeID = reader.GetValue( 0 ).ToString();
+                            EmployeeSystem employeeSystem = new EmployeeSystem( employeeID );
+                            employeeSystem.Show();
                         }
-                    }
-                    else
-                    {
-                        MessageBox.Show( "Email or password is incorrect. Please try again." );
+                        else
+                        {
+                            MessageBox.Show( "Email or password is incorrect. Please try again." );
+                        }
                     }
                 }
                 catch( FormatException ex )
                 {
                     MessageBox.Show( ex.ToString() );
                 }
-
                 connection.Close();
             }
         }
