@@ -31,7 +31,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(EmployeeSystem));
             this.tbControlEmp = new System.Windows.Forms.TabControl();
             this.tbPageHome = new System.Windows.Forms.TabPage();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.dataGVWorkSchedule = new System.Windows.Forms.DataGridView();
             this.dtpWorkSchedule = new System.Windows.Forms.DateTimePicker();
             this.btnViewAllWorkShifts = new System.Windows.Forms.Button();
             this.tbPageStatistics = new System.Windows.Forms.TabPage();
@@ -41,7 +41,6 @@
             this.txtBoxSearch = new System.Windows.Forms.TextBox();
             this.btnViewAllProducts = new System.Windows.Forms.Button();
             this.btnViewAllEmployees = new System.Windows.Forms.Button();
-            this.lbEmployeeStatistics = new System.Windows.Forms.ListBox();
             this.dataGridViewEmployeeStats = new System.Windows.Forms.DataGridView();
             this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -66,13 +65,13 @@
             this.btnUpdateProfile = new System.Windows.Forms.Button();
             this.lbEmployeeInfo = new System.Windows.Forms.ListBox();
             this.clmnEmployeeName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.clmnHoursWorked = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.clmnHoursAvailable = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.clmnRole = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Time = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clmnStartTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clmnEndTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clmnWorkDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tbControlEmp.SuspendLayout();
             this.tbPageHome.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGVWorkSchedule)).BeginInit();
             this.tbPageStatistics.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewEmployeeStats)).BeginInit();
             this.tbPageProfile.SuspendLayout();
@@ -94,7 +93,7 @@
             // tbPageHome
             // 
             this.tbPageHome.BackColor = System.Drawing.SystemColors.Menu;
-            this.tbPageHome.Controls.Add(this.dataGridView1);
+            this.tbPageHome.Controls.Add(this.dataGVWorkSchedule);
             this.tbPageHome.Controls.Add(this.dtpWorkSchedule);
             this.tbPageHome.Controls.Add(this.btnViewAllWorkShifts);
             this.tbPageHome.Location = new System.Drawing.Point(4, 30);
@@ -104,25 +103,25 @@
             this.tbPageHome.TabIndex = 0;
             this.tbPageHome.Text = "Home";
             // 
-            // dataGridView1
+            // dataGVWorkSchedule
             // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dataGVWorkSchedule.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGVWorkSchedule.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.clmnEmployeeName,
-            this.clmnHoursWorked,
-            this.clmnHoursAvailable,
             this.clmnRole,
-            this.Time});
-            this.dataGridView1.Location = new System.Drawing.Point(99, 29);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.RowHeadersWidth = 51;
-            this.dataGridView1.RowTemplate.Height = 24;
-            this.dataGridView1.Size = new System.Drawing.Size(679, 173);
-            this.dataGridView1.TabIndex = 4;
+            this.clmnStartTime,
+            this.clmnEndTime,
+            this.clmnWorkDate});
+            this.dataGVWorkSchedule.Location = new System.Drawing.Point(92, 34);
+            this.dataGVWorkSchedule.Name = "dataGVWorkSchedule";
+            this.dataGVWorkSchedule.RowHeadersWidth = 51;
+            this.dataGVWorkSchedule.RowTemplate.Height = 24;
+            this.dataGVWorkSchedule.Size = new System.Drawing.Size(689, 399);
+            this.dataGVWorkSchedule.TabIndex = 4;
             // 
             // dtpWorkSchedule
             // 
-            this.dtpWorkSchedule.Location = new System.Drawing.Point(242, 508);
+            this.dtpWorkSchedule.Location = new System.Drawing.Point(242, 472);
             this.dtpWorkSchedule.Name = "dtpWorkSchedule";
             this.dtpWorkSchedule.Size = new System.Drawing.Size(385, 28);
             this.dtpWorkSchedule.TabIndex = 3;
@@ -130,7 +129,7 @@
             // btnViewAllWorkShifts
             // 
             this.btnViewAllWorkShifts.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.btnViewAllWorkShifts.Location = new System.Drawing.Point(242, 559);
+            this.btnViewAllWorkShifts.Location = new System.Drawing.Point(242, 523);
             this.btnViewAllWorkShifts.Name = "btnViewAllWorkShifts";
             this.btnViewAllWorkShifts.Size = new System.Drawing.Size(385, 39);
             this.btnViewAllWorkShifts.TabIndex = 2;
@@ -146,7 +145,6 @@
             this.tbPageStatistics.Controls.Add(this.txtBoxSearch);
             this.tbPageStatistics.Controls.Add(this.btnViewAllProducts);
             this.tbPageStatistics.Controls.Add(this.btnViewAllEmployees);
-            this.tbPageStatistics.Controls.Add(this.lbEmployeeStatistics);
             this.tbPageStatistics.Controls.Add(this.dataGridViewEmployeeStats);
             this.tbPageStatistics.Location = new System.Drawing.Point(4, 30);
             this.tbPageStatistics.Name = "tbPageStatistics";
@@ -212,16 +210,6 @@
             this.btnViewAllEmployees.Text = "View All Employees";
             this.btnViewAllEmployees.UseVisualStyleBackColor = false;
             // 
-            // lbEmployeeStatistics
-            // 
-            this.lbEmployeeStatistics.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.lbEmployeeStatistics.FormattingEnabled = true;
-            this.lbEmployeeStatistics.ItemHeight = 21;
-            this.lbEmployeeStatistics.Location = new System.Drawing.Point(32, 309);
-            this.lbEmployeeStatistics.Name = "lbEmployeeStatistics";
-            this.lbEmployeeStatistics.Size = new System.Drawing.Size(803, 130);
-            this.lbEmployeeStatistics.TabIndex = 2;
-            // 
             // dataGridViewEmployeeStats
             // 
             this.dataGridViewEmployeeStats.AllowUserToOrderColumns = true;
@@ -237,7 +225,7 @@
             this.dataGridViewEmployeeStats.Name = "dataGridViewEmployeeStats";
             this.dataGridViewEmployeeStats.RowHeadersWidth = 51;
             this.dataGridViewEmployeeStats.RowTemplate.Height = 24;
-            this.dataGridViewEmployeeStats.Size = new System.Drawing.Size(803, 187);
+            this.dataGridViewEmployeeStats.Size = new System.Drawing.Size(803, 330);
             this.dataGridViewEmployeeStats.TabIndex = 1;
             // 
             // Column1
@@ -447,20 +435,6 @@
             this.clmnEmployeeName.Name = "clmnEmployeeName";
             this.clmnEmployeeName.Width = 125;
             // 
-            // clmnHoursWorked
-            // 
-            this.clmnHoursWorked.HeaderText = "Hours Worked";
-            this.clmnHoursWorked.MinimumWidth = 6;
-            this.clmnHoursWorked.Name = "clmnHoursWorked";
-            this.clmnHoursWorked.Width = 125;
-            // 
-            // clmnHoursAvailable
-            // 
-            this.clmnHoursAvailable.HeaderText = "Hours Available";
-            this.clmnHoursAvailable.MinimumWidth = 6;
-            this.clmnHoursAvailable.Name = "clmnHoursAvailable";
-            this.clmnHoursAvailable.Width = 125;
-            // 
             // clmnRole
             // 
             this.clmnRole.HeaderText = "Role";
@@ -468,12 +442,26 @@
             this.clmnRole.Name = "clmnRole";
             this.clmnRole.Width = 125;
             // 
-            // Time
+            // clmnStartTime
             // 
-            this.Time.HeaderText = "Time";
-            this.Time.MinimumWidth = 6;
-            this.Time.Name = "Time";
-            this.Time.Width = 125;
+            this.clmnStartTime.HeaderText = "Start Time";
+            this.clmnStartTime.MinimumWidth = 6;
+            this.clmnStartTime.Name = "clmnStartTime";
+            this.clmnStartTime.Width = 125;
+            // 
+            // clmnEndTime
+            // 
+            this.clmnEndTime.HeaderText = "End Time";
+            this.clmnEndTime.MinimumWidth = 6;
+            this.clmnEndTime.Name = "clmnEndTime";
+            this.clmnEndTime.Width = 125;
+            // 
+            // clmnWorkDate
+            // 
+            this.clmnWorkDate.HeaderText = "Date";
+            this.clmnWorkDate.MinimumWidth = 6;
+            this.clmnWorkDate.Name = "clmnWorkDate";
+            this.clmnWorkDate.Width = 125;
             // 
             // EmployeeSystem
             // 
@@ -487,7 +475,7 @@
             this.Text = "EmployeeSystem";
             this.tbControlEmp.ResumeLayout(false);
             this.tbPageHome.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGVWorkSchedule)).EndInit();
             this.tbPageStatistics.ResumeLayout(false);
             this.tbPageStatistics.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewEmployeeStats)).EndInit();
@@ -505,7 +493,6 @@
         private System.Windows.Forms.DateTimePicker dtpWorkSchedule;
         private System.Windows.Forms.Button btnViewAllWorkShifts;
         private System.Windows.Forms.TabPage tbPageStatistics;
-        private System.Windows.Forms.ListBox lbEmployeeStatistics;
         private System.Windows.Forms.DataGridView dataGridViewEmployeeStats;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
@@ -535,11 +522,11 @@
         private System.Windows.Forms.TextBox txtBoxSearch;
         private System.Windows.Forms.Button btnViewAllProducts;
         private System.Windows.Forms.Button btnViewAllEmployees;
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridView dataGVWorkSchedule;
         private System.Windows.Forms.DataGridViewTextBoxColumn clmnEmployeeName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn clmnHoursWorked;
-        private System.Windows.Forms.DataGridViewTextBoxColumn clmnHoursAvailable;
         private System.Windows.Forms.DataGridViewTextBoxColumn clmnRole;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Time;
+        private System.Windows.Forms.DataGridViewTextBoxColumn clmnStartTime;
+        private System.Windows.Forms.DataGridViewTextBoxColumn clmnEndTime;
+        private System.Windows.Forms.DataGridViewTextBoxColumn clmnWorkDate;
     }
 }
