@@ -27,3 +27,4 @@ C:\Users\Gebruiker\Documents\GitHub\MediaBazaar\mediabazaar\MediaBazaarSystem\Me
 C:\Users\Gebruiker\Documents\GitHub\MediaBazaar\mediabazaar\MediaBazaarSystem\MediaBazaarSystem\bin\Debug\System.Numerics.Vectors.xml
 C:\Users\Gebruiker\Documents\GitHub\MediaBazaar\mediabazaar\MediaBazaarSystem\MediaBazaarSystem\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
 C:\Users\Gebruiker\Documents\GitHub\MediaBazaar\mediabazaar\MediaBazaarSystem\MediaBazaarSystem\obj\Debug\MediaBazaarSystem.csproj.CopyComplete
+C:\Users\Gebruiker\Documents\GitHub\MediaBazaar\mediabazaar\MediaBazaarSystem\MediaBazaarSystem\obj\Debug\MediaBazaarSystem.AssignEmployeeSystem.resources

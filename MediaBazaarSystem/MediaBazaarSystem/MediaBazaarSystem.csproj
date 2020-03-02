@@ -87,6 +87,12 @@
     <Compile Include="AdministrationSystem.Designer.cs">
       <DependentUpon>AdministrationSystem.cs</DependentUpon>
     </Compile>
+    <Compile Include="AssignEmployeeSystem.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AssignEmployeeSystem.Designer.cs">
+      <DependentUpon>AssignEmployeeSystem.cs</DependentUpon>
+    </Compile>
     <Compile Include="Cryptography.cs" />
     <Compile Include="Department.cs" />
     <Compile Include="Employee.cs" />
@@ -109,6 +115,9 @@
     <Compile Include="Staff.cs" />
     <EmbeddedResource Include="AdministrationSystem.resx">
       <DependentUpon>AdministrationSystem.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AssignEmployeeSystem.resx">
+      <DependentUpon>AssignEmployeeSystem.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="EmployeeSystem.resx">
       <DependentUpon>EmployeeSystem.cs</DependentUpon>

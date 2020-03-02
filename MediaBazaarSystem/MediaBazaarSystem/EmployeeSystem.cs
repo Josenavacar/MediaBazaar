@@ -37,18 +37,25 @@ namespace MediaBazaarSystem
                 DateTime workStartTime = Convert.ToDateTime( startTime );
                 DateTime workEndTime = Convert.ToDateTime( endTime );
 
-                DataGridViewRow row = ( DataGridViewRow ) dataGVWorkSchedule.Rows[ 0 ].Clone();
-                dataGVWorkSchedule.Columns[ "clmnWorkDate" ].DefaultCellStyle.BackColor = Color.LightSteelBlue;
+                DataGridViewRow row = ( DataGridViewRow ) dataEmpWorkSchedule.Rows[ 0 ].Clone();
+                dataEmpWorkSchedule.Columns[ "clmnWorkDate" ].DefaultCellStyle.BackColor = Color.LightSteelBlue;
                 row.Cells[ 0 ].Value = reader.GetValue( 0 ).ToString(); // First Name
                 row.Cells[ 1 ].Value = reader.GetValue( 1 ).ToString(); // Name (Role)
                 row.Cells[ 2 ].Value = workStartTime.ToString( "hh:mm tt" );// Start Time
                 row.Cells[ 3 ].Value = workEndTime.ToString( "hh:mm tt" ); // End Time
                 row.Cells[ 4 ].Value = reader.GetValue( 4 ).ToString(); // Date
                 //row.Cells[ 7 ].Value = dateTimePicker.Value.ToString();
-                dataGVWorkSchedule.Rows.Add( row );
+                dataEmpWorkSchedule.Rows.Add( row );
                 //dataGridView1.Controls.Add( dateTimePicker );
                 //dateTimePicker.Format = DateTimePickerFormat.Time;
             }
+        }
+
+        private void picBoxLogout_Click( object sender, EventArgs e )
+        {
+            this.Hide();
+            formLogin login = new formLogin();
+            login.Show();
         }
     }
 }

@@ -12,9 +12,23 @@ namespace MediaBazaarSystem
 {
     public partial class AdministrationSystem : Form
     {
+        AssignEmployeeSystem assignEmployeeForm = new AssignEmployeeSystem();
+
         public AdministrationSystem()
         {
             InitializeComponent();
+        }
+
+        private void btnAssignEmployee_Click( object sender, EventArgs e )
+        {
+            assignEmployeeForm.Show(); 
+        }
+
+        private void picBoxLogout_Click( object sender, EventArgs e )
+        {
+            this.Hide();
+            formLogin login = new formLogin();
+            login.Show();
         }
     }
 }

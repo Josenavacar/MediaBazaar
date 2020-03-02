@@ -25,6 +25,7 @@ namespace MediaBazaarSystem
             String email = txtBoxEmail.Text;
             String password = txtBoxPassword.Text;
             String toDecryptPassword = "";
+            int role;
 
             using( SqlConnection connection = new SqlConnection( @"Data Source=(local);Initial Catalog=MediaBazaar;Integrated Security=True;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False;Column Encryption Setting=enabled" ) )
             {
@@ -45,15 +46,26 @@ namespace MediaBazaarSystem
                     {
                         // The number is based on the column... 
                         //E.g. password is column 6 and email is column 5
-                        toDecryptPassword = reader.GetString( 6 ) ; 
+                        toDecryptPassword = reader.GetString( 6 ) ;
+                        role = (int)reader.GetValue(11);
 
                         if( Cryptography.Decrypt( toDecryptPassword ) == password )
                         {
-                            String employeeID = reader.GetValue( 0 ).ToString();
-                            EmployeeSystem employeeSystem = new EmployeeSystem( employeeID );
-                            employeeSystem.Show();
+                            if(role == 1) // Manager
+                            {
+                                AdministrationSystem administrationSystem = new AdministrationSystem();
+                                administrationSystem.Show();
+                                this.Hide();
+                            }
+                            else if(role == 2) // Employee
+                            {
+                                String employeeID = reader.GetValue( 0 ).ToString();
+                                EmployeeSystem employeeSystem = new EmployeeSystem( employeeID );
+                                employeeSystem.Show();
+                                this.Hide();
+                            }
                         }
-                        else
+                        else if( (Cryptography.Decrypt( toDecryptPassword ) != password) || (password == null) )
                         {
                             MessageBox.Show( "Email or password is incorrect. Please try again." );
                         }
