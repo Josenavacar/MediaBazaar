@@ -95,6 +95,12 @@
     </Compile>
     <Compile Include="Cryptography.cs" />
     <Compile Include="Department.cs" />
+    <Compile Include="AddEmployee.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AddEmployee.Designer.cs">
+      <DependentUpon>AddEmployee.cs</DependentUpon>
+    </Compile>
     <Compile Include="Employee.cs" />
     <Compile Include="EmployeeSystem.cs">
       <SubType>Form</SubType>
@@ -113,11 +119,19 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Staff.cs" />
+    <Compile Include="ViewEmployee.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ViewEmployee.Designer.cs">
+      <DependentUpon>ViewEmployee.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="AdministrationSystem.resx">
       <DependentUpon>AdministrationSystem.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="AssignEmployeeSystem.resx">
       <DependentUpon>AssignEmployeeSystem.cs</DependentUpon>
+    <EmbeddedResource Include="AddEmployee.resx">
+      <DependentUpon>AddEmployee.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="EmployeeSystem.resx">
       <DependentUpon>EmployeeSystem.cs</DependentUpon>
@@ -135,6 +149,10 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <None Include="packages.config" />
+    <EmbeddedResource Include="ViewEmployee.resx">
+      <DependentUpon>ViewEmployee.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="ClassDiagram1.cd" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
