@@ -106,7 +106,7 @@
             // picBoxLogout
             // 
             this.picBoxLogout.Image = ((System.Drawing.Image)(resources.GetObject("picBoxLogout.Image")));
-            this.picBoxLogout.Location = new System.Drawing.Point(833, 3);
+            this.picBoxLogout.Location = new System.Drawing.Point(830, 3);
             this.picBoxLogout.Name = "picBoxLogout";
             this.picBoxLogout.Size = new System.Drawing.Size(34, 27);
             this.picBoxLogout.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
