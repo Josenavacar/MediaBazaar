@@ -18,24 +18,54 @@ namespace MediaBazaarSystem
             set;
         }
 
-        public void AddEmployee()
+        public String NAME
         {
-
+            get { return this.name; }
+            private set { this.name = value; }
         }
 
-        public void AddManager()
+        public Department(String name)
         {
+            employees = new List<Employee>();
+            managers = new List<Manager>();
+            NAME = name;
+        }
 
+        public void AddEmployee(Employee employee)
+        {
+            employees.Add(employee);
+        }
+        public void DeleteEmployee(Employee employee)
+        {
+            employees.Remove(employee);
+        }
+
+        public void AddManager(Manager manager)
+        {
+            managers.Add(manager);
         }
 
         public List<Employee> GetEmployees()
         {
-            return null;
+            return employees;
         }
 
         public List<Manager> GetManagers()
         {
-            return null;
+            return managers;
+        }
+
+        public Employee GetEmployee(String firstname, String lastname)
+        {
+            Employee ans = null;
+            foreach(Employee aux in employees)
+            {
+                if(aux.FirstN == firstname && aux.LastN == lastname)
+                {
+                    ans = aux;
+                }
+            }
+            return ans;
         }
 
         //public List<Staff> GetStaffs()

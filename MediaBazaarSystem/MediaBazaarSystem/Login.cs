@@ -14,6 +14,7 @@ namespace MediaBazaarSystem
 {
     public partial class formLogin : Form
     {
+        Department dep1;
         public formLogin()
         {
             InitializeComponent();

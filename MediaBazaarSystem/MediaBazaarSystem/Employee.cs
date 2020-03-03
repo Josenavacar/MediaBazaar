@@ -9,19 +9,64 @@ namespace MediaBazaarSystem
     public class Employee : Staff
     {
         private static int idSeeder;
+        String firstName;
+        String lastName;
+        int age;
+        String address;
 
-        public Employee(String firstName, String lastName, int age, String address, String role, double salary, int hoursWorked, int hoursAvailable) 
+        public String FirstN
+        {
+            get { return firstName; }
+            private set { this.firstName = value; }
+        }
+
+        public String LastN
+        {
+            get { return lastName; }
+            private set { this.lastName = value; }
+        }
+
+        public String ADDRESS
+        {
+            get { return this.address; }
+            private set { this.address = value; }
+        }
+
+        public int AGE
+        {
+            get { return this.age; }
+            private set { this.age = value; }
+        }
+
+        public String ROLE
+        {
+            get { return this.role; }
+            private set { this.role = value; }
+        }
+
+        public double SALARY
+        {
+            get { return this.salary; }
+            private set { this.salary = value; }
+        }
+
+        public int HoursFree
+        {
+            get { return this.hoursAvailable; }
+            private set { this.hoursAvailable = value; }
+        }
+
+        public Employee(String firstName, String lastName, int age, String address, String role, double salary, int hoursAvailable) //Removed hoursworked
         {
             this.ID = idSeeder;
             idSeeder++;
-            this.firstName = firstName;
-            this.lastName = lastName;
-            this.age = age;
-            this.address = address;
-            this.role = role;
-            this.salary = salary;
-            this.hoursWorked = hoursWorked;
-            this.hoursAvailable = hoursAvailable;
+            FirstN = firstName;
+            LastN = lastName;
+            AGE = age;
+            ADDRESS = address;
+            ROLE = role;
+            SALARY = salary;
+            HoursFree = hoursAvailable;
         }
 
         public void GenerateSalary()
