@@ -21,14 +21,14 @@ namespace MediaBazaarSystem
         {
             InitializeComponent();
 
-            string connectionString = @"Data Source=(local);Initial Catalog=MediaBazaar;Integrated Security=True;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False;Column Encryption Setting=enabled";
-            string sql = "SELECT FirstName, Name, StartTime, EndTime, WorkDate FROM [User] " +
-                "INNER JOIN Role ON [User].RoleId = Role.Id " +
-                "INNER JOIN Schedule ON [User].Id = Schedule.UserID";
-            SqlConnection connection = new SqlConnection( connectionString );
-            SqlCommand cmd = new SqlCommand( sql, connection );
+            string connectionString = @"Server = studmysql01.fhict.local; Uid = dbi437493; Database = dbi437493; Pwd = dbgroup01;";
+            string sql = "SELECT FirstName, Name, StartTime, EndTime, WorkDate FROM Person " +
+                "INNER JOIN Role ON Person.RoleId = Role.Id " +
+                "INNER JOIN Schedule ON Person.Id = Schedule.PersonID";
+            MySqlConnection connection = new MySqlConnection( connectionString );
+            MySqlCommand cmd = new MySqlCommand( sql, connection );
             connection.Open();
-            SqlDataReader reader = cmd.ExecuteReader();
+            MySqlDataReader reader = cmd.ExecuteReader();
 
             while( reader.Read() )
             {

@@ -27,16 +27,16 @@ namespace MediaBazaarSystem
             String toDecryptPassword = "";
             int role;
 
-            using( SqlConnection connection = new SqlConnection( @"Data Source=(local);Initial Catalog=MediaBazaar;Integrated Security=True;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False;Column Encryption Setting=enabled" ) )
+            using( MySqlConnection connection = new MySqlConnection( @"Server = studmysql01.fhict.local; Uid = dbi437493; Database = dbi437493; Pwd = dbgroup01;" ) )
             {
                 // SQL query to get the user based on login credentials
-                SqlCommand cmd = new SqlCommand( "Select * from [User] where email = @email", connection );
-                cmd.Parameters.Add( "email", SqlDbType.NVarChar ).Value = email;
+                MySqlCommand cmd = new MySqlCommand( "Select * from Person where email = @email", connection );
+                cmd.Parameters.Add( "email", MySqlDbType.VarChar).Value = email;
 
                 // Open connection
                 connection.Open();
 
-                SqlDataReader reader = cmd.ExecuteReader( CommandBehavior.CloseConnection );
+                MySqlDataReader reader = cmd.ExecuteReader( CommandBehavior.CloseConnection );
 
                 try
                 {
@@ -84,14 +84,15 @@ namespace MediaBazaarSystem
             String email = txtBoxEmail.Text;
             String password = Cryptography.Encrypt( txtBoxPassword.Text );
 
-            using( SqlConnection connection = new SqlConnection( @"Data Source=(local);Initial Catalog=MediaBazaar;Integrated Security=True;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False;Column Encryption Setting=enabled" ) )
+
+            using( MySqlConnection connection = new MySqlConnection( @"Server = studmysql01.fhict.local; Uid = dbi437493; Database = dbi437493; Pwd = dbgroup01;" ) )
             {
-                String query = "INSERT INTO [User](email, password) VALUES (@email, @password)";
+                String query = "INSERT INTO Person (email, password) VALUES (@email, @password)";
 
                 try
                 {
                     connection.Open();
-                    SqlCommand cmd = new SqlCommand( query, connection );
+                    MySqlCommand cmd = new MySqlCommand( query, connection );
                     cmd.Parameters.AddWithValue( "@email", email );
                     cmd.Parameters.AddWithValue( "@password", password );
                     cmd.ExecuteNonQuery();
