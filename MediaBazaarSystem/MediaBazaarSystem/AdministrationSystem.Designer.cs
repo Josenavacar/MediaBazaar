@@ -192,8 +192,9 @@
             // 
             this.dtpWorkSchedule.Location = new System.Drawing.Point(240, 537);
             this.dtpWorkSchedule.Name = "dtpWorkSchedule";
-            this.dtpWorkSchedule.Size = new System.Drawing.Size(385, 24);
+            this.dtpWorkSchedule.Size = new System.Drawing.Size(385, 28);
             this.dtpWorkSchedule.TabIndex = 3;
+            this.dtpWorkSchedule.ValueChanged += new System.EventHandler(this.dtpWorkSchedule_ValueChanged);
             // 
             // tbPageStatistics
             // 
@@ -204,7 +205,7 @@
             this.tbPageStatistics.Controls.Add(this.btnViewAllProducts);
             this.tbPageStatistics.Controls.Add(this.btnViewAllEmployees);
             this.tbPageStatistics.Controls.Add(this.dataGridViewEmployeeStats);
-            this.tbPageStatistics.Location = new System.Drawing.Point(4, 28);
+            this.tbPageStatistics.Location = new System.Drawing.Point(4, 30);
             this.tbPageStatistics.Name = "tbPageStatistics";
             this.tbPageStatistics.Size = new System.Drawing.Size(870, 673);
             this.tbPageStatistics.TabIndex = 2;
@@ -235,7 +236,7 @@
             this.txtBoxSearch.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtBoxSearch.Location = new System.Drawing.Point(29, 32);
             this.txtBoxSearch.Name = "txtBoxSearch";
-            this.txtBoxSearch.Size = new System.Drawing.Size(595, 27);
+            this.txtBoxSearch.Size = new System.Drawing.Size(595, 32);
             this.txtBoxSearch.TabIndex = 13;
             // 
             // btnViewAllProducts
@@ -336,7 +337,7 @@
             this.tbPageProfile.Controls.Add(this.txtBoxFirstName);
             this.tbPageProfile.Controls.Add(this.btnUpdateProfile);
             this.tbPageProfile.Controls.Add(this.lbEmployeeInfo);
-            this.tbPageProfile.Location = new System.Drawing.Point(4, 28);
+            this.tbPageProfile.Location = new System.Drawing.Point(4, 30);
             this.tbPageProfile.Name = "tbPageProfile";
             this.tbPageProfile.Padding = new System.Windows.Forms.Padding(3);
             this.tbPageProfile.Size = new System.Drawing.Size(870, 673);
@@ -349,7 +350,7 @@
             this.lblAdminName.Font = new System.Drawing.Font("Century Gothic", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblAdminName.Location = new System.Drawing.Point(15, 23);
             this.lblAdminName.Name = "lblAdminName";
-            this.lblAdminName.Size = new System.Drawing.Size(235, 19);
+            this.lblAdminName.Size = new System.Drawing.Size(283, 21);
             this.lblAdminName.TabIndex = 15;
             this.lblAdminName.Text = "Hello (here goes the user\'s name)";
             // 
@@ -375,7 +376,7 @@
             this.lblEmail.AutoSize = true;
             this.lblEmail.Location = new System.Drawing.Point(447, 509);
             this.lblEmail.Name = "lblEmail";
-            this.lblEmail.Size = new System.Drawing.Size(50, 19);
+            this.lblEmail.Size = new System.Drawing.Size(57, 21);
             this.lblEmail.TabIndex = 11;
             this.lblEmail.Text = "Email:";
             // 
@@ -384,7 +385,7 @@
             this.txtBoxEmail.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtBoxEmail.Location = new System.Drawing.Point(526, 504);
             this.txtBoxEmail.Name = "txtBoxEmail";
-            this.txtBoxEmail.Size = new System.Drawing.Size(297, 27);
+            this.txtBoxEmail.Size = new System.Drawing.Size(297, 32);
             this.txtBoxEmail.TabIndex = 10;
             // 
             // lblAddress
@@ -392,7 +393,7 @@
             this.lblAddress.AutoSize = true;
             this.lblAddress.Location = new System.Drawing.Point(422, 465);
             this.lblAddress.Name = "lblAddress";
-            this.lblAddress.Size = new System.Drawing.Size(65, 19);
+            this.lblAddress.Size = new System.Drawing.Size(82, 21);
             this.lblAddress.TabIndex = 9;
             this.lblAddress.Text = "Address:";
             // 
@@ -401,7 +402,7 @@
             this.lblAge.AutoSize = true;
             this.lblAge.Location = new System.Drawing.Point(454, 415);
             this.lblAge.Name = "lblAge";
-            this.lblAge.Size = new System.Drawing.Size(40, 19);
+            this.lblAge.Size = new System.Drawing.Size(50, 21);
             this.lblAge.TabIndex = 8;
             this.lblAge.Text = "Age:";
             // 
@@ -410,7 +411,7 @@
             this.lblLastName.AutoSize = true;
             this.lblLastName.Location = new System.Drawing.Point(399, 364);
             this.lblLastName.Name = "lblLastName";
-            this.lblLastName.Size = new System.Drawing.Size(85, 19);
+            this.lblLastName.Size = new System.Drawing.Size(105, 21);
             this.lblLastName.TabIndex = 7;
             this.lblLastName.Text = "Last Name:";
             // 
@@ -419,7 +420,7 @@
             this.lblFirstName.AutoSize = true;
             this.lblFirstName.Location = new System.Drawing.Point(403, 312);
             this.lblFirstName.Name = "lblFirstName";
-            this.lblFirstName.Size = new System.Drawing.Size(83, 19);
+            this.lblFirstName.Size = new System.Drawing.Size(101, 21);
             this.lblFirstName.TabIndex = 6;
             this.lblFirstName.Text = "First Name:";
             // 
@@ -428,7 +429,7 @@
             this.txtBoxAddress.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtBoxAddress.Location = new System.Drawing.Point(526, 460);
             this.txtBoxAddress.Name = "txtBoxAddress";
-            this.txtBoxAddress.Size = new System.Drawing.Size(297, 27);
+            this.txtBoxAddress.Size = new System.Drawing.Size(297, 32);
             this.txtBoxAddress.TabIndex = 5;
             // 
             // txtBoxLastName
@@ -436,7 +437,7 @@
             this.txtBoxLastName.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtBoxLastName.Location = new System.Drawing.Point(526, 359);
             this.txtBoxLastName.Name = "txtBoxLastName";
-            this.txtBoxLastName.Size = new System.Drawing.Size(297, 27);
+            this.txtBoxLastName.Size = new System.Drawing.Size(297, 32);
             this.txtBoxLastName.TabIndex = 4;
             // 
             // txtBoxAge
@@ -444,7 +445,7 @@
             this.txtBoxAge.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtBoxAge.Location = new System.Drawing.Point(526, 410);
             this.txtBoxAge.Name = "txtBoxAge";
-            this.txtBoxAge.Size = new System.Drawing.Size(297, 27);
+            this.txtBoxAge.Size = new System.Drawing.Size(297, 32);
             this.txtBoxAge.TabIndex = 3;
             // 
             // txtBoxFirstName
@@ -452,7 +453,7 @@
             this.txtBoxFirstName.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtBoxFirstName.Location = new System.Drawing.Point(526, 307);
             this.txtBoxFirstName.Name = "txtBoxFirstName";
-            this.txtBoxFirstName.Size = new System.Drawing.Size(297, 27);
+            this.txtBoxFirstName.Size = new System.Drawing.Size(297, 32);
             this.txtBoxFirstName.TabIndex = 2;
             // 
             // btnUpdateProfile
@@ -470,10 +471,10 @@
             this.lbEmployeeInfo.BackColor = System.Drawing.Color.WhiteSmoke;
             this.lbEmployeeInfo.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbEmployeeInfo.FormattingEnabled = true;
-            this.lbEmployeeInfo.ItemHeight = 21;
+            this.lbEmployeeInfo.ItemHeight = 23;
             this.lbEmployeeInfo.Location = new System.Drawing.Point(19, 65);
             this.lbEmployeeInfo.Name = "lbEmployeeInfo";
-            this.lbEmployeeInfo.Size = new System.Drawing.Size(330, 529);
+            this.lbEmployeeInfo.Size = new System.Drawing.Size(330, 510);
             this.lbEmployeeInfo.TabIndex = 0;
             // 
             // tbPageEmpManagement
@@ -484,7 +485,7 @@
             this.tbPageEmpManagement.Controls.Add(this.btnUpdateEmployee);
             this.tbPageEmpManagement.Controls.Add(this.lbEmployees);
             this.tbPageEmpManagement.Controls.Add(this.btnFireEmployee);
-            this.tbPageEmpManagement.Location = new System.Drawing.Point(4, 28);
+            this.tbPageEmpManagement.Location = new System.Drawing.Point(4, 30);
             this.tbPageEmpManagement.Name = "tbPageEmpManagement";
             this.tbPageEmpManagement.Size = new System.Drawing.Size(870, 673);
             this.tbPageEmpManagement.TabIndex = 3;
@@ -493,9 +494,9 @@
             // btnViewEmployeeDetails
             // 
             this.btnViewEmployeeDetails.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.btnViewEmployeeDetails.Location = new System.Drawing.Point(139, 548);
+            this.btnViewEmployeeDetails.Location = new System.Drawing.Point(447, 558);
             this.btnViewEmployeeDetails.Name = "btnViewEmployeeDetails";
-            this.btnViewEmployeeDetails.Size = new System.Drawing.Size(577, 48);
+            this.btnViewEmployeeDetails.Size = new System.Drawing.Size(211, 48);
             this.btnViewEmployeeDetails.TabIndex = 7;
             this.btnViewEmployeeDetails.Text = "View Employee Details";
             this.btnViewEmployeeDetails.UseVisualStyleBackColor = false;
@@ -504,9 +505,9 @@
             // btnAddEmployee
             // 
             this.btnAddEmployee.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.btnAddEmployee.Location = new System.Drawing.Point(139, 440);
+            this.btnAddEmployee.Location = new System.Drawing.Point(19, 558);
             this.btnAddEmployee.Name = "btnAddEmployee";
-            this.btnAddEmployee.Size = new System.Drawing.Size(577, 48);
+            this.btnAddEmployee.Size = new System.Drawing.Size(167, 48);
             this.btnAddEmployee.TabIndex = 6;
             this.btnAddEmployee.Text = "Add Employee";
             this.btnAddEmployee.UseVisualStyleBackColor = false;
@@ -515,9 +516,9 @@
             // btnUpdateEmployee
             // 
             this.btnUpdateEmployee.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.btnUpdateEmployee.Location = new System.Drawing.Point(139, 494);
+            this.btnUpdateEmployee.Location = new System.Drawing.Point(227, 558);
             this.btnUpdateEmployee.Name = "btnUpdateEmployee";
-            this.btnUpdateEmployee.Size = new System.Drawing.Size(577, 48);
+            this.btnUpdateEmployee.Size = new System.Drawing.Size(182, 48);
             this.btnUpdateEmployee.TabIndex = 5;
             this.btnUpdateEmployee.Text = "Update Employee";
             this.btnUpdateEmployee.UseVisualStyleBackColor = false;
@@ -528,20 +529,20 @@
             this.lbEmployees.BackColor = System.Drawing.Color.WhiteSmoke;
             this.lbEmployees.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbEmployees.FormattingEnabled = true;
-            this.lbEmployees.ItemHeight = 21;
+            this.lbEmployees.ItemHeight = 23;
             this.lbEmployees.Location = new System.Drawing.Point(19, 19);
             this.lbEmployees.Name = "lbEmployees";
-            this.lbEmployees.Size = new System.Drawing.Size(831, 395);
+            this.lbEmployees.Size = new System.Drawing.Size(831, 464);
             this.lbEmployees.TabIndex = 4;
             // 
             // btnFireEmployee
             // 
             this.btnFireEmployee.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.btnFireEmployee.Location = new System.Drawing.Point(139, 602);
+            this.btnFireEmployee.Location = new System.Drawing.Point(688, 558);
             this.btnFireEmployee.Name = "btnFireEmployee";
-            this.btnFireEmployee.Size = new System.Drawing.Size(577, 48);
+            this.btnFireEmployee.Size = new System.Drawing.Size(162, 48);
             this.btnFireEmployee.TabIndex = 3;
-            this.btnFireEmployee.Text = "Fire Employee";
+            this.btnFireEmployee.Text = "Delete Employee";
             this.btnFireEmployee.UseVisualStyleBackColor = false;
             this.btnFireEmployee.Click += new System.EventHandler(this.btnFireEmployee_Click);
             // 
@@ -553,7 +554,7 @@
             // 
             // AdministrationSystem
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 15F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.WindowFrame;
             this.ClientSize = new System.Drawing.Size(907, 733);

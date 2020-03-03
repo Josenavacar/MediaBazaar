@@ -106,7 +106,7 @@
             // picBoxLogout
             // 
             this.picBoxLogout.Image = ((System.Drawing.Image)(resources.GetObject("picBoxLogout.Image")));
-            this.picBoxLogout.Location = new System.Drawing.Point(830, 3);
+            this.picBoxLogout.Location = new System.Drawing.Point(833, 3);
             this.picBoxLogout.Name = "picBoxLogout";
             this.picBoxLogout.Size = new System.Drawing.Size(34, 27);
             this.picBoxLogout.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -171,6 +171,7 @@
             this.dtpWorkSchedule.Name = "dtpWorkSchedule";
             this.dtpWorkSchedule.Size = new System.Drawing.Size(385, 28);
             this.dtpWorkSchedule.TabIndex = 3;
+            this.dtpWorkSchedule.ValueChanged += new System.EventHandler(this.dtpWorkSchedule_ValueChanged);
             // 
             // tbPageStatistics
             // 
