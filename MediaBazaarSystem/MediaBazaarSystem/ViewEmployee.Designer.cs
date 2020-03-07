@@ -31,89 +31,106 @@
             this.lbMoney = new System.Windows.Forms.Label();
             this.lbTimeAv = new System.Windows.Forms.Label();
             this.lbWork = new System.Windows.Forms.Label();
-            this.lbPlace = new System.Windows.Forms.Label();
-            this.lbOld = new System.Windows.Forms.Label();
-            this.lbSurn = new System.Windows.Forms.Label();
-            this.lbName = new System.Windows.Forms.Label();
+            this.lblAddress = new System.Windows.Forms.Label();
+            this.lblAge = new System.Windows.Forms.Label();
+            this.lblLastName = new System.Windows.Forms.Label();
+            this.lblFirstName = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // lbMoney
             // 
             this.lbMoney.AutoSize = true;
-            this.lbMoney.Location = new System.Drawing.Point(75, 214);
+            this.lbMoney.Font = new System.Drawing.Font("Century Gothic", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbMoney.Location = new System.Drawing.Point(147, 196);
+            this.lbMoney.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lbMoney.Name = "lbMoney";
-            this.lbMoney.Size = new System.Drawing.Size(39, 13);
+            this.lbMoney.Size = new System.Drawing.Size(63, 21);
             this.lbMoney.TabIndex = 21;
             this.lbMoney.Text = "Salary:";
             // 
             // lbTimeAv
             // 
             this.lbTimeAv.AutoSize = true;
-            this.lbTimeAv.Location = new System.Drawing.Point(32, 250);
+            this.lbTimeAv.Font = new System.Drawing.Font("Century Gothic", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbTimeAv.Location = new System.Drawing.Point(65, 229);
+            this.lbTimeAv.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lbTimeAv.Name = "lbTimeAv";
-            this.lbTimeAv.Size = new System.Drawing.Size(84, 13);
+            this.lbTimeAv.Size = new System.Drawing.Size(145, 21);
             this.lbTimeAv.TabIndex = 20;
             this.lbTimeAv.Text = "Hours Available:";
             // 
             // lbWork
             // 
             this.lbWork.AutoSize = true;
-            this.lbWork.Location = new System.Drawing.Point(67, 173);
+            this.lbWork.Font = new System.Drawing.Font("Century Gothic", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbWork.Location = new System.Drawing.Point(133, 163);
+            this.lbWork.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lbWork.Name = "lbWork";
-            this.lbWork.Size = new System.Drawing.Size(47, 13);
+            this.lbWork.Size = new System.Drawing.Size(77, 21);
             this.lbWork.TabIndex = 19;
             this.lbWork.Text = "Position:";
             // 
-            // lbPlace
+            // lblAddress
             // 
-            this.lbPlace.AutoSize = true;
-            this.lbPlace.Location = new System.Drawing.Point(67, 138);
-            this.lbPlace.Name = "lbPlace";
-            this.lbPlace.Size = new System.Drawing.Size(48, 13);
-            this.lbPlace.TabIndex = 18;
-            this.lbPlace.Text = "Address:";
+            this.lblAddress.AutoSize = true;
+            this.lblAddress.Font = new System.Drawing.Font("Century Gothic", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblAddress.Location = new System.Drawing.Point(128, 130);
+            this.lblAddress.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblAddress.Name = "lblAddress";
+            this.lblAddress.Size = new System.Drawing.Size(82, 21);
+            this.lblAddress.TabIndex = 18;
+            this.lblAddress.Text = "Address:";
             // 
-            // lbOld
+            // lblAge
             // 
-            this.lbOld.AutoSize = true;
-            this.lbOld.Location = new System.Drawing.Point(86, 100);
-            this.lbOld.Name = "lbOld";
-            this.lbOld.Size = new System.Drawing.Size(29, 13);
-            this.lbOld.TabIndex = 17;
-            this.lbOld.Text = "Age:";
+            this.lblAge.AutoSize = true;
+            this.lblAge.Font = new System.Drawing.Font("Century Gothic", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblAge.Location = new System.Drawing.Point(160, 96);
+            this.lblAge.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblAge.Name = "lblAge";
+            this.lblAge.Size = new System.Drawing.Size(50, 21);
+            this.lblAge.TabIndex = 17;
+            this.lblAge.Text = "Age:";
             // 
-            // lbSurn
+            // lblLastName
             // 
-            this.lbSurn.AutoSize = true;
-            this.lbSurn.Location = new System.Drawing.Point(45, 60);
-            this.lbSurn.Name = "lbSurn";
-            this.lbSurn.Size = new System.Drawing.Size(70, 13);
-            this.lbSurn.TabIndex = 16;
-            this.lbSurn.Text = "Last name(s):";
+            this.lblLastName.AutoSize = true;
+            this.lblLastName.Font = new System.Drawing.Font("Century Gothic", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblLastName.Location = new System.Drawing.Point(108, 60);
+            this.lblLastName.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblLastName.Name = "lblLastName";
+            this.lblLastName.Size = new System.Drawing.Size(102, 21);
+            this.lblLastName.TabIndex = 16;
+            this.lblLastName.Text = "Last name:";
             // 
-            // lbName
+            // lblFirstName
             // 
-            this.lbName.AutoSize = true;
-            this.lbName.Location = new System.Drawing.Point(57, 20);
-            this.lbName.Name = "lbName";
-            this.lbName.Size = new System.Drawing.Size(58, 13);
-            this.lbName.TabIndex = 15;
-            this.lbName.Text = "First name:";
+            this.lblFirstName.AutoSize = true;
+            this.lblFirstName.Font = new System.Drawing.Font("Century Gothic", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblFirstName.Location = new System.Drawing.Point(112, 27);
+            this.lblFirstName.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblFirstName.Name = "lblFirstName";
+            this.lblFirstName.Size = new System.Drawing.Size(98, 21);
+            this.lblFirstName.TabIndex = 15;
+            this.lblFirstName.Text = "First name:";
             // 
             // ViewEmployee
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(428, 296);
+            this.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.ClientSize = new System.Drawing.Size(675, 290);
             this.Controls.Add(this.lbMoney);
             this.Controls.Add(this.lbTimeAv);
             this.Controls.Add(this.lbWork);
-            this.Controls.Add(this.lbPlace);
-            this.Controls.Add(this.lbOld);
-            this.Controls.Add(this.lbSurn);
-            this.Controls.Add(this.lbName);
+            this.Controls.Add(this.lblAddress);
+            this.Controls.Add(this.lblAge);
+            this.Controls.Add(this.lblLastName);
+            this.Controls.Add(this.lblFirstName);
+            this.Font = new System.Drawing.Font("Century Gothic", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "ViewEmployee";
-            this.Text = "ViewEmployee";
+            this.Text = "Employee Details";
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -124,9 +141,9 @@
         private System.Windows.Forms.Label lbMoney;
         private System.Windows.Forms.Label lbTimeAv;
         private System.Windows.Forms.Label lbWork;
-        private System.Windows.Forms.Label lbPlace;
-        private System.Windows.Forms.Label lbOld;
-        private System.Windows.Forms.Label lbSurn;
-        private System.Windows.Forms.Label lbName;
+        private System.Windows.Forms.Label lblAddress;
+        private System.Windows.Forms.Label lblAge;
+        private System.Windows.Forms.Label lblLastName;
+        private System.Windows.Forms.Label lblFirstName;
     }
 }

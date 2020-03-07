@@ -17,11 +17,11 @@ namespace MediaBazaarSystem
         {
             InitializeComponent();
             this.emp = emp;
-            lbName.Text += " " + emp.FirstN;
-            lbSurn.Text += " " + emp.LastN;
-            lbPlace.Text += " " + emp.ADDRESS;
+            lblFirstName.Text += " " + emp.FirstN;
+            lblLastName.Text += " " + emp.LastN;
+            lblAddress.Text += " " + emp.ADDRESS;
             lbMoney.Text += " " + emp.SALARY;
-            lbOld.Text += " " + emp.AGE;
+            lblAge.Text += " " + emp.AGE;
             lbTimeAv.Text += " " + emp.HoursFree;
             lbWork.Text += " " + emp.ROLE;
         }

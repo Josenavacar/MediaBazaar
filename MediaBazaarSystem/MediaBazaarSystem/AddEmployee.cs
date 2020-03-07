@@ -22,13 +22,13 @@ namespace MediaBazaarSystem
 
             if(emp != null)
             {
-                tbFirstN.Text = emp.FirstN;
-                tbLastN.Text = emp.LastN;
+                txtBoxFirstName.Text = emp.FirstN;
+                txtBoxLastName.Text = emp.LastN;
                 numAge.Value = emp.AGE;
                 tbAddress.Text = emp.ADDRESS;
-                cbPosition.SelectedItem = emp.ROLE;
-                tbSalary.Text = emp.SALARY.ToString();
-                tbHours.Text = emp.HoursFree.ToString();
+                comBoxPosition.SelectedItem = emp.ROLE;
+                txtBoxSalary.Text = emp.SALARY.ToString();
+                txtBoxHoursAvailable.Text = emp.HoursFree.ToString();
 
                 btnAddEmployee.Text = "Edit";
             }
@@ -40,19 +40,19 @@ namespace MediaBazaarSystem
 
         private void button1_Click(object sender, EventArgs e)
         {
-            if (dep.GetEmployee(tbFirstN.Text, tbLastN.Text) != null && emp == null)
+            if (dep.GetEmployee(txtBoxFirstName.Text, txtBoxLastName.Text) != null && emp == null)
             {
                 MessageBox.Show("Employee already registered.");
             }
             else
             {
-                String FirstN = tbFirstN.Text.ToString();
-                String LastN = tbLastN.Text.ToString();
+                String FirstN = txtBoxFirstName.Text.ToString();
+                String LastN = txtBoxLastName.Text.ToString();
                 int age = Convert.ToInt32(numAge.Value);
                 String address = tbAddress.Text.ToString();
-                String role = cbPosition.SelectedItem.ToString();
-                double salary = Convert.ToDouble(tbSalary.Text);
-                int hoursAvailable = Convert.ToInt32(tbHours.Text);
+                String role = comBoxPosition.SelectedItem.ToString();
+                double salary = Convert.ToDouble(txtBoxSalary.Text);
+                int hoursAvailable = Convert.ToInt32(txtBoxHoursAvailable.Text);
 
                 Employee newEmployee = new Employee(FirstN, LastN, age, address, role, salary, hoursAvailable);
                 if (emp == null)

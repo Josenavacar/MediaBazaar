@@ -28,77 +28,92 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.tbFirstN = new System.Windows.Forms.TextBox();
-            this.tbLastN = new System.Windows.Forms.TextBox();
+            this.txtBoxFirstName = new System.Windows.Forms.TextBox();
+            this.txtBoxLastName = new System.Windows.Forms.TextBox();
             this.tbAddress = new System.Windows.Forms.TextBox();
             this.btnAddEmployee = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
+            this.lblFirstName = new System.Windows.Forms.Label();
+            this.lblLastName = new System.Windows.Forms.Label();
             this.numAge = new System.Windows.Forms.NumericUpDown();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.cbPosition = new System.Windows.Forms.ComboBox();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
-            this.tbHours = new System.Windows.Forms.TextBox();
-            this.tbSalary = new System.Windows.Forms.TextBox();
-            this.label7 = new System.Windows.Forms.Label();
+            this.lblAge = new System.Windows.Forms.Label();
+            this.lblAddress = new System.Windows.Forms.Label();
+            this.comBoxPosition = new System.Windows.Forms.ComboBox();
+            this.lblPosition = new System.Windows.Forms.Label();
+            this.lblHoursAvailable = new System.Windows.Forms.Label();
+            this.txtBoxHoursAvailable = new System.Windows.Forms.TextBox();
+            this.txtBoxSalary = new System.Windows.Forms.TextBox();
+            this.lblSalary = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.numAge)).BeginInit();
             this.SuspendLayout();
             // 
-            // tbFirstN
+            // txtBoxFirstName
             // 
-            this.tbFirstN.Location = new System.Drawing.Point(200, 35);
-            this.tbFirstN.Name = "tbFirstN";
-            this.tbFirstN.Size = new System.Drawing.Size(150, 20);
-            this.tbFirstN.TabIndex = 0;
+            this.txtBoxFirstName.Font = new System.Drawing.Font("Century Gothic", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtBoxFirstName.Location = new System.Drawing.Point(273, 44);
+            this.txtBoxFirstName.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtBoxFirstName.Name = "txtBoxFirstName";
+            this.txtBoxFirstName.Size = new System.Drawing.Size(199, 28);
+            this.txtBoxFirstName.TabIndex = 0;
             // 
-            // tbLastN
+            // txtBoxLastName
             // 
-            this.tbLastN.Location = new System.Drawing.Point(200, 75);
-            this.tbLastN.Name = "tbLastN";
-            this.tbLastN.Size = new System.Drawing.Size(150, 20);
-            this.tbLastN.TabIndex = 1;
+            this.txtBoxLastName.Font = new System.Drawing.Font("Century Gothic", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtBoxLastName.Location = new System.Drawing.Point(273, 92);
+            this.txtBoxLastName.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtBoxLastName.Name = "txtBoxLastName";
+            this.txtBoxLastName.Size = new System.Drawing.Size(199, 28);
+            this.txtBoxLastName.TabIndex = 1;
             // 
             // tbAddress
             // 
-            this.tbAddress.Location = new System.Drawing.Point(200, 153);
+            this.tbAddress.Font = new System.Drawing.Font("Century Gothic", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbAddress.Location = new System.Drawing.Point(273, 189);
+            this.tbAddress.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.tbAddress.Name = "tbAddress";
-            this.tbAddress.Size = new System.Drawing.Size(150, 20);
+            this.tbAddress.Size = new System.Drawing.Size(199, 28);
             this.tbAddress.TabIndex = 2;
             // 
             // btnAddEmployee
             // 
-            this.btnAddEmployee.Location = new System.Drawing.Point(168, 318);
+            this.btnAddEmployee.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.btnAddEmployee.Font = new System.Drawing.Font("Century Gothic", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAddEmployee.Location = new System.Drawing.Point(218, 399);
+            this.btnAddEmployee.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnAddEmployee.Name = "btnAddEmployee";
-            this.btnAddEmployee.Size = new System.Drawing.Size(129, 23);
+            this.btnAddEmployee.Size = new System.Drawing.Size(254, 40);
             this.btnAddEmployee.TabIndex = 3;
             this.btnAddEmployee.Text = "Add/Edit";
-            this.btnAddEmployee.UseVisualStyleBackColor = true;
+            this.btnAddEmployee.UseVisualStyleBackColor = false;
             this.btnAddEmployee.Click += new System.EventHandler(this.button1_Click);
             // 
-            // label1
+            // lblFirstName
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(136, 38);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(58, 13);
-            this.label1.TabIndex = 4;
-            this.label1.Text = "First name:";
+            this.lblFirstName.AutoSize = true;
+            this.lblFirstName.Font = new System.Drawing.Font("Century Gothic", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblFirstName.Location = new System.Drawing.Point(161, 47);
+            this.lblFirstName.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblFirstName.Name = "lblFirstName";
+            this.lblFirstName.Size = new System.Drawing.Size(98, 21);
+            this.lblFirstName.TabIndex = 4;
+            this.lblFirstName.Text = "First name:";
             // 
-            // label2
+            // lblLastName
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(124, 78);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(70, 13);
-            this.label2.TabIndex = 5;
-            this.label2.Text = "Last name(s):";
+            this.lblLastName.AutoSize = true;
+            this.lblLastName.Font = new System.Drawing.Font("Century Gothic", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblLastName.Location = new System.Drawing.Point(157, 95);
+            this.lblLastName.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblLastName.Name = "lblLastName";
+            this.lblLastName.Size = new System.Drawing.Size(102, 21);
+            this.lblLastName.TabIndex = 5;
+            this.lblLastName.Text = "Last name:";
             // 
             // numAge
             // 
+            this.numAge.Font = new System.Drawing.Font("Century Gothic", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.numAge.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.numAge.Location = new System.Drawing.Point(200, 116);
+            this.numAge.Location = new System.Drawing.Point(273, 140);
+            this.numAge.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.numAge.Maximum = new decimal(new int[] {
             67,
             0,
@@ -110,7 +125,7 @@
             0,
             0});
             this.numAge.Name = "numAge";
-            this.numAge.Size = new System.Drawing.Size(120, 20);
+            this.numAge.Size = new System.Drawing.Size(199, 28);
             this.numAge.TabIndex = 6;
             this.numAge.Value = new decimal(new int[] {
             18,
@@ -118,98 +133,117 @@
             0,
             0});
             // 
-            // label3
+            // lblAge
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(165, 118);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(29, 13);
-            this.label3.TabIndex = 7;
-            this.label3.Text = "Age:";
+            this.lblAge.AutoSize = true;
+            this.lblAge.Font = new System.Drawing.Font("Century Gothic", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblAge.Location = new System.Drawing.Point(209, 142);
+            this.lblAge.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblAge.Name = "lblAge";
+            this.lblAge.Size = new System.Drawing.Size(50, 21);
+            this.lblAge.TabIndex = 7;
+            this.lblAge.Text = "Age:";
             // 
-            // label4
+            // lblAddress
             // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(146, 156);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(48, 13);
-            this.label4.TabIndex = 8;
-            this.label4.Text = "Address:";
+            this.lblAddress.AutoSize = true;
+            this.lblAddress.Font = new System.Drawing.Font("Century Gothic", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblAddress.Location = new System.Drawing.Point(177, 192);
+            this.lblAddress.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblAddress.Name = "lblAddress";
+            this.lblAddress.Size = new System.Drawing.Size(82, 21);
+            this.lblAddress.TabIndex = 8;
+            this.lblAddress.Text = "Address:";
             // 
-            // cbPosition
+            // comBoxPosition
             // 
-            this.cbPosition.FormattingEnabled = true;
-            this.cbPosition.Items.AddRange(new object[] {
+            this.comBoxPosition.Font = new System.Drawing.Font("Century Gothic", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.comBoxPosition.FormattingEnabled = true;
+            this.comBoxPosition.Items.AddRange(new object[] {
             "Manager",
             "Employee"});
-            this.cbPosition.Location = new System.Drawing.Point(200, 188);
-            this.cbPosition.Name = "cbPosition";
-            this.cbPosition.Size = new System.Drawing.Size(121, 21);
-            this.cbPosition.TabIndex = 9;
+            this.comBoxPosition.Location = new System.Drawing.Point(273, 240);
+            this.comBoxPosition.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.comBoxPosition.Name = "comBoxPosition";
+            this.comBoxPosition.Size = new System.Drawing.Size(199, 29);
+            this.comBoxPosition.TabIndex = 9;
             // 
-            // label5
+            // lblPosition
             // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(146, 191);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(47, 13);
-            this.label5.TabIndex = 10;
-            this.label5.Text = "Position:";
+            this.lblPosition.AutoSize = true;
+            this.lblPosition.Font = new System.Drawing.Font("Century Gothic", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblPosition.Location = new System.Drawing.Point(182, 243);
+            this.lblPosition.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblPosition.Name = "lblPosition";
+            this.lblPosition.Size = new System.Drawing.Size(77, 21);
+            this.lblPosition.TabIndex = 10;
+            this.lblPosition.Text = "Position:";
             // 
-            // label6
+            // lblHoursAvailable
             // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(111, 268);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(84, 13);
-            this.label6.TabIndex = 12;
-            this.label6.Text = "Hours Available:";
+            this.lblHoursAvailable.AutoSize = true;
+            this.lblHoursAvailable.Font = new System.Drawing.Font("Century Gothic", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblHoursAvailable.Location = new System.Drawing.Point(114, 339);
+            this.lblHoursAvailable.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblHoursAvailable.Name = "lblHoursAvailable";
+            this.lblHoursAvailable.Size = new System.Drawing.Size(145, 21);
+            this.lblHoursAvailable.TabIndex = 12;
+            this.lblHoursAvailable.Text = "Hours Available:";
             // 
-            // tbHours
+            // txtBoxHoursAvailable
             // 
-            this.tbHours.Location = new System.Drawing.Point(201, 265);
-            this.tbHours.Name = "tbHours";
-            this.tbHours.Size = new System.Drawing.Size(120, 20);
-            this.tbHours.TabIndex = 13;
+            this.txtBoxHoursAvailable.Font = new System.Drawing.Font("Century Gothic", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtBoxHoursAvailable.Location = new System.Drawing.Point(273, 336);
+            this.txtBoxHoursAvailable.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtBoxHoursAvailable.Name = "txtBoxHoursAvailable";
+            this.txtBoxHoursAvailable.Size = new System.Drawing.Size(199, 28);
+            this.txtBoxHoursAvailable.TabIndex = 13;
             // 
-            // tbSalary
+            // txtBoxSalary
             // 
-            this.tbSalary.Location = new System.Drawing.Point(200, 229);
-            this.tbSalary.Name = "tbSalary";
-            this.tbSalary.Size = new System.Drawing.Size(120, 20);
-            this.tbSalary.TabIndex = 15;
+            this.txtBoxSalary.Font = new System.Drawing.Font("Century Gothic", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtBoxSalary.Location = new System.Drawing.Point(273, 289);
+            this.txtBoxSalary.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtBoxSalary.Name = "txtBoxSalary";
+            this.txtBoxSalary.Size = new System.Drawing.Size(199, 28);
+            this.txtBoxSalary.TabIndex = 15;
             // 
-            // label7
+            // lblSalary
             // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(154, 232);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(39, 13);
-            this.label7.TabIndex = 14;
-            this.label7.Text = "Salary:";
+            this.lblSalary.AutoSize = true;
+            this.lblSalary.Font = new System.Drawing.Font("Century Gothic", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblSalary.Location = new System.Drawing.Point(196, 292);
+            this.lblSalary.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblSalary.Name = "lblSalary";
+            this.lblSalary.Size = new System.Drawing.Size(63, 21);
+            this.lblSalary.TabIndex = 14;
+            this.lblSalary.Text = "Salary:";
             // 
             // Employee_Add
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(490, 363);
-            this.Controls.Add(this.tbSalary);
-            this.Controls.Add(this.label7);
-            this.Controls.Add(this.tbHours);
-            this.Controls.Add(this.label6);
-            this.Controls.Add(this.label5);
-            this.Controls.Add(this.cbPosition);
-            this.Controls.Add(this.label4);
-            this.Controls.Add(this.label3);
+            this.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.ClientSize = new System.Drawing.Size(653, 475);
+            this.Controls.Add(this.txtBoxSalary);
+            this.Controls.Add(this.lblSalary);
+            this.Controls.Add(this.txtBoxHoursAvailable);
+            this.Controls.Add(this.lblHoursAvailable);
+            this.Controls.Add(this.lblPosition);
+            this.Controls.Add(this.comBoxPosition);
+            this.Controls.Add(this.lblAddress);
+            this.Controls.Add(this.lblAge);
             this.Controls.Add(this.numAge);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.lblLastName);
+            this.Controls.Add(this.lblFirstName);
             this.Controls.Add(this.btnAddEmployee);
             this.Controls.Add(this.tbAddress);
-            this.Controls.Add(this.tbLastN);
-            this.Controls.Add(this.tbFirstN);
+            this.Controls.Add(this.txtBoxLastName);
+            this.Controls.Add(this.txtBoxFirstName);
+            this.Font = new System.Drawing.Font("Century Gothic", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "Employee_Add";
-            this.Text = "Employee_Add";
+            this.Text = "Add Employee";
             ((System.ComponentModel.ISupportInitialize)(this.numAge)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -218,20 +252,20 @@
 
         #endregion
 
-        private System.Windows.Forms.TextBox tbFirstN;
-        private System.Windows.Forms.TextBox tbLastN;
+        private System.Windows.Forms.TextBox txtBoxFirstName;
+        private System.Windows.Forms.TextBox txtBoxLastName;
         private System.Windows.Forms.TextBox tbAddress;
         private System.Windows.Forms.Button btnAddEmployee;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label lblFirstName;
+        private System.Windows.Forms.Label lblLastName;
         private System.Windows.Forms.NumericUpDown numAge;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.ComboBox cbPosition;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.TextBox tbHours;
-        private System.Windows.Forms.TextBox tbSalary;
-        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label lblAge;
+        private System.Windows.Forms.Label lblAddress;
+        private System.Windows.Forms.ComboBox comBoxPosition;
+        private System.Windows.Forms.Label lblPosition;
+        private System.Windows.Forms.Label lblHoursAvailable;
+        private System.Windows.Forms.TextBox txtBoxHoursAvailable;
+        private System.Windows.Forms.TextBox txtBoxSalary;
+        private System.Windows.Forms.Label lblSalary;
     }
 }
