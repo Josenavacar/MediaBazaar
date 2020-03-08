@@ -12,23 +12,23 @@ namespace MediaBazaarSystem
 {
     public partial class Employee_Add : Form
     {
-        Department dep;
-        Employee emp;
+        Department department;
+        Employee employee;
         public Employee_Add(Department dep, Employee emp)
         {
             InitializeComponent();
-            this.dep = dep;
-            this.emp = emp;
+            this.department = dep;
+            this.employee = emp;
 
             if(emp != null)
             {
-                txtBoxFirstName.Text = emp.FirstN;
-                txtBoxLastName.Text = emp.LastN;
-                numAge.Value = emp.AGE;
-                tbAddress.Text = emp.ADDRESS;
-                comBoxPosition.SelectedItem = emp.ROLE;
-                txtBoxSalary.Text = emp.SALARY.ToString();
-                txtBoxHoursAvailable.Text = emp.HoursFree.ToString();
+                txtBoxFirstName.Text = emp.FirstName;
+                txtBoxLastName.Text = emp.LastName;
+                numAge.Value = emp.Age;
+                tbAddress.Text = emp.Address;
+                comBoxPosition.SelectedItem = emp.Role;
+                txtBoxSalary.Text = emp.Salary.ToString();
+                txtBoxHoursAvailable.Text = emp.HoursAvailable.ToString();
 
                 btnAddEmployee.Text = "Edit";
             }
@@ -40,7 +40,7 @@ namespace MediaBazaarSystem
 
         private void button1_Click(object sender, EventArgs e)
         {
-            if (dep.GetEmployee(txtBoxFirstName.Text, txtBoxLastName.Text) != null && emp == null)
+            if ( department.GetEmployee(txtBoxFirstName.Text, txtBoxLastName.Text) != null && employee == null)
             {
                 MessageBox.Show("Employee already registered.");
             }
@@ -55,15 +55,15 @@ namespace MediaBazaarSystem
                 int hoursAvailable = Convert.ToInt32(txtBoxHoursAvailable.Text);
 
                 Employee newEmployee = new Employee(FirstN, LastN, age, address, role, salary, hoursAvailable);
-                if (emp == null)
+                if ( employee == null)
                 {
-                    dep.AddEmployee(newEmployee);
+                    department.AddEmployee(newEmployee);
                     MessageBox.Show("Employee successfully added");
                 }
                 else
                 {
-                    dep.DeleteEmployee(emp);
-                    dep.AddEmployee(newEmployee);
+                    department.DeleteEmployee( employee );
+                    department.AddEmployee(newEmployee);
                     MessageBox.Show("Employee successfully edited");
                 }
                 this.Hide();
