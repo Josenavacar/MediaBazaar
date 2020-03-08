@@ -25,12 +25,15 @@ namespace MediaBazaarSystem
             String email = txtBoxEmail.Text;
             String password = txtBoxPassword.Text;
             String toDecryptPassword = "";
+            String depName;
             int role;
 
             using( MySqlConnection connection = new MySqlConnection( @"Server = studmysql01.fhict.local; Uid = dbi437493; Database = dbi437493; Pwd = dbgroup01;" ) )
             {
                 // SQL query to get the user based on login credentials
-                MySqlCommand cmd = new MySqlCommand( "Select * from Person where email = @email", connection );
+                MySqlCommand cmd = new MySqlCommand("SELECT person.Id, person.Firstname, person.Lastname, person.Age, person.Address, person.Email, person.Password, person.Salary, " +
+                    "person.HoursWorked, person.HoursAvailable, person.IsAvailable, person.RoleID, department.Name FROM person WHERE email = @email " 
+                    + "INNER JOIN department ON Person.DepartmentID = Department.id", connection );
                 cmd.Parameters.Add( "email", MySqlDbType.VarChar).Value = email;
 
                 // Open connection
@@ -47,13 +50,18 @@ namespace MediaBazaarSystem
                         // The number is based on the column... 
                         //E.g. password is column 6 and email is column 5
                         toDecryptPassword = reader.GetString( 6 ) ;
-                        role = (int)reader.GetValue(11);
+                        role = (int)reader.GetValue( 11 );
+
+                        //Department
+                        depName = reader.GetString( 12 );
+                        Department department = new Department( depName );
+
 
                         if( Cryptography.Decrypt( toDecryptPassword ) == password )
                         {
                             if(role == 1) // Manager
                             {
-                                AdministrationSystem administrationSystem = new AdministrationSystem();
+                                AdministrationSystem administrationSystem = new AdministrationSystem( department );
                                 administrationSystem.Show();
                                 this.Hide();
                             }
