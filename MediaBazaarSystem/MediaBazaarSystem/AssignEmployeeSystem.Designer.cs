@@ -30,12 +30,12 @@
         {
             this.btnDone = new System.Windows.Forms.Button();
             this.lBoxAssignEmployee = new System.Windows.Forms.ListBox();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.comboBox2 = new System.Windows.Forms.ComboBox();
-            this.comboBox3 = new System.Windows.Forms.ComboBox();
             this.lblEmployeeName = new System.Windows.Forms.Label();
             this.lblStartTime = new System.Windows.Forms.Label();
             this.lblEndTime = new System.Windows.Forms.Label();
+            this.comBoxEndTime = new System.Windows.Forms.ComboBox();
+            this.comBoxStartTime = new System.Windows.Forms.ComboBox();
+            this.comBoxEmployees = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // btnDone
@@ -48,6 +48,7 @@
             this.btnDone.TabIndex = 0;
             this.btnDone.Text = "Done";
             this.btnDone.UseVisualStyleBackColor = false;
+            this.btnDone.Click += new System.EventHandler(this.btnDone_Click);
             // 
             // lBoxAssignEmployee
             // 
@@ -59,33 +60,6 @@
             this.lBoxAssignEmployee.Name = "lBoxAssignEmployee";
             this.lBoxAssignEmployee.Size = new System.Drawing.Size(520, 188);
             this.lBoxAssignEmployee.TabIndex = 1;
-            // 
-            // comboBox1
-            // 
-            this.comboBox1.Font = new System.Drawing.Font("Century Gothic", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(164, 347);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(349, 29);
-            this.comboBox1.TabIndex = 2;
-            // 
-            // comboBox2
-            // 
-            this.comboBox2.Font = new System.Drawing.Font("Century Gothic", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Location = new System.Drawing.Point(164, 294);
-            this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(349, 29);
-            this.comboBox2.TabIndex = 3;
-            // 
-            // comboBox3
-            // 
-            this.comboBox3.Font = new System.Drawing.Font("Century Gothic", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.comboBox3.FormattingEnabled = true;
-            this.comboBox3.Location = new System.Drawing.Point(164, 248);
-            this.comboBox3.Name = "comboBox3";
-            this.comboBox3.Size = new System.Drawing.Size(349, 29);
-            this.comboBox3.TabIndex = 4;
             // 
             // lblEmployeeName
             // 
@@ -120,6 +94,36 @@
             this.lblEndTime.TabIndex = 7;
             this.lblEndTime.Text = "End Time:";
             // 
+            // comBoxEndTime
+            // 
+            this.comBoxEndTime.Font = new System.Drawing.Font("Century Gothic", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.comBoxEndTime.FormattingEnabled = true;
+            this.comBoxEndTime.Location = new System.Drawing.Point(164, 347);
+            this.comBoxEndTime.Name = "comBoxEndTime";
+            this.comBoxEndTime.Size = new System.Drawing.Size(349, 29);
+            this.comBoxEndTime.TabIndex = 2;
+            this.comBoxEndTime.Text = "Select end time";
+            // 
+            // comBoxStartTime
+            // 
+            this.comBoxStartTime.Font = new System.Drawing.Font("Century Gothic", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.comBoxStartTime.FormattingEnabled = true;
+            this.comBoxStartTime.Location = new System.Drawing.Point(164, 294);
+            this.comBoxStartTime.Name = "comBoxStartTime";
+            this.comBoxStartTime.Size = new System.Drawing.Size(349, 29);
+            this.comBoxStartTime.TabIndex = 3;
+            this.comBoxStartTime.Text = "Select start time";
+            // 
+            // comBoxEmployees
+            // 
+            this.comBoxEmployees.Font = new System.Drawing.Font("Century Gothic", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.comBoxEmployees.FormattingEnabled = true;
+            this.comBoxEmployees.Location = new System.Drawing.Point(164, 248);
+            this.comBoxEmployees.Name = "comBoxEmployees";
+            this.comBoxEmployees.Size = new System.Drawing.Size(349, 29);
+            this.comBoxEmployees.TabIndex = 4;
+            this.comBoxEmployees.Text = "Select employee";
+            // 
             // AssignEmployeeSystem
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 17F);
@@ -129,9 +133,9 @@
             this.Controls.Add(this.lblEndTime);
             this.Controls.Add(this.lblStartTime);
             this.Controls.Add(this.lblEmployeeName);
-            this.Controls.Add(this.comboBox3);
-            this.Controls.Add(this.comboBox2);
-            this.Controls.Add(this.comboBox1);
+            this.Controls.Add(this.comBoxEmployees);
+            this.Controls.Add(this.comBoxStartTime);
+            this.Controls.Add(this.comBoxEndTime);
             this.Controls.Add(this.lBoxAssignEmployee);
             this.Controls.Add(this.btnDone);
             this.Font = new System.Drawing.Font("Century Gothic", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -146,11 +150,11 @@
 
         private System.Windows.Forms.Button btnDone;
         private System.Windows.Forms.ListBox lBoxAssignEmployee;
-        private System.Windows.Forms.ComboBox comboBox1;
-        private System.Windows.Forms.ComboBox comboBox2;
-        private System.Windows.Forms.ComboBox comboBox3;
         private System.Windows.Forms.Label lblEmployeeName;
         private System.Windows.Forms.Label lblStartTime;
         private System.Windows.Forms.Label lblEndTime;
+        private System.Windows.Forms.ComboBox comBoxEndTime;
+        private System.Windows.Forms.ComboBox comBoxStartTime;
+        private System.Windows.Forms.ComboBox comBoxEmployees;
     }
 }

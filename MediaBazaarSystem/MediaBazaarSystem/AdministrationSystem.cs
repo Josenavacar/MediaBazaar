@@ -14,9 +14,10 @@ namespace MediaBazaarSystem
 {
     public partial class AdministrationSystem : Form
     {
-        AssignEmployeeSystem assignEmployeeForm = new AssignEmployeeSystem();
+        AssignEmployeeSystem assignEmployeeForm;
         Department department;
         Manager manager;
+        String employeeName;
 
         public AdministrationSystem( Department department, Manager manager )
         {
@@ -28,7 +29,7 @@ namespace MediaBazaarSystem
             lblAdminName.Text += " " + manager.FirstName + " " + manager.LastName;
 
             string connectionString = @"Server = studmysql01.fhict.local; Uid = dbi437493; Database = dbi437493; Pwd = dbgroup01;";
-            string sql = "SELECT FirstName, Name, StartTime, EndTime, WorkDate FROM Person " +
+            string sql = "SELECT Person.Id, Person.FirstName, Role.Name, Schedule.StartTime, Schedule.EndTime, Schedule.WorkDate FROM Person " +
                 "INNER JOIN Role ON Person.RoleId = Role.Id " +
                 "INNER JOIN Schedule ON Person.Id = Schedule.PersonID";
             MySqlConnection connection = new MySqlConnection( connectionString );
@@ -38,18 +39,18 @@ namespace MediaBazaarSystem
 
             while( reader.Read() )
             {
-                String startTime = reader.GetValue( 2 ).ToString();
-                String endTime = reader.GetValue( 3 ).ToString();
+                String startTime = reader.GetValue( 3 ).ToString();
+                String endTime = reader.GetValue( 4 ).ToString();
                 DateTime workStartTime = Convert.ToDateTime( startTime );
                 DateTime workEndTime = Convert.ToDateTime( endTime );
 
                 DataGridViewRow row = ( DataGridViewRow ) dataAdminWorkSchedule.Rows[ 0 ].Clone();
                 dataAdminWorkSchedule.Columns[ "clmnWorkDate" ].DefaultCellStyle.BackColor = Color.LightSteelBlue;
-                row.Cells[ 0 ].Value = reader.GetValue( 0 ).ToString(); // First Name
-                row.Cells[ 1 ].Value = reader.GetValue( 1 ).ToString(); // Name (Role)
+                row.Cells[ 0 ].Value = reader.GetValue( 1 ).ToString(); // First Name
+                row.Cells[ 1 ].Value = reader.GetValue( 2 ).ToString(); // Name (Role)
                 row.Cells[ 2 ].Value = workStartTime.ToString( "hh:mm tt" );// Start Time
                 row.Cells[ 3 ].Value = workEndTime.ToString( "hh:mm tt" ); // End Time
-                row.Cells[ 4 ].Value = reader.GetValue( 4 ).ToString(); // Date
+                row.Cells[ 4 ].Value = reader.GetValue( 5 ).ToString(); // Date
                 dataAdminWorkSchedule.Rows.Add( row );
             }
         }
@@ -135,7 +136,6 @@ namespace MediaBazaarSystem
 
         private void btnAssignEmployee_Click( object sender, EventArgs e )
         {
-            assignEmployeeForm.Show();
 
             //if( dataAdminWorkSchedule.SelectedRows.Count != -1 )
             //{
@@ -184,6 +184,17 @@ namespace MediaBazaarSystem
                     dataAdminWorkSchedule.Rows.Add( row );
                 }
             }
+        }
+
+        private void dataAdminWorkSchedule_CellDoubleClick( object sender, DataGridViewCellEventArgs e )
+        {
+            int index = e.RowIndex;// get the Row Index
+            DataGridViewRow selectedRow = dataAdminWorkSchedule.Rows[ index ];
+
+            employeeName = selectedRow.Cells[ 0 ].Value.ToString();
+
+            assignEmployeeForm = new AssignEmployeeSystem( employeeName );
+            assignEmployeeForm.Show();
         }
     }
 }
