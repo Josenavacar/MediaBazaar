@@ -130,6 +130,12 @@ namespace MediaBazaarSystem
         private void btnAssignEmployee_Click( object sender, EventArgs e )
         {
             assignEmployeeForm.Show();
+
+            //if( dataAdminWorkSchedule.SelectedRows.Count != -1 )
+            //{
+            //    DataGridViewRow row = this.dataAdminWorkSchedule.SelectedRows[ 0 ];
+            //    MessageBox.Show(row.Cells[ "clmnEmployeeName" ].Value.ToString());
+            //}
         }
 
         private void picBoxLogout_Click( object sender, EventArgs e )

@@ -139,6 +139,7 @@
             this.dataAdminWorkSchedule.Name = "dataAdminWorkSchedule";
             this.dataAdminWorkSchedule.RowHeadersWidth = 51;
             this.dataAdminWorkSchedule.RowTemplate.Height = 24;
+            this.dataAdminWorkSchedule.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataAdminWorkSchedule.Size = new System.Drawing.Size(680, 431);
             this.dataAdminWorkSchedule.TabIndex = 5;
             // 
