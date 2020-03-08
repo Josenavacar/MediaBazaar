@@ -18,7 +18,7 @@ namespace MediaBazaarSystem
             set;
         }
 
-        public String NAME
+        public String Name
         {
             get { return this.name; }
             private set { this.name = value; }
@@ -57,15 +57,15 @@ namespace MediaBazaarSystem
 
         public Employee GetEmployee(String firstname, String lastname)
         {
-            Employee ans = null;
-            foreach(Employee aux in employees)
+            Employee emp = null;
+            foreach(Employee employee in employees)
             {
-                if(aux.FirstN == firstname && aux.LastN == lastname)
+                if( employee.FirstName == firstname && employee.LastName == lastname)
                 {
-                    ans = aux;
+                    emp = employee;
                 }
             }
-            return ans;
+            return emp;
         }
 
         //public List<Staff> GetStaffs()

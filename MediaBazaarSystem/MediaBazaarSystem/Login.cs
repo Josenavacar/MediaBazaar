@@ -25,13 +25,16 @@ namespace MediaBazaarSystem
             String email = txtBoxEmail.Text;
             String password = txtBoxPassword.Text;
             String toDecryptPassword = "";
+            String depName;
             int role;
 
             using( MySqlConnection connection = new MySqlConnection( @"Server = studmysql01.fhict.local; Uid = dbi437493; Database = dbi437493; Pwd = dbgroup01;" ) )
             {
                 // SQL query to get the user based on login credentials
-                MySqlCommand cmd = new MySqlCommand( "Select * from Person where email = @email", connection );
-                cmd.Parameters.Add( "email", MySqlDbType.VarChar).Value = email;
+                MySqlCommand cmd = new MySqlCommand("SELECT person.Id, person.Firstname, person.Lastname, person.Age, person.Address, person.Email, person.Password, person.Salary, " +
+                    "person.HoursWorked, person.HoursAvailable, person.IsAvailable, person.RoleID, department.Name FROM person JOIN department ON Person.DepartmentID = Department.id " +
+                    "WHERE email = @email", connection ); 
+                cmd.Parameters.Add("email", MySqlDbType.VarChar).Value = email;
 
                 // Open connection
                 connection.Open();
@@ -47,13 +50,28 @@ namespace MediaBazaarSystem
                         // The number is based on the column... 
                         //E.g. password is column 6 and email is column 5
                         toDecryptPassword = reader.GetString( 6 ) ;
-                        role = (int)reader.GetValue(11);
+                        role = (int)reader.GetValue( 11 );
+
+                        //Department
+                        depName = reader.GetString( 12 );
+                        Department department = new Department( depName );
+
 
                         if( Cryptography.Decrypt( toDecryptPassword ) == password )
                         {
                             if(role == 1) // Manager
                             {
-                                AdministrationSystem administrationSystem = new AdministrationSystem();
+                                String firstName = reader.GetString(1);
+                                String lastName = reader.GetString(2);
+                                int age = (int)reader.GetValue(3);
+                                String address = reader.GetString(4);
+                                String charge = "Manager";
+                                double salary = reader.GetDouble(7);
+                                int hoursavailable = (int)reader.GetValue(9);
+
+                                Manager manager = new Manager(firstName, lastName, age, address, charge, salary, hoursavailable);
+
+                                AdministrationSystem administrationSystem = new AdministrationSystem( department, manager );
                                 administrationSystem.Show();
                                 this.Hide();
                             }
