@@ -17,13 +17,16 @@ namespace MediaBazaarSystem
         //Department dep;
         AssignEmployeeSystem assignEmployeeForm = new AssignEmployeeSystem();
         Department dep;
+        Manager man;
 
-        public AdministrationSystem( Department department )
+        public AdministrationSystem( Department department, Manager manager )
         {
             InitializeComponent();
 
             this.dep = department;
+            this.man = manager;
 
+            lblAdminName.Text += " " + manager.FirstN + " " + manager.LastN;
 
             string connectionString = @"Server = studmysql01.fhict.local; Uid = dbi437493; Database = dbi437493; Pwd = dbgroup01;";
             string sql = "SELECT FirstName, Name, StartTime, EndTime, WorkDate FROM Person " +
