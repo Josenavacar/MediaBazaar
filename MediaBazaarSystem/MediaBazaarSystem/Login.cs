@@ -32,9 +32,9 @@ namespace MediaBazaarSystem
             {
                 // SQL query to get the user based on login credentials
                 MySqlCommand cmd = new MySqlCommand("SELECT person.Id, person.Firstname, person.Lastname, person.Age, person.Address, person.Email, person.Password, person.Salary, " +
-                    "person.HoursWorked, person.HoursAvailable, person.IsAvailable, person.RoleID, department.Name FROM person WHERE email = @email " 
-                    + "INNER JOIN department ON Person.DepartmentID = Department.id", connection );
-                cmd.Parameters.Add( "email", MySqlDbType.VarChar).Value = email;
+                    "person.HoursWorked, person.HoursAvailable, person.IsAvailable, person.RoleID, department.Name FROM person JOIN department ON Person.DepartmentID = Department.id " +
+                    "WHERE email = @email", connection );  //email parts deleted
+                cmd.Parameters.Add("email", MySqlDbType.VarChar).Value = email;
 
                 // Open connection
                 connection.Open();
