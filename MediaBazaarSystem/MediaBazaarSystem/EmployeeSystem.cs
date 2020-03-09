@@ -20,16 +20,22 @@ namespace MediaBazaarSystem
         public EmployeeSystem(String employeeID)
         {
             InitializeComponent();
-
+            // Connect to DB
             string connectionString = @"Server = studmysql01.fhict.local; Uid = dbi437493; Database = dbi437493; Pwd = dbgroup01;";
+            // SQL Query
             string sql = "SELECT FirstName, Name, StartTime, EndTime, WorkDate FROM Person " +
                 "INNER JOIN Role ON Person.RoleId = Role.Id " +
                 "INNER JOIN Schedule ON Person.Id = Schedule.PersonID";
+
+            // Start mysql objects
             MySqlConnection connection = new MySqlConnection( connectionString );
             MySqlCommand cmd = new MySqlCommand( sql, connection );
+
+            // Open connection
             connection.Open();
             MySqlDataReader reader = cmd.ExecuteReader();
 
+            // Add data to data grid view table
             while( reader.Read() )
             {
                 String startTime =  reader.GetValue( 2 ).ToString();
@@ -48,6 +54,9 @@ namespace MediaBazaarSystem
             }
         }
 
+        /**
+         * Method to log out
+         */
         private void picBoxLogout_Click( object sender, EventArgs e )
         {
             this.Hide();
@@ -55,18 +64,28 @@ namespace MediaBazaarSystem
             login.Show();
         }
 
+        /**
+         * Method when user selects a date from the date time picker for the work schedule
+         */
         private void dtpWorkSchedule_ValueChanged( object sender, EventArgs e )
         {
+            // Clear table
             this.dataEmpWorkSchedule.Rows.Clear();
+            // Connect to DB
             string connectionString = @"Server = studmysql01.fhict.local; Uid = dbi437493; Database = dbi437493; Pwd = dbgroup01;";
+            // SQL Query
             string sql = "SELECT FirstName, Name, StartTime, EndTime, WorkDate FROM Person " +
                 "INNER JOIN Role ON Person.RoleId = Role.Id " +
                 "INNER JOIN Schedule ON Person.Id = Schedule.PersonID";
+            // Start mysql objects
             MySqlConnection connection = new MySqlConnection( connectionString );
             MySqlCommand cmd = new MySqlCommand( sql, connection );
+
+            // Open connection
             connection.Open();
             MySqlDataReader reader = cmd.ExecuteReader();
 
+            // Add data to data grid view table
             while( reader.Read() )
             {
                 String startTime = reader.GetValue( 2 ).ToString();
@@ -76,6 +95,7 @@ namespace MediaBazaarSystem
                 DateTime date = Convert.ToDateTime( reader.GetValue( 4 ).ToString() );
                 String theDate = dtpWorkSchedule.Value.ToString( "MM/dd/yyyy" );
 
+                // Check if the date in the work schedule is equal to the date from the DB
                 if( theDate == date.ToString( "MM/dd/yyyy" ) )
                 {
                     DataGridViewRow row = ( DataGridViewRow ) dataEmpWorkSchedule.Rows[ 0 ].Clone();

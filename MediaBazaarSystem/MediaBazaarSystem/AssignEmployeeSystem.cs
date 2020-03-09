@@ -21,6 +21,7 @@ namespace MediaBazaarSystem
         {
             InitializeComponent();
             this.employeeName = employeeName;
+            comBoxEmployees.Items.Add( this.employeeName );
 
             DateTime time = DateTime.Today;
             for( DateTime _time = time.AddHours( 08 ); _time < time.AddHours( 24 ); _time = _time.AddMinutes( 60 ) ) //from 16h to 18h hours
@@ -66,23 +67,28 @@ namespace MediaBazaarSystem
 
             String startTime = comBoxStartTime.SelectedItem.ToString();
             String endTime = comBoxEndTime.SelectedItem.ToString();
+            String workDate = dtpWorkDate.Value.ToString();
             DateTime updateStartTime = DateTime.Parse( startTime );
             DateTime updateEndTime = DateTime.Parse( endTime );
+            DateTime updateWorkDate = DateTime.Parse( workDate );
             lBoxAssignEmployee.Items.Clear();
             
             string connectionString = @"Server = studmysql01.fhict.local; Uid = dbi437493; Database = dbi437493; Pwd = dbgroup01;";
             string sql = "UPDATE Schedule " +
                 "INNER JOIN Person ON Schedule.PersonID = Person.Id " +
-                "SET StartTime=@startTime, EndTime=@endTime, FirstName=@employeeName " +
+                "SET StartTime=@startTime, EndTime=@endTime, WorkDate=@workDate, FirstName=@employeeName " +
                 "WHERE Person.FirstName = @employeeName";
 
-                MySqlConnection connection = new MySqlConnection( connectionString );
-                MySqlCommand cmd = new MySqlCommand( sql, connection );
-                cmd.Parameters.AddWithValue( "@employeeName", this.employeeName );
-                cmd.Parameters.AddWithValue( "@startTime", updateStartTime );
-                cmd.Parameters.AddWithValue( "@endTime", updateEndTime );
-                connection.Open();
-                int rows = cmd.ExecuteNonQuery();            
+            MySqlConnection connection = new MySqlConnection( connectionString );
+            MySqlCommand cmd = new MySqlCommand( sql, connection );
+            cmd.Parameters.AddWithValue( "@employeeName", this.employeeName );
+            cmd.Parameters.AddWithValue( "@startTime", updateStartTime );
+            cmd.Parameters.AddWithValue( "@endTime", updateEndTime );
+            cmd.Parameters.AddWithValue( "@workDate", updateWorkDate );
+            connection.Open();
+            int rows = cmd.ExecuteNonQuery();
+            this.Hide();
+
         }
 
         private void updateTimer_Tick( object sender, EventArgs e )
