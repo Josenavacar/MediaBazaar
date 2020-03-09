@@ -14,19 +14,18 @@ namespace MediaBazaarSystem
 {
     public partial class AdministrationSystem : Form
     {
-        //Department dep;
         AssignEmployeeSystem assignEmployeeForm = new AssignEmployeeSystem();
-        Department dep;
-        Manager man;
+        Department department;
+        Manager manager;
 
         public AdministrationSystem( Department department, Manager manager )
         {
             InitializeComponent();
 
-            this.dep = department;
-            this.man = manager;
+            this.department = department;
+            this.manager = manager;
 
-            lblAdminName.Text += " " + manager.FirstN + " " + manager.LastN;
+            lblAdminName.Text += " " + manager.FirstName + " " + manager.LastName;
 
             string connectionString = @"Server = studmysql01.fhict.local; Uid = dbi437493; Database = dbi437493; Pwd = dbgroup01;";
 

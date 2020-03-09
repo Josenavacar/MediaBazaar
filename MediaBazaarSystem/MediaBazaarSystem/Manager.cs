@@ -10,43 +10,43 @@ namespace MediaBazaarSystem
     {
         private static int idSeeder;
 
-        public String FirstN
+        public String FirstName
         {
             get { return firstName; }
             private set { this.firstName = value; }
         }
 
-        public String LastN
+        public String LastName
         {
             get { return lastName; }
             private set { this.lastName = value; }
         }
 
-        public String ADDRESS
+        public String Address
         {
             get { return this.address; }
             private set { this.address = value; }
         }
 
-        public int AGE
+        public int Age
         {
             get { return this.age; }
             private set { this.age = value; }
         }
 
-        public String ROLE
+        public String Role
         {
             get { return this.role; }
             private set { this.role = value; }
         }
 
-        public double SALARY
+        public double Salary
         {
             get { return this.salary; }
             private set { this.salary = value; }
         }
 
-        public int HoursFree
+        public int HoursAvailable
         {
             get { return this.hoursAvailable; }
             private set { this.hoursAvailable = value; }
@@ -56,13 +56,13 @@ namespace MediaBazaarSystem
         {
             this.ID = idSeeder;
             idSeeder++;
-            FirstN = firstName;
-            LastN = lastName;
-            AGE = age;
-            ADDRESS = address;
-            ROLE = role;
-            SALARY = salary;
-            HoursFree = hoursAvailable;
+            FirstName = firstName;
+            LastName = lastName;
+            Age = age;
+            Address = address;
+            Role = role;
+            Salary = salary;
+            HoursAvailable = hoursAvailable;
         }
 
         public void GenerateSalary()
