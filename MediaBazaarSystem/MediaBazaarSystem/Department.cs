@@ -8,14 +8,15 @@ namespace MediaBazaarSystem
 {
     public class Department
     {
+        private int ID;
         private String name;
         private List<Employee> employees;
         private List<Manager> managers;
 
         public int DepartmentID
         {
-            get;
-            set;
+            get { return this.ID; }
+            private set { this.ID = value; }
         }
 
         public String NAME
@@ -24,11 +25,12 @@ namespace MediaBazaarSystem
             private set { this.name = value; }
         }
 
-        public Department(String name)
+        public Department(String name, int ID)
         {
             employees = new List<Employee>();
             managers = new List<Manager>();
-            //Name = name;
+            DepartmentID = ID;
+            NAME = name;
         }
 
         public void AddEmployee(Employee employee)

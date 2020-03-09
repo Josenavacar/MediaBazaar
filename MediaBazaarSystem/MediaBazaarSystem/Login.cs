@@ -26,14 +26,15 @@ namespace MediaBazaarSystem
             String password = txtBoxPassword.Text;
             String toDecryptPassword = "";
             String depName;
+            int depID;
             int role;
 
             using( MySqlConnection connection = new MySqlConnection( @"Server = studmysql01.fhict.local; Uid = dbi437493; Database = dbi437493; Pwd = dbgroup01;" ) )
             {
                 // SQL query to get the user based on login credentials
                 MySqlCommand cmd = new MySqlCommand("SELECT person.Id, person.Firstname, person.Lastname, person.Age, person.Address, person.Email, person.Password, person.Salary, " +
-                    "person.HoursWorked, person.HoursAvailable, person.IsAvailable, person.RoleID, department.Name FROM person JOIN department ON Person.DepartmentID = Department.id " +
-                    "WHERE email = @email", connection );  //email parts deleted
+                    "person.HoursWorked, person.HoursAvailable, person.IsAvailable, person.RoleID, department.Name, person.DepartmentID FROM person JOIN department ON Person.DepartmentID = Department.id " +
+                    "WHERE email = @email", connection );
                 cmd.Parameters.Add("email", MySqlDbType.VarChar).Value = email;
 
                 // Open connection
@@ -54,7 +55,8 @@ namespace MediaBazaarSystem
 
                         //Department
                         depName = reader.GetString( 12 );
-                        Department department = new Department( depName );
+                        depID = (int)reader.GetValue(13);
+                        Department department = new Department( depName, depID );
 
 
                         if( Cryptography.Decrypt( toDecryptPassword ) == password )

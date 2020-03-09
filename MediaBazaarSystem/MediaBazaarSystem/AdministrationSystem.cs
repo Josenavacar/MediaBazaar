@@ -29,10 +29,13 @@ namespace MediaBazaarSystem
             lblAdminName.Text += " " + manager.FirstN + " " + manager.LastN;
 
             string connectionString = @"Server = studmysql01.fhict.local; Uid = dbi437493; Database = dbi437493; Pwd = dbgroup01;";
+
+            //Schedule related
             string sql = "SELECT FirstName, Name, StartTime, EndTime, WorkDate FROM Person " +
                 "INNER JOIN Role ON Person.RoleId = Role.Id " +
                 "INNER JOIN Schedule ON Person.Id = Schedule.PersonID";
             MySqlConnection connection = new MySqlConnection( connectionString );
+
             MySqlCommand cmd = new MySqlCommand( sql, connection );
             connection.Open();
             MySqlDataReader reader = cmd.ExecuteReader();
@@ -53,6 +56,49 @@ namespace MediaBazaarSystem
                 row.Cells[ 4 ].Value = reader.GetValue( 4 ).ToString(); // Date
                 dataAdminWorkSchedule.Rows.Add( row );
             }
+            reader.Close();
+
+            //Employee related
+            String sql2 = "SELECT * FROM person WHERE DepartmentID = @DepartmentID";
+            MySqlCommand cmd2 = new MySqlCommand(sql2, connection);
+            cmd2.Parameters.Add("DepartmentID", MySqlDbType.VarChar).Value = dep.DepartmentID;
+
+
+
+            reader = cmd2.ExecuteReader();
+            while (reader.Read())
+            {
+                int role = (int)reader.GetValue(11);
+                if ( role == 1 )
+                {
+                    String firstName = reader.GetString(1);
+                    String lastName = reader.GetString(2);
+                    int age = (int)reader.GetValue(3);
+                    String address = reader.GetString(4);
+                    String charge = "Manager";
+                    double salary = reader.GetDouble(7);
+                    int hoursavailable = (int)reader.GetValue(9);
+
+                    Manager man = new Manager(firstName, lastName, age, address, charge, salary, hoursavailable);
+                    dep.AddManager(man);
+                }
+
+                else if(role == 2)
+                {
+                    String firstName = reader.GetString(1);
+                    String lastName = reader.GetString(2);
+                    int age = (int)reader.GetValue(3);
+                    String address = reader.GetString(4);
+                    String charge = "Employee";
+                    double salary = reader.GetDouble(7);
+                    int hoursavailable = (int)reader.GetValue(9);
+
+                    Employee emp = new Employee(firstName, lastName, age, address, charge, salary, hoursavailable);
+                    dep.AddEmployee(emp);
+                }
+            }
+            reader.Close();
+
         }
 
         private void btnAddEmployee_Click(object sender, EventArgs e)
@@ -118,20 +164,20 @@ namespace MediaBazaarSystem
 
         private void Refresh_Tick(object sender, EventArgs e)
         {
-            //int aux1 = lbEmployees.SelectedIndex;
+            int index = lbEmployees.SelectedIndex;
 
-            //lbEmployees.Items.Clear();
-            //List<Employee> list = dep.GetEmployees();
-            //foreach (Employee emp in list)
-            //{
-            //    String aux = emp.LastN + ", " + emp.FirstN;
-            //    lbEmployees.Items.Add(aux);
-            //}
+            lbEmployees.Items.Clear();
+            List<Employee> list = dep.GetEmployees();
+            foreach (Employee emp in list)
+            {
+                String aux = emp.LastN + ", " + emp.FirstN;
+                lbEmployees.Items.Add(aux);
+            }
 
-            //if (lbEmployees.Items.Count > 0)
-            //{
-            //    lbEmployees.SelectedIndex = aux1;
-            //}
+            if (lbEmployees.Items.Count > 0)
+            {
+                lbEmployees.SelectedIndex = index;
+            }
         }
 
         private void btnAssignEmployee_Click( object sender, EventArgs e )
