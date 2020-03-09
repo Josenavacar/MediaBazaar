@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.btnDone = new System.Windows.Forms.Button();
             this.lBoxAssignEmployee = new System.Windows.Forms.ListBox();
             this.lblEmployeeName = new System.Windows.Forms.Label();
@@ -36,6 +37,9 @@
             this.comBoxEndTime = new System.Windows.Forms.ComboBox();
             this.comBoxStartTime = new System.Windows.Forms.ComboBox();
             this.comBoxEmployees = new System.Windows.Forms.ComboBox();
+            this.updateTimer = new System.Windows.Forms.Timer(this.components);
+            this.dtpWorkDate = new System.Windows.Forms.DateTimePicker();
+            this.lblWorkDate = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // btnDone
@@ -58,7 +62,7 @@
             this.lBoxAssignEmployee.ItemHeight = 23;
             this.lBoxAssignEmployee.Location = new System.Drawing.Point(28, 32);
             this.lBoxAssignEmployee.Name = "lBoxAssignEmployee";
-            this.lBoxAssignEmployee.Size = new System.Drawing.Size(520, 188);
+            this.lBoxAssignEmployee.Size = new System.Drawing.Size(520, 142);
             this.lBoxAssignEmployee.TabIndex = 1;
             // 
             // lblEmployeeName
@@ -66,7 +70,7 @@
             this.lblEmployeeName.AutoSize = true;
             this.lblEmployeeName.Font = new System.Drawing.Font("Century Gothic", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblEmployeeName.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.lblEmployeeName.Location = new System.Drawing.Point(54, 251);
+            this.lblEmployeeName.Location = new System.Drawing.Point(52, 208);
             this.lblEmployeeName.Name = "lblEmployeeName";
             this.lblEmployeeName.Size = new System.Drawing.Size(95, 21);
             this.lblEmployeeName.TabIndex = 5;
@@ -77,7 +81,7 @@
             this.lblStartTime.AutoSize = true;
             this.lblStartTime.Font = new System.Drawing.Font("Century Gothic", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblStartTime.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.lblStartTime.Location = new System.Drawing.Point(53, 297);
+            this.lblStartTime.Location = new System.Drawing.Point(51, 254);
             this.lblStartTime.Name = "lblStartTime";
             this.lblStartTime.Size = new System.Drawing.Size(96, 21);
             this.lblStartTime.TabIndex = 6;
@@ -88,7 +92,7 @@
             this.lblEndTime.AutoSize = true;
             this.lblEndTime.Font = new System.Drawing.Font("Century Gothic", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblEndTime.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.lblEndTime.Location = new System.Drawing.Point(61, 350);
+            this.lblEndTime.Location = new System.Drawing.Point(59, 307);
             this.lblEndTime.Name = "lblEndTime";
             this.lblEndTime.Size = new System.Drawing.Size(88, 21);
             this.lblEndTime.TabIndex = 7;
@@ -98,7 +102,7 @@
             // 
             this.comBoxEndTime.Font = new System.Drawing.Font("Century Gothic", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.comBoxEndTime.FormattingEnabled = true;
-            this.comBoxEndTime.Location = new System.Drawing.Point(164, 347);
+            this.comBoxEndTime.Location = new System.Drawing.Point(162, 304);
             this.comBoxEndTime.Name = "comBoxEndTime";
             this.comBoxEndTime.Size = new System.Drawing.Size(349, 29);
             this.comBoxEndTime.TabIndex = 2;
@@ -108,7 +112,7 @@
             // 
             this.comBoxStartTime.Font = new System.Drawing.Font("Century Gothic", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.comBoxStartTime.FormattingEnabled = true;
-            this.comBoxStartTime.Location = new System.Drawing.Point(164, 294);
+            this.comBoxStartTime.Location = new System.Drawing.Point(162, 251);
             this.comBoxStartTime.Name = "comBoxStartTime";
             this.comBoxStartTime.Size = new System.Drawing.Size(349, 29);
             this.comBoxStartTime.TabIndex = 3;
@@ -118,11 +122,34 @@
             // 
             this.comBoxEmployees.Font = new System.Drawing.Font("Century Gothic", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.comBoxEmployees.FormattingEnabled = true;
-            this.comBoxEmployees.Location = new System.Drawing.Point(164, 248);
+            this.comBoxEmployees.Location = new System.Drawing.Point(162, 205);
             this.comBoxEmployees.Name = "comBoxEmployees";
             this.comBoxEmployees.Size = new System.Drawing.Size(349, 29);
             this.comBoxEmployees.TabIndex = 4;
             this.comBoxEmployees.Text = "Select employee";
+            // 
+            // updateTimer
+            // 
+            this.updateTimer.Tick += new System.EventHandler(this.updateTimer_Tick);
+            // 
+            // dtpWorkDate
+            // 
+            this.dtpWorkDate.Font = new System.Drawing.Font("Century Gothic", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dtpWorkDate.Location = new System.Drawing.Point(162, 353);
+            this.dtpWorkDate.Name = "dtpWorkDate";
+            this.dtpWorkDate.Size = new System.Drawing.Size(349, 28);
+            this.dtpWorkDate.TabIndex = 8;
+            // 
+            // lblWorkDate
+            // 
+            this.lblWorkDate.AutoSize = true;
+            this.lblWorkDate.Font = new System.Drawing.Font("Century Gothic", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblWorkDate.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.lblWorkDate.Location = new System.Drawing.Point(42, 359);
+            this.lblWorkDate.Name = "lblWorkDate";
+            this.lblWorkDate.Size = new System.Drawing.Size(105, 21);
+            this.lblWorkDate.TabIndex = 9;
+            this.lblWorkDate.Text = "Work Date:";
             // 
             // AssignEmployeeSystem
             // 
@@ -130,6 +157,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlLight;
             this.ClientSize = new System.Drawing.Size(584, 478);
+            this.Controls.Add(this.lblWorkDate);
+            this.Controls.Add(this.dtpWorkDate);
             this.Controls.Add(this.lblEndTime);
             this.Controls.Add(this.lblStartTime);
             this.Controls.Add(this.lblEmployeeName);
@@ -156,5 +185,8 @@
         private System.Windows.Forms.ComboBox comBoxEndTime;
         private System.Windows.Forms.ComboBox comBoxStartTime;
         private System.Windows.Forms.ComboBox comBoxEmployees;
+        private System.Windows.Forms.Timer updateTimer;
+        private System.Windows.Forms.DateTimePicker dtpWorkDate;
+        private System.Windows.Forms.Label lblWorkDate;
     }
 }

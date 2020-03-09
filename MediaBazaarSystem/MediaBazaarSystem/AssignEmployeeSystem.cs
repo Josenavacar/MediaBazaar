@@ -14,9 +14,8 @@ namespace MediaBazaarSystem
 {
     public partial class AssignEmployeeSystem : Form
     {
-        String employeeName;
-        String employeeID;
-        String firstName;
+        private String employeeName;
+        private String firstName;
 
         public AssignEmployeeSystem(String employeeName )
         {
@@ -24,13 +23,17 @@ namespace MediaBazaarSystem
             this.employeeName = employeeName;
 
             DateTime time = DateTime.Today;
-
             for( DateTime _time = time.AddHours( 08 ); _time < time.AddHours( 24 ); _time = _time.AddMinutes( 60 ) ) //from 16h to 18h hours
             {
                 comBoxStartTime.Items.Add( _time.ToShortTimeString() );
                 comBoxEndTime.Items.Add( _time.ToShortTimeString() );
             }
 
+            this.UpdateSchedule();
+
+        }
+        private void UpdateSchedule()
+        {
             lBoxAssignEmployee.Items.Clear();
 
             string connectionString = @"Server = studmysql01.fhict.local; Uid = dbi437493; Database = dbi437493; Pwd = dbgroup01;";
@@ -43,42 +46,49 @@ namespace MediaBazaarSystem
 
             while( reader.Read() )
             {
-                this.employeeID = reader.GetValue( 0 ).ToString();
                 this.firstName = reader.GetValue( 1 ).ToString();
                 String startTime = reader.GetValue( 2 ).ToString();
                 String endTime = reader.GetValue( 3 ).ToString();
                 String workDate = reader.GetValue( 4 ).ToString();
 
-                if(firstName == employeeName )
+                if( firstName == employeeName )
                 {
-                    lBoxAssignEmployee.Items.Add(firstName + " - " + startTime + " - " + endTime + " - " + workDate );
+                    lBoxAssignEmployee.Items.Add( firstName + " - " + startTime + " - " + endTime + " - " + workDate );
                 }
             }
 
+            updateTimer.Enabled = false;
         }
 
         private void btnDone_Click( object sender, EventArgs e )
         {
-            String employeeID = this.employeeID;
+            updateTimer.Enabled = true;
+
             String startTime = comBoxStartTime.SelectedItem.ToString();
             String endTime = comBoxEndTime.SelectedItem.ToString();
             DateTime updateStartTime = DateTime.Parse( startTime );
             DateTime updateEndTime = DateTime.Parse( endTime );
-
+            lBoxAssignEmployee.Items.Clear();
+            
             string connectionString = @"Server = studmysql01.fhict.local; Uid = dbi437493; Database = dbi437493; Pwd = dbgroup01;";
             string sql = "UPDATE Schedule " +
                 "INNER JOIN Person ON Schedule.PersonID = Person.Id " +
                 "SET StartTime=@startTime, EndTime=@endTime, FirstName=@employeeName " +
                 "WHERE Person.FirstName = @employeeName";
 
-            MySqlConnection connection = new MySqlConnection( connectionString );
-            MySqlCommand cmd = new MySqlCommand( sql, connection );
-            cmd.Parameters.AddWithValue( "@employeeName", this.firstName );
-            cmd.Parameters.AddWithValue( "@startTime", updateStartTime );
-            cmd.Parameters.AddWithValue( "@endTime", updateEndTime );
-            connection.Open();
-            int rows = cmd.ExecuteNonQuery();
-            MessageBox.Show( rows.ToString() );
+                MySqlConnection connection = new MySqlConnection( connectionString );
+                MySqlCommand cmd = new MySqlCommand( sql, connection );
+                cmd.Parameters.AddWithValue( "@employeeName", this.employeeName );
+                cmd.Parameters.AddWithValue( "@startTime", updateStartTime );
+                cmd.Parameters.AddWithValue( "@endTime", updateEndTime );
+                connection.Open();
+                int rows = cmd.ExecuteNonQuery();            
+        }
+
+        private void updateTimer_Tick( object sender, EventArgs e )
+        {
+            updateTimer.Interval = 1000;
+            this.UpdateSchedule();
         }
     }
 }
