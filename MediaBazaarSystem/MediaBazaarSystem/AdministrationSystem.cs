@@ -60,7 +60,7 @@ namespace MediaBazaarSystem
             //Employee related
             String sql2 = "SELECT * FROM person WHERE DepartmentID = @DepartmentID";
             MySqlCommand cmd2 = new MySqlCommand(sql2, connection);
-            cmd2.Parameters.Add("DepartmentID", MySqlDbType.VarChar).Value = dep.DepartmentID;
+            cmd2.Parameters.Add("DepartmentID", MySqlDbType.VarChar).Value = department.DepartmentID;
 
 
 
@@ -79,7 +79,7 @@ namespace MediaBazaarSystem
                     int hoursavailable = (int)reader.GetValue(9);
 
                     Manager man = new Manager(firstName, lastName, age, address, charge, salary, hoursavailable);
-                    dep.AddManager(man);
+                    department.AddManager(man);
                 }
 
                 else if(role == 2)
@@ -93,7 +93,7 @@ namespace MediaBazaarSystem
                     int hoursavailable = (int)reader.GetValue(9);
 
                     Employee emp = new Employee(firstName, lastName, age, address, charge, salary, hoursavailable);
-                    dep.AddEmployee(emp);
+                    department.AddEmployee(emp);
                 }
             }
             reader.Close();
@@ -166,10 +166,10 @@ namespace MediaBazaarSystem
             int index = lbEmployees.SelectedIndex;
 
             lbEmployees.Items.Clear();
-            List<Employee> list = dep.GetEmployees();
+            List<Employee> list = department.GetEmployees();
             foreach (Employee emp in list)
             {
-                String aux = emp.LastN + ", " + emp.FirstN;
+                String aux = emp.LastName + ", " + emp.FirstName;
                 lbEmployees.Items.Add(aux);
             }
 

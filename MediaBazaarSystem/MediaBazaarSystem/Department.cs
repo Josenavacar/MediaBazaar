@@ -30,7 +30,7 @@ namespace MediaBazaarSystem
             employees = new List<Employee>();
             managers = new List<Manager>();
             DepartmentID = ID;
-            NAME = name;
+            Name = name;
         }
 
         public void AddEmployee(Employee employee)
