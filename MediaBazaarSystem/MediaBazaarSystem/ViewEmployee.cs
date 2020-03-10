@@ -12,18 +12,18 @@ namespace MediaBazaarSystem
 {
     public partial class ViewEmployee : Form
     {
-        Employee emp;
-        public ViewEmployee(Employee emp)
+        Employee employee;
+        public ViewEmployee(Employee employee )
         {
             InitializeComponent();
-            this.emp = emp;
-            lblFirstName.Text += " " + emp.FirstN;
-            lblLastName.Text += " " + emp.LastN;
-            lblAddress.Text += " " + emp.ADDRESS;
-            lbMoney.Text += " " + emp.SALARY;
-            lblAge.Text += " " + emp.AGE;
-            lbTimeAv.Text += " " + emp.HoursFree;
-            lbWork.Text += " " + emp.ROLE;
+            this.employee = employee;
+            lblFirstName.Text += " " + employee.FirstName;
+            lblLastName.Text += " " + employee.LastName;
+            lblAddress.Text += " " + employee.Address;
+            lbMoney.Text += " " + employee.Salary;
+            lblAge.Text += " " + employee.Age;
+            lbTimeAv.Text += " " + employee.HoursAvailable;
+            lbWork.Text += " " + employee.Role;
         }
     }
 }
