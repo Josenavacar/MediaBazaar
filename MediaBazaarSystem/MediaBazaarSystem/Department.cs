@@ -70,6 +70,19 @@ namespace MediaBazaarSystem
             return emp;
         }
 
+        public Manager GetManager(String firstname, String lastname)
+        {
+            Manager man = null;
+            foreach(Manager manager in managers)
+            {
+                if(manager.FirstName == firstname && manager.LastName == lastname)
+                {
+                    man = manager;
+                }
+            }
+            return man;
+        }
+
         //public List<Staff> GetStaffs()
         //{
         //    return null;

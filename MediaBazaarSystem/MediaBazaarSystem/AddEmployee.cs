@@ -98,19 +98,41 @@ namespace MediaBazaarSystem
 
                     if(roleID == 1)
                     {
-                        AdministrationSystem.idManage++;
-                        Manager newManager = new Manager(AdministrationSystem.idManage, FirstN, LastN, age, address, role, salary, hoursAvailable, email);
+                        conn.Open();
+                        MySqlCommand cmd2 = conn.CreateCommand();
+                        cmd2.CommandText = "SELECT Id FROM person ORDER BY Id DESC LIMIT 1";
+                        MySqlDataReader reader = cmd2.ExecuteReader();
+                        int ID = 0;
+                        while (reader.Read())
+                        {
+                            ID = (int)reader.GetValue(0);
+                        }
+                        reader.Close();
+                        conn.Close();
+                        Manager newManager = new Manager(ID, FirstN, LastN, age, address, role, salary, hoursAvailable, email);
                         department.AddManager(newManager);
                         MessageBox.Show("Manager successfully added");
                     }
+
                     else
                     {
-                        AdministrationSystem.idManage++;
-                        Employee newEmployee = new Employee(AdministrationSystem.idManage, FirstN, LastN, age, address, role, salary, hoursAvailable, email);
+                        conn.Open();
+                        MySqlCommand cmd2 = conn.CreateCommand();
+                        cmd2.CommandText = "SELECT Id FROM person ORDER BY Id DESC LIMIT 1";
+                        MySqlDataReader reader = cmd2.ExecuteReader();
+                        int ID = 0;
+                        while(reader.Read())
+                        {
+                            ID = (int)reader.GetValue(0);
+                        }
+                        reader.Close();
+                        conn.Close();
+                        Employee newEmployee = new Employee(ID, FirstN, LastN, age, address, role, salary, hoursAvailable, email);
                         department.AddEmployee(newEmployee);
                         MessageBox.Show("Employee successfully added");
                     }
                 }
+
                 else
                 {
                     conn.Open();

@@ -71,12 +71,15 @@
             this.btnUpdateProfile = new System.Windows.Forms.Button();
             this.lbEmployeeInfo = new System.Windows.Forms.ListBox();
             this.tbPageEmpManagement = new System.Windows.Forms.TabPage();
+            this.lbManagers = new System.Windows.Forms.ListBox();
             this.btnViewEmployeeDetails = new System.Windows.Forms.Button();
             this.btnAddEmployee = new System.Windows.Forms.Button();
             this.btnUpdateEmployee = new System.Windows.Forms.Button();
             this.lbEmployees = new System.Windows.Forms.ListBox();
             this.btnFireEmployee = new System.Windows.Forms.Button();
             this.Refresh = new System.Windows.Forms.Timer(this.components);
+            this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
             this.tbControlAdmin.SuspendLayout();
             this.tbPageHome.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picBoxLogout)).BeginInit();
@@ -480,6 +483,9 @@
             // tbPageEmpManagement
             // 
             this.tbPageEmpManagement.BackColor = System.Drawing.SystemColors.Menu;
+            this.tbPageEmpManagement.Controls.Add(this.label2);
+            this.tbPageEmpManagement.Controls.Add(this.label1);
+            this.tbPageEmpManagement.Controls.Add(this.lbManagers);
             this.tbPageEmpManagement.Controls.Add(this.btnViewEmployeeDetails);
             this.tbPageEmpManagement.Controls.Add(this.btnAddEmployee);
             this.tbPageEmpManagement.Controls.Add(this.btnUpdateEmployee);
@@ -490,6 +496,17 @@
             this.tbPageEmpManagement.Size = new System.Drawing.Size(870, 675);
             this.tbPageEmpManagement.TabIndex = 3;
             this.tbPageEmpManagement.Text = "Employee Management";
+            // 
+            // lbManagers
+            // 
+            this.lbManagers.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.lbManagers.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbManagers.FormattingEnabled = true;
+            this.lbManagers.ItemHeight = 21;
+            this.lbManagers.Location = new System.Drawing.Point(438, 40);
+            this.lbManagers.Name = "lbManagers";
+            this.lbManagers.Size = new System.Drawing.Size(390, 424);
+            this.lbManagers.TabIndex = 8;
             // 
             // btnViewEmployeeDetails
             // 
@@ -530,9 +547,9 @@
             this.lbEmployees.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbEmployees.FormattingEnabled = true;
             this.lbEmployees.ItemHeight = 21;
-            this.lbEmployees.Location = new System.Drawing.Point(19, 19);
+            this.lbEmployees.Location = new System.Drawing.Point(19, 40);
             this.lbEmployees.Name = "lbEmployees";
-            this.lbEmployees.Size = new System.Drawing.Size(831, 445);
+            this.lbEmployees.Size = new System.Drawing.Size(390, 424);
             this.lbEmployees.TabIndex = 4;
             // 
             // btnFireEmployee
@@ -551,6 +568,24 @@
             this.Refresh.Enabled = true;
             this.Refresh.Interval = 1500;
             this.Refresh.Tick += new System.EventHandler(this.Refresh_Tick);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(15, 18);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(83, 19);
+            this.label1.TabIndex = 9;
+            this.label1.Text = "Employees";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(434, 18);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(78, 19);
+            this.label2.TabIndex = 10;
+            this.label2.Text = "Managers";
             // 
             // AdministrationSystem
             // 
@@ -573,6 +608,7 @@
             this.tbPageProfile.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxAdminPhoto)).EndInit();
             this.tbPageEmpManagement.ResumeLayout(false);
+            this.tbPageEmpManagement.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -626,5 +662,8 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn clmnWorkDate;
         private System.Windows.Forms.PictureBox picBoxLogout;
         private System.Windows.Forms.Timer Refresh;
+        private System.Windows.Forms.ListBox lbManagers;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label1;
     }
 }

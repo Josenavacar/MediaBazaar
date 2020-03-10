@@ -17,12 +17,12 @@ namespace MediaBazaarSystem
         AssignEmployeeSystem assignEmployeeForm = new AssignEmployeeSystem();
         Department department;
         Manager manager;
-        public static int idManage = 0;
 
         public AdministrationSystem( Department department, Manager manager )
         {
             InitializeComponent();
 
+            int idManage;
             this.department = department;
             this.manager = manager;
 
@@ -125,37 +125,62 @@ namespace MediaBazaarSystem
 
         private void btnUpdateEmployee_Click(object sender, EventArgs e)
         {
-            Employee emp = SearchEmp();
-            if (emp != null)
+            if (lbEmployees.SelectedIndex != null)
             {
-                Employee_Add form1 = new Employee_Add(department, emp);
-                form1.Show();
+                Employee emp = SearchEmp();
+                if (emp != null)
+                {
+                    Employee_Add form1 = new Employee_Add(department, emp);
+                    form1.Show();
+                }
+            }
+
+            else if(lbManagers.SelectedIndex != null)
+            {
+                Manager man = SearchMan();
+                if (man != null)
+                {
+                    Employee_Add form1 = new Employee_Add(department, man);
+                    form1.Show();
+                }
+            }
+            else
+            {
+                MessageBox.Show("Action could not be performed, noone selected.");
             }
 
         }
 
         private Employee SearchEmp()
         {
-            if (lbEmployees.SelectedItem != null)
-            {
-                String aux = lbEmployees.SelectedItem.ToString();
-                String[] name = aux.Split(','); //Splits the string by the comma.
-                String firstName = name[1].Trim();
-                String lastName = name[0].Trim();
-                Employee emp = department.GetEmployee(firstName, lastName);
+            String auxEmp = lbEmployees.SelectedItem.ToString();
+            String[] name = auxEmp.Split(','); //Splits the string by the comma.
+            String firstName = name[1].Trim();
+            String lastName = name[0].Trim();
+            Employee emp = department.GetEmployee(firstName, lastName);
 
-                if (emp == null)
-                {
-                    MessageBox.Show("Employee not found.");
-                }
-
-                return emp;
-            }
-            else
+            if (emp == null)
             {
-                MessageBox.Show("Employee not selected.");
-                return null;
+                MessageBox.Show("Employee not found.");
             }
+
+            return emp;
+        }
+
+        private Manager SearchMan()
+        {
+            String auxMan = lbManagers.SelectedItem.ToString();
+            String[] name = auxMan.Split(','); //Splits the string by the comma.
+            String firstName = name[1].Trim();
+            String lastName = name[0].Trim();
+            Manager man = department.GetManager(firstName, lastName);
+
+            if (man == null)
+            {
+                MessageBox.Show("Employee not found.");
+            }
+
+            return man;
         }
 
         private void btnFireEmployee_Click(object sender, EventArgs e)
@@ -170,19 +195,36 @@ namespace MediaBazaarSystem
 
         private void Refresh_Tick(object sender, EventArgs e)
         {
-            int index = lbEmployees.SelectedIndex;
+            //Employees
+            int indexEmp = lbEmployees.SelectedIndex;
 
             lbEmployees.Items.Clear();
-            List<Employee> list = department.GetEmployees();
-            foreach (Employee emp in list)
+            List<Employee> listEmp = department.GetEmployees();
+            foreach (Employee emp in listEmp)
             {
-                String aux = emp.LastName + ", " + emp.FirstName;
-                lbEmployees.Items.Add(aux);
+                String outpEmp = emp.LastName + ", " + emp.FirstName;
+                lbEmployees.Items.Add(outpEmp);
             }
 
             if (lbEmployees.Items.Count > 0)
             {
-                lbEmployees.SelectedIndex = index;
+                lbEmployees.SelectedIndex = indexEmp;
+            }
+
+            //Managers
+            int indexMan = lbManagers.SelectedIndex;
+
+            lbManagers.Items.Clear();
+            List<Manager> listMan = department.GetManagers();
+            foreach (Manager man in listMan)
+            {
+                String outpMan = man.LastName + ", " + man.FirstName;
+                lbManagers.Items.Add(outpMan);
+            }
+
+            if (lbManagers.Items.Count > 0)
+            {
+                lbManagers.SelectedIndex = indexMan;
             }
         }
 
