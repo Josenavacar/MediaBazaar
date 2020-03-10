@@ -63,6 +63,7 @@ namespace MediaBazaarSystem
                         {
                             if(role == 1) // Manager
                             {
+                                int ID = (int)reader.GetValue(0);
                                 String firstName = reader.GetString(1);
                                 String lastName = reader.GetString(2);
                                 int age = (int)reader.GetValue(3);
@@ -71,7 +72,7 @@ namespace MediaBazaarSystem
                                 double salary = reader.GetDouble(7);
                                 int hoursavailable = (int)reader.GetValue(9);
 
-                                Manager manager = new Manager(firstName, lastName, age, address, charge, salary, hoursavailable, email);
+                                Manager manager = new Manager(ID, firstName, lastName, age, address, charge, salary, hoursavailable, email);
 
                                 AdministrationSystem administrationSystem = new AdministrationSystem( department, manager );
                                 administrationSystem.Show();

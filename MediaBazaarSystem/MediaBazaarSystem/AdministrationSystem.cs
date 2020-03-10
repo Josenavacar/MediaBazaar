@@ -17,6 +17,7 @@ namespace MediaBazaarSystem
         AssignEmployeeSystem assignEmployeeForm = new AssignEmployeeSystem();
         Department department;
         Manager manager;
+        public static int idManage = 0;
 
         public AdministrationSystem( Department department, Manager manager )
         {
@@ -62,38 +63,44 @@ namespace MediaBazaarSystem
             MySqlCommand cmd2 = new MySqlCommand(sql2, connection);
             cmd2.Parameters.Add("DepartmentID", MySqlDbType.VarChar).Value = department.DepartmentID;
 
-
-
             reader = cmd2.ExecuteReader();
             while (reader.Read())
             {
                 int role = (int)reader.GetValue(11);
                 if ( role == 1 )
                 {
+                    int ID = (int)reader.GetValue(0);
                     String firstName = reader.GetString(1);
                     String lastName = reader.GetString(2);
                     int age = (int)reader.GetValue(3);
                     String address = reader.GetString(4);
+                    String email = reader.GetString(5);
                     String charge = "Manager";
                     double salary = reader.GetDouble(7);
                     int hoursavailable = (int)reader.GetValue(9);
 
-                    Manager man = new Manager(firstName, lastName, age, address, charge, salary, hoursavailable);
+                    Manager man = new Manager(ID, firstName, lastName, age, address, charge, salary, hoursavailable, email);
                     department.AddManager(man);
+
+                    idManage = ID;
                 }
 
                 else if(role == 2)
                 {
+                    int ID = (int)reader.GetValue(0);
                     String firstName = reader.GetString(1);
                     String lastName = reader.GetString(2);
                     int age = (int)reader.GetValue(3);
                     String address = reader.GetString(4);
+                    String email = reader.GetString(5);
                     String charge = "Employee";
                     double salary = reader.GetDouble(7);
                     int hoursavailable = (int)reader.GetValue(9);
 
-                    Employee emp = new Employee(firstName, lastName, age, address, charge, salary, hoursavailable);
+                    Employee emp = new Employee(ID, firstName, lastName, age, address, charge, salary, hoursavailable, email);
                     department.AddEmployee(emp);
+
+                    idManage = ID;
                 }
             }
             reader.Close();
@@ -102,54 +109,54 @@ namespace MediaBazaarSystem
 
         private void btnAddEmployee_Click(object sender, EventArgs e)
         {
-            //Employee_Add form1 = new Employee_Add(dep, null);
-            //form1.Show();
+            Employee_Add form1 = new Employee_Add(department, null);
+            form1.Show();
         }
 
         private void btnViewEmployeeDetails_Click(object sender, EventArgs e)
         {
-            //Employee emp = SearchEmp();
-            //if (emp != null)
-            //{
-            //    ViewEmployee form1 = new ViewEmployee(emp);
-            //    form1.Show();
-            //}
+            Employee emp = SearchEmp();
+            if (emp != null)
+            {
+                ViewEmployee form1 = new ViewEmployee(emp);
+                form1.Show();
+            }
         }
 
         private void btnUpdateEmployee_Click(object sender, EventArgs e)
         {
-            //Employee emp = SearchEmp();
-            //if(emp != null)
-            //{
-            //    Employee_Add form1 = new Employee_Add(dep, emp);
-            //    form1.Show();
-            //}
-            
+            Employee emp = SearchEmp();
+            if (emp != null)
+            {
+                Employee_Add form1 = new Employee_Add(department, emp);
+                form1.Show();
+            }
+
         }
 
-        //private Employee SearchEmp()
-        //{
-            //if (lbEmployees.SelectedItem != null)
-            //{
-            //    String aux = lbEmployees.SelectedItem.ToString();
-            //    String[] name = aux.Split(','); //Splits the string by the comma.
-            //    String firstName = name[1].Trim();
-            //    String lastName = name[0].Trim();
-            //    Employee emp = dep.GetEmployee(firstName, lastName);
+        private Employee SearchEmp()
+        {
+            if (lbEmployees.SelectedItem != null)
+            {
+                String aux = lbEmployees.SelectedItem.ToString();
+                String[] name = aux.Split(','); //Splits the string by the comma.
+                String firstName = name[1].Trim();
+                String lastName = name[0].Trim();
+                Employee emp = department.GetEmployee(firstName, lastName);
 
-            //    if(emp == null)
-            //    {
-            //        MessageBox.Show("Employee not found.");
-            //    }
+                if (emp == null)
+                {
+                    MessageBox.Show("Employee not found.");
+                }
 
-            //    return emp;
-            //}
-            //else
-            //{
-            //    MessageBox.Show("Employee not selected.");
-            //    return null;
-            //}
-        //}
+                return emp;
+            }
+            else
+            {
+                MessageBox.Show("Employee not selected.");
+                return null;
+            }
+        }
 
         private void btnFireEmployee_Click(object sender, EventArgs e)
         {

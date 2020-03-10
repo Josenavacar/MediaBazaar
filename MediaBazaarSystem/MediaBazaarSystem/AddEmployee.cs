@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using MySql.Data.MySqlClient;
+using System.Data.SqlClient;
 
 namespace MediaBazaarSystem
 {
@@ -29,6 +31,7 @@ namespace MediaBazaarSystem
                 comBoxPosition.SelectedItem = emp.Role;
                 txtBoxSalary.Text = emp.Salary.ToString();
                 txtBoxHoursAvailable.Text = emp.HoursAvailable.ToString();
+                txtBoxEmail.Text = emp.Email.ToString();
 
                 btnAddEmployee.Text = "Edit";
             }
@@ -40,12 +43,17 @@ namespace MediaBazaarSystem
 
         private void button1_Click(object sender, EventArgs e)
         {
-            if ( department.GetEmployee(txtBoxFirstName.Text, txtBoxLastName.Text) != null && employee == null)
+            if (department.GetEmployee(txtBoxFirstName.Text, txtBoxLastName.Text) != null && employee == null)
             {
                 MessageBox.Show("Employee already registered.");
             }
             else
             {
+                //MySQL
+                string connString = @"Server = studmysql01.fhict.local; Uid = dbi437493; Database = dbi437493; Pwd = dbgroup01;";
+                MySqlConnection conn = new MySqlConnection(connString);
+
+                int roleID = 0;
                 String FirstN = txtBoxFirstName.Text.ToString();
                 String LastN = txtBoxLastName.Text.ToString();
                 int age = Convert.ToInt32(numAge.Value);
@@ -53,17 +61,78 @@ namespace MediaBazaarSystem
                 String role = comBoxPosition.SelectedItem.ToString();
                 double salary = Convert.ToDouble(txtBoxSalary.Text);
                 int hoursAvailable = Convert.ToInt32(txtBoxHoursAvailable.Text);
+                String email = txtBoxEmail.Text.ToString();
 
-                Employee newEmployee = new Employee(FirstN, LastN, age, address, role, salary, hoursAvailable);
-                if ( employee == null)
+                if(role == "Manager")
                 {
-                    department.AddEmployee(newEmployee);
-                    MessageBox.Show("Employee successfully added");
+                    roleID = 1;
+                }
+                else if(role == "Employee")
+                {
+                    roleID = 2;
+                }
+                
+                if (employee == null)
+                {
+                    String password = Cryptography.Encrypt("temp");
+                    conn.Open();
+                    MySqlCommand cmd = conn.CreateCommand();
+
+                    cmd.CommandText = "INSERT INTO person(Firstname, Lastname, Age, Address, Email, Password, Salary, HoursWorked, HoursAvailable, IsAvailable, RoleID, DepartmentID) " +
+                        "VALUES(@FirstN, @LastN, @Age, @Address, @Email, @Password, @Salary, @HoursWorked, @HoursAvailable, @IsAvailable, @RoleID, @DepartmentID)";
+                    
+                    cmd.Parameters.AddWithValue("@FirstN", FirstN);
+                    cmd.Parameters.AddWithValue("@LastN", LastN);
+                    cmd.Parameters.AddWithValue("@Age", age);
+                    cmd.Parameters.AddWithValue("@Address", address);
+                    cmd.Parameters.AddWithValue("@Email", email);
+                    cmd.Parameters.AddWithValue("@Password", password);
+                    cmd.Parameters.AddWithValue("@Salary", salary);
+                    cmd.Parameters.AddWithValue("@HoursWorked", 0);
+                    cmd.Parameters.AddWithValue("@HoursAvailable", hoursAvailable);
+                    cmd.Parameters.AddWithValue("@IsAvailable", "Yes");
+                    cmd.Parameters.AddWithValue("@RoleID", roleID);
+                    cmd.Parameters.AddWithValue("@DepartmentID", department.DepartmentID);
+                    cmd.ExecuteNonQuery();
+                    conn.Close();
+
+                    if(roleID == 1)
+                    {
+                        AdministrationSystem.idManage++;
+                        Manager newManager = new Manager(AdministrationSystem.idManage, FirstN, LastN, age, address, role, salary, hoursAvailable, email);
+                        department.AddManager(newManager);
+                        MessageBox.Show("Manager successfully added");
+                    }
+                    else
+                    {
+                        AdministrationSystem.idManage++;
+                        Employee newEmployee = new Employee(AdministrationSystem.idManage, FirstN, LastN, age, address, role, salary, hoursAvailable, email);
+                        department.AddEmployee(newEmployee);
+                        MessageBox.Show("Employee successfully added");
+                    }
                 }
                 else
                 {
-                    department.DeleteEmployee( employee );
-                    department.AddEmployee(newEmployee);
+                    conn.Open();
+                    MySqlCommand cmd = conn.CreateCommand();
+
+                    cmd.CommandText = "UPDATE person SET Firstname = @FirstN,  Lastname = @LastN, Age = @Age, Address = @Address, Email = @Email, Salary = @Salary," +
+                        "HoursAvailable = @HoursAvailable, IsAvailable = @IsAvailable, RoleID = @RoleID, DepartmentID = @DepartmentID WHERE Id = @PersonID";
+
+                    cmd.Parameters.AddWithValue("@FirstN", FirstN);
+                    cmd.Parameters.AddWithValue("@LastN", LastN);
+                    cmd.Parameters.AddWithValue("@Age", age);
+                    cmd.Parameters.AddWithValue("@Address", address);
+                    cmd.Parameters.AddWithValue("@Email", email);
+                    cmd.Parameters.AddWithValue("@Salary", salary);
+                    cmd.Parameters.AddWithValue("@HoursAvailable", hoursAvailable);
+                    cmd.Parameters.AddWithValue("@IsAvailable", "Yes");
+                    cmd.Parameters.AddWithValue("@RoleID", roleID);
+                    cmd.Parameters.AddWithValue("@DepartmentID", department.DepartmentID);
+                    cmd.Parameters.AddWithValue("@PersonID", employee.dbID);
+                    cmd.ExecuteNonQuery();
+                    conn.Close();
+                    employee.editEmployee(FirstN, LastN, age, address, role, salary, hoursAvailable, email);
                     MessageBox.Show("Employee successfully edited");
                 }
                 this.Hide();

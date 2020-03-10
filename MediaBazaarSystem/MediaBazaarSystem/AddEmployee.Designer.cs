@@ -43,42 +43,44 @@
             this.txtBoxHoursAvailable = new System.Windows.Forms.TextBox();
             this.txtBoxSalary = new System.Windows.Forms.TextBox();
             this.lblSalary = new System.Windows.Forms.Label();
+            this.lblEmail = new System.Windows.Forms.Label();
+            this.txtBoxEmail = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.numAge)).BeginInit();
             this.SuspendLayout();
             // 
             // txtBoxFirstName
             // 
             this.txtBoxFirstName.Font = new System.Drawing.Font("Century Gothic", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtBoxFirstName.Location = new System.Drawing.Point(273, 44);
-            this.txtBoxFirstName.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtBoxFirstName.Location = new System.Drawing.Point(261, 17);
+            this.txtBoxFirstName.Margin = new System.Windows.Forms.Padding(4);
             this.txtBoxFirstName.Name = "txtBoxFirstName";
-            this.txtBoxFirstName.Size = new System.Drawing.Size(199, 28);
+            this.txtBoxFirstName.Size = new System.Drawing.Size(199, 24);
             this.txtBoxFirstName.TabIndex = 0;
             // 
             // txtBoxLastName
             // 
             this.txtBoxLastName.Font = new System.Drawing.Font("Century Gothic", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtBoxLastName.Location = new System.Drawing.Point(273, 92);
-            this.txtBoxLastName.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtBoxLastName.Location = new System.Drawing.Point(261, 65);
+            this.txtBoxLastName.Margin = new System.Windows.Forms.Padding(4);
             this.txtBoxLastName.Name = "txtBoxLastName";
-            this.txtBoxLastName.Size = new System.Drawing.Size(199, 28);
+            this.txtBoxLastName.Size = new System.Drawing.Size(199, 24);
             this.txtBoxLastName.TabIndex = 1;
             // 
             // tbAddress
             // 
             this.tbAddress.Font = new System.Drawing.Font("Century Gothic", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbAddress.Location = new System.Drawing.Point(273, 189);
-            this.tbAddress.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tbAddress.Location = new System.Drawing.Point(261, 162);
+            this.tbAddress.Margin = new System.Windows.Forms.Padding(4);
             this.tbAddress.Name = "tbAddress";
-            this.tbAddress.Size = new System.Drawing.Size(199, 28);
+            this.tbAddress.Size = new System.Drawing.Size(199, 24);
             this.tbAddress.TabIndex = 2;
             // 
             // btnAddEmployee
             // 
             this.btnAddEmployee.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.btnAddEmployee.Font = new System.Drawing.Font("Century Gothic", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAddEmployee.Location = new System.Drawing.Point(218, 399);
-            this.btnAddEmployee.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnAddEmployee.Location = new System.Drawing.Point(206, 405);
+            this.btnAddEmployee.Margin = new System.Windows.Forms.Padding(4);
             this.btnAddEmployee.Name = "btnAddEmployee";
             this.btnAddEmployee.Size = new System.Drawing.Size(254, 40);
             this.btnAddEmployee.TabIndex = 3;
@@ -90,10 +92,10 @@
             // 
             this.lblFirstName.AutoSize = true;
             this.lblFirstName.Font = new System.Drawing.Font("Century Gothic", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblFirstName.Location = new System.Drawing.Point(161, 47);
+            this.lblFirstName.Location = new System.Drawing.Point(171, 20);
             this.lblFirstName.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblFirstName.Name = "lblFirstName";
-            this.lblFirstName.Size = new System.Drawing.Size(98, 21);
+            this.lblFirstName.Size = new System.Drawing.Size(82, 19);
             this.lblFirstName.TabIndex = 4;
             this.lblFirstName.Text = "First name:";
             // 
@@ -101,10 +103,10 @@
             // 
             this.lblLastName.AutoSize = true;
             this.lblLastName.Font = new System.Drawing.Font("Century Gothic", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblLastName.Location = new System.Drawing.Point(157, 95);
+            this.lblLastName.Location = new System.Drawing.Point(169, 68);
             this.lblLastName.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblLastName.Name = "lblLastName";
-            this.lblLastName.Size = new System.Drawing.Size(102, 21);
+            this.lblLastName.Size = new System.Drawing.Size(84, 19);
             this.lblLastName.TabIndex = 5;
             this.lblLastName.Text = "Last name:";
             // 
@@ -112,8 +114,8 @@
             // 
             this.numAge.Font = new System.Drawing.Font("Century Gothic", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.numAge.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.numAge.Location = new System.Drawing.Point(273, 140);
-            this.numAge.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.numAge.Location = new System.Drawing.Point(261, 113);
+            this.numAge.Margin = new System.Windows.Forms.Padding(4);
             this.numAge.Maximum = new decimal(new int[] {
             67,
             0,
@@ -125,7 +127,7 @@
             0,
             0});
             this.numAge.Name = "numAge";
-            this.numAge.Size = new System.Drawing.Size(199, 28);
+            this.numAge.Size = new System.Drawing.Size(199, 24);
             this.numAge.TabIndex = 6;
             this.numAge.Value = new decimal(new int[] {
             18,
@@ -137,10 +139,10 @@
             // 
             this.lblAge.AutoSize = true;
             this.lblAge.Font = new System.Drawing.Font("Century Gothic", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblAge.Location = new System.Drawing.Point(209, 142);
+            this.lblAge.Location = new System.Drawing.Point(213, 115);
             this.lblAge.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblAge.Name = "lblAge";
-            this.lblAge.Size = new System.Drawing.Size(50, 21);
+            this.lblAge.Size = new System.Drawing.Size(40, 19);
             this.lblAge.TabIndex = 7;
             this.lblAge.Text = "Age:";
             // 
@@ -148,10 +150,10 @@
             // 
             this.lblAddress.AutoSize = true;
             this.lblAddress.Font = new System.Drawing.Font("Century Gothic", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblAddress.Location = new System.Drawing.Point(177, 192);
+            this.lblAddress.Location = new System.Drawing.Point(188, 165);
             this.lblAddress.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblAddress.Name = "lblAddress";
-            this.lblAddress.Size = new System.Drawing.Size(82, 21);
+            this.lblAddress.Size = new System.Drawing.Size(65, 19);
             this.lblAddress.TabIndex = 8;
             this.lblAddress.Text = "Address:";
             // 
@@ -162,20 +164,20 @@
             this.comBoxPosition.Items.AddRange(new object[] {
             "Manager",
             "Employee"});
-            this.comBoxPosition.Location = new System.Drawing.Point(273, 240);
-            this.comBoxPosition.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.comBoxPosition.Location = new System.Drawing.Point(261, 213);
+            this.comBoxPosition.Margin = new System.Windows.Forms.Padding(4);
             this.comBoxPosition.Name = "comBoxPosition";
-            this.comBoxPosition.Size = new System.Drawing.Size(199, 29);
+            this.comBoxPosition.Size = new System.Drawing.Size(199, 27);
             this.comBoxPosition.TabIndex = 9;
             // 
             // lblPosition
             // 
             this.lblPosition.AutoSize = true;
             this.lblPosition.Font = new System.Drawing.Font("Century Gothic", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblPosition.Location = new System.Drawing.Point(182, 243);
+            this.lblPosition.Location = new System.Drawing.Point(189, 216);
             this.lblPosition.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblPosition.Name = "lblPosition";
-            this.lblPosition.Size = new System.Drawing.Size(77, 21);
+            this.lblPosition.Size = new System.Drawing.Size(64, 19);
             this.lblPosition.TabIndex = 10;
             this.lblPosition.Text = "Position:";
             // 
@@ -183,48 +185,70 @@
             // 
             this.lblHoursAvailable.AutoSize = true;
             this.lblHoursAvailable.Font = new System.Drawing.Font("Century Gothic", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblHoursAvailable.Location = new System.Drawing.Point(114, 339);
+            this.lblHoursAvailable.Location = new System.Drawing.Point(134, 312);
             this.lblHoursAvailable.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblHoursAvailable.Name = "lblHoursAvailable";
-            this.lblHoursAvailable.Size = new System.Drawing.Size(145, 21);
+            this.lblHoursAvailable.Size = new System.Drawing.Size(119, 19);
             this.lblHoursAvailable.TabIndex = 12;
             this.lblHoursAvailable.Text = "Hours Available:";
             // 
             // txtBoxHoursAvailable
             // 
             this.txtBoxHoursAvailable.Font = new System.Drawing.Font("Century Gothic", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtBoxHoursAvailable.Location = new System.Drawing.Point(273, 336);
-            this.txtBoxHoursAvailable.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtBoxHoursAvailable.Location = new System.Drawing.Point(261, 309);
+            this.txtBoxHoursAvailable.Margin = new System.Windows.Forms.Padding(4);
             this.txtBoxHoursAvailable.Name = "txtBoxHoursAvailable";
-            this.txtBoxHoursAvailable.Size = new System.Drawing.Size(199, 28);
+            this.txtBoxHoursAvailable.Size = new System.Drawing.Size(199, 24);
             this.txtBoxHoursAvailable.TabIndex = 13;
             // 
             // txtBoxSalary
             // 
             this.txtBoxSalary.Font = new System.Drawing.Font("Century Gothic", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtBoxSalary.Location = new System.Drawing.Point(273, 289);
-            this.txtBoxSalary.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtBoxSalary.Location = new System.Drawing.Point(261, 262);
+            this.txtBoxSalary.Margin = new System.Windows.Forms.Padding(4);
             this.txtBoxSalary.Name = "txtBoxSalary";
-            this.txtBoxSalary.Size = new System.Drawing.Size(199, 28);
+            this.txtBoxSalary.Size = new System.Drawing.Size(199, 24);
             this.txtBoxSalary.TabIndex = 15;
             // 
             // lblSalary
             // 
             this.lblSalary.AutoSize = true;
             this.lblSalary.Font = new System.Drawing.Font("Century Gothic", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblSalary.Location = new System.Drawing.Point(196, 292);
+            this.lblSalary.Location = new System.Drawing.Point(198, 265);
             this.lblSalary.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblSalary.Name = "lblSalary";
-            this.lblSalary.Size = new System.Drawing.Size(63, 21);
+            this.lblSalary.Size = new System.Drawing.Size(55, 19);
             this.lblSalary.TabIndex = 14;
             this.lblSalary.Text = "Salary:";
             // 
+            // lblEmail
+            // 
+            this.lblEmail.AutoSize = true;
+            this.lblEmail.Font = new System.Drawing.Font("Century Gothic", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblEmail.Location = new System.Drawing.Point(203, 354);
+            this.lblEmail.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblEmail.Name = "lblEmail";
+            this.lblEmail.Size = new System.Drawing.Size(50, 19);
+            this.lblEmail.TabIndex = 17;
+            this.lblEmail.Text = "Email:";
+            // 
+            // txtBoxEmail
+            // 
+            this.txtBoxEmail.Font = new System.Drawing.Font("Century Gothic", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtBoxEmail.Location = new System.Drawing.Point(261, 351);
+            this.txtBoxEmail.Margin = new System.Windows.Forms.Padding(4);
+            this.txtBoxEmail.Name = "txtBoxEmail";
+            this.txtBoxEmail.Size = new System.Drawing.Size(199, 24);
+            this.txtBoxEmail.TabIndex = 16;
+            // 
             // Employee_Add
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 17F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlLight;
             this.ClientSize = new System.Drawing.Size(653, 475);
+            this.Controls.Add(this.lblEmail);
+            this.Controls.Add(this.txtBoxEmail);
             this.Controls.Add(this.txtBoxSalary);
             this.Controls.Add(this.lblSalary);
             this.Controls.Add(this.txtBoxHoursAvailable);
@@ -241,7 +265,7 @@
             this.Controls.Add(this.txtBoxLastName);
             this.Controls.Add(this.txtBoxFirstName);
             this.Font = new System.Drawing.Font("Century Gothic", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "Employee_Add";
             this.Text = "Add Employee";
             ((System.ComponentModel.ISupportInitialize)(this.numAge)).EndInit();
@@ -267,5 +291,7 @@
         private System.Windows.Forms.TextBox txtBoxHoursAvailable;
         private System.Windows.Forms.TextBox txtBoxSalary;
         private System.Windows.Forms.Label lblSalary;
+        private System.Windows.Forms.Label lblEmail;
+        private System.Windows.Forms.TextBox txtBoxEmail;
     }
 }

@@ -8,7 +8,16 @@ namespace MediaBazaarSystem
 {
     public class Employee : Staff
     {
-        private static int idSeeder;
+        public int dbID
+        {
+            get { return this.personID; }
+            private set { this.personID = value; }
+        }
+        public String Email
+        {
+            get { return this.email; }
+            private set { this.email = value; }
+        }
 
         public String FirstName
         {
@@ -52,10 +61,9 @@ namespace MediaBazaarSystem
             private set { this.hoursAvailable = value; }
         }
 
-        public Employee(String firstName, String lastName, int age, String address, String role, double salary, int hoursAvailable) //Removed hoursworked
+        public Employee(int ID, String firstName, String lastName, int age, String address, String role, double salary, int hoursAvailable, String email) //Removed hoursworked
         {
-            this.ID = idSeeder;
-            idSeeder++;
+            dbID = ID;
             FirstName = firstName;
             LastName = lastName;
             Age = age;
@@ -63,6 +71,19 @@ namespace MediaBazaarSystem
             Role = role;
             Salary = salary;
             HoursAvailable = hoursAvailable;
+            Email = email;
+        }
+
+        public void editEmployee(String firstName, String lastName, int age, String address, String role, double salary, int hoursAvailable, String email)
+        {
+            FirstName = firstName;
+            LastName = lastName;
+            Age = age;
+            Address = address;
+            Role = role;
+            Salary = salary;
+            HoursAvailable = hoursAvailable;
+            Email = email;
         }
 
         public void GenerateSalary()

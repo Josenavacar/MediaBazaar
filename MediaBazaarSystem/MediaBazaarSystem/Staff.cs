@@ -14,6 +14,7 @@ namespace MediaBazaarSystem
         protected double salary;
         protected int hoursWorked;
         protected int hoursAvailable;
+        protected int personID;
 
         public override string ToString()
         {
