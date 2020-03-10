@@ -8,8 +8,6 @@ namespace MediaBazaarSystem
 {
     public class Employee : Staff
     {
-        private static int idSeeder;
-
         public String FirstName
         {
             get { return firstName; }
@@ -54,8 +52,7 @@ namespace MediaBazaarSystem
 
         public Employee(String firstName, String lastName, int age, String address, String role, double salary, int hoursAvailable) //Removed hoursworked
         {
-            this.ID = idSeeder;
-            idSeeder++;
+            //this.ID;
             FirstName = firstName;
             LastName = lastName;
             Age = age;
@@ -72,7 +69,10 @@ namespace MediaBazaarSystem
 
         public override string ToString()
         {
-            return base.ToString();
+            return "First name: " + this.FirstName + " Last name: " + this.LastName + 
+                " Age: " + this.Age + " Address: " + this.Address + 
+                " Role: " + this.Role + " Salary: " + this.Salary + 
+                " Hours Available: " + this.HoursAvailable;
         }
     }
 }

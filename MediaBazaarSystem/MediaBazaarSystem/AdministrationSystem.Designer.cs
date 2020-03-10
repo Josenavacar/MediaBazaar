@@ -32,6 +32,10 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AdministrationSystem));
             this.tbControlAdmin = new System.Windows.Forms.TabControl();
             this.tbPageHome = new System.Windows.Forms.TabPage();
+            this.btnFilter = new System.Windows.Forms.Button();
+            this.btnSort = new System.Windows.Forms.Button();
+            this.btnViewAllShifts = new System.Windows.Forms.Button();
+            this.lblAssignEmployee = new System.Windows.Forms.Label();
             this.picBoxLogout = new System.Windows.Forms.PictureBox();
             this.dataAdminWorkSchedule = new System.Windows.Forms.DataGridView();
             this.clmnEmployeeName = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -46,7 +50,7 @@
             this.txtBoxSearch = new System.Windows.Forms.TextBox();
             this.btnViewAllProducts = new System.Windows.Forms.Button();
             this.btnViewAllEmployees = new System.Windows.Forms.Button();
-            this.dataGridViewEmployeeStats = new System.Windows.Forms.DataGridView();
+            this.dataGridViewStats = new System.Windows.Forms.DataGridView();
             this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -77,16 +81,13 @@
             this.btnFireEmployee = new System.Windows.Forms.Button();
             this.Refresh = new System.Windows.Forms.Timer(this.components);
             this.updateTimer = new System.Windows.Forms.Timer(this.components);
-            this.lblAssignEmployee = new System.Windows.Forms.Label();
-            this.btnViewAllShifts = new System.Windows.Forms.Button();
-            this.btnSort = new System.Windows.Forms.Button();
-            this.btnFilter = new System.Windows.Forms.Button();
+            this.lBoxStatistics = new System.Windows.Forms.ListBox();
             this.tbControlAdmin.SuspendLayout();
             this.tbPageHome.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picBoxLogout)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataAdminWorkSchedule)).BeginInit();
             this.tbPageStatistics.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewEmployeeStats)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewStats)).BeginInit();
             this.tbPageProfile.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxAdminPhoto)).BeginInit();
             this.tbPageEmpManagement.SuspendLayout();
@@ -121,6 +122,49 @@
             this.tbPageHome.Size = new System.Drawing.Size(870, 673);
             this.tbPageHome.TabIndex = 0;
             this.tbPageHome.Text = "Home";
+            // 
+            // btnFilter
+            // 
+            this.btnFilter.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.btnFilter.Location = new System.Drawing.Point(95, 610);
+            this.btnFilter.Name = "btnFilter";
+            this.btnFilter.Size = new System.Drawing.Size(139, 42);
+            this.btnFilter.TabIndex = 15;
+            this.btnFilter.Text = "Filter";
+            this.btnFilter.UseVisualStyleBackColor = false;
+            this.btnFilter.Click += new System.EventHandler(this.btnFilter_Click);
+            // 
+            // btnSort
+            // 
+            this.btnSort.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.btnSort.Location = new System.Drawing.Point(631, 610);
+            this.btnSort.Name = "btnSort";
+            this.btnSort.Size = new System.Drawing.Size(144, 42);
+            this.btnSort.TabIndex = 14;
+            this.btnSort.Text = "Sort";
+            this.btnSort.UseVisualStyleBackColor = false;
+            this.btnSort.Click += new System.EventHandler(this.btnSort_Click);
+            // 
+            // btnViewAllShifts
+            // 
+            this.btnViewAllShifts.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.btnViewAllShifts.Location = new System.Drawing.Point(240, 610);
+            this.btnViewAllShifts.Name = "btnViewAllShifts";
+            this.btnViewAllShifts.Size = new System.Drawing.Size(385, 42);
+            this.btnViewAllShifts.TabIndex = 13;
+            this.btnViewAllShifts.Text = "View All Shifts";
+            this.btnViewAllShifts.UseVisualStyleBackColor = false;
+            this.btnViewAllShifts.Click += new System.EventHandler(this.btnViewAllShifts_Click);
+            // 
+            // lblAssignEmployee
+            // 
+            this.lblAssignEmployee.AutoSize = true;
+            this.lblAssignEmployee.Font = new System.Drawing.Font("Century Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblAssignEmployee.Location = new System.Drawing.Point(91, 69);
+            this.lblAssignEmployee.Name = "lblAssignEmployee";
+            this.lblAssignEmployee.Size = new System.Drawing.Size(417, 22);
+            this.lblAssignEmployee.TabIndex = 8;
+            this.lblAssignEmployee.Text = "Double click employee to assign a employee";
             // 
             // picBoxLogout
             // 
@@ -205,12 +249,13 @@
             // tbPageStatistics
             // 
             this.tbPageStatistics.BackColor = System.Drawing.SystemColors.Menu;
+            this.tbPageStatistics.Controls.Add(this.lBoxStatistics);
             this.tbPageStatistics.Controls.Add(this.btnViewAllDepartments);
             this.tbPageStatistics.Controls.Add(this.btnSearch);
             this.tbPageStatistics.Controls.Add(this.txtBoxSearch);
             this.tbPageStatistics.Controls.Add(this.btnViewAllProducts);
             this.tbPageStatistics.Controls.Add(this.btnViewAllEmployees);
-            this.tbPageStatistics.Controls.Add(this.dataGridViewEmployeeStats);
+            this.tbPageStatistics.Controls.Add(this.dataGridViewStats);
             this.tbPageStatistics.Location = new System.Drawing.Point(4, 30);
             this.tbPageStatistics.Name = "tbPageStatistics";
             this.tbPageStatistics.Size = new System.Drawing.Size(870, 673);
@@ -226,6 +271,7 @@
             this.btnViewAllDepartments.TabIndex = 16;
             this.btnViewAllDepartments.Text = "View All Departments";
             this.btnViewAllDepartments.UseVisualStyleBackColor = false;
+            this.btnViewAllDepartments.Click += new System.EventHandler(this.btnViewAllDepartments_Click);
             // 
             // btnSearch
             // 
@@ -236,6 +282,7 @@
             this.btnSearch.TabIndex = 14;
             this.btnSearch.Text = "Search";
             this.btnSearch.UseVisualStyleBackColor = false;
+            this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
             // 
             // txtBoxSearch
             // 
@@ -254,6 +301,7 @@
             this.btnViewAllProducts.TabIndex = 12;
             this.btnViewAllProducts.Text = "View All Products";
             this.btnViewAllProducts.UseVisualStyleBackColor = false;
+            this.btnViewAllProducts.Click += new System.EventHandler(this.btnViewAllProducts_Click);
             // 
             // btnViewAllEmployees
             // 
@@ -264,24 +312,25 @@
             this.btnViewAllEmployees.TabIndex = 11;
             this.btnViewAllEmployees.Text = "View All Employees";
             this.btnViewAllEmployees.UseVisualStyleBackColor = false;
+            this.btnViewAllEmployees.Click += new System.EventHandler(this.btnViewAllEmployees_Click);
             // 
-            // dataGridViewEmployeeStats
+            // dataGridViewStats
             // 
-            this.dataGridViewEmployeeStats.AllowUserToOrderColumns = true;
-            this.dataGridViewEmployeeStats.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridViewEmployeeStats.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dataGridViewStats.AllowUserToOrderColumns = true;
+            this.dataGridViewStats.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewStats.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Column1,
             this.Column2,
             this.Column3,
             this.Column4,
             this.Column5,
             this.Column6});
-            this.dataGridViewEmployeeStats.Location = new System.Drawing.Point(29, 104);
-            this.dataGridViewEmployeeStats.Name = "dataGridViewEmployeeStats";
-            this.dataGridViewEmployeeStats.RowHeadersWidth = 51;
-            this.dataGridViewEmployeeStats.RowTemplate.Height = 24;
-            this.dataGridViewEmployeeStats.Size = new System.Drawing.Size(803, 321);
-            this.dataGridViewEmployeeStats.TabIndex = 9;
+            this.dataGridViewStats.Location = new System.Drawing.Point(29, 104);
+            this.dataGridViewStats.Name = "dataGridViewStats";
+            this.dataGridViewStats.RowHeadersWidth = 51;
+            this.dataGridViewStats.RowTemplate.Height = 24;
+            this.dataGridViewStats.Size = new System.Drawing.Size(803, 128);
+            this.dataGridViewStats.TabIndex = 9;
             // 
             // Column1
             // 
@@ -562,48 +611,14 @@
             // 
             this.updateTimer.Tick += new System.EventHandler(this.updateTimer_Tick);
             // 
-            // lblAssignEmployee
+            // lBoxStatistics
             // 
-            this.lblAssignEmployee.AutoSize = true;
-            this.lblAssignEmployee.Font = new System.Drawing.Font("Century Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblAssignEmployee.Location = new System.Drawing.Point(91, 69);
-            this.lblAssignEmployee.Name = "lblAssignEmployee";
-            this.lblAssignEmployee.Size = new System.Drawing.Size(417, 22);
-            this.lblAssignEmployee.TabIndex = 8;
-            this.lblAssignEmployee.Text = "Double click employee to assign a employee";
-            // 
-            // btnViewAllShifts
-            // 
-            this.btnViewAllShifts.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.btnViewAllShifts.Location = new System.Drawing.Point(240, 610);
-            this.btnViewAllShifts.Name = "btnViewAllShifts";
-            this.btnViewAllShifts.Size = new System.Drawing.Size(385, 42);
-            this.btnViewAllShifts.TabIndex = 13;
-            this.btnViewAllShifts.Text = "View All Shifts";
-            this.btnViewAllShifts.UseVisualStyleBackColor = false;
-            this.btnViewAllShifts.Click += new System.EventHandler(this.btnViewAllShifts_Click);
-            // 
-            // btnSort
-            // 
-            this.btnSort.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.btnSort.Location = new System.Drawing.Point(631, 610);
-            this.btnSort.Name = "btnSort";
-            this.btnSort.Size = new System.Drawing.Size(144, 42);
-            this.btnSort.TabIndex = 14;
-            this.btnSort.Text = "Sort";
-            this.btnSort.UseVisualStyleBackColor = false;
-            this.btnSort.Click += new System.EventHandler(this.btnSort_Click);
-            // 
-            // btnFilter
-            // 
-            this.btnFilter.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.btnFilter.Location = new System.Drawing.Point(95, 610);
-            this.btnFilter.Name = "btnFilter";
-            this.btnFilter.Size = new System.Drawing.Size(139, 42);
-            this.btnFilter.TabIndex = 15;
-            this.btnFilter.Text = "Filter";
-            this.btnFilter.UseVisualStyleBackColor = false;
-            this.btnFilter.Click += new System.EventHandler(this.btnFilter_Click);
+            this.lBoxStatistics.FormattingEnabled = true;
+            this.lBoxStatistics.ItemHeight = 21;
+            this.lBoxStatistics.Location = new System.Drawing.Point(29, 267);
+            this.lBoxStatistics.Name = "lBoxStatistics";
+            this.lBoxStatistics.Size = new System.Drawing.Size(803, 151);
+            this.lBoxStatistics.TabIndex = 17;
             // 
             // AdministrationSystem
             // 
@@ -622,7 +637,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataAdminWorkSchedule)).EndInit();
             this.tbPageStatistics.ResumeLayout(false);
             this.tbPageStatistics.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewEmployeeStats)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewStats)).EndInit();
             this.tbPageProfile.ResumeLayout(false);
             this.tbPageProfile.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxAdminPhoto)).EndInit();
@@ -663,7 +678,7 @@
         private System.Windows.Forms.TextBox txtBoxSearch;
         private System.Windows.Forms.Button btnViewAllProducts;
         private System.Windows.Forms.Button btnViewAllEmployees;
-        private System.Windows.Forms.DataGridView dataGridViewEmployeeStats;
+        private System.Windows.Forms.DataGridView dataGridViewStats;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
@@ -684,5 +699,6 @@
         private System.Windows.Forms.Button btnViewAllShifts;
         private System.Windows.Forms.Button btnFilter;
         private System.Windows.Forms.Button btnSort;
+        private System.Windows.Forms.ListBox lBoxStatistics;
     }
 }

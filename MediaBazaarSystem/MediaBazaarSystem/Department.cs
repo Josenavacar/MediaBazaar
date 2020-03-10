@@ -26,9 +26,9 @@ namespace MediaBazaarSystem
 
         public Department(String name)
         {
+            this.Name = name;
             employees = new List<Employee>();
             managers = new List<Manager>();
-            //Name = name;
         }
 
         public void AddEmployee(Employee employee)
@@ -66,6 +66,11 @@ namespace MediaBazaarSystem
                 }
             }
             return emp;
+        }
+
+        public override string ToString()
+        {
+            return this.Name;
         }
 
         //public List<Staff> GetStaffs()

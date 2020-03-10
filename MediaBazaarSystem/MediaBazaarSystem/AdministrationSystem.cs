@@ -32,6 +32,7 @@ namespace MediaBazaarSystem
             // Enable timer
             updateTimer.Enabled = true;
             updateTimer.Interval = 1000;
+            this.GetStatistics();
         }
 
         /**
@@ -75,6 +76,14 @@ namespace MediaBazaarSystem
 
             // Disable timer
             updateTimer.Enabled = false;
+        }
+
+        private void GetStatistics()
+        {
+            if( tbControlAdmin.Contains( tbPageStatistics ) )
+            {
+
+            }
         }
 
         private void btnAddEmployee_Click(object sender, EventArgs e)
@@ -257,12 +266,100 @@ namespace MediaBazaarSystem
          */
         private void btnSort_Click( object sender, EventArgs e )
         {
+            // Sort the first column in the data grid view (work schedule)
+            // In this case the first column is the first name of employee
             dataAdminWorkSchedule.Sort( dataAdminWorkSchedule.Columns[ 0 ], ListSortDirection.Ascending );
         }
 
         private void btnFilter_Click( object sender, EventArgs e )
         {
 
+        }
+
+        /**
+         * Method to display all departments in system to listbox
+         */
+        private void btnViewAllDepartments_Click( object sender, EventArgs e )
+        {
+            lBoxStatistics.Items.Clear();
+            // Connect to DB
+            string connectionString = @"Server = studmysql01.fhict.local; Uid = dbi437493; Database = dbi437493; Pwd = dbgroup01;";
+            // SQL Query
+            string sql = "SELECT Name FROM Department ";
+            // Start mysql objects
+            MySqlConnection connection = new MySqlConnection( connectionString );
+            MySqlCommand cmd = new MySqlCommand( sql, connection );
+            // Open connection
+            connection.Open();
+            MySqlDataReader reader = cmd.ExecuteReader();
+
+            // Get the data
+            while( reader.Read() )
+            {
+                department = new Department( reader.GetString( 0 ) );
+                lBoxStatistics.Items.Add( department.ToString() );
+            }
+        }
+
+        /**
+         * Method to display all employees in every department in the system to the listbox
+         */
+        private void btnViewAllEmployees_Click( object sender, EventArgs e )
+        {
+            lBoxStatistics.Items.Clear();
+            // Connect to DB
+            string connectionString = @"Server = studmysql01.fhict.local; Uid = dbi437493; Database = dbi437493; Pwd = dbgroup01;";
+            // SQL Query
+            string sql = "SELECT Person.FirstName, Person.LastName, Person.Age, Person.Address, Person.Salary, Person.HoursWorked, Person.HoursAvailable, Role.Name, Department.Name FROM Person " +
+                "INNER JOIN Role ON Person.RoleId = Role.Id " +
+                "INNER JOIN Department ON Person.DepartmentID = Department.Id";
+            // Start mysql objects
+            MySqlConnection connection = new MySqlConnection( connectionString );
+            MySqlCommand cmd = new MySqlCommand( sql, connection );
+            // Open connection
+            connection.Open();
+            MySqlDataReader reader = cmd.ExecuteReader();
+
+            // Get the data
+            while( reader.Read() )
+            {
+                // Create employee object
+                Employee employee = new Employee( reader.GetValue( 0 ).ToString(), reader.GetValue( 1 ).ToString(), Convert.ToInt32(reader.GetValue( 2 )), reader.GetValue( 3 ).ToString(), reader.GetValue( 7 ).ToString(), Convert.ToDouble(reader.GetValue( 4 )), Convert.ToInt32(reader.GetValue( 6 )) );
+                department.AddEmployee(employee);
+            }
+
+            // Add employees to the listbox
+            foreach(Employee emp in department.GetEmployees())
+            {
+                lBoxStatistics.Items.Add( emp );
+            }
+        }
+
+        private void btnViewAllProducts_Click( object sender, EventArgs e )
+        {
+
+        }
+
+        /**
+         * Method to search and display information in the listbox
+         */
+        private void btnSearch_Click( object sender, EventArgs e )
+        {
+            lBoxStatistics.Items.Clear();
+            // Set textbox characters to lowercase
+            txtBoxSearch.CharacterCasing = CharacterCasing.Lower;
+            String searchedValue = txtBoxSearch.Text;
+
+            foreach( Employee employee in department.GetEmployees() )
+            {
+                // Check if employee has first name with the value in search textbox
+                // (Remember this info is coming from the database and comparing it to the searched value)
+                // Return employee in listbox
+                if( searchedValue.Contains( employee.FirstName.ToLower() ) ) // ToLower is lowercase
+                {
+                    lBoxStatistics.Items.Add( employee.ToString() );
+                }
+            }
         }
     }
 }

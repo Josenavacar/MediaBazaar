@@ -42,7 +42,7 @@ namespace MediaBazaarSystem
                 String endTime = reader.GetValue( 3 ).ToString();
                 DateTime workStartTime = Convert.ToDateTime( startTime );
                 DateTime workEndTime = Convert.ToDateTime( endTime );
-
+                 
                 DataGridViewRow row = ( DataGridViewRow ) dataEmpWorkSchedule.Rows[ 0 ].Clone();
                 dataEmpWorkSchedule.Columns[ "clmnWorkDate" ].DefaultCellStyle.BackColor = Color.LightSteelBlue;
                 row.Cells[ 0 ].Value = reader.GetValue( 0 ).ToString(); // First Name
