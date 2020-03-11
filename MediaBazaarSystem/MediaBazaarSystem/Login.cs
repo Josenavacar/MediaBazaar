@@ -14,12 +14,18 @@ namespace MediaBazaarSystem
 {
     public partial class formLogin : Form
     {
+        /**
+         * Constructor
+         */
         public formLogin()
         {
             InitializeComponent();
             txtBoxPassword.PasswordChar = Convert.ToChar("*");
         }
 
+        /**
+         * Method to login based on valid credentials
+         */
         private void btnLogin_Click( object sender, EventArgs e )
         {
             String email = txtBoxEmail.Text;
@@ -56,9 +62,9 @@ namespace MediaBazaarSystem
                         //Department
                         depName = reader.GetString( 12 );
                         depID = (int)reader.GetValue(13);
-                        Department department = new Department( depName, depID );
-
-
+                        Department department = new Department( depName, depID );      
+                        
+                        // Decrypt password and check if password is equal to the password user filled in
                         if( Cryptography.Decrypt( toDecryptPassword ) == password )
                         {
                             if(role == 1) // Manager
@@ -71,10 +77,9 @@ namespace MediaBazaarSystem
                                 String charge = "Manager";
                                 double salary = reader.GetDouble(7);
                                 int hoursavailable = (int)reader.GetValue(9);
-
                                 Manager manager = new Manager(ID, firstName, lastName, age, address, charge, salary, hoursavailable, email);
-
                                 AdministrationSystem administrationSystem = new AdministrationSystem( department, manager );
+
                                 administrationSystem.Show();
                                 this.Hide();
                             }
@@ -82,6 +87,7 @@ namespace MediaBazaarSystem
                             {
                                 String employeeID = reader.GetValue( 0 ).ToString();
                                 EmployeeSystem employeeSystem = new EmployeeSystem( employeeID );
+
                                 employeeSystem.Show();
                                 this.Hide();
                             }
@@ -100,20 +106,26 @@ namespace MediaBazaarSystem
             }
         }
 
+        /**
+         * Method to register a user to the system
+         */
         private void btnRegister_Click( object sender, EventArgs e )
         {
+            // Set variables
             String email = txtBoxEmail.Text;
             String password = Cryptography.Encrypt( txtBoxPassword.Text );
-
-
+                
             using( MySqlConnection connection = new MySqlConnection( @"Server = studmysql01.fhict.local; Uid = dbi437493; Database = dbi437493; Pwd = dbgroup01;" ) )
             {
+                // SQL query
                 String query = "INSERT INTO Person (email, password) VALUES (@email, @password)";
 
                 try
                 {
+                    // Open connection
                     connection.Open();
                     MySqlCommand cmd = new MySqlCommand( query, connection );
+                    // Use parameterised variables to prevent SQL-injection
                     cmd.Parameters.AddWithValue( "@email", email );
                     cmd.Parameters.AddWithValue( "@password", password );
                     cmd.ExecuteNonQuery();

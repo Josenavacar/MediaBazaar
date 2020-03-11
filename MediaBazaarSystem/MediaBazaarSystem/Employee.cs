@@ -93,7 +93,10 @@ namespace MediaBazaarSystem
 
         public override string ToString()
         {
-            return base.ToString();
+            return "First name: " + this.FirstName + " Last name: " + this.LastName + 
+                " Age: " + this.Age + " Address: " + this.Address + 
+                " Role: " + this.Role + " Salary: " + this.Salary + 
+                " Hours Available: " + this.HoursAvailable;
         }
     }
 }

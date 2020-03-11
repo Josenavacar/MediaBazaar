@@ -39,12 +39,9 @@
             this.clmnEndTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.clmnWorkDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dtpWorkSchedule = new System.Windows.Forms.DateTimePicker();
-            this.tbPageStatistics = new System.Windows.Forms.TabPage();
-            this.btnViewAllDepartments = new System.Windows.Forms.Button();
+            this.tbPageHistory = new System.Windows.Forms.TabPage();
             this.btnSearch = new System.Windows.Forms.Button();
             this.txtBoxSearch = new System.Windows.Forms.TextBox();
-            this.btnViewAllProducts = new System.Windows.Forms.Button();
-            this.btnViewAllEmployees = new System.Windows.Forms.Button();
             this.dataGridViewEmployeeStats = new System.Windows.Forms.DataGridView();
             this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -72,7 +69,7 @@
             this.tbPageHome.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picBoxLogout)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataEmpWorkSchedule)).BeginInit();
-            this.tbPageStatistics.SuspendLayout();
+            this.tbPageHistory.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewEmployeeStats)).BeginInit();
             this.tbPageProfile.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxEmployeePhoto)).BeginInit();
@@ -81,7 +78,7 @@
             // tbControlEmp
             // 
             this.tbControlEmp.Controls.Add(this.tbPageHome);
-            this.tbControlEmp.Controls.Add(this.tbPageStatistics);
+            this.tbControlEmp.Controls.Add(this.tbPageHistory);
             this.tbControlEmp.Controls.Add(this.tbPageProfile);
             this.tbControlEmp.Font = new System.Drawing.Font("Century Gothic", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tbControlEmp.Location = new System.Drawing.Point(12, 12);
@@ -173,30 +170,17 @@
             this.dtpWorkSchedule.TabIndex = 3;
             this.dtpWorkSchedule.ValueChanged += new System.EventHandler(this.dtpWorkSchedule_ValueChanged);
             // 
-            // tbPageStatistics
+            // tbPageHistory
             // 
-            this.tbPageStatistics.BackColor = System.Drawing.SystemColors.Menu;
-            this.tbPageStatistics.Controls.Add(this.btnViewAllDepartments);
-            this.tbPageStatistics.Controls.Add(this.btnSearch);
-            this.tbPageStatistics.Controls.Add(this.txtBoxSearch);
-            this.tbPageStatistics.Controls.Add(this.btnViewAllProducts);
-            this.tbPageStatistics.Controls.Add(this.btnViewAllEmployees);
-            this.tbPageStatistics.Controls.Add(this.dataGridViewEmployeeStats);
-            this.tbPageStatistics.Location = new System.Drawing.Point(4, 30);
-            this.tbPageStatistics.Name = "tbPageStatistics";
-            this.tbPageStatistics.Size = new System.Drawing.Size(870, 675);
-            this.tbPageStatistics.TabIndex = 2;
-            this.tbPageStatistics.Text = "Statistics";
-            // 
-            // btnViewAllDepartments
-            // 
-            this.btnViewAllDepartments.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.btnViewAllDepartments.Location = new System.Drawing.Point(158, 527);
-            this.btnViewAllDepartments.Name = "btnViewAllDepartments";
-            this.btnViewAllDepartments.Size = new System.Drawing.Size(496, 42);
-            this.btnViewAllDepartments.TabIndex = 8;
-            this.btnViewAllDepartments.Text = "View All Departments";
-            this.btnViewAllDepartments.UseVisualStyleBackColor = false;
+            this.tbPageHistory.BackColor = System.Drawing.SystemColors.Menu;
+            this.tbPageHistory.Controls.Add(this.btnSearch);
+            this.tbPageHistory.Controls.Add(this.txtBoxSearch);
+            this.tbPageHistory.Controls.Add(this.dataGridViewEmployeeStats);
+            this.tbPageHistory.Location = new System.Drawing.Point(4, 30);
+            this.tbPageHistory.Name = "tbPageHistory";
+            this.tbPageHistory.Size = new System.Drawing.Size(870, 675);
+            this.tbPageHistory.TabIndex = 2;
+            this.tbPageHistory.Text = "History";
             // 
             // btnSearch
             // 
@@ -215,26 +199,6 @@
             this.txtBoxSearch.Name = "txtBoxSearch";
             this.txtBoxSearch.Size = new System.Drawing.Size(595, 32);
             this.txtBoxSearch.TabIndex = 5;
-            // 
-            // btnViewAllProducts
-            // 
-            this.btnViewAllProducts.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.btnViewAllProducts.Location = new System.Drawing.Point(158, 464);
-            this.btnViewAllProducts.Name = "btnViewAllProducts";
-            this.btnViewAllProducts.Size = new System.Drawing.Size(496, 42);
-            this.btnViewAllProducts.TabIndex = 4;
-            this.btnViewAllProducts.Text = "View All Products";
-            this.btnViewAllProducts.UseVisualStyleBackColor = false;
-            // 
-            // btnViewAllEmployees
-            // 
-            this.btnViewAllEmployees.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.btnViewAllEmployees.Location = new System.Drawing.Point(158, 590);
-            this.btnViewAllEmployees.Name = "btnViewAllEmployees";
-            this.btnViewAllEmployees.Size = new System.Drawing.Size(496, 42);
-            this.btnViewAllEmployees.TabIndex = 3;
-            this.btnViewAllEmployees.Text = "View All Employees";
-            this.btnViewAllEmployees.UseVisualStyleBackColor = false;
             // 
             // dataGridViewEmployeeStats
             // 
@@ -468,8 +432,8 @@
             this.tbPageHome.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.picBoxLogout)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataEmpWorkSchedule)).EndInit();
-            this.tbPageStatistics.ResumeLayout(false);
-            this.tbPageStatistics.PerformLayout();
+            this.tbPageHistory.ResumeLayout(false);
+            this.tbPageHistory.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewEmployeeStats)).EndInit();
             this.tbPageProfile.ResumeLayout(false);
             this.tbPageProfile.PerformLayout();
@@ -483,7 +447,7 @@
         private System.Windows.Forms.TabControl tbControlEmp;
         private System.Windows.Forms.TabPage tbPageHome;
         private System.Windows.Forms.DateTimePicker dtpWorkSchedule;
-        private System.Windows.Forms.TabPage tbPageStatistics;
+        private System.Windows.Forms.TabPage tbPageHistory;
         private System.Windows.Forms.DataGridView dataGridViewEmployeeStats;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
@@ -507,11 +471,8 @@
         private System.Windows.Forms.Button btnUpdateProfile;
         private System.Windows.Forms.ListBox lbEmployeeInfo;
         private System.Windows.Forms.Label lblEmployeeName;
-        private System.Windows.Forms.Button btnViewAllDepartments;
         private System.Windows.Forms.Button btnSearch;
         private System.Windows.Forms.TextBox txtBoxSearch;
-        private System.Windows.Forms.Button btnViewAllProducts;
-        private System.Windows.Forms.Button btnViewAllEmployees;
         private System.Windows.Forms.DataGridView dataEmpWorkSchedule;
         private System.Windows.Forms.DataGridViewTextBoxColumn clmnEmployeeName;
         private System.Windows.Forms.DataGridViewTextBoxColumn clmnRole;
