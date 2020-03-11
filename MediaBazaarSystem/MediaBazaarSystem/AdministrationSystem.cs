@@ -19,7 +19,7 @@ namespace MediaBazaarSystem
         private Manager manager;
         public static bool ensure;
 
-        public AdministrationSystem( Department department, Manager manager )
+        public AdministrationSystem(Department department, Manager manager)
         {
             InitializeComponent();
 
@@ -356,6 +356,13 @@ namespace MediaBazaarSystem
         private void lbEmployees_Click(object sender, EventArgs e)
         {
             lbManagers.SelectedItem = null;
+        }
+
+        private void lblChangePwd_Click(object sender, EventArgs e)
+        {
+            ChangePassword pwd = new ChangePassword(manager, null);
+            pwd.StartPosition = FormStartPosition.CenterParent;
+            pwd.ShowDialog(this);
         }
     }
 }

@@ -55,6 +55,7 @@
             this.Column5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tbPageProfile = new System.Windows.Forms.TabPage();
+            this.lblChangePwd = new System.Windows.Forms.Label();
             this.lblAdminName = new System.Windows.Forms.Label();
             this.pictureBoxAdminPhoto = new System.Windows.Forms.PictureBox();
             this.label6 = new System.Windows.Forms.Label();
@@ -325,6 +326,7 @@
             // tbPageProfile
             // 
             this.tbPageProfile.BackColor = System.Drawing.SystemColors.Menu;
+            this.tbPageProfile.Controls.Add(this.lblChangePwd);
             this.tbPageProfile.Controls.Add(this.lblAdminName);
             this.tbPageProfile.Controls.Add(this.pictureBoxAdminPhoto);
             this.tbPageProfile.Controls.Add(this.label6);
@@ -346,6 +348,20 @@
             this.tbPageProfile.Size = new System.Drawing.Size(870, 675);
             this.tbPageProfile.TabIndex = 1;
             this.tbPageProfile.Text = "Profile";
+            // 
+            // lblChangePwd
+            // 
+            this.lblChangePwd.AutoSize = true;
+            this.lblChangePwd.BackColor = System.Drawing.SystemColors.Menu;
+            this.lblChangePwd.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.lblChangePwd.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblChangePwd.ForeColor = System.Drawing.SystemColors.HotTrack;
+            this.lblChangePwd.Location = new System.Drawing.Point(606, 614);
+            this.lblChangePwd.Name = "lblChangePwd";
+            this.lblChangePwd.Size = new System.Drawing.Size(143, 20);
+            this.lblChangePwd.TabIndex = 16;
+            this.lblChangePwd.Text = "Change Password";
+            this.lblChangePwd.Click += new System.EventHandler(this.lblChangePwd_Click);
             // 
             // lblAdminName
             // 
@@ -667,5 +683,6 @@
         private System.Windows.Forms.ListBox lbManagers;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label lblChangePwd;
     }
 }
