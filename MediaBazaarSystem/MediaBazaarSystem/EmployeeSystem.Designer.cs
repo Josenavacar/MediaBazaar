@@ -65,6 +65,7 @@
             this.txtBoxFirstName = new System.Windows.Forms.TextBox();
             this.btnUpdateProfile = new System.Windows.Forms.Button();
             this.lbEmployeeInfo = new System.Windows.Forms.ListBox();
+            this.btnChangePwd = new System.Windows.Forms.Button();
             this.tbControlEmp.SuspendLayout();
             this.tbPageHome.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picBoxLogout)).BeginInit();
@@ -263,6 +264,7 @@
             // tbPageProfile
             // 
             this.tbPageProfile.BackColor = System.Drawing.SystemColors.Menu;
+            this.tbPageProfile.Controls.Add(this.btnChangePwd);
             this.tbPageProfile.Controls.Add(this.lblEmployeeName);
             this.tbPageProfile.Controls.Add(this.pictureBoxEmployeePhoto);
             this.tbPageProfile.Controls.Add(this.label6);
@@ -418,6 +420,16 @@
             this.lbEmployeeInfo.Size = new System.Drawing.Size(330, 533);
             this.lbEmployeeInfo.TabIndex = 0;
             // 
+            // btnChangePwd
+            // 
+            this.btnChangePwd.BackColor = System.Drawing.Color.CornflowerBlue;
+            this.btnChangePwd.Location = new System.Drawing.Point(526, 613);
+            this.btnChangePwd.Name = "btnChangePwd";
+            this.btnChangePwd.Size = new System.Drawing.Size(297, 44);
+            this.btnChangePwd.TabIndex = 18;
+            this.btnChangePwd.Text = "Change Password";
+            this.btnChangePwd.UseVisualStyleBackColor = false;
+            // 
             // EmployeeSystem
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 17F);
@@ -480,5 +492,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn clmnEndTime;
         private System.Windows.Forms.DataGridViewTextBoxColumn clmnWorkDate;
         private System.Windows.Forms.PictureBox picBoxLogout;
+        private System.Windows.Forms.Button btnChangePwd;
     }
 }

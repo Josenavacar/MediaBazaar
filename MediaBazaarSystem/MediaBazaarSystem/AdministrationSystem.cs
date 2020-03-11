@@ -14,7 +14,7 @@ namespace MediaBazaarSystem
 {
     public partial class AdministrationSystem : Form
     {
-        AssignEmployeeSystem assignEmployeeForm = new AssignEmployeeSystem();
+        AssignEmployeeSystem assignEmployeeForm;
         private Department department;
         private Manager manager;
         public static bool ensure;
@@ -79,54 +79,54 @@ namespace MediaBazaarSystem
                 dataAdminWorkSchedule.Rows.Add( row );
             }
 
-//            reader.Close();
+            reader.Close();
 
-//            //Employee related
-//            String sql2 = "SELECT * FROM person WHERE DepartmentID = @DepartmentID";
-//            MySqlCommand cmd2 = new MySqlCommand(sql2, connection);
-//            cmd2.Parameters.Add("DepartmentID", MySqlDbType.VarChar).Value = department.DepartmentID;
+            //            //Employee related
+            //            String sql2 = "SELECT * FROM person WHERE DepartmentID = @DepartmentID";
+            //            MySqlCommand cmd2 = new MySqlCommand(sql2, connection);
+            //            cmd2.Parameters.Add("DepartmentID", MySqlDbType.VarChar).Value = department.DepartmentID;
 
-//            reader = cmd2.ExecuteReader();
-//            while (reader.Read())
-//            {
-//                int role = (int)reader.GetValue(11);
-//                if ( role == 1 )
-//                {
-//                    int ID = (int)reader.GetValue(0);
-//                    String firstName = reader.GetString(1);
-//                    String lastName = reader.GetString(2);
-//                    int age = (int)reader.GetValue(3);
-//                    String address = reader.GetString(4);
-//                    String email = reader.GetString(5);
-//                    String charge = "Manager";
-//                    double salary = reader.GetDouble(7);
-//                    int hoursavailable = (int)reader.GetValue(9);
+            //            reader = cmd2.ExecuteReader();
+            //            while (reader.Read())
+            //            {
+            //                int role = (int)reader.GetValue(11);
+            //                if ( role == 1 )
+            //                {
+            //                    int ID = (int)reader.GetValue(0);
+            //                    String firstName = reader.GetString(1);
+            //                    String lastName = reader.GetString(2);
+            //                    int age = (int)reader.GetValue(3);
+            //                    String address = reader.GetString(4);
+            //                    String email = reader.GetString(5);
+            //                    String charge = "Manager";
+            //                    double salary = reader.GetDouble(7);
+            //                    int hoursavailable = (int)reader.GetValue(9);
 
-//                    Manager man = new Manager(ID, firstName, lastName, age, address, charge, salary, hoursavailable, email);
-//                    department.AddManager(man);
+            //                    Manager man = new Manager(ID, firstName, lastName, age, address, charge, salary, hoursavailable, email);
+            //                    department.AddManager(man);
 
-//                    idManage = ID;
-//                }
+            //                    idManage = ID;
+            //                }
 
-//                else if(role == 2)
-//                {
-//                    int ID = (int)reader.GetValue(0);
-//                    String firstName = reader.GetString(1);
-//                    String lastName = reader.GetString(2);
-//                    int age = (int)reader.GetValue(3);
-//                    String address = reader.GetString(4);
-//                    String email = reader.GetString(5);
-//                    String charge = "Employee";
-//                    double salary = reader.GetDouble(7);
-//                    int hoursavailable = (int)reader.GetValue(9);
+            //                else if(role == 2)
+            //                {
+            //                    int ID = (int)reader.GetValue(0);
+            //                    String firstName = reader.GetString(1);
+            //                    String lastName = reader.GetString(2);
+            //                    int age = (int)reader.GetValue(3);
+            //                    String address = reader.GetString(4);
+            //                    String email = reader.GetString(5);
+            //                    String charge = "Employee";
+            //                    double salary = reader.GetDouble(7);
+            //                    int hoursavailable = (int)reader.GetValue(9);
 
-//                    Employee emp = new Employee(ID, firstName, lastName, age, address, charge, salary, hoursavailable, email);
-//                    department.AddEmployee(emp);
+            //                    Employee emp = new Employee(ID, firstName, lastName, age, address, charge, salary, hoursavailable, email);
+            //                    department.AddEmployee(emp);
 
-//                    idManage = ID;
-//                }
-//            }
-//            reader.Close();
+            //                    idManage = ID;
+            //                }
+            //            }
+            //            reader.Close();
 
 
             // Disable timer
@@ -407,7 +407,7 @@ namespace MediaBazaarSystem
             lbManagers.SelectedItem = null;
         }
 
-        private void lblChangePwd_Click( object sender, EventArgs e )
+        private void btnChangePwd_Click( object sender, EventArgs e )
         {
             ChangePassword pwd = new ChangePassword( manager, null );
             pwd.StartPosition = FormStartPosition.CenterParent;
@@ -491,7 +491,7 @@ namespace MediaBazaarSystem
             // Connect to DB
             string connectionString = @"Server = studmysql01.fhict.local; Uid = dbi437493; Database = dbi437493; Pwd = dbgroup01;";
             // SQL Query
-            string sql = "SELECT Person.FirstName, Person.LastName, Person.Age, Person.Address, Person.Salary, Person.HoursWorked, Person.HoursAvailable, Role.Name, Department.Name FROM Person " +
+            string sql = "SELECT Person.Id, Person.FirstName, Person.LastName, Person.Age, Person.Address, Person.Salary, Person.HoursWorked, Person.HoursAvailable, Person.Email, Role.Name, Department.Name FROM Person " +
                 "INNER JOIN Role ON Person.RoleId = Role.Id " +
                 "INNER JOIN Department ON Person.DepartmentID = Department.Id";
             // Start mysql objects
@@ -505,7 +505,17 @@ namespace MediaBazaarSystem
             while( reader.Read() )
             {
                 // Create employee object
-                Employee employee = new Employee( reader.GetValue( 0 ).ToString(), reader.GetValue( 1 ).ToString(), Convert.ToInt32(reader.GetValue( 2 )), reader.GetValue( 3 ).ToString(), reader.GetValue( 7 ).ToString(), Convert.ToDouble(reader.GetValue( 4 )), Convert.ToInt32(reader.GetValue( 6 )) );
+                Employee employee = new Employee( 
+                    Convert.ToInt32(reader.GetValue( 0 ).ToString()), //ID
+                    reader.GetValue( 1 ).ToString(), // First Name
+                    reader.GetValue( 2 ).ToString(), // Lastname
+                    Convert.ToInt32(reader.GetValue( 3 )), // Age
+                    reader.GetValue( 4 ).ToString(),  //Address
+                    reader.GetValue( 9 ).ToString(),  //Role
+                    Convert.ToDouble(reader.GetValue( 5 )), //Salary
+                    Convert.ToInt32(reader.GetValue( 7 ).ToString()), // Hours available
+                    reader.GetValue( 8 ).ToString() // Email
+                    );
                 department.AddEmployee(employee);
             }
 
