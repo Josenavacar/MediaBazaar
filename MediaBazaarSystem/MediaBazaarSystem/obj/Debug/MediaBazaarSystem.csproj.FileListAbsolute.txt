@@ -92,3 +92,4 @@ C:\Users\Jose\Desktop\Backup\mediabazaar\MediaBazaarSystem\MediaBazaarSystem\bin
 C:\Users\Jose\Desktop\Backup\mediabazaar\MediaBazaarSystem\MediaBazaarSystem\bin\Debug\System.Numerics.Vectors.xml
 C:\Users\Jose\Desktop\Backup\mediabazaar\MediaBazaarSystem\MediaBazaarSystem\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
 C:\Users\Jose\Desktop\Backup\mediabazaar\MediaBazaarSystem\MediaBazaarSystem\obj\Debug\MediaBazaarSystem.csproj.CopyComplete
+C:\Users\Jose\Desktop\Semester 2\ProjectGIT\mediabazaar\MediaBazaarSystem\MediaBazaarSystem\obj\Debug\MediaBazaarSystem.DeleteForm.resources

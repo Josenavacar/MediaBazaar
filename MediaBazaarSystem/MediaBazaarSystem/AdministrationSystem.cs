@@ -15,8 +15,9 @@ namespace MediaBazaarSystem
     public partial class AdministrationSystem : Form
     {
         AssignEmployeeSystem assignEmployeeForm = new AssignEmployeeSystem();
-        Department department;
-        Manager manager;
+        private Department department;
+        private Manager manager;
+        public static bool ensure;
 
         public AdministrationSystem( Department department, Manager manager )
         {
@@ -109,38 +110,50 @@ namespace MediaBazaarSystem
 
         private void btnAddEmployee_Click(object sender, EventArgs e)
         {
-            Employee_Add form1 = new Employee_Add(department, null);
+            Employee_Add form1 = new Employee_Add(department, null, null);
             form1.Show();
         }
 
         private void btnViewEmployeeDetails_Click(object sender, EventArgs e)
         {
-            Employee emp = SearchEmp();
-            if (emp != null)
+            if(lbEmployees.SelectedItem != null)
             {
-                ViewEmployee form1 = new ViewEmployee(emp);
-                form1.Show();
+                Employee emp = SearchEmp();
+                if (emp != null)
+                {
+                    ViewEmployee form1 = new ViewEmployee(emp, null);
+                    form1.Show();
+                }
+            }
+            else if(lbManagers.SelectedItem != null)
+            {
+                Manager man = SearchMan();
+                if(man != null)
+                {
+                    ViewEmployee form1 = new ViewEmployee(null, man);
+                    form1.Show();
+                }
             }
         }
 
         private void btnUpdateEmployee_Click(object sender, EventArgs e)
         {
-            if (lbEmployees.SelectedIndex != null)
+            if (lbEmployees.SelectedItem != null)
             {
                 Employee emp = SearchEmp();
                 if (emp != null)
                 {
-                    Employee_Add form1 = new Employee_Add(department, emp);
+                    Employee_Add form1 = new Employee_Add(department, emp, null);
                     form1.Show();
                 }
             }
 
-            else if(lbManagers.SelectedIndex != null)
+            else if(lbManagers.SelectedItem != null)
             {
                 Manager man = SearchMan();
                 if (man != null)
                 {
-                    Employee_Add form1 = new Employee_Add(department, man);
+                    Employee_Add form1 = new Employee_Add(department, null, man);
                     form1.Show();
                 }
             }
@@ -185,12 +198,57 @@ namespace MediaBazaarSystem
 
         private void btnFireEmployee_Click(object sender, EventArgs e)
         {
-            //Employee fired = SearchEmp();
-            //if (fired != null)
-            //{
-            //    dep.DeleteEmployee(fired);
-            //    MessageBox.Show("Employee Fired.");
-            //}
+            string connString = @"Server = studmysql01.fhict.local; Uid = dbi437493; Database = dbi437493; Pwd = dbgroup01;";
+            MySqlConnection conn = new MySqlConnection(connString);
+            conn.Open();
+
+            MySqlCommand cmd = conn.CreateCommand();
+            
+
+            if (lbEmployees.SelectedItem != null)
+            {
+                DeleteForm check = new DeleteForm(ensure);
+                check.StartPosition = FormStartPosition.CenterParent;
+                check.ShowDialog(this);
+
+                if(ensure)
+                {
+                    Employee fired = SearchEmp();
+                    if (fired != null)
+                    {
+                        cmd.CommandText = "DELETE FROM person WHERE Id = @Id";
+                        cmd.Parameters.AddWithValue("@Id", fired.dbID);
+                        cmd.ExecuteNonQuery();
+
+                        department.DeleteEmployee(fired);
+                    }
+
+                    ensure = false;
+                }
+            }
+
+            else if (lbManagers.SelectedItem != null)
+            {
+                DeleteForm check = new DeleteForm(ensure);
+                check.StartPosition = FormStartPosition.CenterParent;
+                check.ShowDialog(this);
+
+                if (ensure)
+                {
+                    Manager fired = SearchMan();
+                    if (fired != null)
+                    {
+                        cmd.CommandText = "DELETE FROM person WHERE Id = @Id";
+                        cmd.Parameters.AddWithValue("@Id", fired.dbID);
+                        cmd.ExecuteNonQuery();
+
+                        department.DeleteManager(fired);
+                    }
+
+                    ensure = false;
+                }
+            }
+            
         }
 
         private void Refresh_Tick(object sender, EventArgs e)
@@ -206,10 +264,18 @@ namespace MediaBazaarSystem
                 lbEmployees.Items.Add(outpEmp);
             }
 
-            if (lbEmployees.Items.Count > 0)
+            try
             {
-                lbEmployees.SelectedIndex = indexEmp;
+                if (lbEmployees.Items.Count > 0)
+                {
+                    lbEmployees.SelectedIndex = indexEmp;
+                }
             }
+            catch(Exception ex)
+            {
+                lbEmployees.SelectedItem = null;
+            }
+            
 
             //Managers
             int indexMan = lbManagers.SelectedIndex;
@@ -222,9 +288,16 @@ namespace MediaBazaarSystem
                 lbManagers.Items.Add(outpMan);
             }
 
-            if (lbManagers.Items.Count > 0)
+            try
             {
-                lbManagers.SelectedIndex = indexMan;
+                if (lbManagers.Items.Count > 0)
+                {
+                    lbManagers.SelectedIndex = indexMan;
+                }
+            }
+            catch(Exception ex)
+            {
+                lbManagers.SelectedItem = null;
             }
         }
 
@@ -273,6 +346,16 @@ namespace MediaBazaarSystem
                     dataAdminWorkSchedule.Rows.Add( row );
                 }
             }
+        }
+
+        private void lbManagers_Click(object sender, EventArgs e)
+        {
+            lbEmployees.SelectedItem = null;
+        }
+
+        private void lbEmployees_Click(object sender, EventArgs e)
+        {
+            lbManagers.SelectedItem = null;
         }
     }
 }

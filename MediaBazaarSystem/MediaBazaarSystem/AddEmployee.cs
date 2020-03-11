@@ -16,11 +16,13 @@ namespace MediaBazaarSystem
     {
         Department department;
         Employee employee;
-        public Employee_Add(Department dep, Employee emp)
+        Manager manager;
+        public Employee_Add(Department dep, Employee emp, Manager man)
         {
             InitializeComponent();
             this.department = dep;
             this.employee = emp;
+            this.manager = man;
 
             if(emp != null)
             {
@@ -32,6 +34,19 @@ namespace MediaBazaarSystem
                 txtBoxSalary.Text = emp.Salary.ToString();
                 txtBoxHoursAvailable.Text = emp.HoursAvailable.ToString();
                 txtBoxEmail.Text = emp.Email.ToString();
+
+                btnAddEmployee.Text = "Edit";
+            }
+            else if(man != null)
+            {
+                txtBoxFirstName.Text = manager.FirstName;
+                txtBoxLastName.Text = manager.LastName;
+                numAge.Value = manager.Age;
+                tbAddress.Text = manager.Address;
+                comBoxPosition.SelectedItem = manager.Role;
+                txtBoxSalary.Text = manager.Salary.ToString();
+                txtBoxHoursAvailable.Text = manager.HoursAvailable.ToString();
+                txtBoxEmail.Text = manager.Email.ToString();
 
                 btnAddEmployee.Text = "Edit";
             }

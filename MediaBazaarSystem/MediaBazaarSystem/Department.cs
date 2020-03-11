@@ -41,6 +41,10 @@ namespace MediaBazaarSystem
         {
             employees.Remove(employee);
         }
+        public void DeleteManager(Manager manager)
+        {
+            managers.Remove(manager);
+        }
 
         public void AddManager(Manager manager)
         {

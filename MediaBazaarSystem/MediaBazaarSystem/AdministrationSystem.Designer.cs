@@ -71,6 +71,8 @@
             this.btnUpdateProfile = new System.Windows.Forms.Button();
             this.lbEmployeeInfo = new System.Windows.Forms.ListBox();
             this.tbPageEmpManagement = new System.Windows.Forms.TabPage();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
             this.lbManagers = new System.Windows.Forms.ListBox();
             this.btnViewEmployeeDetails = new System.Windows.Forms.Button();
             this.btnAddEmployee = new System.Windows.Forms.Button();
@@ -78,8 +80,6 @@
             this.lbEmployees = new System.Windows.Forms.ListBox();
             this.btnFireEmployee = new System.Windows.Forms.Button();
             this.Refresh = new System.Windows.Forms.Timer(this.components);
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
             this.tbControlAdmin.SuspendLayout();
             this.tbPageHome.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picBoxLogout)).BeginInit();
@@ -497,6 +497,24 @@
             this.tbPageEmpManagement.TabIndex = 3;
             this.tbPageEmpManagement.Text = "Employee Management";
             // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(434, 18);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(78, 19);
+            this.label2.TabIndex = 10;
+            this.label2.Text = "Managers";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(15, 18);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(83, 19);
+            this.label1.TabIndex = 9;
+            this.label1.Text = "Employees";
+            // 
             // lbManagers
             // 
             this.lbManagers.BackColor = System.Drawing.Color.WhiteSmoke;
@@ -505,8 +523,9 @@
             this.lbManagers.ItemHeight = 21;
             this.lbManagers.Location = new System.Drawing.Point(438, 40);
             this.lbManagers.Name = "lbManagers";
-            this.lbManagers.Size = new System.Drawing.Size(390, 424);
+            this.lbManagers.Size = new System.Drawing.Size(412, 424);
             this.lbManagers.TabIndex = 8;
+            this.lbManagers.Click += new System.EventHandler(this.lbManagers_Click);
             // 
             // btnViewEmployeeDetails
             // 
@@ -515,7 +534,7 @@
             this.btnViewEmployeeDetails.Name = "btnViewEmployeeDetails";
             this.btnViewEmployeeDetails.Size = new System.Drawing.Size(211, 48);
             this.btnViewEmployeeDetails.TabIndex = 7;
-            this.btnViewEmployeeDetails.Text = "View Employee Details";
+            this.btnViewEmployeeDetails.Text = "View Details";
             this.btnViewEmployeeDetails.UseVisualStyleBackColor = false;
             this.btnViewEmployeeDetails.Click += new System.EventHandler(this.btnViewEmployeeDetails_Click);
             // 
@@ -526,7 +545,7 @@
             this.btnAddEmployee.Name = "btnAddEmployee";
             this.btnAddEmployee.Size = new System.Drawing.Size(167, 48);
             this.btnAddEmployee.TabIndex = 6;
-            this.btnAddEmployee.Text = "Add Employee";
+            this.btnAddEmployee.Text = "Add";
             this.btnAddEmployee.UseVisualStyleBackColor = false;
             this.btnAddEmployee.Click += new System.EventHandler(this.btnAddEmployee_Click);
             // 
@@ -537,7 +556,7 @@
             this.btnUpdateEmployee.Name = "btnUpdateEmployee";
             this.btnUpdateEmployee.Size = new System.Drawing.Size(182, 48);
             this.btnUpdateEmployee.TabIndex = 5;
-            this.btnUpdateEmployee.Text = "Update Employee";
+            this.btnUpdateEmployee.Text = "Update";
             this.btnUpdateEmployee.UseVisualStyleBackColor = false;
             this.btnUpdateEmployee.Click += new System.EventHandler(this.btnUpdateEmployee_Click);
             // 
@@ -551,6 +570,7 @@
             this.lbEmployees.Name = "lbEmployees";
             this.lbEmployees.Size = new System.Drawing.Size(390, 424);
             this.lbEmployees.TabIndex = 4;
+            this.lbEmployees.Click += new System.EventHandler(this.lbEmployees_Click);
             // 
             // btnFireEmployee
             // 
@@ -559,7 +579,7 @@
             this.btnFireEmployee.Name = "btnFireEmployee";
             this.btnFireEmployee.Size = new System.Drawing.Size(162, 48);
             this.btnFireEmployee.TabIndex = 3;
-            this.btnFireEmployee.Text = "Delete Employee";
+            this.btnFireEmployee.Text = "Delete";
             this.btnFireEmployee.UseVisualStyleBackColor = false;
             this.btnFireEmployee.Click += new System.EventHandler(this.btnFireEmployee_Click);
             // 
@@ -568,24 +588,6 @@
             this.Refresh.Enabled = true;
             this.Refresh.Interval = 1500;
             this.Refresh.Tick += new System.EventHandler(this.Refresh_Tick);
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(15, 18);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(83, 19);
-            this.label1.TabIndex = 9;
-            this.label1.Text = "Employees";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(434, 18);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(78, 19);
-            this.label2.TabIndex = 10;
-            this.label2.Text = "Managers";
             // 
             // AdministrationSystem
             // 
