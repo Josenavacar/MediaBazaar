@@ -31,7 +31,6 @@ namespace MediaBazaarSystem
             lblAdminName.Text += " " + manager.FirstName + " " + manager.LastName;
             // Enable timer
             updateTimer.Enabled = true;
-            updateTimer.Interval = 1000;
             this.GetStatistics();
         }
 
@@ -80,10 +79,6 @@ namespace MediaBazaarSystem
 
         private void GetStatistics()
         {
-            if( tbControlAdmin.Contains( tbPageStatistics ) )
-            {
-
-            }
         }
 
         private void btnAddEmployee_Click(object sender, EventArgs e)
@@ -281,24 +276,24 @@ namespace MediaBazaarSystem
          */
         private void btnViewAllDepartments_Click( object sender, EventArgs e )
         {
-            lBoxStatistics.Items.Clear();
-            // Connect to DB
-            string connectionString = @"Server = studmysql01.fhict.local; Uid = dbi437493; Database = dbi437493; Pwd = dbgroup01;";
-            // SQL Query
-            string sql = "SELECT Name FROM Department ";
-            // Start mysql objects
-            MySqlConnection connection = new MySqlConnection( connectionString );
-            MySqlCommand cmd = new MySqlCommand( sql, connection );
-            // Open connection
-            connection.Open();
-            MySqlDataReader reader = cmd.ExecuteReader();
+            //lBoxStatistics.Items.Clear();
+            //// Connect to DB
+            //string connectionString = @"Server = studmysql01.fhict.local; Uid = dbi437493; Database = dbi437493; Pwd = dbgroup01;";
+            //// SQL Query
+            //string sql = "SELECT Name FROM Department ";
+            //// Start mysql objects
+            //MySqlConnection connection = new MySqlConnection( connectionString );
+            //MySqlCommand cmd = new MySqlCommand( sql, connection );
+            //// Open connection
+            //connection.Open();
+            //MySqlDataReader reader = cmd.ExecuteReader();
 
-            // Get the data
-            while( reader.Read() )
-            {
-                department = new Department( reader.GetString( 0 ) );
-                lBoxStatistics.Items.Add( department.ToString() );
-            }
+            //// Get the data
+            //while( reader.Read() )
+            //{
+            //    department = new Department( reader.GetString( 0 ) );
+            //    lBoxStatistics.Items.Add( department.ToString() );
+            //}
         }
 
         /**
@@ -306,7 +301,7 @@ namespace MediaBazaarSystem
          */
         private void btnViewAllEmployees_Click( object sender, EventArgs e )
         {
-            lBoxStatistics.Items.Clear();
+            dataStatistics.Rows.Clear();
             // Connect to DB
             string connectionString = @"Server = studmysql01.fhict.local; Uid = dbi437493; Database = dbi437493; Pwd = dbgroup01;";
             // SQL Query
@@ -328,10 +323,18 @@ namespace MediaBazaarSystem
                 department.AddEmployee(employee);
             }
 
-            // Add employees to the listbox
+            // Add employees to the data table
             foreach(Employee emp in department.GetEmployees())
             {
-                lBoxStatistics.Items.Add( emp );
+                DataGridViewRow row = ( DataGridViewRow ) dataStatistics.Rows[ 0 ].Clone();
+                //dataStatistics.Columns[ "clmnWorkDate" ].DefaultCellStyle.BackColor = Color.LightSteelBlue;
+                row.Cells[ 0 ].Value = emp.FirstName;// First Name
+                row.Cells[ 1 ].Value = emp.Role;// Name (Role)
+                row.Cells[ 2 ].Value = emp.Salary;// Start Time
+                row.Cells[ 3 ].Value = emp.HoursAvailable;// End Time
+                row.Cells[ 4 ].Value = emp.Department;// Date
+                row.Cells[ 5 ].Value = emp.Age;// Date
+                dataStatistics.Rows.Add( row );
             }
         }
 
@@ -345,21 +348,21 @@ namespace MediaBazaarSystem
          */
         private void btnSearch_Click( object sender, EventArgs e )
         {
-            lBoxStatistics.Items.Clear();
-            // Set textbox characters to lowercase
-            txtBoxSearch.CharacterCasing = CharacterCasing.Lower;
-            String searchedValue = txtBoxSearch.Text;
+            //lBoxStatistics.Items.Clear();
+            //// Set textbox characters to lowercase
+            //txtBoxSearch.CharacterCasing = CharacterCasing.Lower;
+            //String searchedValue = txtBoxSearch.Text;
 
-            foreach( Employee employee in department.GetEmployees() )
-            {
-                // Check if employee has first name with the value in search textbox
-                // (Remember this info is coming from the database and comparing it to the searched value)
-                // Return employee in listbox
-                if( searchedValue.Contains( employee.FirstName.ToLower() ) ) // ToLower is lowercase
-                {
-                    lBoxStatistics.Items.Add( employee.ToString() );
-                }
-            }
+            //foreach( Employee employee in department.GetEmployees() )
+            //{
+            //    // Check if employee has first name with the value in search textbox
+            //    // (Remember this info is coming from the database and comparing it to the searched value)
+            //    // Return employee in listbox
+            //    if( searchedValue.Contains( employee.FirstName.ToLower() ) ) // ToLower is lowercase
+            //    {
+            //        lBoxStatistics.Items.Add( employee.ToString() );
+            //    }
+            //}
         }
     }
 }
