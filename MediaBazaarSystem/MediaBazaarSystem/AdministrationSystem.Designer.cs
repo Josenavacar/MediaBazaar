@@ -40,11 +40,6 @@
             this.lblAssignEmployee = new System.Windows.Forms.Label();
             this.picBoxLogout = new System.Windows.Forms.PictureBox();
             this.dataAdminWorkSchedule = new System.Windows.Forms.DataGridView();
-            this.clmnEmployeeName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.clmnRole = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.clmnStartTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.clmnEndTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.clmnWorkDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dtpWorkSchedule = new System.Windows.Forms.DateTimePicker();
             this.tbPageStatistics = new System.Windows.Forms.TabPage();
             this.dataStatistics = new System.Windows.Forms.DataGridView();
@@ -91,6 +86,11 @@
             this.btnFireEmployee = new System.Windows.Forms.Button();
             this.Refresh = new System.Windows.Forms.Timer(this.components);
             this.updateTimer = new System.Windows.Forms.Timer(this.components);
+            this.clmnEmployeeName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clmnRole = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clmnStartTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clmnEndTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clmnWorkDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tbControlAdmin.SuspendLayout();
             this.tbPageHome.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picBoxLogout)).BeginInit();
@@ -192,7 +192,7 @@
             // 
             this.lblAssignEmployee.AutoSize = true;
             this.lblAssignEmployee.Font = new System.Drawing.Font("Century Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblAssignEmployee.Location = new System.Drawing.Point(91, 89);
+            this.lblAssignEmployee.Location = new System.Drawing.Point(24, 88);
             this.lblAssignEmployee.Name = "lblAssignEmployee";
             this.lblAssignEmployee.Size = new System.Drawing.Size(538, 22);
             this.lblAssignEmployee.TabIndex = 8;
@@ -219,56 +219,16 @@
             this.clmnStartTime,
             this.clmnEndTime,
             this.clmnWorkDate});
-            this.dataAdminWorkSchedule.Location = new System.Drawing.Point(95, 125);
+            this.dataAdminWorkSchedule.Location = new System.Drawing.Point(28, 125);
             this.dataAdminWorkSchedule.MultiSelect = false;
             this.dataAdminWorkSchedule.Name = "dataAdminWorkSchedule";
             this.dataAdminWorkSchedule.ReadOnly = true;
             this.dataAdminWorkSchedule.RowHeadersWidth = 51;
             this.dataAdminWorkSchedule.RowTemplate.Height = 24;
             this.dataAdminWorkSchedule.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataAdminWorkSchedule.Size = new System.Drawing.Size(680, 412);
+            this.dataAdminWorkSchedule.Size = new System.Drawing.Size(809, 412);
             this.dataAdminWorkSchedule.TabIndex = 5;
             this.dataAdminWorkSchedule.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataAdminWorkSchedule_CellDoubleClick);
-            // 
-            // clmnEmployeeName
-            // 
-            this.clmnEmployeeName.HeaderText = "Employee";
-            this.clmnEmployeeName.MinimumWidth = 6;
-            this.clmnEmployeeName.Name = "clmnEmployeeName";
-            this.clmnEmployeeName.ReadOnly = true;
-            this.clmnEmployeeName.Width = 125;
-            // 
-            // clmnRole
-            // 
-            this.clmnRole.HeaderText = "Role";
-            this.clmnRole.MinimumWidth = 6;
-            this.clmnRole.Name = "clmnRole";
-            this.clmnRole.ReadOnly = true;
-            this.clmnRole.Width = 125;
-            // 
-            // clmnStartTime
-            // 
-            this.clmnStartTime.HeaderText = "Start Time";
-            this.clmnStartTime.MinimumWidth = 6;
-            this.clmnStartTime.Name = "clmnStartTime";
-            this.clmnStartTime.ReadOnly = true;
-            this.clmnStartTime.Width = 125;
-            // 
-            // clmnEndTime
-            // 
-            this.clmnEndTime.HeaderText = "End Time";
-            this.clmnEndTime.MinimumWidth = 6;
-            this.clmnEndTime.Name = "clmnEndTime";
-            this.clmnEndTime.ReadOnly = true;
-            this.clmnEndTime.Width = 125;
-            // 
-            // clmnWorkDate
-            // 
-            this.clmnWorkDate.HeaderText = "Date";
-            this.clmnWorkDate.MinimumWidth = 6;
-            this.clmnWorkDate.Name = "clmnWorkDate";
-            this.clmnWorkDate.ReadOnly = true;
-            this.clmnWorkDate.Width = 125;
             // 
             // dtpWorkSchedule
             // 
@@ -737,6 +697,46 @@
             // 
             this.updateTimer.Tick += new System.EventHandler(this.updateTimer_Tick);
             // 
+            // clmnEmployeeName
+            // 
+            this.clmnEmployeeName.HeaderText = "Employee";
+            this.clmnEmployeeName.MinimumWidth = 6;
+            this.clmnEmployeeName.Name = "clmnEmployeeName";
+            this.clmnEmployeeName.ReadOnly = true;
+            this.clmnEmployeeName.Width = 125;
+            // 
+            // clmnRole
+            // 
+            this.clmnRole.HeaderText = "Role";
+            this.clmnRole.MinimumWidth = 6;
+            this.clmnRole.Name = "clmnRole";
+            this.clmnRole.ReadOnly = true;
+            this.clmnRole.Width = 125;
+            // 
+            // clmnStartTime
+            // 
+            this.clmnStartTime.HeaderText = "Start Time";
+            this.clmnStartTime.MinimumWidth = 6;
+            this.clmnStartTime.Name = "clmnStartTime";
+            this.clmnStartTime.ReadOnly = true;
+            this.clmnStartTime.Width = 125;
+            // 
+            // clmnEndTime
+            // 
+            this.clmnEndTime.HeaderText = "End Time";
+            this.clmnEndTime.MinimumWidth = 6;
+            this.clmnEndTime.Name = "clmnEndTime";
+            this.clmnEndTime.ReadOnly = true;
+            this.clmnEndTime.Width = 125;
+            // 
+            // clmnWorkDate
+            // 
+            this.clmnWorkDate.HeaderText = "Date";
+            this.clmnWorkDate.MinimumWidth = 6;
+            this.clmnWorkDate.Name = "clmnWorkDate";
+            this.clmnWorkDate.ReadOnly = true;
+            this.clmnWorkDate.Width = 255;
+            // 
             // AdministrationSystem
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 17F);
@@ -801,11 +801,6 @@
         private System.Windows.Forms.Button btnViewAllEmployees;
         private System.Windows.Forms.Button btnViewEmployeeDetails;
         private System.Windows.Forms.DataGridView dataAdminWorkSchedule;
-        private System.Windows.Forms.DataGridViewTextBoxColumn clmnEmployeeName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn clmnRole;
-        private System.Windows.Forms.DataGridViewTextBoxColumn clmnStartTime;
-        private System.Windows.Forms.DataGridViewTextBoxColumn clmnEndTime;
-        private System.Windows.Forms.DataGridViewTextBoxColumn clmnWorkDate;
         private System.Windows.Forms.PictureBox picBoxLogout;
         private System.Windows.Forms.Timer Refresh;
         private System.Windows.Forms.ListBox lbManagers;
@@ -830,5 +825,10 @@
         private System.Windows.Forms.Button btnUndoEmpSelection;
         private System.Windows.Forms.GroupBox grpBoxManagers;
         private System.Windows.Forms.Button btnUndoManSelection;
+        private System.Windows.Forms.DataGridViewTextBoxColumn clmnEmployeeName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn clmnRole;
+        private System.Windows.Forms.DataGridViewTextBoxColumn clmnStartTime;
+        private System.Windows.Forms.DataGridViewTextBoxColumn clmnEndTime;
+        private System.Windows.Forms.DataGridViewTextBoxColumn clmnWorkDate;
     }
 }

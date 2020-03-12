@@ -72,9 +72,10 @@ namespace MediaBazaarSystem
             Salary = salary;
             HoursAvailable = hoursAvailable;
             Email = email;
+
         }
 
-        public void editEmployee(String firstName, String lastName, int age, String address, String role, double salary, int hoursAvailable, String email)
+        public void EditEmployee(String firstName, String lastName, int age, String address, String role, double salary, int hoursAvailable, String email)
         {
             FirstName = firstName;
             LastName = lastName;

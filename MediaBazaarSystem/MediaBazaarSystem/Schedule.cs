@@ -6,13 +6,12 @@ using System.Threading.Tasks;
 
 namespace MediaBazaarSystem
 {
-    public class Schedule
+    public class Schedule : Staff
     {
         String startTime;
         String endTime;
         String workDate;
         String shifts;
-        private List<Schedule> schedules;
 
         public String FirstName
         {
@@ -46,7 +45,6 @@ namespace MediaBazaarSystem
 
         public Schedule(String firstName, String role, DateTime startTime, DateTime endTime, DateTime workDate)
         {
-            schedules = new List<Schedule>();
             this.FirstName = firstName;
             this.Role = role;
             this.StartTime = startTime;
@@ -56,17 +54,9 @@ namespace MediaBazaarSystem
 
         public override string ToString()
         {
-            return this.FirstName + this.Role + this.StartTime + this.EndTime + this.WorkDate;
+            return this.FirstName + " " + this.Role + " " + this.StartTime + " " + this.EndTime + " " + this.WorkDate;
         }
 
-        public void AddSchedule( Schedule schedule )
-        {
-            schedules.Add( schedule );
-        }
 
-        public List<Schedule> GetSchedules()
-        {
-            return this.schedules;
-        }
     }
 }

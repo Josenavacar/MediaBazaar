@@ -18,7 +18,7 @@ namespace MediaBazaarSystem
         private Department department;
         private Manager manager;
         private Schedule schedule;
-        private Staff staff;
+        private Employee emp;
         public static bool ensure;
         int idManage;
         private String employeeName;
@@ -36,6 +36,7 @@ namespace MediaBazaarSystem
             // Enable timer
             updateTimer.Enabled = true;
             this.GetStatistics();
+            this.UpdateScheduleAndEmployeeManagement();
         }
 
         /**
@@ -82,11 +83,11 @@ namespace MediaBazaarSystem
                 row.Cells[ 1 ].Value = role; // Name (Role)
                 row.Cells[ 2 ].Value = workStartTime.ToString( "hh:mm tt" );// Start Time
                 row.Cells[ 3 ].Value = workEndTime.ToString( "hh:mm tt" ); // End Time
-                row.Cells[ 4 ].Value = workDate; // Work Date
+                row.Cells[ 4 ].Value = convertedWorkDate.ToString( "dddd, dd MMMM yyyy" ); // Work Date
                 dataAdminWorkSchedule.Rows.Add( row );
 
                 schedule = new Schedule( firstName, role, workStartTime, workEndTime, convertedWorkDate );
-                schedule.AddSchedule( schedule );
+                department.AddSchedule( schedule );
             }
 
             reader.Close();
@@ -120,7 +121,6 @@ namespace MediaBazaarSystem
 
                     idManage = ID;
                 }
-
                 else if( role == 2 )
                 {
                     int ID = ( int ) reader.GetValue( 0 );
@@ -132,7 +132,7 @@ namespace MediaBazaarSystem
                     String charge = "Employee";
                     double salary = reader.GetDouble( 7 );
                     int hoursavailable = ( int ) reader.GetValue( 9 );
-                    Employee emp = new Employee( ID, firstName, lastName, age, address, charge, salary, hoursavailable, email );
+                    emp = new Employee( ID, firstName, lastName, age, address, charge, salary, hoursavailable, email );
 
                     if(department.GetEmployee(firstName, lastName) == null)
                     {
@@ -146,7 +146,7 @@ namespace MediaBazaarSystem
 
             // Disable timer
             updateTimer.Enabled = false;
-            Refresh.Enabled = false;
+            //Refresh.Enabled = false;
         }
 
         private void GetStatistics()
@@ -296,40 +296,58 @@ namespace MediaBazaarSystem
             
         }
 
+        /**
+         * Method to 
+         */
         private void Refresh_Tick(object sender, EventArgs e)
         {
             //Employees
             int indexEmp = lbEmployees.SelectedIndex;
-            int indexMan = lbManagers.SelectedIndex;
 
             lbEmployees.Items.Clear();
-            lbManagers.Items.Clear();
+            List<Employee> listEmp = department.GetEmployees();
+            foreach( Employee emp in listEmp )
+            {
+                String outpEmp = emp.LastName + ", " + emp.FirstName;
+                lbEmployees.Items.Add( outpEmp );
+            }
 
             try
             {
-                if( ( lbEmployees.Items.Count > 0 ) && ( lbManagers.Items.Count > 0 ) )
+                if( lbEmployees.Items.Count > 0 )
                 {
                     lbEmployees.SelectedIndex = indexEmp;
-                    lbManagers.SelectedIndex = indexMan;
-                }
-
-                foreach( Employee emp in department.GetEmployees() )
-                {
-                    String outpEmp = emp.LastName + ", " + emp.FirstName;
-                    lbEmployees.Items.Add( outpEmp );
-                }
-
-                foreach( Manager man in department.GetManagers() )
-                {
-                    String outpMan = man.LastName + ", " + man.FirstName;
-                    lbManagers.Items.Add( outpMan );
                 }
             }
             catch( Exception ex )
             {
                 lbEmployees.SelectedItem = null;
+            }
+
+
+            //Managers
+            int indexMan = lbManagers.SelectedIndex;
+
+            lbManagers.Items.Clear();
+            List<Manager> listMan = department.GetManagers();
+            foreach( Manager man in listMan )
+            {
+                String outpMan = man.LastName + ", " + man.FirstName;
+                lbManagers.Items.Add( outpMan );
+            }
+
+            try
+            {
+                if( lbManagers.Items.Count > 0 )
+                {
+                    lbManagers.SelectedIndex = indexMan;
+                }
+            }
+            catch( Exception ex )
+            {
                 lbManagers.SelectedItem = null;
             }
+
         }
 
         /**
@@ -428,6 +446,7 @@ namespace MediaBazaarSystem
          */
         private void btnViewAllShifts_Click( object sender, EventArgs e )
         {
+            this.dataAdminWorkSchedule.Rows.Clear();
             this.UpdateScheduleAndEmployeeManagement();
         }
 
@@ -576,10 +595,31 @@ namespace MediaBazaarSystem
         {
             String searchedValue = txtBoxHomeSearch.Text;
 
-            foreach(Schedule schedule in schedule.GetSchedules())
+            try
             {
-                MessageBox.Show( schedule.ToString() );
+                foreach( Schedule schedule in department.GetSchedules() )
+                {
+                    if( searchedValue.Contains( schedule.FirstName ) )
+                    {
+                        dataAdminWorkSchedule.Rows.Clear();
+
+                        dataAdminWorkSchedule.Rows.Add(
+                            schedule.FirstName,
+                            schedule.Role,
+                            schedule.StartTime.ToString( "hh:mm tt" ),
+                            schedule.EndTime.ToString( "hh:mm tt" ),
+                            schedule.WorkDate.ToString( "dddd, dd MMMM yyyy" )
+                        );
+                    }
+                }
             }
+            catch(Exception ex)
+            {
+
+                MessageBox.Show( "Sorry, that person doesn't exist" );
+                
+            }
+
         }
     }
 }

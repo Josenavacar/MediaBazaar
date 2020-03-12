@@ -12,6 +12,7 @@ namespace MediaBazaarSystem
         private String name;
         private List<Employee> employees;
         private List<Manager> managers;
+        private List<Schedule> schedules;
 
         public int DepartmentID
         {
@@ -30,6 +31,7 @@ namespace MediaBazaarSystem
             this.Name = name;
             employees = new List<Employee>();
             managers = new List<Manager>();
+            schedules = new List<Schedule>();
             DepartmentID = ID;
         }
 
@@ -92,6 +94,15 @@ namespace MediaBazaarSystem
             return this.Name;
         }
 
+        public void AddSchedule( Schedule schedule )
+        {
+            schedules.Add( schedule );
+        }
+
+        public List<Schedule> GetSchedules()
+        {
+            return this.schedules;
+        }
         //public List<Staff> GetStaffs()
         //{
         //    return null;

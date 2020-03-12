@@ -94,7 +94,9 @@ namespace MediaBazaarSystem
                     MySqlCommand cmd = conn.CreateCommand();
 
                     cmd.CommandText = "INSERT INTO person(Firstname, Lastname, Age, Address, Email, Password, Salary, HoursWorked, HoursAvailable, IsAvailable, RoleID, DepartmentID) " +
-                        "VALUES(@FirstN, @LastN, @Age, @Address, @Email, @Password, @Salary, @HoursWorked, @HoursAvailable, @IsAvailable, @RoleID, @DepartmentID)";
+                        "VALUES(@FirstN, @LastN, @Age, @Address, @Email, @Password, @Salary, @HoursWorked, @HoursAvailable, @IsAvailable, @RoleID, @DepartmentID) " +
+                        "INSERT INTO scheduleName, StartTime, EndTime, WorkDate, PersonID) " +
+                        "VALUES(@Name, @StartTime, @EndTime, @WorkDate, LAST_INSERT_ID())";
                     
                     cmd.Parameters.AddWithValue("@FirstN", FirstN);
                     cmd.Parameters.AddWithValue("@LastN", LastN);
@@ -108,6 +110,10 @@ namespace MediaBazaarSystem
                     cmd.Parameters.AddWithValue("@IsAvailable", "Yes");
                     cmd.Parameters.AddWithValue("@RoleID", roleID);
                     cmd.Parameters.AddWithValue("@DepartmentID", department.DepartmentID);
+                    cmd.Parameters.AddWithValue( "@Name", FirstN );
+                    cmd.Parameters.AddWithValue( "@StartTime", "Unknown" );
+                    cmd.Parameters.AddWithValue( "@EndTime", "Unknown" );
+                    cmd.Parameters.AddWithValue( "@WorkDate", "Unknown" );
                     cmd.ExecuteNonQuery();
                     conn.Close();
 
@@ -169,7 +175,7 @@ namespace MediaBazaarSystem
                     cmd.Parameters.AddWithValue("@PersonID", employee.dbID);
                     cmd.ExecuteNonQuery();
                     conn.Close();
-                    employee.editEmployee(FirstN, LastN, age, address, role, salary, hoursAvailable, email);
+                    employee.EditEmployee(FirstN, LastN, age, address, role, salary, hoursAvailable, email);
                     MessageBox.Show("Employee successfully edited");
                 }
                 this.Hide();
