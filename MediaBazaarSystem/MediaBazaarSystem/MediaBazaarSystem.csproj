@@ -107,11 +107,11 @@
       <DependentUpon>DeleteForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Department.cs" />
-    <Compile Include="AddEmployee.cs">
+    <Compile Include="UpdateOrAdd.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="AddEmployee.Designer.cs">
-      <DependentUpon>AddEmployee.cs</DependentUpon>
+    <Compile Include="UpdateOrAdd.Designer.cs">
+      <DependentUpon>UpdateOrAdd.cs</DependentUpon>
     </Compile>
     <Compile Include="Employee.cs" />
     <Compile Include="EmployeeSystem.cs">
@@ -137,8 +137,8 @@
     <Compile Include="ViewEmployee.Designer.cs">
       <DependentUpon>ViewEmployee.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="AddEmployee.resx">
-      <DependentUpon>AddEmployee.cs</DependentUpon>
+    <EmbeddedResource Include="UpdateOrAdd.resx">
+      <DependentUpon>UpdateOrAdd.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="AdministrationSystem.resx">
       <DependentUpon>AdministrationSystem.cs</DependentUpon>

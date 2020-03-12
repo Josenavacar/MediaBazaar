@@ -12,53 +12,72 @@ using System.Data.SqlClient;
 
 namespace MediaBazaarSystem
 {
-    public partial class Employee_Add : Form
+    public partial class UpdateOrAdd : Form
     {
         Department department;
         Employee employee;
         Manager manager;
-        public Employee_Add(Department dep, Employee emp, Manager man)
+
+        //This form is used by 3 different methods, Add employee, add manager and update employee/manager, for that reason the constructor is overloaded,
+        //if a department alone is given, then the method will add a new person, if a department + a manager is given, a manager is to be updated, and if
+        //a department and an employee are given, an employee is to be updated.
+        public UpdateOrAdd(Department dep)
         {
+            //Add a new person.
+            InitializeComponent();
+            this.department = dep;
+            this.employee = null;
+            this.manager = null;
+
+            btnAddEmployee.Text = "Add";
+            this.Text = "Add new person";
+        }
+
+        public UpdateOrAdd(Department dep, Manager man)
+        {
+            //Update manager
+            InitializeComponent();
+            this.department = dep;
+            this.employee = null;
+            this.manager = man;
+            
+            txtBoxFirstName.Text = manager.FirstName;
+            txtBoxLastName.Text = manager.LastName;
+            numAge.Value = manager.Age;
+            tbAddress.Text = manager.Address;
+            comBoxPosition.SelectedItem = manager.Role;
+            txtBoxSalary.Text = manager.Salary.ToString();
+            txtBoxHoursAvailable.Text = manager.HoursAvailable.ToString();
+            txtBoxEmail.Text = manager.Email.ToString();
+
+            btnAddEmployee.Text = "Edit";
+            this.Text = "Update " + manager.FirstName + " " + manager.LastName;
+        }
+        public UpdateOrAdd(Department dep, Employee emp)
+        {
+            //Update employee
             InitializeComponent();
             this.department = dep;
             this.employee = emp;
-            this.manager = man;
+            this.manager = null;
+            
+            txtBoxFirstName.Text = emp.FirstName;
+            txtBoxLastName.Text = emp.LastName;
+            numAge.Value = emp.Age;
+            tbAddress.Text = emp.Address;
+            comBoxPosition.SelectedItem = emp.Role;
+            txtBoxSalary.Text = emp.Salary.ToString();
+            txtBoxHoursAvailable.Text = emp.HoursAvailable.ToString();
+            txtBoxEmail.Text = emp.Email.ToString();
 
-            if(emp != null)
-            {
-                txtBoxFirstName.Text = emp.FirstName;
-                txtBoxLastName.Text = emp.LastName;
-                numAge.Value = emp.Age;
-                tbAddress.Text = emp.Address;
-                comBoxPosition.SelectedItem = emp.Role;
-                txtBoxSalary.Text = emp.Salary.ToString();
-                txtBoxHoursAvailable.Text = emp.HoursAvailable.ToString();
-                txtBoxEmail.Text = emp.Email.ToString();
-
-                btnAddEmployee.Text = "Edit";
-            }
-            else if(man != null)
-            {
-                txtBoxFirstName.Text = manager.FirstName;
-                txtBoxLastName.Text = manager.LastName;
-                numAge.Value = manager.Age;
-                tbAddress.Text = manager.Address;
-                comBoxPosition.SelectedItem = manager.Role;
-                txtBoxSalary.Text = manager.Salary.ToString();
-                txtBoxHoursAvailable.Text = manager.HoursAvailable.ToString();
-                txtBoxEmail.Text = manager.Email.ToString();
-
-                btnAddEmployee.Text = "Edit";
-            }
-            else
-            {
-                btnAddEmployee.Text = "Add";
-            }
+            btnAddEmployee.Text = "Edit";
+            this.Text = "Update " + employee.FirstName + " " + employee.LastName;
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            if (department.GetEmployee(txtBoxFirstName.Text, txtBoxLastName.Text) != null && employee == null)
+            //Avoids employees or managers with same name and surname.
+            if (department.GetEmployee(txtBoxFirstName.Text, txtBoxLastName.Text) != null && employee == null && manager == null) 
             {
                 MessageBox.Show("Employee already registered.");
             }
@@ -68,17 +87,18 @@ namespace MediaBazaarSystem
                 string connString = @"Server = studmysql01.fhict.local; Uid = dbi437493; Database = dbi437493; Pwd = dbgroup01;";
                 MySqlConnection conn = new MySqlConnection(connString);
 
-                int roleID = 0;
-                String FirstN = txtBoxFirstName.Text.ToString();
-                String LastN = txtBoxLastName.Text.ToString();
-                int age = Convert.ToInt32(numAge.Value);
-                String address = tbAddress.Text.ToString();
-                String role = comBoxPosition.SelectedItem.ToString();
-                double salary = Convert.ToDouble(txtBoxSalary.Text);
-                int hoursAvailable = Convert.ToInt32(txtBoxHoursAvailable.Text);
-                String email = txtBoxEmail.Text.ToString();
+                int roleID = 0; //This variable will store the role ID to be stored into the database.
+                String FirstN = txtBoxFirstName.Text.ToString(); //First name
+                String LastN = txtBoxLastName.Text.ToString(); //Last name
+                int age = Convert.ToInt32(numAge.Value); //Age
+                String address = tbAddress.Text.ToString(); //Address
+                String role = comBoxPosition.SelectedItem.ToString(); //Role (as a string instead of an ID for ease of use and clarity in a list of C#)
+                double salary = Convert.ToDouble(txtBoxSalary.Text); //Salary
+                int hoursAvailable = Convert.ToInt32(txtBoxHoursAvailable.Text); //Hours available
+                String email = txtBoxEmail.Text.ToString(); //Email
 
-                if(role == "Manager")
+                //Converts the string role into the ID.
+                if (role == "Manager") 
                 {
                     roleID = 1;
                 }
@@ -87,7 +107,7 @@ namespace MediaBazaarSystem
                     roleID = 2;
                 }
                 
-                if (employee == null)
+                if (employee == null && manager == null) //If only a department was given, we will add a new person.
                 {
                     String password = Cryptography.Encrypt("temp");
                     conn.Open();
@@ -108,14 +128,15 @@ namespace MediaBazaarSystem
                     cmd.Parameters.AddWithValue("@IsAvailable", "Yes");
                     cmd.Parameters.AddWithValue("@RoleID", roleID);
                     cmd.Parameters.AddWithValue("@DepartmentID", department.DepartmentID);
-                    cmd.ExecuteNonQuery();
+                    cmd.ExecuteNonQuery(); //Inserted into database.
                     conn.Close();
 
-                    if(roleID == 1)
+                    //Checks for role (1 = Manager, 2 = Employee)
+                    if(roleID == 1) 
                     {
                         conn.Open();
                         MySqlCommand cmd2 = conn.CreateCommand();
-                        cmd2.CommandText = "SELECT Id FROM person ORDER BY Id DESC LIMIT 1";
+                        cmd2.CommandText = "SELECT Id FROM person ORDER BY Id DESC LIMIT 1"; //Extracts the Id assigned from the database.
                         MySqlDataReader reader = cmd2.ExecuteReader();
                         int ID = 0;
                         while (reader.Read())
@@ -124,16 +145,16 @@ namespace MediaBazaarSystem
                         }
                         reader.Close();
                         conn.Close();
-                        Manager newManager = new Manager(ID, FirstN, LastN, age, address, role, salary, hoursAvailable, email);
+                        Manager newManager = new Manager(ID, FirstN, LastN, age, address, role, salary, hoursAvailable, email); //Adds the manager to the list.
                         department.AddManager(newManager);
                         MessageBox.Show("Manager successfully added");
                     }
 
-                    else
+                    else if(roleID == 2)
                     {
                         conn.Open();
                         MySqlCommand cmd2 = conn.CreateCommand();
-                        cmd2.CommandText = "SELECT Id FROM person ORDER BY Id DESC LIMIT 1";
+                        cmd2.CommandText = "SELECT Id FROM person ORDER BY Id DESC LIMIT 1"; //Extracts the Id assigned from the database.
                         MySqlDataReader reader = cmd2.ExecuteReader();
                         int ID = 0;
                         while(reader.Read())
@@ -142,7 +163,7 @@ namespace MediaBazaarSystem
                         }
                         reader.Close();
                         conn.Close();
-                        Employee newEmployee = new Employee(ID, FirstN, LastN, age, address, role, salary, hoursAvailable, email);
+                        Employee newEmployee = new Employee(ID, FirstN, LastN, age, address, role, salary, hoursAvailable, email); //Adds employee to the list.
                         department.AddEmployee(newEmployee);
                         MessageBox.Show("Employee successfully added");
                     }
@@ -150,6 +171,7 @@ namespace MediaBazaarSystem
 
                 else
                 {
+                    //Edits existing person.
                     conn.Open();
                     MySqlCommand cmd = conn.CreateCommand();
 
@@ -167,10 +189,11 @@ namespace MediaBazaarSystem
                     cmd.Parameters.AddWithValue("@RoleID", roleID);
                     cmd.Parameters.AddWithValue("@DepartmentID", department.DepartmentID);
                     cmd.Parameters.AddWithValue("@PersonID", employee.dbID);
-                    cmd.ExecuteNonQuery();
+                    cmd.ExecuteNonQuery(); //Database edit.
                     conn.Close();
-                    employee.editEmployee(FirstN, LastN, age, address, role, salary, hoursAvailable, email);
+                    employee.editEmployee(FirstN, LastN, age, address, role, salary, hoursAvailable, email); //List edit (local).
                     MessageBox.Show("Employee successfully edited");
+                    conn.Close();
                 }
                 this.Hide();
             }

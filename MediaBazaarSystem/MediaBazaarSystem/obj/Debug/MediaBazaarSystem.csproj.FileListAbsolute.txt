@@ -57,7 +57,6 @@ C:\Users\Jose\Desktop\Semester 2\ProjectGIT\mediabazaar\MediaBazaarSystem\MediaB
 C:\Users\Jose\Desktop\Semester 2\ProjectGIT\mediabazaar\MediaBazaarSystem\MediaBazaarSystem\bin\Debug\System.Memory.xml
 C:\Users\Jose\Desktop\Semester 2\ProjectGIT\mediabazaar\MediaBazaarSystem\MediaBazaarSystem\bin\Debug\System.Numerics.Vectors.xml
 C:\Users\Jose\Desktop\Semester 2\ProjectGIT\mediabazaar\MediaBazaarSystem\MediaBazaarSystem\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
-C:\Users\Jose\Desktop\Semester 2\ProjectGIT\mediabazaar\MediaBazaarSystem\MediaBazaarSystem\obj\Debug\MediaBazaarSystem.Employee_Add.resources
 C:\Users\Jose\Desktop\Semester 2\ProjectGIT\mediabazaar\MediaBazaarSystem\MediaBazaarSystem\obj\Debug\MediaBazaarSystem.ViewEmployee.resources
 C:\Users\Jose\Desktop\Semester 2\ProjectGIT\mediabazaar\MediaBazaarSystem\MediaBazaarSystem\obj\Debug\MediaBazaarSystem.csproj.CopyComplete
 C:\Users\Jose\Desktop\Backup\mediabazaar\MediaBazaarSystem\MediaBazaarSystem\obj\Debug\MediaBazaarSystem.csprojAssemblyReference.cache
@@ -127,3 +126,5 @@ C:\Users\Jose\Desktop\Backup\backup 3.11.2020\mediabazaar\MediaBazaarSystem\Medi
 C:\Users\Jose\Desktop\Backup\backup 3.11.2020\mediabazaar\MediaBazaarSystem\MediaBazaarSystem\obj\Debug\MediaBazaarSystem.exe
 C:\Users\Jose\Desktop\Backup\backup 3.11.2020\mediabazaar\MediaBazaarSystem\MediaBazaarSystem\obj\Debug\MediaBazaarSystem.pdb
 C:\Users\Jose\Desktop\Backup\backup 3.11.2020\mediabazaar\MediaBazaarSystem\MediaBazaarSystem\obj\Debug\MediaBazaarSystem.ChangePassword.resources
+C:\Users\Jose\Desktop\Semester 2\ProjectGIT\mediabazaar\MediaBazaarSystem\MediaBazaarSystem\obj\Debug\MediaBazaarSystem.UpdateOrAdd.resources
+C:\Users\Jose\Desktop\Semester 2\ProjectGIT\mediabazaar\MediaBazaarSystem\MediaBazaarSystem\obj\Debug\MediaBazaarSystem.ChangePassword.resources

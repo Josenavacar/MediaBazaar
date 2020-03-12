@@ -17,7 +17,7 @@ namespace MediaBazaarSystem
         AssignEmployeeSystem assignEmployeeForm = new AssignEmployeeSystem();
         private Department department;
         private Manager manager;
-        public static bool ensure;
+        public static bool ensure; //Used for double checking when deleting from the database.
 
         public AdministrationSystem(Department department, Manager manager)
         {
@@ -68,8 +68,9 @@ namespace MediaBazaarSystem
             while (reader.Read())
             {
                 int role = (int)reader.GetValue(11);
-                if ( role == 1 )
+                if ( role == 1 ) //Managers
                 {
+                    //Retreive all the data from the database
                     int ID = (int)reader.GetValue(0);
                     String firstName = reader.GetString(1);
                     String lastName = reader.GetString(2);
@@ -80,14 +81,16 @@ namespace MediaBazaarSystem
                     double salary = reader.GetDouble(7);
                     int hoursavailable = (int)reader.GetValue(9);
 
+                    //Add the manager to the list.
                     Manager man = new Manager(ID, firstName, lastName, age, address, charge, salary, hoursavailable, email);
                     department.AddManager(man);
 
                     idManage = ID;
                 }
 
-                else if(role == 2)
+                else if(role == 2) //Employees
                 {
+                    //Retreive all the data from the database
                     int ID = (int)reader.GetValue(0);
                     String firstName = reader.GetString(1);
                     String lastName = reader.GetString(2);
@@ -98,6 +101,7 @@ namespace MediaBazaarSystem
                     double salary = reader.GetDouble(7);
                     int hoursavailable = (int)reader.GetValue(9);
 
+                    //Add the employee to the list.
                     Employee emp = new Employee(ID, firstName, lastName, age, address, charge, salary, hoursavailable, email);
                     department.AddEmployee(emp);
 
@@ -105,29 +109,29 @@ namespace MediaBazaarSystem
                 }
             }
             reader.Close();
-
+            connection.Clone();
         }
 
         private void btnAddEmployee_Click(object sender, EventArgs e)
         {
-            Employee_Add form1 = new Employee_Add(department, null, null);
+            UpdateOrAdd form1 = new UpdateOrAdd(department);
             form1.Show();
         }
 
         private void btnViewEmployeeDetails_Click(object sender, EventArgs e)
         {
-            if(lbEmployees.SelectedItem != null)
+            if(lbEmployees.SelectedItem != null) //Checks if an employee is selected in the listbox.
             {
-                Employee emp = SearchEmp();
+                Employee emp = SearchEmp(); 
                 if (emp != null)
                 {
                     ViewEmployee form1 = new ViewEmployee(emp, null);
                     form1.Show();
                 }
             }
-            else if(lbManagers.SelectedItem != null)
+            else if(lbManagers.SelectedItem != null) //Checks if a manager is selected in the listbox.
             {
-                Manager man = SearchMan();
+                Manager man = SearchMan(); 
                 if(man != null)
                 {
                     ViewEmployee form1 = new ViewEmployee(null, man);
@@ -138,22 +142,22 @@ namespace MediaBazaarSystem
 
         private void btnUpdateEmployee_Click(object sender, EventArgs e)
         {
-            if (lbEmployees.SelectedItem != null)
+            if (lbEmployees.SelectedItem != null) //Checks if an employee is selected in the listbox.
             {
                 Employee emp = SearchEmp();
                 if (emp != null)
                 {
-                    Employee_Add form1 = new Employee_Add(department, emp, null);
+                    UpdateOrAdd form1 = new UpdateOrAdd(department, emp);
                     form1.Show();
                 }
             }
 
-            else if(lbManagers.SelectedItem != null)
+            else if(lbManagers.SelectedItem != null) //Checks if a manager is selected in the listbox.
             {
                 Manager man = SearchMan();
                 if (man != null)
                 {
-                    Employee_Add form1 = new Employee_Add(department, null, man);
+                    UpdateOrAdd form1 = new UpdateOrAdd(department, man);
                     form1.Show();
                 }
             }
@@ -164,7 +168,7 @@ namespace MediaBazaarSystem
 
         }
 
-        private Employee SearchEmp()
+        private Employee SearchEmp() //Returns an employee selected on the listbox or null if it doesn't exist.
         {
             String auxEmp = lbEmployees.SelectedItem.ToString();
             String[] name = auxEmp.Split(','); //Splits the string by the comma.
@@ -180,7 +184,7 @@ namespace MediaBazaarSystem
             return emp;
         }
 
-        private Manager SearchMan()
+        private Manager SearchMan() //Returns a manager selected on the listbox or null if it doesn't exist.
         {
             String auxMan = lbManagers.SelectedItem.ToString();
             String[] name = auxMan.Split(','); //Splits the string by the comma.
@@ -207,8 +211,9 @@ namespace MediaBazaarSystem
 
             if (lbEmployees.SelectedItem != null)
             {
+                //Opens a form that will double check for deleting, if ensure is returned back as true, the employee will be deleted from the database.
                 DeleteForm check = new DeleteForm(ensure);
-                check.StartPosition = FormStartPosition.CenterParent;
+                check.StartPosition = FormStartPosition.CenterParent; //Makes the form pop up in the middle of the parent form (this).
                 check.ShowDialog(this);
 
                 if(ensure)
@@ -218,17 +223,18 @@ namespace MediaBazaarSystem
                     {
                         cmd.CommandText = "DELETE FROM person WHERE Id = @Id";
                         cmd.Parameters.AddWithValue("@Id", fired.dbID);
-                        cmd.ExecuteNonQuery();
+                        cmd.ExecuteNonQuery(); //Delte from Database.
 
-                        department.DeleteEmployee(fired);
+                        department.DeleteEmployee(fired); //Delete from list.
                     }
 
-                    ensure = false;
+                    ensure = false; //Set ensure back to false for future calls.
                 }
             }
 
             else if (lbManagers.SelectedItem != null)
             {
+                //Opens a form that will double check for deleting, if ensure is returned back as true, the manager will be deleted from the database.
                 DeleteForm check = new DeleteForm(ensure);
                 check.StartPosition = FormStartPosition.CenterParent;
                 check.ShowDialog(this);
@@ -245,10 +251,11 @@ namespace MediaBazaarSystem
                         department.DeleteManager(fired);
                     }
 
-                    ensure = false;
+                    ensure = false; //Set ensure back to false for future calls.
                 }
             }
-            
+
+            conn.Close();
         }
 
         private void Refresh_Tick(object sender, EventArgs e)
@@ -256,22 +263,22 @@ namespace MediaBazaarSystem
             //Employees
             int indexEmp = lbEmployees.SelectedIndex;
 
-            lbEmployees.Items.Clear();
-            List<Employee> listEmp = department.GetEmployees();
-            foreach (Employee emp in listEmp)
+            lbEmployees.Items.Clear(); //Empties empoloyee listbox
+            List<Employee> listEmp = department.GetEmployees(); 
+            foreach (Employee emp in listEmp) //Refills employee listbox
             {
                 String outpEmp = emp.LastName + ", " + emp.FirstName;
                 lbEmployees.Items.Add(outpEmp);
             }
 
-            try
+            try //Makes sure that the user does not notice this operation by reselecting the exact same item that he had selected.
             {
                 if (lbEmployees.Items.Count > 0)
                 {
                     lbEmployees.SelectedIndex = indexEmp;
                 }
             }
-            catch(Exception ex)
+            catch(Exception ex) //If an element was deleted, this would lead to a crash, instead of that we will select nothing.
             {
                 lbEmployees.SelectedItem = null;
             }
@@ -280,22 +287,22 @@ namespace MediaBazaarSystem
             //Managers
             int indexMan = lbManagers.SelectedIndex;
 
-            lbManagers.Items.Clear();
+            lbManagers.Items.Clear(); //Empties managers listbox
             List<Manager> listMan = department.GetManagers();
-            foreach (Manager man in listMan)
+            foreach (Manager man in listMan) //Refills managers listbox
             {
                 String outpMan = man.LastName + ", " + man.FirstName;
                 lbManagers.Items.Add(outpMan);
             }
 
-            try
+            try //Makes sure that the user does not notice this operation by reselecting the exact same item that he had selected.
             {
                 if (lbManagers.Items.Count > 0)
                 {
                     lbManagers.SelectedIndex = indexMan;
                 }
             }
-            catch(Exception ex)
+            catch(Exception ex) //If an element was deleted, this would lead to a crash, instead of that we will select nothing.
             {
                 lbManagers.SelectedItem = null;
             }
@@ -360,6 +367,7 @@ namespace MediaBazaarSystem
 
         private void lblChangePwd_Click(object sender, EventArgs e)
         {
+            //On click, opens a form to change the currently logged in user's password.
             ChangePassword pwd = new ChangePassword(manager, null);
             pwd.StartPosition = FormStartPosition.CenterParent;
             pwd.ShowDialog(this);
