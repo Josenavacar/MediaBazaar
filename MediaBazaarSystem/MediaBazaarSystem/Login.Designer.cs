@@ -69,7 +69,7 @@
             this.label2.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.Location = new System.Drawing.Point(114, 332);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(86, 21);
+            this.label2.Size = new System.Drawing.Size(108, 23);
             this.label2.TabIndex = 8;
             this.label2.Text = "Password:";
             // 
@@ -79,7 +79,7 @@
             this.label1.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.Location = new System.Drawing.Point(155, 271);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(55, 21);
+            this.label1.Size = new System.Drawing.Size(67, 23);
             this.label1.TabIndex = 7;
             this.label1.Text = "Email:";
             // 
@@ -88,7 +88,7 @@
             this.txtBoxPassword.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtBoxPassword.Location = new System.Drawing.Point(239, 329);
             this.txtBoxPassword.Name = "txtBoxPassword";
-            this.txtBoxPassword.Size = new System.Drawing.Size(339, 27);
+            this.txtBoxPassword.Size = new System.Drawing.Size(339, 32);
             this.txtBoxPassword.TabIndex = 6;
             // 
             // txtBoxEmail
@@ -96,7 +96,7 @@
             this.txtBoxEmail.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtBoxEmail.Location = new System.Drawing.Point(239, 268);
             this.txtBoxEmail.Name = "txtBoxEmail";
-            this.txtBoxEmail.Size = new System.Drawing.Size(339, 27);
+            this.txtBoxEmail.Size = new System.Drawing.Size(339, 32);
             this.txtBoxEmail.TabIndex = 5;
             // 
             // label3
@@ -105,7 +105,7 @@
             this.label3.Font = new System.Drawing.Font("Century Gothic", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.Location = new System.Drawing.Point(338, 527);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(110, 16);
+            this.label3.Size = new System.Drawing.Size(139, 19);
             this.label3.TabIndex = 10;
             this.label3.Text = "All rights reserved ®";
             // 
@@ -113,9 +113,9 @@
             // 
             this.btnRegister.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.btnRegister.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnRegister.Location = new System.Drawing.Point(248, 458);
+            this.btnRegister.Location = new System.Drawing.Point(239, 482);
             this.btnRegister.Name = "btnRegister";
-            this.btnRegister.Size = new System.Drawing.Size(313, 43);
+            this.btnRegister.Size = new System.Drawing.Size(339, 42);
             this.btnRegister.TabIndex = 11;
             this.btnRegister.Text = "Register (temporary button)";
             this.btnRegister.UseVisualStyleBackColor = false;
@@ -123,7 +123,7 @@
             // 
             // formLogin
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 15F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Menu;
             this.ClientSize = new System.Drawing.Size(783, 555);

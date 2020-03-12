@@ -128,3 +128,16 @@ C:\Users\Jose\Desktop\Backup\backup 3.11.2020\mediabazaar\MediaBazaarSystem\Medi
 C:\Users\Jose\Desktop\Backup\backup 3.11.2020\mediabazaar\MediaBazaarSystem\MediaBazaarSystem\obj\Debug\MediaBazaarSystem.ChangePassword.resources
 C:\Users\Jose\Desktop\Semester 2\ProjectGIT\mediabazaar\MediaBazaarSystem\MediaBazaarSystem\obj\Debug\MediaBazaarSystem.UpdateOrAdd.resources
 C:\Users\Jose\Desktop\Semester 2\ProjectGIT\mediabazaar\MediaBazaarSystem\MediaBazaarSystem\obj\Debug\MediaBazaarSystem.ChangePassword.resources
+C:\Users\Gebruiker\Documents\GitHub\MediaBazaar\mediabazaar\MediaBazaarSystem\MediaBazaarSystem\obj\Debug\MediaBazaarSystem.Employee_Add.resources
+C:\Users\Gebruiker\Documents\GitHub\MediaBazaar\mediabazaar\MediaBazaarSystem\MediaBazaarSystem\obj\Debug\MediaBazaarSystem.ViewEmployee.resources
+C:\Users\Gebruiker\Documents\GitHub\MediaBazaar\mediabazaar\MediaBazaarSystem\MediaBazaarSystem\bin\Debug\LiveCharts.dll
+C:\Users\Gebruiker\Documents\GitHub\MediaBazaar\mediabazaar\MediaBazaarSystem\MediaBazaarSystem\bin\Debug\LiveCharts.WinForms.dll
+C:\Users\Gebruiker\Documents\GitHub\MediaBazaar\mediabazaar\MediaBazaarSystem\MediaBazaarSystem\bin\Debug\LiveCharts.Wpf.dll
+C:\Users\Gebruiker\Documents\GitHub\MediaBazaar\mediabazaar\MediaBazaarSystem\MediaBazaarSystem\bin\Debug\LiveCharts.pdb
+C:\Users\Gebruiker\Documents\GitHub\MediaBazaar\mediabazaar\MediaBazaarSystem\MediaBazaarSystem\bin\Debug\LiveCharts.xml
+C:\Users\Gebruiker\Documents\GitHub\MediaBazaar\mediabazaar\MediaBazaarSystem\MediaBazaarSystem\bin\Debug\LiveCharts.WinForms.pdb
+C:\Users\Gebruiker\Documents\GitHub\MediaBazaar\mediabazaar\MediaBazaarSystem\MediaBazaarSystem\bin\Debug\LiveCharts.WinForms.xml
+C:\Users\Gebruiker\Documents\GitHub\MediaBazaar\mediabazaar\MediaBazaarSystem\MediaBazaarSystem\bin\Debug\LiveCharts.Wpf.pdb
+C:\Users\Gebruiker\Documents\GitHub\MediaBazaar\mediabazaar\MediaBazaarSystem\MediaBazaarSystem\bin\Debug\LiveCharts.Wpf.xml
+C:\Users\Gebruiker\Documents\GitHub\MediaBazaar\mediabazaar\MediaBazaarSystem\MediaBazaarSystem\obj\Debug\MediaBazaarSystem.ChangePassword.resources
+C:\Users\Gebruiker\Documents\GitHub\MediaBazaar\mediabazaar\MediaBazaarSystem\MediaBazaarSystem\obj\Debug\MediaBazaarSystem.DeleteForm.resources

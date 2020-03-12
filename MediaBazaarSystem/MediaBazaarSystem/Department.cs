@@ -27,10 +27,10 @@ namespace MediaBazaarSystem
 
         public Department(String name, int ID)
         {
+            this.Name = name;
             employees = new List<Employee>();
             managers = new List<Manager>();
             DepartmentID = ID;
-            Name = name;
         }
 
         public void AddEmployee(Employee employee)
@@ -74,17 +74,22 @@ namespace MediaBazaarSystem
             return emp;
         }
 
-        public Manager GetManager(String firstname, String lastname)
+        public Manager GetManager( String firstname, String lastname )
         {
             Manager man = null;
-            foreach(Manager manager in managers)
+            foreach( Manager manager in managers )
             {
-                if(manager.FirstName == firstname && manager.LastName == lastname)
+                if( manager.FirstName == firstname && manager.LastName == lastname )
                 {
                     man = manager;
                 }
             }
             return man;
+        }
+
+        public override string ToString()
+        {
+            return this.Name;
         }
 
         //public List<Staff> GetStaffs()
