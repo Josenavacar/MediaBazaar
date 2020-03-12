@@ -17,6 +17,8 @@ namespace MediaBazaarSystem
         AssignEmployeeSystem assignEmployeeForm;
         private Department department;
         private Manager manager;
+        private Schedule schedule;
+        private Staff staff;
         public static bool ensure;
         int idManage;
         private String employeeName;
@@ -39,15 +41,16 @@ namespace MediaBazaarSystem
         /**
          * Method to update the table when timer is running.
          */
-        private void UpdateSchedule()
+        private void UpdateScheduleAndEmployeeManagement()
         {
             // Clear table
             this.dataAdminWorkSchedule.Rows.Clear();
+            this.lbEmployees.Items.Clear();
+            this.lbManagers.Items.Clear();
+
             // Connect to DB
             string connectionString = @"Server = studmysql01.fhict.local; Uid = dbi437493; Database = dbi437493; Pwd = dbgroup01;";
 
-            //Schedule related
-            //string sql = "SELECT FirstName, Name, StartTime, EndTime, WorkDate FROM Person " +
             // SQL Query
             string sql = "SELECT Person.Id, Person.FirstName, Role.Name, Schedule.StartTime, Schedule.EndTime, Schedule.WorkDate FROM Person " +
                 "INNER JOIN Role ON Person.RoleId = Role.Id " +
@@ -63,74 +66,87 @@ namespace MediaBazaarSystem
             // Get the data
             while( reader.Read() )
             {
+                String firstName = reader.GetValue( 1 ).ToString();
+                String role = reader.GetValue( 2 ).ToString();
                 String startTime = reader.GetValue( 3 ).ToString();
                 String endTime = reader.GetValue( 4 ).ToString();
+                String workDate = reader.GetValue( 5 ).ToString();
                 DateTime workStartTime = Convert.ToDateTime( startTime );
                 DateTime workEndTime = Convert.ToDateTime( endTime );
+                DateTime convertedWorkDate = Convert.ToDateTime(workDate);
 
                 // Add data to data grid view table
                 DataGridViewRow row = ( DataGridViewRow ) dataAdminWorkSchedule.Rows[ 0 ].Clone();
                 dataAdminWorkSchedule.Columns[ "clmnWorkDate" ].DefaultCellStyle.BackColor = Color.LightSteelBlue;
-                row.Cells[ 0 ].Value = reader.GetValue( 1 ).ToString(); // First Name
-                row.Cells[ 1 ].Value = reader.GetValue( 2 ).ToString(); // Name (Role)
+                row.Cells[ 0 ].Value = firstName; // First Name
+                row.Cells[ 1 ].Value = role; // Name (Role)
                 row.Cells[ 2 ].Value = workStartTime.ToString( "hh:mm tt" );// Start Time
                 row.Cells[ 3 ].Value = workEndTime.ToString( "hh:mm tt" ); // End Time
-                row.Cells[ 4 ].Value = reader.GetValue( 5 ).ToString(); // Date
+                row.Cells[ 4 ].Value = workDate; // Work Date
                 dataAdminWorkSchedule.Rows.Add( row );
+
+                schedule = new Schedule( firstName, role, workStartTime, workEndTime, convertedWorkDate );
+                schedule.AddSchedule( schedule );
             }
 
             reader.Close();
 
-            //            //Employee related
-            //            String sql2 = "SELECT * FROM person WHERE DepartmentID = @DepartmentID";
-            //            MySqlCommand cmd2 = new MySqlCommand(sql2, connection);
-            //            cmd2.Parameters.Add("DepartmentID", MySqlDbType.VarChar).Value = department.DepartmentID;
+            //Employee related
+            String sql2 = "SELECT * FROM person WHERE DepartmentID = @DepartmentID";
+            MySqlCommand cmd2 = new MySqlCommand( sql2, connection );
+            cmd2.Parameters.Add( "DepartmentID", MySqlDbType.VarChar ).Value = department.DepartmentID;
+            reader = cmd2.ExecuteReader();
 
-            //            reader = cmd2.ExecuteReader();
-            //            while (reader.Read())
-            //            {
-            //                int role = (int)reader.GetValue(11);
-            //                if ( role == 1 )
-            //                {
-            //                    int ID = (int)reader.GetValue(0);
-            //                    String firstName = reader.GetString(1);
-            //                    String lastName = reader.GetString(2);
-            //                    int age = (int)reader.GetValue(3);
-            //                    String address = reader.GetString(4);
-            //                    String email = reader.GetString(5);
-            //                    String charge = "Manager";
-            //                    double salary = reader.GetDouble(7);
-            //                    int hoursavailable = (int)reader.GetValue(9);
+            while( reader.Read() )
+            {
+                int role = ( int ) reader.GetValue( 11 );
+                if( role == 1 )
+                {
+                    int ID = ( int ) reader.GetValue( 0 );
+                    String firstName = reader.GetString( 1 );
+                    String lastName = reader.GetString( 2 );
+                    int age = ( int ) reader.GetValue( 3 );
+                    String address = reader.GetString( 4 );
+                    String email = reader.GetString( 5 );
+                    String charge = "Manager";
+                    double salary = reader.GetDouble( 7 );
+                    int hoursavailable = ( int ) reader.GetValue( 9 );
+                    Manager man = new Manager( ID, firstName, lastName, age, address, charge, salary, hoursavailable, email );
 
-            //                    Manager man = new Manager(ID, firstName, lastName, age, address, charge, salary, hoursavailable, email);
-            //                    department.AddManager(man);
+                    if(department.GetManager(firstName, lastName) == null)
+                    {
+                        department.AddManager( man );
+                    }
 
-            //                    idManage = ID;
-            //                }
+                    idManage = ID;
+                }
 
-            //                else if(role == 2)
-            //                {
-            //                    int ID = (int)reader.GetValue(0);
-            //                    String firstName = reader.GetString(1);
-            //                    String lastName = reader.GetString(2);
-            //                    int age = (int)reader.GetValue(3);
-            //                    String address = reader.GetString(4);
-            //                    String email = reader.GetString(5);
-            //                    String charge = "Employee";
-            //                    double salary = reader.GetDouble(7);
-            //                    int hoursavailable = (int)reader.GetValue(9);
+                else if( role == 2 )
+                {
+                    int ID = ( int ) reader.GetValue( 0 );
+                    String firstName = reader.GetString( 1 );
+                    String lastName = reader.GetString( 2 );
+                    int age = ( int ) reader.GetValue( 3 );
+                    String address = reader.GetString( 4 );
+                    String email = reader.GetString( 5 );
+                    String charge = "Employee";
+                    double salary = reader.GetDouble( 7 );
+                    int hoursavailable = ( int ) reader.GetValue( 9 );
+                    Employee emp = new Employee( ID, firstName, lastName, age, address, charge, salary, hoursavailable, email );
 
-            //                    Employee emp = new Employee(ID, firstName, lastName, age, address, charge, salary, hoursavailable, email);
-            //                    department.AddEmployee(emp);
+                    if(department.GetEmployee(firstName, lastName) == null)
+                    {
+                        department.AddEmployee( emp );
+                    }
 
-            //                    idManage = ID;
-            //                }
-            //            }
-            //            reader.Close();
-
+                    idManage = ID;
+                }
+            }
+            reader.Close();
 
             // Disable timer
             updateTimer.Enabled = false;
+            Refresh.Enabled = false;
         }
 
         private void GetStatistics()
@@ -284,60 +300,36 @@ namespace MediaBazaarSystem
         {
             //Employees
             int indexEmp = lbEmployees.SelectedIndex;
-
-            lbEmployees.Items.Clear();
-            List<Employee> listEmp = department.GetEmployees();
-            foreach (Employee emp in listEmp)
-            {
-                String outpEmp = emp.LastName + ", " + emp.FirstName;
-                lbEmployees.Items.Add(outpEmp);
-            }
-
-            try
-            {
-                if (lbEmployees.Items.Count > 0)
-                {
-                    lbEmployees.SelectedIndex = indexEmp;
-                }
-            }
-            catch(Exception ex)
-            {
-                lbEmployees.SelectedItem = null;
-            }
-            
-
-            //Managers
             int indexMan = lbManagers.SelectedIndex;
 
+            lbEmployees.Items.Clear();
             lbManagers.Items.Clear();
-            List<Manager> listMan = department.GetManagers();
-            foreach (Manager man in listMan)
-            {
-                String outpMan = man.LastName + ", " + man.FirstName;
-                lbManagers.Items.Add(outpMan);
-            }
 
             try
             {
-                if (lbManagers.Items.Count > 0)
+                if( ( lbEmployees.Items.Count > 0 ) && ( lbManagers.Items.Count > 0 ) )
                 {
+                    lbEmployees.SelectedIndex = indexEmp;
                     lbManagers.SelectedIndex = indexMan;
                 }
+
+                foreach( Employee emp in department.GetEmployees() )
+                {
+                    String outpEmp = emp.LastName + ", " + emp.FirstName;
+                    lbEmployees.Items.Add( outpEmp );
+                }
+
+                foreach( Manager man in department.GetManagers() )
+                {
+                    String outpMan = man.LastName + ", " + man.FirstName;
+                    lbManagers.Items.Add( outpMan );
+                }
             }
-            catch(Exception ex)
+            catch( Exception ex )
             {
+                lbEmployees.SelectedItem = null;
                 lbManagers.SelectedItem = null;
             }
-        }
-
-        private void btnAssignEmployee_Click( object sender, EventArgs e )
-        {
-            //this.UpdateSchedule();
-            //if( dataAdminWorkSchedule.SelectedRows.Count != -1 )
-            //{
-            //    DataGridViewRow row = this.dataAdminWorkSchedule.SelectedRows[ 0 ];
-            //    MessageBox.Show(row.Cells[ "clmnEmployeeName" ].Value.ToString());
-            //}
         }
 
         /**
@@ -397,22 +389,16 @@ namespace MediaBazaarSystem
             }
         }
 
-        private void lbManagers_Click(object sender, EventArgs e)
-        {
-            lbEmployees.SelectedItem = null;
-        }
-
-        private void lbEmployees_Click(object sender, EventArgs e)
-        {
-            lbManagers.SelectedItem = null;
-        }
-
+        /**
+         * Method to change user's password
+         */
         private void btnChangePwd_Click( object sender, EventArgs e )
         {
             ChangePassword pwd = new ChangePassword( manager, null );
             pwd.StartPosition = FormStartPosition.CenterParent;
             pwd.ShowDialog( this );
         }
+
         /**
          * Method when user double clicks on row (on an employee)
          */
@@ -428,10 +414,13 @@ namespace MediaBazaarSystem
             assignEmployeeForm.Show();
         }
 
+        /**
+         * Method to update timer
+         */
         private void updateTimer_Tick( object sender, EventArgs e )
         {
             updateTimer.Interval = 1000;
-            this.UpdateSchedule();
+            this.UpdateScheduleAndEmployeeManagement();
         }
 
         /**
@@ -439,11 +428,11 @@ namespace MediaBazaarSystem
          */
         private void btnViewAllShifts_Click( object sender, EventArgs e )
         {
-            this.UpdateSchedule();
+            this.UpdateScheduleAndEmployeeManagement();
         }
 
         /**
-         * Method to sort table based on employee's name
+         * Method to sort employee's name alphabetically in schedule table
          */
         private void btnSort_Click( object sender, EventArgs e )
         {
@@ -452,6 +441,9 @@ namespace MediaBazaarSystem
             dataAdminWorkSchedule.Sort( dataAdminWorkSchedule.Columns[ 0 ], ListSortDirection.Ascending );
         }
 
+        /**
+         * Method to filter schedule table
+         */
         private void btnFilter_Click( object sender, EventArgs e )
         {
 
@@ -534,6 +526,9 @@ namespace MediaBazaarSystem
             }
         }
 
+        /**
+         * Method to display all products in the system to the listbox
+         */
         private void btnViewAllProducts_Click( object sender, EventArgs e )
         {
 
@@ -559,6 +554,32 @@ namespace MediaBazaarSystem
             //        lBoxStatistics.Items.Add( employee.ToString() );
             //    }
             //}
+        }
+
+        /**
+         * Method to undo a selection in the employees listbox
+         */
+        private void btnUndoEmpSelection_Click( object sender, EventArgs e )
+        {
+            lbEmployees.SelectedItem = null;
+        }
+
+        /**
+         * Method to undo a selection in the manager listbox
+         */
+        private void btnUndoManSelection_Click( object sender, EventArgs e )
+        {
+            lbManagers.SelectedItem = null;
+        }
+
+        private void btnHomeSearch_Click( object sender, EventArgs e )
+        {
+            String searchedValue = txtBoxHomeSearch.Text;
+
+            foreach(Schedule schedule in schedule.GetSchedules())
+            {
+                MessageBox.Show( schedule.ToString() );
+            }
         }
     }
 }

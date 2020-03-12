@@ -77,8 +77,12 @@
             this.btnUpdateProfile = new System.Windows.Forms.Button();
             this.lbEmployeeInfo = new System.Windows.Forms.ListBox();
             this.tbPageEmpManagement = new System.Windows.Forms.TabPage();
-            this.label2 = new System.Windows.Forms.Label();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.btnUndoEmpSelection = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
+            this.grpBoxManagers = new System.Windows.Forms.GroupBox();
+            this.btnUndoManSelection = new System.Windows.Forms.Button();
+            this.label2 = new System.Windows.Forms.Label();
             this.lbManagers = new System.Windows.Forms.ListBox();
             this.btnViewEmployeeDetails = new System.Windows.Forms.Button();
             this.btnAddEmployee = new System.Windows.Forms.Button();
@@ -96,6 +100,8 @@
             this.tbPageProfile.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxAdminPhoto)).BeginInit();
             this.tbPageEmpManagement.SuspendLayout();
+            this.groupBox1.SuspendLayout();
+            this.grpBoxManagers.SuspendLayout();
             this.SuspendLayout();
             // 
             // tbControlAdmin
@@ -139,6 +145,7 @@
             this.btnHomeSearch.TabIndex = 17;
             this.btnHomeSearch.Text = "Search";
             this.btnHomeSearch.UseVisualStyleBackColor = false;
+            this.btnHomeSearch.Click += new System.EventHandler(this.btnHomeSearch_Click);
             // 
             // txtBoxHomeSearch
             // 
@@ -580,8 +587,8 @@
             // tbPageEmpManagement
             // 
             this.tbPageEmpManagement.BackColor = System.Drawing.SystemColors.Menu;
-            this.tbPageEmpManagement.Controls.Add(this.label2);
-            this.tbPageEmpManagement.Controls.Add(this.label1);
+            this.tbPageEmpManagement.Controls.Add(this.groupBox1);
+            this.tbPageEmpManagement.Controls.Add(this.grpBoxManagers);
             this.tbPageEmpManagement.Controls.Add(this.lbManagers);
             this.tbPageEmpManagement.Controls.Add(this.btnViewEmployeeDetails);
             this.tbPageEmpManagement.Controls.Add(this.btnAddEmployee);
@@ -594,23 +601,65 @@
             this.tbPageEmpManagement.TabIndex = 3;
             this.tbPageEmpManagement.Text = "Employee Management";
             // 
-            // label2
+            // groupBox1
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(443, 38);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(95, 21);
-            this.label2.TabIndex = 10;
-            this.label2.Text = "Managers";
+            this.groupBox1.Controls.Add(this.btnUndoEmpSelection);
+            this.groupBox1.Controls.Add(this.label1);
+            this.groupBox1.Location = new System.Drawing.Point(19, 3);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(403, 73);
+            this.groupBox1.TabIndex = 13;
+            this.groupBox1.TabStop = false;
+            // 
+            // btnUndoEmpSelection
+            // 
+            this.btnUndoEmpSelection.BackColor = System.Drawing.Color.OrangeRed;
+            this.btnUndoEmpSelection.Location = new System.Drawing.Point(235, 27);
+            this.btnUndoEmpSelection.Name = "btnUndoEmpSelection";
+            this.btnUndoEmpSelection.Size = new System.Drawing.Size(162, 40);
+            this.btnUndoEmpSelection.TabIndex = 12;
+            this.btnUndoEmpSelection.Text = "Undo Selection";
+            this.btnUndoEmpSelection.UseVisualStyleBackColor = false;
+            this.btnUndoEmpSelection.Click += new System.EventHandler(this.btnUndoEmpSelection_Click);
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(15, 38);
+            this.label1.Location = new System.Drawing.Point(6, 37);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(97, 21);
             this.label1.TabIndex = 9;
             this.label1.Text = "Employees";
+            // 
+            // grpBoxManagers
+            // 
+            this.grpBoxManagers.Controls.Add(this.btnUndoManSelection);
+            this.grpBoxManagers.Controls.Add(this.label2);
+            this.grpBoxManagers.Location = new System.Drawing.Point(447, 3);
+            this.grpBoxManagers.Name = "grpBoxManagers";
+            this.grpBoxManagers.Size = new System.Drawing.Size(403, 73);
+            this.grpBoxManagers.TabIndex = 11;
+            this.grpBoxManagers.TabStop = false;
+            // 
+            // btnUndoManSelection
+            // 
+            this.btnUndoManSelection.BackColor = System.Drawing.Color.OrangeRed;
+            this.btnUndoManSelection.Location = new System.Drawing.Point(235, 27);
+            this.btnUndoManSelection.Name = "btnUndoManSelection";
+            this.btnUndoManSelection.Size = new System.Drawing.Size(162, 40);
+            this.btnUndoManSelection.TabIndex = 12;
+            this.btnUndoManSelection.Text = "Undo Selection";
+            this.btnUndoManSelection.UseVisualStyleBackColor = false;
+            this.btnUndoManSelection.Click += new System.EventHandler(this.btnUndoManSelection_Click);
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(6, 35);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(95, 21);
+            this.label2.TabIndex = 10;
+            this.label2.Text = "Managers";
             // 
             // lbManagers
             // 
@@ -622,7 +671,6 @@
             this.lbManagers.Name = "lbManagers";
             this.lbManagers.Size = new System.Drawing.Size(403, 464);
             this.lbManagers.TabIndex = 8;
-            this.lbManagers.Click += new System.EventHandler(this.lbManagers_Click);
             // 
             // btnViewEmployeeDetails
             // 
@@ -667,7 +715,6 @@
             this.lbEmployees.Name = "lbEmployees";
             this.lbEmployees.Size = new System.Drawing.Size(403, 464);
             this.lbEmployees.TabIndex = 4;
-            this.lbEmployees.Click += new System.EventHandler(this.lbEmployees_Click);
             // 
             // btnFireEmployee
             // 
@@ -712,7 +759,10 @@
             this.tbPageProfile.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxAdminPhoto)).EndInit();
             this.tbPageEmpManagement.ResumeLayout(false);
-            this.tbPageEmpManagement.PerformLayout();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
+            this.grpBoxManagers.ResumeLayout(false);
+            this.grpBoxManagers.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -776,5 +826,9 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn5;
         private System.Windows.Forms.DataGridViewTextBoxColumn clmnIsAvailable;
         private System.Windows.Forms.Button btnChangePwd;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.Button btnUndoEmpSelection;
+        private System.Windows.Forms.GroupBox grpBoxManagers;
+        private System.Windows.Forms.Button btnUndoManSelection;
     }
 }
