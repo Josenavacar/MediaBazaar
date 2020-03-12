@@ -18,7 +18,6 @@ namespace MediaBazaarSystem
         private Department department;
         private Manager manager;
         public static bool ensure; //Used for double checking when deleting from the database.
-        public static bool ensure;
         int idManage;
         private String employeeName;
 
@@ -48,7 +47,6 @@ namespace MediaBazaarSystem
             string connectionString = @"Server = studmysql01.fhict.local; Uid = dbi437493; Database = dbi437493; Pwd = dbgroup01;";
 
             //Schedule related
-            //string sql = "SELECT FirstName, Name, StartTime, EndTime, WorkDate FROM Person " +
             // SQL Query
             string sql = "SELECT Person.Id, Person.FirstName, Role.Name, Schedule.StartTime, Schedule.EndTime, Schedule.WorkDate FROM Person " +
                 "INNER JOIN Role ON Person.RoleId = Role.Id " +
@@ -134,54 +132,6 @@ namespace MediaBazaarSystem
             connection.Clone();
 
             reader.Close();
-
-            //            //Employee related
-            //            String sql2 = "SELECT * FROM person WHERE DepartmentID = @DepartmentID";
-            //            MySqlCommand cmd2 = new MySqlCommand(sql2, connection);
-            //            cmd2.Parameters.Add("DepartmentID", MySqlDbType.VarChar).Value = department.DepartmentID;
-
-            //            reader = cmd2.ExecuteReader();
-            //            while (reader.Read())
-            //            {
-            //                int role = (int)reader.GetValue(11);
-            //                if ( role == 1 )
-            //                {
-            //                    int ID = (int)reader.GetValue(0);
-            //                    String firstName = reader.GetString(1);
-            //                    String lastName = reader.GetString(2);
-            //                    int age = (int)reader.GetValue(3);
-            //                    String address = reader.GetString(4);
-            //                    String email = reader.GetString(5);
-            //                    String charge = "Manager";
-            //                    double salary = reader.GetDouble(7);
-            //                    int hoursavailable = (int)reader.GetValue(9);
-
-            //                    Manager man = new Manager(ID, firstName, lastName, age, address, charge, salary, hoursavailable, email);
-            //                    department.AddManager(man);
-
-            //                    idManage = ID;
-            //                }
-
-            //                else if(role == 2)
-            //                {
-            //                    int ID = (int)reader.GetValue(0);
-            //                    String firstName = reader.GetString(1);
-            //                    String lastName = reader.GetString(2);
-            //                    int age = (int)reader.GetValue(3);
-            //                    String address = reader.GetString(4);
-            //                    String email = reader.GetString(5);
-            //                    String charge = "Employee";
-            //                    double salary = reader.GetDouble(7);
-            //                    int hoursavailable = (int)reader.GetValue(9);
-
-            //                    Employee emp = new Employee(ID, firstName, lastName, age, address, charge, salary, hoursavailable, email);
-            //                    department.AddEmployee(emp);
-
-            //                    idManage = ID;
-            //                }
-            //            }
-            //            reader.Close();
-
 
             // Disable timer
             updateTimer.Enabled = false;
@@ -470,7 +420,6 @@ namespace MediaBazaarSystem
 
             //On click, opens a form to change the currently logged in user's password.
             ChangePassword pwd = new ChangePassword(manager, null);
-            ChangePassword pwd = new ChangePassword( manager, null );
             pwd.StartPosition = FormStartPosition.CenterParent;
             pwd.ShowDialog( this );
         }
@@ -620,6 +569,16 @@ namespace MediaBazaarSystem
             //        lBoxStatistics.Items.Add( employee.ToString() );
             //    }
             //}
+        }
+
+        private void picBoxLogout_MouseEnter(object sender, EventArgs e)
+        {
+            picBoxLogout.Cursor = Cursors.Hand;
+        }
+
+        private void picBoxLogout_MouseLeave(object sender, EventArgs e)
+        {
+            picBoxLogout.Cursor = Cursors.Default;
         }
     }
 }
