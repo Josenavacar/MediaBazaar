@@ -93,7 +93,9 @@ namespace MediaBazaarSystem
          */
         public void GetEmployeeManagementDB(String sql, MySqlConnection connection)
         {
-            
+            this.lbEmployees.Items.Clear();
+            this.lbManagers.Items.Clear();
+
             MySqlCommand cmd2 = new MySqlCommand( sql, connection );
             connection.Open();
             cmd2.Parameters.Add( "DepartmentID", MySqlDbType.VarChar ).Value = department.DepartmentID;
