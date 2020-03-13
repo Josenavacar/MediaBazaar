@@ -32,14 +32,19 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AdministrationSystem));
             this.tbControlAdmin = new System.Windows.Forms.TabControl();
             this.tbPageHome = new System.Windows.Forms.TabPage();
+            this.cmboBoxFilter = new System.Windows.Forms.ComboBox();
             this.btnHomeSearch = new System.Windows.Forms.Button();
             this.txtBoxHomeSearch = new System.Windows.Forms.TextBox();
-            this.btnFilter = new System.Windows.Forms.Button();
             this.btnSort = new System.Windows.Forms.Button();
             this.btnViewAllShifts = new System.Windows.Forms.Button();
             this.lblAssignEmployee = new System.Windows.Forms.Label();
             this.picBoxLogout = new System.Windows.Forms.PictureBox();
             this.dataAdminWorkSchedule = new System.Windows.Forms.DataGridView();
+            this.clmnEmployeeName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clmnRole = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clmnStartTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clmnEndTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clmnWorkDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dtpWorkSchedule = new System.Windows.Forms.DateTimePicker();
             this.tbPageStatistics = new System.Windows.Forms.TabPage();
             this.dataStatistics = new System.Windows.Forms.DataGridView();
@@ -51,7 +56,7 @@
             this.clmnIsAvailable = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btnViewAllDepartments = new System.Windows.Forms.Button();
             this.btnSearch = new System.Windows.Forms.Button();
-            this.txtBoxSearch = new System.Windows.Forms.TextBox();
+            this.txtBoxStatsSearch = new System.Windows.Forms.TextBox();
             this.btnViewAllProducts = new System.Windows.Forms.Button();
             this.btnViewAllEmployees = new System.Windows.Forms.Button();
             this.tbPageProfile = new System.Windows.Forms.TabPage();
@@ -86,11 +91,6 @@
             this.btnFireEmployee = new System.Windows.Forms.Button();
             this.Refresh = new System.Windows.Forms.Timer(this.components);
             this.updateTimer = new System.Windows.Forms.Timer(this.components);
-            this.clmnEmployeeName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.clmnRole = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.clmnStartTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.clmnEndTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.clmnWorkDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tbControlAdmin.SuspendLayout();
             this.tbPageHome.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picBoxLogout)).BeginInit();
@@ -120,9 +120,9 @@
             // tbPageHome
             // 
             this.tbPageHome.BackColor = System.Drawing.SystemColors.Menu;
+            this.tbPageHome.Controls.Add(this.cmboBoxFilter);
             this.tbPageHome.Controls.Add(this.btnHomeSearch);
             this.tbPageHome.Controls.Add(this.txtBoxHomeSearch);
-            this.tbPageHome.Controls.Add(this.btnFilter);
             this.tbPageHome.Controls.Add(this.btnSort);
             this.tbPageHome.Controls.Add(this.btnViewAllShifts);
             this.tbPageHome.Controls.Add(this.lblAssignEmployee);
@@ -135,6 +135,21 @@
             this.tbPageHome.Size = new System.Drawing.Size(870, 673);
             this.tbPageHome.TabIndex = 0;
             this.tbPageHome.Text = "Home";
+            // 
+            // cmboBoxFilter
+            // 
+            this.cmboBoxFilter.Font = new System.Drawing.Font("Century Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cmboBoxFilter.FormattingEnabled = true;
+            this.cmboBoxFilter.Items.AddRange(new object[] {
+            "All",
+            "Manager",
+            "Employee"});
+            this.cmboBoxFilter.Location = new System.Drawing.Point(28, 16);
+            this.cmboBoxFilter.Name = "cmboBoxFilter";
+            this.cmboBoxFilter.Size = new System.Drawing.Size(178, 29);
+            this.cmboBoxFilter.TabIndex = 18;
+            this.cmboBoxFilter.Text = "Filter";
+            this.cmboBoxFilter.SelectedIndexChanged += new System.EventHandler(this.cmboBoxFilter_SelectedIndexChanged);
             // 
             // btnHomeSearch
             // 
@@ -150,28 +165,17 @@
             // txtBoxHomeSearch
             // 
             this.txtBoxHomeSearch.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtBoxHomeSearch.Location = new System.Drawing.Point(95, 16);
+            this.txtBoxHomeSearch.Location = new System.Drawing.Point(212, 16);
             this.txtBoxHomeSearch.Name = "txtBoxHomeSearch";
-            this.txtBoxHomeSearch.Size = new System.Drawing.Size(464, 32);
+            this.txtBoxHomeSearch.Size = new System.Drawing.Size(347, 32);
             this.txtBoxHomeSearch.TabIndex = 16;
-            // 
-            // btnFilter
-            // 
-            this.btnFilter.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.btnFilter.Location = new System.Drawing.Point(95, 610);
-            this.btnFilter.Name = "btnFilter";
-            this.btnFilter.Size = new System.Drawing.Size(139, 42);
-            this.btnFilter.TabIndex = 15;
-            this.btnFilter.Text = "Filter";
-            this.btnFilter.UseVisualStyleBackColor = false;
-            this.btnFilter.Click += new System.EventHandler(this.btnFilter_Click);
             // 
             // btnSort
             // 
             this.btnSort.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.btnSort.Location = new System.Drawing.Point(631, 610);
+            this.btnSort.Location = new System.Drawing.Point(452, 610);
             this.btnSort.Name = "btnSort";
-            this.btnSort.Size = new System.Drawing.Size(144, 42);
+            this.btnSort.Size = new System.Drawing.Size(385, 42);
             this.btnSort.TabIndex = 14;
             this.btnSort.Text = "Sort";
             this.btnSort.UseVisualStyleBackColor = false;
@@ -180,7 +184,7 @@
             // btnViewAllShifts
             // 
             this.btnViewAllShifts.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.btnViewAllShifts.Location = new System.Drawing.Point(240, 610);
+            this.btnViewAllShifts.Location = new System.Drawing.Point(28, 610);
             this.btnViewAllShifts.Name = "btnViewAllShifts";
             this.btnViewAllShifts.Size = new System.Drawing.Size(385, 42);
             this.btnViewAllShifts.TabIndex = 13;
@@ -230,6 +234,46 @@
             this.dataAdminWorkSchedule.TabIndex = 5;
             this.dataAdminWorkSchedule.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataAdminWorkSchedule_CellDoubleClick);
             // 
+            // clmnEmployeeName
+            // 
+            this.clmnEmployeeName.HeaderText = "Employee";
+            this.clmnEmployeeName.MinimumWidth = 6;
+            this.clmnEmployeeName.Name = "clmnEmployeeName";
+            this.clmnEmployeeName.ReadOnly = true;
+            this.clmnEmployeeName.Width = 125;
+            // 
+            // clmnRole
+            // 
+            this.clmnRole.HeaderText = "Role";
+            this.clmnRole.MinimumWidth = 6;
+            this.clmnRole.Name = "clmnRole";
+            this.clmnRole.ReadOnly = true;
+            this.clmnRole.Width = 125;
+            // 
+            // clmnStartTime
+            // 
+            this.clmnStartTime.HeaderText = "Start Time";
+            this.clmnStartTime.MinimumWidth = 6;
+            this.clmnStartTime.Name = "clmnStartTime";
+            this.clmnStartTime.ReadOnly = true;
+            this.clmnStartTime.Width = 125;
+            // 
+            // clmnEndTime
+            // 
+            this.clmnEndTime.HeaderText = "End Time";
+            this.clmnEndTime.MinimumWidth = 6;
+            this.clmnEndTime.Name = "clmnEndTime";
+            this.clmnEndTime.ReadOnly = true;
+            this.clmnEndTime.Width = 125;
+            // 
+            // clmnWorkDate
+            // 
+            this.clmnWorkDate.HeaderText = "Date";
+            this.clmnWorkDate.MinimumWidth = 6;
+            this.clmnWorkDate.Name = "clmnWorkDate";
+            this.clmnWorkDate.ReadOnly = true;
+            this.clmnWorkDate.Width = 255;
+            // 
             // dtpWorkSchedule
             // 
             this.dtpWorkSchedule.Location = new System.Drawing.Point(240, 563);
@@ -244,7 +288,7 @@
             this.tbPageStatistics.Controls.Add(this.dataStatistics);
             this.tbPageStatistics.Controls.Add(this.btnViewAllDepartments);
             this.tbPageStatistics.Controls.Add(this.btnSearch);
-            this.tbPageStatistics.Controls.Add(this.txtBoxSearch);
+            this.tbPageStatistics.Controls.Add(this.txtBoxStatsSearch);
             this.tbPageStatistics.Controls.Add(this.btnViewAllProducts);
             this.tbPageStatistics.Controls.Add(this.btnViewAllEmployees);
             this.tbPageStatistics.Location = new System.Drawing.Point(4, 30);
@@ -344,13 +388,13 @@
             this.btnSearch.UseVisualStyleBackColor = false;
             this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
             // 
-            // txtBoxSearch
+            // txtBoxStatsSearch
             // 
-            this.txtBoxSearch.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtBoxSearch.Location = new System.Drawing.Point(29, 32);
-            this.txtBoxSearch.Name = "txtBoxSearch";
-            this.txtBoxSearch.Size = new System.Drawing.Size(595, 32);
-            this.txtBoxSearch.TabIndex = 13;
+            this.txtBoxStatsSearch.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtBoxStatsSearch.Location = new System.Drawing.Point(29, 32);
+            this.txtBoxStatsSearch.Name = "txtBoxStatsSearch";
+            this.txtBoxStatsSearch.Size = new System.Drawing.Size(595, 32);
+            this.txtBoxStatsSearch.TabIndex = 13;
             // 
             // btnViewAllProducts
             // 
@@ -697,46 +741,6 @@
             // 
             this.updateTimer.Tick += new System.EventHandler(this.updateTimer_Tick);
             // 
-            // clmnEmployeeName
-            // 
-            this.clmnEmployeeName.HeaderText = "Employee";
-            this.clmnEmployeeName.MinimumWidth = 6;
-            this.clmnEmployeeName.Name = "clmnEmployeeName";
-            this.clmnEmployeeName.ReadOnly = true;
-            this.clmnEmployeeName.Width = 125;
-            // 
-            // clmnRole
-            // 
-            this.clmnRole.HeaderText = "Role";
-            this.clmnRole.MinimumWidth = 6;
-            this.clmnRole.Name = "clmnRole";
-            this.clmnRole.ReadOnly = true;
-            this.clmnRole.Width = 125;
-            // 
-            // clmnStartTime
-            // 
-            this.clmnStartTime.HeaderText = "Start Time";
-            this.clmnStartTime.MinimumWidth = 6;
-            this.clmnStartTime.Name = "clmnStartTime";
-            this.clmnStartTime.ReadOnly = true;
-            this.clmnStartTime.Width = 125;
-            // 
-            // clmnEndTime
-            // 
-            this.clmnEndTime.HeaderText = "End Time";
-            this.clmnEndTime.MinimumWidth = 6;
-            this.clmnEndTime.Name = "clmnEndTime";
-            this.clmnEndTime.ReadOnly = true;
-            this.clmnEndTime.Width = 125;
-            // 
-            // clmnWorkDate
-            // 
-            this.clmnWorkDate.HeaderText = "Date";
-            this.clmnWorkDate.MinimumWidth = 6;
-            this.clmnWorkDate.Name = "clmnWorkDate";
-            this.clmnWorkDate.ReadOnly = true;
-            this.clmnWorkDate.Width = 255;
-            // 
             // AdministrationSystem
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 17F);
@@ -796,7 +800,7 @@
         private System.Windows.Forms.Button btnFireEmployee;
         private System.Windows.Forms.Button btnViewAllDepartments;
         private System.Windows.Forms.Button btnSearch;
-        private System.Windows.Forms.TextBox txtBoxSearch;
+        private System.Windows.Forms.TextBox txtBoxStatsSearch;
         private System.Windows.Forms.Button btnViewAllProducts;
         private System.Windows.Forms.Button btnViewAllEmployees;
         private System.Windows.Forms.Button btnViewEmployeeDetails;
@@ -809,7 +813,6 @@
         private System.Windows.Forms.Timer updateTimer;
         private System.Windows.Forms.Label lblAssignEmployee;
         private System.Windows.Forms.Button btnViewAllShifts;
-        private System.Windows.Forms.Button btnFilter;
         private System.Windows.Forms.Button btnSort;
         private System.Windows.Forms.Button btnHomeSearch;
         private System.Windows.Forms.TextBox txtBoxHomeSearch;
@@ -830,5 +833,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn clmnStartTime;
         private System.Windows.Forms.DataGridViewTextBoxColumn clmnEndTime;
         private System.Windows.Forms.DataGridViewTextBoxColumn clmnWorkDate;
+        private System.Windows.Forms.ComboBox cmboBoxFilter;
     }
 }

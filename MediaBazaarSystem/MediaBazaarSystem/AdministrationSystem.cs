@@ -14,7 +14,7 @@ namespace MediaBazaarSystem
 {
     public partial class AdministrationSystem : Form
     {
-        AssignEmployeeSystem assignEmployeeForm;
+        private AssignEmployeeSystem assignEmployeeForm;
         private Department department;
         private Manager manager;
         private Schedule schedule;
@@ -33,69 +33,71 @@ namespace MediaBazaarSystem
             this.department = department;
             this.manager = manager;
             lblAdminName.Text += " " + manager.FirstName + " " + manager.LastName;
-            // Enable timer
             updateTimer.Enabled = true;
             this.GetStatistics();
-            this.UpdateScheduleAndEmployeeManagement();
+            this.UpdateSchedule();
+            this.UpdateEmployeeManagement();
         }
 
         /**
-         * Method to update the table when timer is running.
+         * Method to get database info on work schedule
          */
-        private void UpdateScheduleAndEmployeeManagement()
+        private void GetWorkScheduleDB(String sql, MySqlConnection connection)
         {
-            // Clear table
-            this.dataAdminWorkSchedule.Rows.Clear();
-            this.lbEmployees.Items.Clear();
-            this.lbManagers.Items.Clear();
-
-            // Connect to DB
-            string connectionString = @"Server = studmysql01.fhict.local; Uid = dbi437493; Database = dbi437493; Pwd = dbgroup01;";
-
-            // SQL Query
-            string sql = "SELECT Person.Id, Person.FirstName, Role.Name, Schedule.StartTime, Schedule.EndTime, Schedule.WorkDate FROM Person " +
-                "INNER JOIN Role ON Person.RoleId = Role.Id " +
-                "INNER JOIN Schedule ON Person.Id = Schedule.PersonID";
-            // Start mysql objects
-            MySqlConnection connection = new MySqlConnection( connectionString );
-
+            //this.connection = connection;
             MySqlCommand cmd = new MySqlCommand( sql, connection );
             // Open connection
             connection.Open();
             MySqlDataReader reader = cmd.ExecuteReader();
 
-            // Get the data
-            while( reader.Read() )
+            if(reader.HasRows)
             {
-                String firstName = reader.GetValue( 1 ).ToString();
-                String role = reader.GetValue( 2 ).ToString();
-                String startTime = reader.GetValue( 3 ).ToString();
-                String endTime = reader.GetValue( 4 ).ToString();
-                String workDate = reader.GetValue( 5 ).ToString();
-                DateTime workStartTime = Convert.ToDateTime( startTime );
-                DateTime workEndTime = Convert.ToDateTime( endTime );
-                DateTime convertedWorkDate = Convert.ToDateTime(workDate);
+                // Get the data
+                while( reader.Read() )
+                {
+                    String firstName = reader.GetValue( 1 ).ToString();
+                    String role = reader.GetValue( 2 ).ToString();
+                    String startTime = reader.GetValue( 3 ).ToString();
+                    String endTime = reader.GetValue( 4 ).ToString();
+                    String workDate = reader.GetValue( 5 ).ToString();
+                    DateTime workStartTime = Convert.ToDateTime( startTime );
+                    DateTime workEndTime = Convert.ToDateTime( endTime );
+                    DateTime convertedWorkDate = Convert.ToDateTime( workDate );
 
-                // Add data to data grid view table
-                DataGridViewRow row = ( DataGridViewRow ) dataAdminWorkSchedule.Rows[ 0 ].Clone();
-                dataAdminWorkSchedule.Columns[ "clmnWorkDate" ].DefaultCellStyle.BackColor = Color.LightSteelBlue;
-                row.Cells[ 0 ].Value = firstName; // First Name
-                row.Cells[ 1 ].Value = role; // Name (Role)
-                row.Cells[ 2 ].Value = workStartTime.ToString( "hh:mm tt" );// Start Time
-                row.Cells[ 3 ].Value = workEndTime.ToString( "hh:mm tt" ); // End Time
-                row.Cells[ 4 ].Value = convertedWorkDate.ToString( "dddd, dd MMMM yyyy" ); // Work Date
-                dataAdminWorkSchedule.Rows.Add( row );
+                    // Add data to data grid view table
+                    DataGridViewRow row = ( DataGridViewRow ) dataAdminWorkSchedule.Rows[ 0 ].Clone();
+                    dataAdminWorkSchedule.Columns[ "clmnWorkDate" ].DefaultCellStyle.BackColor = Color.LightSteelBlue;
+                    dataAdminWorkSchedule.Columns[ "clmnStartTime" ].DefaultCellStyle.BackColor = Color.PaleGreen;
+                    dataAdminWorkSchedule.Columns[ "clmnEndTime" ].DefaultCellStyle.BackColor = Color.PaleVioletRed;
+                    row.Cells[ 0 ].Value = firstName; // First Name
+                    row.Cells[ 1 ].Value = role; // Name (Role)
+                    row.Cells[ 2 ].Value = workStartTime.ToString( "hh:mm tt" );// Start Time
+                    row.Cells[ 3 ].Value = workEndTime.ToString( "hh:mm tt" ); // End Time
+                    row.Cells[ 4 ].Value = convertedWorkDate.ToString( "dddd, dd MMMM yyyy" ); // Work Date
+                    dataAdminWorkSchedule.Rows.Add( row );
 
-                schedule = new Schedule( firstName, role, workStartTime, workEndTime, convertedWorkDate );
-                department.AddSchedule( schedule );
+                    schedule = new Schedule( firstName, role, workStartTime, workEndTime, convertedWorkDate );
+                    department.AddSchedule( schedule );
+                }
+            }
+            else
+            {
+                MessageBox.Show( "Sorry there's no data. Contact your administrator for more information." );
             }
 
             reader.Close();
+        }
 
-            //Employee related
-            String sql2 = "SELECT * FROM person WHERE DepartmentID = @DepartmentID";
-            MySqlCommand cmd2 = new MySqlCommand( sql2, connection );
+        /**
+         * Method to get database info on employees
+         */
+        public void GetEmployeeManagementDB(String sql, MySqlConnection connection)
+        {
+            
+            MySqlCommand cmd2 = new MySqlCommand( sql, connection );
+            connection.Open();
             cmd2.Parameters.Add( "DepartmentID", MySqlDbType.VarChar ).Value = department.DepartmentID;
+            MySqlDataReader reader;
             reader = cmd2.ExecuteReader();
 
             while( reader.Read() )
@@ -114,7 +116,7 @@ namespace MediaBazaarSystem
                     int hoursavailable = ( int ) reader.GetValue( 9 );
                     Manager man = new Manager( ID, firstName, lastName, age, address, charge, salary, hoursavailable, email );
 
-                    if(department.GetManager(firstName, lastName) == null)
+                    if( department.GetManager( firstName, lastName ) == null )
                     {
                         department.AddManager( man );
                     }
@@ -134,7 +136,7 @@ namespace MediaBazaarSystem
                     int hoursavailable = ( int ) reader.GetValue( 9 );
                     emp = new Employee( ID, firstName, lastName, age, address, charge, salary, hoursavailable, email );
 
-                    if(department.GetEmployee(firstName, lastName) == null)
+                    if( department.GetEmployee( firstName, lastName ) == null )
                     {
                         department.AddEmployee( emp );
                     }
@@ -143,22 +145,70 @@ namespace MediaBazaarSystem
                 }
             }
             reader.Close();
+        }
+
+        /**
+         * Method to update the schedule table
+         */
+        private void UpdateSchedule()
+        {
+            // Clear table
+            this.dataAdminWorkSchedule.Rows.Clear();
+            department.GetSchedules().Clear();
+
+            // Connect to DB
+            string connectionString = @"Server = studmysql01.fhict.local; Uid = dbi437493; Database = dbi437493; Pwd = dbgroup01;";
+
+            // SQL Query
+            string sql = "SELECT Person.Id, Person.FirstName, Role.Name, Schedule.StartTime, Schedule.EndTime, Schedule.WorkDate FROM Person " +
+                "INNER JOIN Role ON Person.RoleId = Role.Id " +
+                "INNER JOIN Schedule ON Person.Id = Schedule.PersonID";
+            // Start mysql objects
+            MySqlConnection connection = new MySqlConnection( connectionString );
+            MySqlCommand cmd = new MySqlCommand( sql, connection );
+            this.GetWorkScheduleDB( sql, connection );
 
             // Disable timer
             updateTimer.Enabled = false;
             //Refresh.Enabled = false;
         }
 
+        /**
+         * Method to update the employee management 
+         */
+        public void UpdateEmployeeManagement()
+        {
+            this.lbEmployees.Items.Clear();
+            this.lbManagers.Items.Clear();
+
+            string connectionString = @"Server = studmysql01.fhict.local; Uid = dbi437493; Database = dbi437493; Pwd = dbgroup01;";
+            MySqlConnection connection = new MySqlConnection( connectionString );
+            //Employee related
+            String sql2 = "SELECT * FROM person WHERE DepartmentID = @DepartmentID";
+            MySqlCommand cmd2 = new MySqlCommand( sql2, connection );
+            cmd2.Parameters.Add( "DepartmentID", MySqlDbType.VarChar ).Value = department.DepartmentID;
+            this.GetEmployeeManagementDB( sql2, connection );
+        }
+
+        /**
+         * Method to get statistics
+         */
         private void GetStatistics()
         {
         }
 
+        /**
+         * Method to add employee to the database
+         */
         private void btnAddEmployee_Click(object sender, EventArgs e)
         {
             Employee_Add form1 = new Employee_Add(department, null, null);
             form1.Show();
         }
 
+        /**
+         * Method to view employee's details
+         */
         private void btnViewEmployeeDetails_Click(object sender, EventArgs e)
         {
             if(lbEmployees.SelectedItem != null)
@@ -181,6 +231,9 @@ namespace MediaBazaarSystem
             }
         }
 
+        /**
+         * Method to update employee's information
+         */
         private void btnUpdateEmployee_Click(object sender, EventArgs e)
         {
             if (lbEmployees.SelectedItem != null)
@@ -209,6 +262,9 @@ namespace MediaBazaarSystem
 
         }
 
+        /**
+         * Jose???
+         */
         private Employee SearchEmp()
         {
             String auxEmp = lbEmployees.SelectedItem.ToString();
@@ -225,6 +281,9 @@ namespace MediaBazaarSystem
             return emp;
         }
 
+        /**
+         * Jose???
+         */
         private Manager SearchMan()
         {
             String auxMan = lbManagers.SelectedItem.ToString();
@@ -241,6 +300,9 @@ namespace MediaBazaarSystem
             return man;
         }
 
+        /**
+         * Method to delete employee from the database
+         */
         private void btnFireEmployee_Click(object sender, EventArgs e)
         {
             string connString = @"Server = studmysql01.fhict.local; Uid = dbi437493; Database = dbi437493; Pwd = dbgroup01;";
@@ -297,7 +359,7 @@ namespace MediaBazaarSystem
         }
 
         /**
-         * Method to 
+         * Jose???
          */
         private void Refresh_Tick(object sender, EventArgs e)
         {
@@ -438,7 +500,7 @@ namespace MediaBazaarSystem
         private void updateTimer_Tick( object sender, EventArgs e )
         {
             updateTimer.Interval = 1000;
-            this.UpdateScheduleAndEmployeeManagement();
+            this.UpdateSchedule();
         }
 
         /**
@@ -447,7 +509,7 @@ namespace MediaBazaarSystem
         private void btnViewAllShifts_Click( object sender, EventArgs e )
         {
             this.dataAdminWorkSchedule.Rows.Clear();
-            this.UpdateScheduleAndEmployeeManagement();
+            this.UpdateSchedule();
         }
 
         /**
@@ -458,14 +520,6 @@ namespace MediaBazaarSystem
             // Sort the first column in the data grid view (work schedule)
             // In this case the first column is the first name of employee
             dataAdminWorkSchedule.Sort( dataAdminWorkSchedule.Columns[ 0 ], ListSortDirection.Ascending );
-        }
-
-        /**
-         * Method to filter schedule table
-         */
-        private void btnFilter_Click( object sender, EventArgs e )
-        {
-
         }
 
         /**
@@ -558,21 +612,32 @@ namespace MediaBazaarSystem
          */
         private void btnSearch_Click( object sender, EventArgs e )
         {
-            //lBoxStatistics.Items.Clear();
-            //// Set textbox characters to lowercase
-            //txtBoxSearch.CharacterCasing = CharacterCasing.Lower;
-            //String searchedValue = txtBoxSearch.Text;
+            // Set textbox characters to lowercase
+            txtBoxStatsSearch.CharacterCasing = CharacterCasing.Lower;
+            String searchedValue = txtBoxStatsSearch.Text;
+            dataStatistics.Rows.Clear();
 
-            //foreach( Employee employee in department.GetEmployees() )
-            //{
-            //    // Check if employee has first name with the value in search textbox
-            //    // (Remember this info is coming from the database and comparing it to the searched value)
-            //    // Return employee in listbox
-            //    if( searchedValue.Contains( employee.FirstName.ToLower() ) ) // ToLower is lowercase
-            //    {
-            //        lBoxStatistics.Items.Add( employee.ToString() );
-            //    }
-            //}
+            try
+            {
+                foreach( Employee employee in department.GetEmployees() )
+                {
+                    if( searchedValue.Contains( employee.FirstName.ToLower() ) )
+                    {
+                        //DataGridViewRow newRow = new DataGridViewRow();
+                        //newRow.CreateCells( dataStatistics );
+                        //newRow.Cells[ 0 ].Value = schedule.FirstName;
+                        //newRow.Cells[ 1 ].Value = schedule.Role;
+                        //newRow.Cells[ 2 ].Value = schedule.StartTime.ToString( "hh:mm tt" );
+                        //newRow.Cells[ 3 ].Value = schedule.EndTime.ToString( "hh:mm tt" );
+                        //newRow.Cells[ 4 ].Value = schedule.WorkDate.ToString( "dddd, dd MMMM yyyy" );
+                        //dataStatistics.Rows.Add( newRow );
+                    }
+                }
+            }
+            catch( Exception ex )
+            {
+                MessageBox.Show( "Sorry, that person doesn't exist" );
+            }
         }
 
         /**
@@ -591,35 +656,63 @@ namespace MediaBazaarSystem
             lbManagers.SelectedItem = null;
         }
 
+        /**
+         * Method to display info on the table based on a user's first name from the searchbox
+         */
         private void btnHomeSearch_Click( object sender, EventArgs e )
         {
+            txtBoxHomeSearch.CharacterCasing = CharacterCasing.Lower;
             String searchedValue = txtBoxHomeSearch.Text;
+            dataAdminWorkSchedule.Rows.Clear();
 
             try
             {
                 foreach( Schedule schedule in department.GetSchedules() )
                 {
-                    if( searchedValue.Contains( schedule.FirstName ) )
+                    if( searchedValue.Contains( schedule.FirstName.ToLower() ) )
                     {
-                        dataAdminWorkSchedule.Rows.Clear();
-
-                        dataAdminWorkSchedule.Rows.Add(
-                            schedule.FirstName,
-                            schedule.Role,
-                            schedule.StartTime.ToString( "hh:mm tt" ),
-                            schedule.EndTime.ToString( "hh:mm tt" ),
-                            schedule.WorkDate.ToString( "dddd, dd MMMM yyyy" )
-                        );
+                        DataGridViewRow newRow = new DataGridViewRow();
+                        newRow.CreateCells( dataAdminWorkSchedule );
+                        newRow.Cells[ 0 ].Value = schedule.FirstName;
+                        newRow.Cells[ 1 ].Value = schedule.Role;
+                        newRow.Cells[ 2 ].Value = schedule.StartTime.ToString( "hh:mm tt" );
+                        newRow.Cells[ 3 ].Value = schedule.EndTime.ToString( "hh:mm tt" );
+                        newRow.Cells[ 4 ].Value = schedule.WorkDate.ToString( "dddd, dd MMMM yyyy" );
+                        dataAdminWorkSchedule.Rows.Add(newRow);
                     }
                 }
             }
             catch(Exception ex)
             {
-
                 MessageBox.Show( "Sorry, that person doesn't exist" );
-                
             }
+        }
 
+        /**
+         * Method to display info based on the selected option from the dropdown list
+         */
+        private void cmboBoxFilter_SelectedIndexChanged( object sender, EventArgs e )
+        {
+            dataAdminWorkSchedule.Rows.Clear();
+            // Connect to DB
+            string connectionString = @"Server = studmysql01.fhict.local; Uid = dbi437493; Database = dbi437493; Pwd = dbgroup01;";
+            // SQL Query
+            string sql = "SELECT Person.Id, Person.FirstName, Role.Name, Schedule.StartTime, Schedule.EndTime, Schedule.WorkDate FROM Person " +
+                "INNER JOIN Role ON Person.RoleId = Role.Id " +
+                "INNER JOIN Schedule ON Person.Id = Schedule.PersonID " +
+                "WHERE Role.name = '" + cmboBoxFilter.SelectedItem.ToString() + "'";
+            // Start mysql objects
+            MySqlConnection connection = new MySqlConnection( connectionString );
+            MySqlCommand cmd = new MySqlCommand( sql, connection );
+            // Check which option is selected from the combobox
+            if(cmboBoxFilter.SelectedItem.ToString() == "All")
+            {
+                this.UpdateSchedule();
+            }
+            else
+            {
+                this.GetWorkScheduleDB(sql, connection);
+            }
         }
     }
 }
