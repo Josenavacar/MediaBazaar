@@ -1,6 +1,6 @@
 ﻿namespace MediaBazaarSystem
 {
-    partial class Employee_Add
+    partial class UpdateOrAdd
     {
         /// <summary>
         /// Required designer variable.

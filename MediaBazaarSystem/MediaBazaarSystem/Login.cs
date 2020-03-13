@@ -52,7 +52,7 @@ namespace MediaBazaarSystem
                 {
                     // If the data is available then log user in and open navigation form
                     // else show error message
-                    if( reader.Read() == true )
+                    if( reader.Read() )
                     {
                         // The number is based on the column... 
                         //E.g. password is column 6 and email is column 5
@@ -96,6 +96,10 @@ namespace MediaBazaarSystem
                         {
                             MessageBox.Show( "Email or password is incorrect. Please try again." );
                         }
+                    }
+                    else
+                    {
+                        MessageBox.Show("Email or password is incorrect. Please try again.");
                     }
                 }
                 catch( FormatException ex )

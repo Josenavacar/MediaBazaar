@@ -19,7 +19,7 @@ namespace MediaBazaarSystem
         private Manager manager;
         private Schedule schedule;
         private Employee emp;
-        public static bool ensure;
+        public static bool ensure; //Used for double checking when deleting from the database.
         int idManage;
         private String employeeName;
 
@@ -155,10 +155,8 @@ namespace MediaBazaarSystem
             // Clear table
             this.dataAdminWorkSchedule.Rows.Clear();
             department.GetSchedules().Clear();
-
             // Connect to DB
             string connectionString = @"Server = studmysql01.fhict.local; Uid = dbi437493; Database = dbi437493; Pwd = dbgroup01;";
-
             // SQL Query
             string sql = "SELECT Person.Id, Person.FirstName, Role.Name, Schedule.StartTime, Schedule.EndTime, Schedule.WorkDate FROM Person " +
                 "INNER JOIN Role ON Person.RoleId = Role.Id " +
@@ -170,7 +168,6 @@ namespace MediaBazaarSystem
 
             // Disable timer
             updateTimer.Enabled = false;
-            //Refresh.Enabled = false;
         }
 
         /**
@@ -195,6 +192,7 @@ namespace MediaBazaarSystem
          */
         private void GetStatistics()
         {
+
         }
 
         /**
@@ -202,7 +200,7 @@ namespace MediaBazaarSystem
          */
         private void btnAddEmployee_Click(object sender, EventArgs e)
         {
-            Employee_Add form1 = new Employee_Add(department, null, null);
+            UpdateOrAdd form1 = new UpdateOrAdd(department);
             form1.Show();
         }
 
@@ -211,18 +209,18 @@ namespace MediaBazaarSystem
          */
         private void btnViewEmployeeDetails_Click(object sender, EventArgs e)
         {
-            if(lbEmployees.SelectedItem != null)
+            if(lbEmployees.SelectedItem != null) //Checks if an employee is selected in the listbox.
             {
-                Employee emp = SearchEmp();
+                Employee emp = SearchEmp(); 
                 if (emp != null)
                 {
                     ViewEmployee form1 = new ViewEmployee(emp, null);
                     form1.Show();
                 }
             }
-            else if(lbManagers.SelectedItem != null)
+            else if(lbManagers.SelectedItem != null) //Checks if a manager is selected in the listbox.
             {
-                Manager man = SearchMan();
+                Manager man = SearchMan(); 
                 if(man != null)
                 {
                     ViewEmployee form1 = new ViewEmployee(null, man);
@@ -236,22 +234,22 @@ namespace MediaBazaarSystem
          */
         private void btnUpdateEmployee_Click(object sender, EventArgs e)
         {
-            if (lbEmployees.SelectedItem != null)
+            if (lbEmployees.SelectedItem != null) //Checks if an employee is selected in the listbox.
             {
                 Employee emp = SearchEmp();
                 if (emp != null)
                 {
-                    Employee_Add form1 = new Employee_Add(department, emp, null);
+                    UpdateOrAdd form1 = new UpdateOrAdd(department, emp);
                     form1.Show();
                 }
             }
 
-            else if(lbManagers.SelectedItem != null)
+            else if(lbManagers.SelectedItem != null) //Checks if a manager is selected in the listbox.
             {
                 Manager man = SearchMan();
                 if (man != null)
                 {
-                    Employee_Add form1 = new Employee_Add(department, null, man);
+                    UpdateOrAdd form1 = new UpdateOrAdd(department, man);
                     form1.Show();
                 }
             }
@@ -263,7 +261,7 @@ namespace MediaBazaarSystem
         }
 
         /**
-         * Jose???
+         * Method that returns an employee selected on the listbox or null if it doesn't exist.
          */
         private Employee SearchEmp()
         {
@@ -282,7 +280,7 @@ namespace MediaBazaarSystem
         }
 
         /**
-         * Jose???
+         * Method that returns a manager selected on the listbox or null if it doesn't exist.
          */
         private Manager SearchMan()
         {
@@ -314,8 +312,9 @@ namespace MediaBazaarSystem
 
             if (lbEmployees.SelectedItem != null)
             {
+                //Opens a form that will double check for deleting, if ensure is returned back as true, the employee will be deleted from the database.
                 DeleteForm check = new DeleteForm(ensure);
-                check.StartPosition = FormStartPosition.CenterParent;
+                check.StartPosition = FormStartPosition.CenterParent; //Makes the form pop up in the middle of the parent form (this).
                 check.ShowDialog(this);
 
                 if(ensure)
@@ -325,17 +324,18 @@ namespace MediaBazaarSystem
                     {
                         cmd.CommandText = "DELETE FROM person WHERE Id = @Id";
                         cmd.Parameters.AddWithValue("@Id", fired.dbID);
-                        cmd.ExecuteNonQuery();
+                        cmd.ExecuteNonQuery(); //Delte from Database.
 
-                        department.DeleteEmployee(fired);
+                        department.DeleteEmployee(fired); //Delete from list.
                     }
 
-                    ensure = false;
+                    ensure = false; //Set ensure back to false for future calls.
                 }
             }
 
             else if (lbManagers.SelectedItem != null)
             {
+                //Opens a form that will double check for deleting, if ensure is returned back as true, the manager will be deleted from the database.
                 DeleteForm check = new DeleteForm(ensure);
                 check.StartPosition = FormStartPosition.CenterParent;
                 check.ShowDialog(this);
@@ -352,10 +352,11 @@ namespace MediaBazaarSystem
                         department.DeleteManager(fired);
                     }
 
-                    ensure = false;
+                    ensure = false; //Set ensure back to false for future calls.
                 }
             }
-            
+
+            conn.Close();
         }
 
         /**
@@ -365,51 +366,47 @@ namespace MediaBazaarSystem
         {
             //Employees
             int indexEmp = lbEmployees.SelectedIndex;
-
-            lbEmployees.Items.Clear();
-            List<Employee> listEmp = department.GetEmployees();
-            foreach( Employee emp in listEmp )
+            lbEmployees.Items.Clear(); //Empties empoloyee listbox
+            List<Employee> listEmp = department.GetEmployees(); 
+            foreach (Employee emp in listEmp) //Refills employee listbox
             {
                 String outpEmp = emp.LastName + ", " + emp.FirstName;
                 lbEmployees.Items.Add( outpEmp );
             }
 
-            try
+            try //Makes sure that the user does not notice this operation by reselecting the exact same item that he had selected.
             {
                 if( lbEmployees.Items.Count > 0 )
                 {
                     lbEmployees.SelectedIndex = indexEmp;
                 }
             }
-            catch( Exception ex )
+            catch(Exception ex) //If an element was deleted, this would lead to a crash, instead of that we will select nothing.
             {
                 lbEmployees.SelectedItem = null;
             }
 
-
             //Managers
             int indexMan = lbManagers.SelectedIndex;
-
-            lbManagers.Items.Clear();
+            lbManagers.Items.Clear(); //Empties managers listbox
             List<Manager> listMan = department.GetManagers();
-            foreach( Manager man in listMan )
+            foreach (Manager man in listMan) //Refills managers listbox
             {
                 String outpMan = man.LastName + ", " + man.FirstName;
                 lbManagers.Items.Add( outpMan );
             }
 
-            try
+            try //Makes sure that the user does not notice this operation by reselecting the exact same item that he had selected.
             {
                 if( lbManagers.Items.Count > 0 )
                 {
                     lbManagers.SelectedIndex = indexMan;
                 }
             }
-            catch( Exception ex )
+            catch(Exception ex) //If an element was deleted, this would lead to a crash, instead of that we will select nothing.
             {
                 lbManagers.SelectedItem = null;
             }
-
         }
 
         /**
@@ -474,7 +471,9 @@ namespace MediaBazaarSystem
          */
         private void btnChangePwd_Click( object sender, EventArgs e )
         {
-            ChangePassword pwd = new ChangePassword( manager, null );
+
+            //On click, opens a form to change the currently logged in user's password.
+            ChangePassword pwd = new ChangePassword(manager, null);
             pwd.StartPosition = FormStartPosition.CenterParent;
             pwd.ShowDialog( this );
         }
@@ -713,6 +712,16 @@ namespace MediaBazaarSystem
             {
                 this.GetWorkScheduleDB(sql, connection);
             }
+        }
+
+        private void picBoxLogout_MouseEnter(object sender, EventArgs e)
+        {
+            picBoxLogout.Cursor = Cursors.Hand;
+        }
+
+        private void picBoxLogout_MouseLeave(object sender, EventArgs e)
+        {
+            picBoxLogout.Cursor = Cursors.Default;
         }
     }
 }
