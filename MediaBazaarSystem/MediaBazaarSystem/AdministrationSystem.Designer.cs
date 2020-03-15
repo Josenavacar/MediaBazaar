@@ -75,7 +75,6 @@
             this.txtBoxAge = new System.Windows.Forms.TextBox();
             this.txtBoxFirstName = new System.Windows.Forms.TextBox();
             this.btnUpdateProfile = new System.Windows.Forms.Button();
-            this.lbEmployeeInfo = new System.Windows.Forms.ListBox();
             this.tbPageEmpManagement = new System.Windows.Forms.TabPage();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.btnUndoEmpSelection = new System.Windows.Forms.Button();
@@ -91,6 +90,7 @@
             this.btnFireEmployee = new System.Windows.Forms.Button();
             this.Refresh = new System.Windows.Forms.Timer(this.components);
             this.updateTimer = new System.Windows.Forms.Timer(this.components);
+            this.lbEmployeeInfo = new System.Windows.Forms.ListBox();
             this.tbControlAdmin.SuspendLayout();
             this.tbPageHome.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picBoxLogout)).BeginInit();
@@ -146,7 +146,7 @@
             "Employee"});
             this.cmboBoxFilter.Location = new System.Drawing.Point(28, 16);
             this.cmboBoxFilter.Name = "cmboBoxFilter";
-            this.cmboBoxFilter.Size = new System.Drawing.Size(178, 29);
+            this.cmboBoxFilter.Size = new System.Drawing.Size(178, 27);
             this.cmboBoxFilter.TabIndex = 18;
             this.cmboBoxFilter.Text = "Filter";
             this.cmboBoxFilter.SelectedIndexChanged += new System.EventHandler(this.cmboBoxFilter_SelectedIndexChanged);
@@ -167,7 +167,7 @@
             this.txtBoxHomeSearch.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtBoxHomeSearch.Location = new System.Drawing.Point(212, 16);
             this.txtBoxHomeSearch.Name = "txtBoxHomeSearch";
-            this.txtBoxHomeSearch.Size = new System.Drawing.Size(347, 32);
+            this.txtBoxHomeSearch.Size = new System.Drawing.Size(347, 27);
             this.txtBoxHomeSearch.TabIndex = 16;
             // 
             // btnSort
@@ -395,7 +395,7 @@
             this.txtBoxStatsSearch.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtBoxStatsSearch.Location = new System.Drawing.Point(29, 32);
             this.txtBoxStatsSearch.Name = "txtBoxStatsSearch";
-            this.txtBoxStatsSearch.Size = new System.Drawing.Size(595, 32);
+            this.txtBoxStatsSearch.Size = new System.Drawing.Size(595, 27);
             this.txtBoxStatsSearch.TabIndex = 13;
             // 
             // btnViewAllProducts
@@ -487,7 +487,7 @@
             // lblEmail
             // 
             this.lblEmail.AutoSize = true;
-            this.lblEmail.Location = new System.Drawing.Point(447, 509);
+            this.lblEmail.Location = new System.Drawing.Point(438, 509);
             this.lblEmail.Name = "lblEmail";
             this.lblEmail.Size = new System.Drawing.Size(50, 19);
             this.lblEmail.TabIndex = 11;
@@ -504,7 +504,7 @@
             // lblAddress
             // 
             this.lblAddress.AutoSize = true;
-            this.lblAddress.Location = new System.Drawing.Point(422, 465);
+            this.lblAddress.Location = new System.Drawing.Point(429, 465);
             this.lblAddress.Name = "lblAddress";
             this.lblAddress.Size = new System.Drawing.Size(65, 19);
             this.lblAddress.TabIndex = 9;
@@ -522,7 +522,7 @@
             // lblLastName
             // 
             this.lblLastName.AutoSize = true;
-            this.lblLastName.Location = new System.Drawing.Point(399, 364);
+            this.lblLastName.Location = new System.Drawing.Point(403, 364);
             this.lblLastName.Name = "lblLastName";
             this.lblLastName.Size = new System.Drawing.Size(85, 19);
             this.lblLastName.TabIndex = 7;
@@ -531,7 +531,7 @@
             // lblFirstName
             // 
             this.lblFirstName.AutoSize = true;
-            this.lblFirstName.Location = new System.Drawing.Point(403, 312);
+            this.lblFirstName.Location = new System.Drawing.Point(405, 312);
             this.lblFirstName.Name = "lblFirstName";
             this.lblFirstName.Size = new System.Drawing.Size(83, 19);
             this.lblFirstName.TabIndex = 6;
@@ -578,17 +578,7 @@
             this.btnUpdateProfile.TabIndex = 1;
             this.btnUpdateProfile.Text = "Update Profile";
             this.btnUpdateProfile.UseVisualStyleBackColor = false;
-            // 
-            // lbEmployeeInfo
-            // 
-            this.lbEmployeeInfo.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.lbEmployeeInfo.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbEmployeeInfo.FormattingEnabled = true;
-            this.lbEmployeeInfo.ItemHeight = 21;
-            this.lbEmployeeInfo.Location = new System.Drawing.Point(19, 65);
-            this.lbEmployeeInfo.Name = "lbEmployeeInfo";
-            this.lbEmployeeInfo.Size = new System.Drawing.Size(330, 529);
-            this.lbEmployeeInfo.TabIndex = 0;
+            this.btnUpdateProfile.Click += new System.EventHandler(this.btnUpdateProfile_Click);
             // 
             // tbPageEmpManagement
             // 
@@ -663,7 +653,7 @@
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(6, 35);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(95, 21);
+            this.label2.Size = new System.Drawing.Size(78, 19);
             this.label2.TabIndex = 10;
             this.label2.Text = "Managers";
             // 
@@ -743,6 +733,17 @@
             // 
             this.updateTimer.Tick += new System.EventHandler(this.updateTimer_Tick);
             // 
+            // lbEmployeeInfo
+            // 
+            this.lbEmployeeInfo.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.lbEmployeeInfo.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbEmployeeInfo.FormattingEnabled = true;
+            this.lbEmployeeInfo.ItemHeight = 21;
+            this.lbEmployeeInfo.Location = new System.Drawing.Point(19, 65);
+            this.lbEmployeeInfo.Name = "lbEmployeeInfo";
+            this.lbEmployeeInfo.Size = new System.Drawing.Size(330, 550);
+            this.lbEmployeeInfo.TabIndex = 0;
+            // 
             // AdministrationSystem
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 15F);
@@ -794,7 +795,6 @@
         private System.Windows.Forms.TextBox txtBoxAge;
         private System.Windows.Forms.TextBox txtBoxFirstName;
         private System.Windows.Forms.Button btnUpdateProfile;
-        private System.Windows.Forms.ListBox lbEmployeeInfo;
         private System.Windows.Forms.TabPage tbPageEmpManagement;
         private System.Windows.Forms.Button btnAddEmployee;
         private System.Windows.Forms.Button btnUpdateEmployee;
@@ -836,5 +836,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn clmnEndTime;
         private System.Windows.Forms.DataGridViewTextBoxColumn clmnWorkDate;
         private System.Windows.Forms.ComboBox cmboBoxFilter;
+        private System.Windows.Forms.ListBox lbEmployeeInfo;
     }
 }

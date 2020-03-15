@@ -75,6 +75,18 @@ namespace MediaBazaarSystem
             Email = email;
         }
 
+        public void EditManager(String firstName, String lastName, int age, String address, String role, double salary, int hoursAvailable, String email)
+        {
+            FirstName = firstName;
+            LastName = lastName;
+            Age = age;
+            Address = address;
+            Role = role;
+            Salary = salary;
+            HoursAvailable = hoursAvailable;
+            Email = email;
+        }
+
         public void GenerateSalary()
         {
 

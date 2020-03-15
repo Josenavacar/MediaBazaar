@@ -37,6 +37,9 @@ namespace MediaBazaarSystem
             this.GetStatistics();
             this.UpdateSchedule();
             this.UpdateEmployeeManagement();
+
+            //Profile
+            refreshProfile();
         }
 
         /**
@@ -473,7 +476,6 @@ namespace MediaBazaarSystem
          */
         private void btnChangePwd_Click( object sender, EventArgs e )
         {
-
             //On click, opens a form to change the currently logged in user's password.
             ChangePassword pwd = new ChangePassword(manager, null);
             pwd.StartPosition = FormStartPosition.CenterParent;
@@ -711,8 +713,8 @@ namespace MediaBazaarSystem
                 this.UpdateSchedule();
             }
             else
-            {
-                this.GetWorkScheduleDB(sql, connection);
+             
+            {   this.GetWorkScheduleDB(sql, connection);
             }
         }
 
@@ -724,6 +726,64 @@ namespace MediaBazaarSystem
         private void picBoxLogout_MouseLeave(object sender, EventArgs e)
         {
             picBoxLogout.Cursor = Cursors.Default;
+        }
+
+        private void btnUpdateProfile_Click(object sender, EventArgs e)
+        {
+            if(checkProfileChange())
+            {
+                //Updates manager in database.
+                string connString = @"Server = studmysql01.fhict.local; Uid = dbi437493; Database = dbi437493; Pwd = dbgroup01;";
+                MySqlConnection conn = new MySqlConnection(connString);
+                conn.Open();
+                MySqlCommand cmd = conn.CreateCommand();
+                cmd.CommandText = "UPDATE person SET Firstname = @Firstname, Lastname = @Lastname, Age = @Age, Address = @Address, Email = @Email WHERE Id = @Id";
+                cmd.Parameters.AddWithValue("@Firstname", txtBoxFirstName.Text);
+                cmd.Parameters.AddWithValue("@Lastname", txtBoxLastName.Text);
+                cmd.Parameters.AddWithValue("@Age", Convert.ToInt32(txtBoxAge.Text));
+                cmd.Parameters.AddWithValue("@Address", txtBoxAddress.Text);
+                cmd.Parameters.AddWithValue("@Email", txtBoxEmail.Text);
+                cmd.Parameters.AddWithValue("@Id", manager.dbID);
+
+                cmd.ExecuteNonQuery();
+
+                //Updates manager in list.
+                manager.EditManager(txtBoxFirstName.Text, txtBoxLastName.Text, Convert.ToInt32(txtBoxAge.Text), txtBoxAddress.Text, manager.Role, manager.Salary, manager.HoursAvailable, txtBoxEmail.Text);
+
+                //Updates profile.
+                refreshProfile();
+            }
+            else
+            {
+                MessageBox.Show("No changes made");
+            }
+        }
+
+        private void refreshProfile() //Adds all manager's data into the listbox and textboxes.
+        {
+            lbEmployeeInfo.Items.Clear();
+            lbEmployeeInfo.Items.Add("Name: " + manager.FirstName);
+            lbEmployeeInfo.Items.Add("Surname: " + manager.LastName);
+            lbEmployeeInfo.Items.Add("Age: " + manager.Age);
+            lbEmployeeInfo.Items.Add("Address: " + manager.Address);
+            lbEmployeeInfo.Items.Add("Email: " + manager.Email);
+            txtBoxFirstName.Text = manager.FirstName;
+            txtBoxLastName.Text = manager.LastName;
+            txtBoxAge.Text = manager.Age.ToString();
+            txtBoxAddress.Text = manager.Address;
+            txtBoxEmail.Text = manager.Email;
+        }
+
+        private bool checkProfileChange()
+        {
+            if(txtBoxFirstName.Text == manager.FirstName && txtBoxLastName.Text == manager.LastName && Convert.ToInt32(txtBoxAge.Text) == manager.Age && txtBoxAddress.Text == manager.Address && txtBoxEmail.Text == manager.Email)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
         }
     }
 }
