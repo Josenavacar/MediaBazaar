@@ -752,6 +752,8 @@ namespace MediaBazaarSystem
 
                 //Updates profile.
                 refreshProfile();
+
+                MessageBox.Show("Profile Updated Successfully");
             }
             else
             {

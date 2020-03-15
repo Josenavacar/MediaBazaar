@@ -14,10 +14,12 @@ namespace MediaBazaarSystem
 {
     public partial class EmployeeSystem : Form
     {
+        Employee employee;
+        Department dep;
         /**
          * The Constructor
          */
-        public EmployeeSystem(String employeeID)
+        public EmployeeSystem(Department dep, Employee emp)
         {
             InitializeComponent();
             // Connect to DB
@@ -52,6 +54,10 @@ namespace MediaBazaarSystem
                 row.Cells[ 4 ].Value = reader.GetValue( 4 ).ToString(); // Date
                 dataEmpWorkSchedule.Rows.Add( row );
             }
+
+            this.employee = emp;
+            this.dep = dep;
+            refreshProfile();
         }
 
         /**
@@ -108,6 +114,74 @@ namespace MediaBazaarSystem
                     dataEmpWorkSchedule.Rows.Add( row );
                 }
             }
+        }
+
+        private void btnUpdateProfile_Click(object sender, EventArgs e)
+        {
+            if (checkProfileChange())
+            {
+                //Updates employee in database.
+                string connString = @"Server = studmysql01.fhict.local; Uid = dbi437493; Database = dbi437493; Pwd = dbgroup01;";
+                MySqlConnection conn = new MySqlConnection(connString);
+                conn.Open();
+                MySqlCommand cmd = conn.CreateCommand();
+                cmd.CommandText = "UPDATE person SET Firstname = @Firstname, Lastname = @Lastname, Age = @Age, Address = @Address, Email = @Email WHERE Id = @Id";
+                cmd.Parameters.AddWithValue("@Firstname", txtBoxFirstName.Text);
+                cmd.Parameters.AddWithValue("@Lastname", txtBoxLastName.Text);
+                cmd.Parameters.AddWithValue("@Age", Convert.ToInt32(txtBoxAge.Text));
+                cmd.Parameters.AddWithValue("@Address", txtBoxAddress.Text);
+                cmd.Parameters.AddWithValue("@Email", txtBoxEmail.Text);
+                cmd.Parameters.AddWithValue("@Id", employee.dbID);
+
+                cmd.ExecuteNonQuery();
+
+                //Updates employee in list.
+                employee.EditEmployee(txtBoxFirstName.Text, txtBoxLastName.Text, Convert.ToInt32(txtBoxAge.Text), txtBoxAddress.Text, employee.Role, employee.Salary, employee.HoursAvailable, txtBoxEmail.Text);
+
+                //Updates profile.
+                refreshProfile();
+
+                MessageBox.Show("Profile Updated Successfully");
+            }
+            else
+            {
+                MessageBox.Show("No changes made");
+            }
+        }
+
+        private void refreshProfile() //Adds all employee's data into the listbox and textboxes.
+        {
+            lbEmployeeInfo.Items.Clear();
+            lbEmployeeInfo.Items.Add("Name: " + employee.FirstName);
+            lbEmployeeInfo.Items.Add("Surname: " + employee.LastName);
+            lbEmployeeInfo.Items.Add("Age: " + employee.Age);
+            lbEmployeeInfo.Items.Add("Address: " + employee.Address);
+            lbEmployeeInfo.Items.Add("Email: " + employee.Email);
+            txtBoxFirstName.Text = employee.FirstName;
+            txtBoxLastName.Text = employee.LastName;
+            txtBoxAge.Text = employee.Age.ToString();
+            txtBoxAddress.Text = employee.Address;
+            txtBoxEmail.Text = employee.Email;
+        }
+        
+        private bool checkProfileChange()
+        {
+            if (txtBoxFirstName.Text == employee.FirstName && txtBoxLastName.Text == employee.LastName && Convert.ToInt32(txtBoxAge.Text) == employee.Age && txtBoxAddress.Text == employee.Address && txtBoxEmail.Text == employee.Email)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
+
+        private void btnChangePwd_Click(object sender, EventArgs e)
+        {
+            //On click, opens a form to change the currently logged in user's password.
+            ChangePassword pwd = new ChangePassword(null, employee);
+            pwd.StartPosition = FormStartPosition.CenterParent;
+            pwd.ShowDialog(this);
         }
     }
 }
