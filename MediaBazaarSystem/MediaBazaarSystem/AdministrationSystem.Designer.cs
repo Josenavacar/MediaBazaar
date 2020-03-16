@@ -30,9 +30,9 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AdministrationSystem));
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea3 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend3 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series3 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.tbControlAdmin = new System.Windows.Forms.TabControl();
             this.tbPageHome = new System.Windows.Forms.TabPage();
             this.cmboBoxFilter = new System.Windows.Forms.ComboBox();
@@ -334,17 +334,17 @@
             // 
             // chart1
             // 
-            chartArea3.Name = "ChartArea1";
-            this.chart1.ChartAreas.Add(chartArea3);
-            legend3.Name = "Legend1";
-            this.chart1.Legends.Add(legend3);
+            chartArea1.Name = "ChartArea1";
+            this.chart1.ChartAreas.Add(chartArea1);
+            legend1.Name = "Legend1";
+            this.chart1.Legends.Add(legend1);
             this.chart1.Location = new System.Drawing.Point(29, 315);
             this.chart1.Name = "chart1";
-            series3.ChartArea = "ChartArea1";
-            series3.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Pie;
-            series3.Legend = "Legend1";
-            series3.Name = "Series1";
-            this.chart1.Series.Add(series3);
+            series1.ChartArea = "ChartArea1";
+            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Pie;
+            series1.Legend = "Legend1";
+            series1.Name = "Series1";
+            this.chart1.Series.Add(series1);
             this.chart1.Size = new System.Drawing.Size(401, 280);
             this.chart1.TabIndex = 20;
             this.chart1.Text = "chart1";
@@ -483,7 +483,7 @@
             // lblEmail
             // 
             this.lblEmail.AutoSize = true;
-            this.lblEmail.Location = new System.Drawing.Point(447, 509);
+            this.lblEmail.Location = new System.Drawing.Point(438, 509);
             this.lblEmail.Name = "lblEmail";
             this.lblEmail.Size = new System.Drawing.Size(57, 21);
             this.lblEmail.TabIndex = 11;
@@ -500,7 +500,7 @@
             // lblAddress
             // 
             this.lblAddress.AutoSize = true;
-            this.lblAddress.Location = new System.Drawing.Point(422, 465);
+            this.lblAddress.Location = new System.Drawing.Point(429, 465);
             this.lblAddress.Name = "lblAddress";
             this.lblAddress.Size = new System.Drawing.Size(82, 21);
             this.lblAddress.TabIndex = 9;
@@ -518,7 +518,7 @@
             // lblLastName
             // 
             this.lblLastName.AutoSize = true;
-            this.lblLastName.Location = new System.Drawing.Point(399, 364);
+            this.lblLastName.Location = new System.Drawing.Point(403, 364);
             this.lblLastName.Name = "lblLastName";
             this.lblLastName.Size = new System.Drawing.Size(105, 21);
             this.lblLastName.TabIndex = 7;
@@ -527,7 +527,7 @@
             // lblFirstName
             // 
             this.lblFirstName.AutoSize = true;
-            this.lblFirstName.Location = new System.Drawing.Point(403, 312);
+            this.lblFirstName.Location = new System.Drawing.Point(405, 312);
             this.lblFirstName.Name = "lblFirstName";
             this.lblFirstName.Size = new System.Drawing.Size(101, 21);
             this.lblFirstName.TabIndex = 6;
@@ -574,6 +574,7 @@
             this.btnUpdateProfile.TabIndex = 1;
             this.btnUpdateProfile.Text = "Update Profile";
             this.btnUpdateProfile.UseVisualStyleBackColor = false;
+            this.btnUpdateProfile.Click += new System.EventHandler(this.btnUpdateProfile_Click);
             // 
             // lbEmployeeInfo
             // 
@@ -583,7 +584,7 @@
             this.lbEmployeeInfo.ItemHeight = 23;
             this.lbEmployeeInfo.Location = new System.Drawing.Point(19, 65);
             this.lbEmployeeInfo.Name = "lbEmployeeInfo";
-            this.lbEmployeeInfo.Size = new System.Drawing.Size(330, 510);
+            this.lbEmployeeInfo.Size = new System.Drawing.Size(330, 533);
             this.lbEmployeeInfo.TabIndex = 0;
             // 
             // tbPageEmpManagement
@@ -615,7 +616,7 @@
             // 
             // btnUndoEmpSelection
             // 
-            this.btnUndoEmpSelection.BackColor = System.Drawing.Color.OrangeRed;
+            this.btnUndoEmpSelection.BackColor = System.Drawing.Color.Azure;
             this.btnUndoEmpSelection.Location = new System.Drawing.Point(235, 27);
             this.btnUndoEmpSelection.Name = "btnUndoEmpSelection";
             this.btnUndoEmpSelection.Size = new System.Drawing.Size(162, 40);
@@ -645,7 +646,7 @@
             // 
             // btnUndoManSelection
             // 
-            this.btnUndoManSelection.BackColor = System.Drawing.Color.OrangeRed;
+            this.btnUndoManSelection.BackColor = System.Drawing.Color.Azure;
             this.btnUndoManSelection.Location = new System.Drawing.Point(235, 27);
             this.btnUndoManSelection.Name = "btnUndoManSelection";
             this.btnUndoManSelection.Size = new System.Drawing.Size(162, 40);
@@ -790,7 +791,6 @@
         private System.Windows.Forms.TextBox txtBoxAge;
         private System.Windows.Forms.TextBox txtBoxFirstName;
         private System.Windows.Forms.Button btnUpdateProfile;
-        private System.Windows.Forms.ListBox lbEmployeeInfo;
         private System.Windows.Forms.TabPage tbPageEmpManagement;
         private System.Windows.Forms.Button btnAddEmployee;
         private System.Windows.Forms.Button btnUpdateEmployee;
@@ -830,5 +830,6 @@
         private System.Windows.Forms.ListBox lBoxStatistics;
         private System.Windows.Forms.Label lblStaffIsAvilable;
         private System.Windows.Forms.ListBox lBoxEmpStats;
+        private System.Windows.Forms.ListBox lbEmployeeInfo;
     }
 }

@@ -17,17 +17,20 @@ namespace MediaBazaarSystem
         private Department department;
         private Schedule schedule;
         private String employeeID;
+        private Employee employee;
 
         /**
          * The Constructor
          */
-        public EmployeeSystem(Department department, String employeeID)
+        public EmployeeSystem(Department department, Employee employee)
         {
-            this.employeeID = employeeID;
+            this.employee = employee;
             this.department = department;
             InitializeComponent();
             updateTimer.Enabled = true;
             this.UpdateSchedule();
+
+            refreshProfile();
         }
 
         /**
@@ -153,7 +156,7 @@ namespace MediaBazaarSystem
                     schedule = new Schedule( firstName, role, workStartTime, workEndTime, convertedWorkDate );
                     department.AddSchedule( schedule );
 
-                    if( employeeID == Convert.ToInt32( this.employeeID ) )
+                    if( employeeID == employee.dbID )
                     {
                         lBoxEmpHistory.Items.Add(
                             convertedWorkDate.ToString( "dddd, dd MMMM yyyy" ) + " - " +
@@ -271,6 +274,74 @@ namespace MediaBazaarSystem
             // Sort the first column in the data grid view (work schedule)
             // In this case the first column is the first name of employee
             dataEmpWorkSchedule.Sort( dataEmpWorkSchedule.Columns[ 0 ], ListSortDirection.Ascending );
+        }
+
+        private void btnUpdateProfile_Click(object sender, EventArgs e)
+        {
+            if (checkProfileChange())
+            {
+                //Updates employee in database.
+                string connString = @"Server = studmysql01.fhict.local; Uid = dbi437493; Database = dbi437493; Pwd = dbgroup01;";
+                MySqlConnection conn = new MySqlConnection(connString);
+                conn.Open();
+                MySqlCommand cmd = conn.CreateCommand();
+                cmd.CommandText = "UPDATE person SET Firstname = @Firstname, Lastname = @Lastname, Age = @Age, Address = @Address, Email = @Email WHERE Id = @Id";
+                cmd.Parameters.AddWithValue("@Firstname", txtBoxFirstName.Text);
+                cmd.Parameters.AddWithValue("@Lastname", txtBoxLastName.Text);
+                cmd.Parameters.AddWithValue("@Age", Convert.ToInt32(txtBoxAge.Text));
+                cmd.Parameters.AddWithValue("@Address", txtBoxAddress.Text);
+                cmd.Parameters.AddWithValue("@Email", txtBoxEmail.Text);
+                cmd.Parameters.AddWithValue("@Id", employee.dbID);
+
+                cmd.ExecuteNonQuery();
+
+                //Updates employee in list.
+                employee.EditEmployee(txtBoxFirstName.Text, txtBoxLastName.Text, Convert.ToInt32(txtBoxAge.Text), txtBoxAddress.Text, employee.Role, employee.Salary, employee.HoursAvailable, txtBoxEmail.Text);
+
+                //Updates profile.
+                refreshProfile();
+
+                MessageBox.Show("Profile Updated Successfully");
+            }
+            else
+            {
+                MessageBox.Show("No changes made");
+            }
+        }
+
+        private void refreshProfile() //Adds all employee's data into the listbox and textboxes.
+        {
+            lbEmployeeInfo.Items.Clear();
+            lbEmployeeInfo.Items.Add("Name: " + employee.FirstName);
+            lbEmployeeInfo.Items.Add("Surname: " + employee.LastName);
+            lbEmployeeInfo.Items.Add("Age: " + employee.Age);
+            lbEmployeeInfo.Items.Add("Address: " + employee.Address);
+            lbEmployeeInfo.Items.Add("Email: " + employee.Email);
+            txtBoxFirstName.Text = employee.FirstName;
+            txtBoxLastName.Text = employee.LastName;
+            txtBoxAge.Text = employee.Age.ToString();
+            txtBoxAddress.Text = employee.Address;
+            txtBoxEmail.Text = employee.Email;
+        }
+        
+        private bool checkProfileChange()
+        {
+            if (txtBoxFirstName.Text == employee.FirstName && txtBoxLastName.Text == employee.LastName && Convert.ToInt32(txtBoxAge.Text) == employee.Age && txtBoxAddress.Text == employee.Address && txtBoxEmail.Text == employee.Email)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
+
+        private void btnChangePwd_Click(object sender, EventArgs e)
+        {
+            //On click, opens a form to change the currently logged in user's password.
+            ChangePassword pwd = new ChangePassword(null, employee);
+            pwd.StartPosition = FormStartPosition.CenterParent;
+            pwd.ShowDialog(this);
         }
     }
 }
