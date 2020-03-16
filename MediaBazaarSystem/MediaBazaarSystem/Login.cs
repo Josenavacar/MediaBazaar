@@ -86,7 +86,7 @@ namespace MediaBazaarSystem
                             else if(role == 2) // Employee
                             {
                                 String employeeID = reader.GetValue( 0 ).ToString();
-                                EmployeeSystem employeeSystem = new EmployeeSystem( employeeID );
+                                EmployeeSystem employeeSystem = new EmployeeSystem( department, employeeID );
 
                                 employeeSystem.Show();
                                 this.Hide();

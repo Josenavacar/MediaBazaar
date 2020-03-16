@@ -8,10 +8,11 @@ namespace MediaBazaarSystem
 {
     public class Schedule : Staff
     {
-        String startTime;
-        String endTime;
-        String workDate;
-        String shifts;
+        private String startTime;
+        private String endTime;
+        private String workDate;
+        private String shifts;
+        private bool isAvailable;
 
         public String FirstName
         {
@@ -43,6 +44,18 @@ namespace MediaBazaarSystem
             set;
         }
 
+        public bool IsAvailable
+        {
+            get
+            {
+                return this.isAvailable;
+            }
+            set
+            {
+                this.isAvailable = value;
+            }
+        }
+
         public Schedule(String firstName, String role, DateTime startTime, DateTime endTime, DateTime workDate)
         {
             this.FirstName = firstName;
@@ -50,11 +63,12 @@ namespace MediaBazaarSystem
             this.StartTime = startTime;
             this.EndTime = endTime;
             this.WorkDate = workDate;
+            this.IsAvailable = true;
         }
 
         public override string ToString()
         {
-            return this.FirstName + " " + this.Role + " " + this.StartTime + " " + this.EndTime + " " + this.WorkDate;
+            return this.FirstName + " " + this.Role + " " + this.StartTime + " " + this.EndTime + " " + this.WorkDate + " " + this.IsAvailable;
         }
 
 
