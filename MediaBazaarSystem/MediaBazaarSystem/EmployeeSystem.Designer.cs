@@ -46,6 +46,7 @@
             this.clmnWorkDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dtpWorkSchedule = new System.Windows.Forms.DateTimePicker();
             this.tbPageHistory = new System.Windows.Forms.TabPage();
+            this.lblWorkHistory = new System.Windows.Forms.Label();
             this.button4 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
@@ -71,7 +72,6 @@
             this.btnUpdateProfile = new System.Windows.Forms.Button();
             this.lbEmployeeInfo = new System.Windows.Forms.ListBox();
             this.updateTimer = new System.Windows.Forms.Timer(this.components);
-            this.lblWorkHistory = new System.Windows.Forms.Label();
             this.tbControlEmp.SuspendLayout();
             this.tbPageHome.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picBoxLogout)).BeginInit();
@@ -121,7 +121,7 @@
             "Employee"});
             this.cmboBoxFilter.Location = new System.Drawing.Point(27, 21);
             this.cmboBoxFilter.Name = "cmboBoxFilter";
-            this.cmboBoxFilter.Size = new System.Drawing.Size(178, 29);
+            this.cmboBoxFilter.Size = new System.Drawing.Size(178, 27);
             this.cmboBoxFilter.TabIndex = 21;
             this.cmboBoxFilter.Text = "Filter";
             this.cmboBoxFilter.SelectedIndexChanged += new System.EventHandler(this.cmboBoxFilter_SelectedIndexChanged);
@@ -142,7 +142,7 @@
             this.txtBoxHomeSearch.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtBoxHomeSearch.Location = new System.Drawing.Point(211, 21);
             this.txtBoxHomeSearch.Name = "txtBoxHomeSearch";
-            this.txtBoxHomeSearch.Size = new System.Drawing.Size(347, 32);
+            this.txtBoxHomeSearch.Size = new System.Drawing.Size(347, 27);
             this.txtBoxHomeSearch.TabIndex = 19;
             // 
             // btnSort
@@ -248,11 +248,20 @@
             this.tbPageHistory.Controls.Add(this.lBoxEmpHistory);
             this.tbPageHistory.Controls.Add(this.btnSearch);
             this.tbPageHistory.Controls.Add(this.txtBoxSearch);
-            this.tbPageHistory.Location = new System.Drawing.Point(4, 30);
+            this.tbPageHistory.Location = new System.Drawing.Point(4, 28);
             this.tbPageHistory.Name = "tbPageHistory";
             this.tbPageHistory.Size = new System.Drawing.Size(870, 677);
             this.tbPageHistory.TabIndex = 2;
             this.tbPageHistory.Text = "History";
+            // 
+            // lblWorkHistory
+            // 
+            this.lblWorkHistory.AutoSize = true;
+            this.lblWorkHistory.Location = new System.Drawing.Point(28, 104);
+            this.lblWorkHistory.Name = "lblWorkHistory";
+            this.lblWorkHistory.Size = new System.Drawing.Size(125, 19);
+            this.lblWorkHistory.TabIndex = 12;
+            this.lblWorkHistory.Text = "Your work history:";
             // 
             // button4
             // 
@@ -297,10 +306,10 @@
             // lBoxEmpHistory
             // 
             this.lBoxEmpHistory.FormattingEnabled = true;
-            this.lBoxEmpHistory.ItemHeight = 21;
+            this.lBoxEmpHistory.ItemHeight = 19;
             this.lBoxEmpHistory.Location = new System.Drawing.Point(32, 128);
             this.lBoxEmpHistory.Name = "lBoxEmpHistory";
-            this.lBoxEmpHistory.Size = new System.Drawing.Size(803, 172);
+            this.lBoxEmpHistory.Size = new System.Drawing.Size(803, 156);
             this.lBoxEmpHistory.TabIndex = 7;
             // 
             // btnSearch
@@ -364,9 +373,9 @@
             this.lblEmployeeName.Font = new System.Drawing.Font("Century Gothic", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblEmployeeName.Location = new System.Drawing.Point(15, 23);
             this.lblEmployeeName.Name = "lblEmployeeName";
-            this.lblEmployeeName.Size = new System.Drawing.Size(235, 19);
+            this.lblEmployeeName.Size = new System.Drawing.Size(47, 19);
             this.lblEmployeeName.TabIndex = 15;
-            this.lblEmployeeName.Text = "Hello (here goes the user\'s name)";
+            this.lblEmployeeName.Text = "Hello,";
             // 
             // pictureBoxEmployeePhoto
             // 
@@ -491,15 +500,6 @@
             this.lbEmployeeInfo.Name = "lbEmployeeInfo";
             this.lbEmployeeInfo.Size = new System.Drawing.Size(330, 529);
             this.lbEmployeeInfo.TabIndex = 0;
-            // 
-            // lblWorkHistory
-            // 
-            this.lblWorkHistory.AutoSize = true;
-            this.lblWorkHistory.Location = new System.Drawing.Point(28, 104);
-            this.lblWorkHistory.Name = "lblWorkHistory";
-            this.lblWorkHistory.Size = new System.Drawing.Size(152, 21);
-            this.lblWorkHistory.TabIndex = 12;
-            this.lblWorkHistory.Text = "Your work history:";
             // 
             // EmployeeSystem
             // 

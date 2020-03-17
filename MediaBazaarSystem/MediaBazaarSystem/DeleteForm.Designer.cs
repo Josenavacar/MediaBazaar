@@ -71,6 +71,7 @@
             this.Controls.Add(this.btnYes);
             this.Controls.Add(this.label1);
             this.Name = "DeleteForm";
+            this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.Text = "DeleteForm";
             this.ResumeLayout(false);
             this.PerformLayout();

@@ -813,7 +813,7 @@ namespace MediaBazaarSystem
 
         private void refreshProfile() //Adds all manager's data into the listbox and textboxes.
         {
-            lbEmployeeInfo.Items.Clear();
+            //lbEmployeeInfo.Items.Clear();
             lbEmployeeInfo.Items.Add("Name: " + manager.FirstName);
             lbEmployeeInfo.Items.Add("Surname: " + manager.LastName);
             lbEmployeeInfo.Items.Add("Age: " + manager.Age);
@@ -836,6 +836,16 @@ namespace MediaBazaarSystem
             {
                 return true;
             }
+        }
+
+        private void lbManagers_Click(object sender, EventArgs e)
+        {
+            lbEmployees.SelectedItem = null;
+        }
+
+        private void lbEmployees_Click(object sender, EventArgs e)
+        {
+            lbManagers.SelectedItem = null;
         }
     }
 }

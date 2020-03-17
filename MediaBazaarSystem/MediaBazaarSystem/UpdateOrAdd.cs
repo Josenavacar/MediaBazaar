@@ -209,12 +209,19 @@ namespace MediaBazaarSystem
                     cmd.Parameters.AddWithValue( "@IsAvailable", "Yes" );
                     cmd.Parameters.AddWithValue( "@RoleID", roleID );
                     cmd.Parameters.AddWithValue( "@DepartmentID", department.DepartmentID );
-                    cmd.Parameters.AddWithValue( "@PersonID", employee.dbID );
+                    if(roleID == 1)
+                    {
+                        cmd.Parameters.AddWithValue("@PersonID", manager.dbID);
+                        manager.EditManager(FirstN, LastN, age, address, role, salary, hoursAvailable, email); //List edit (local).
+                    }
+                    else if(roleID == 2)
+                    {
+                        cmd.Parameters.AddWithValue("@PersonID", employee.dbID);
+                        employee.EditEmployee(FirstN, LastN, age, address, role, salary, hoursAvailable, email); //List edit (local).
+                    }
                     cmd.ExecuteNonQuery(); //Database edit.
                     conn.Close();
-                    employee.EditEmployee( FirstN, LastN, age, address, role, salary, hoursAvailable, email ); //List edit (local).
                     MessageBox.Show( "Employee successfully edited" );
-                    conn.Close();
                 }
                 this.Hide();
             }
