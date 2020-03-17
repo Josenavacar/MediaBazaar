@@ -86,7 +86,12 @@ namespace MediaBazaarSystem
                             else if(role == 2) // Employee
                             {
                                 String employeeID = reader.GetValue( 0 ).ToString();
-                                EmployeeSystem employeeSystem = new EmployeeSystem( employeeID );
+                                String employeeName = reader.GetValue(1).ToString();
+                                String employeeLastName = reader.GetValue(2).ToString();
+                                String employeeAge = reader.GetValue(3).ToString();
+                                String employeeAddress = reader.GetValue(4).ToString(); 
+                                String employeeEmail = reader.GetValue(5).ToString();
+                                EmployeeSystem employeeSystem = new EmployeeSystem( employeeID, employeeName, employeeLastName, employeeAge, employeeAddress, employeeEmail );
 
                                 employeeSystem.Show();
                                 this.Hide();

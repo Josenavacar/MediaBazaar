@@ -150,3 +150,47 @@ C:\Users\Jose\Desktop\Semester 2\ProjectGIT\mediabazaar\MediaBazaarSystem\MediaB
 C:\Users\Jose\Desktop\Semester 2\ProjectGIT\mediabazaar\MediaBazaarSystem\MediaBazaarSystem\bin\Debug\LiveCharts.Wpf.pdb
 C:\Users\Jose\Desktop\Semester 2\ProjectGIT\mediabazaar\MediaBazaarSystem\MediaBazaarSystem\bin\Debug\LiveCharts.Wpf.xml
 C:\Users\Gebruiker\Documents\GitHub\MediaBazaar\mediabazaar\MediaBazaarSystem\MediaBazaarSystem\obj\Debug\MediaBazaarSystem.UpdateOrAdd.resources
+C:\Users\sacli\Desktop\2nd Semester\2nd Semester Project\git\mediabazaar\MediaBazaarSystem\MediaBazaarSystem\bin\Debug\MediaBazaarSystem.exe.config
+C:\Users\sacli\Desktop\2nd Semester\2nd Semester Project\git\mediabazaar\MediaBazaarSystem\MediaBazaarSystem\bin\Debug\MediaBazaarSystem.exe
+C:\Users\sacli\Desktop\2nd Semester\2nd Semester Project\git\mediabazaar\MediaBazaarSystem\MediaBazaarSystem\bin\Debug\MediaBazaarSystem.pdb
+C:\Users\sacli\Desktop\2nd Semester\2nd Semester Project\git\mediabazaar\MediaBazaarSystem\MediaBazaarSystem\bin\Debug\BouncyCastle.Crypto.dll
+C:\Users\sacli\Desktop\2nd Semester\2nd Semester Project\git\mediabazaar\MediaBazaarSystem\MediaBazaarSystem\bin\Debug\Google.Protobuf.dll
+C:\Users\sacli\Desktop\2nd Semester\2nd Semester Project\git\mediabazaar\MediaBazaarSystem\MediaBazaarSystem\bin\Debug\LiveCharts.dll
+C:\Users\sacli\Desktop\2nd Semester\2nd Semester Project\git\mediabazaar\MediaBazaarSystem\MediaBazaarSystem\bin\Debug\LiveCharts.WinForms.dll
+C:\Users\sacli\Desktop\2nd Semester\2nd Semester Project\git\mediabazaar\MediaBazaarSystem\MediaBazaarSystem\bin\Debug\LiveCharts.Wpf.dll
+C:\Users\sacli\Desktop\2nd Semester\2nd Semester Project\git\mediabazaar\MediaBazaarSystem\MediaBazaarSystem\bin\Debug\MySql.Data.dll
+C:\Users\sacli\Desktop\2nd Semester\2nd Semester Project\git\mediabazaar\MediaBazaarSystem\MediaBazaarSystem\bin\Debug\Renci.SshNet.dll
+C:\Users\sacli\Desktop\2nd Semester\2nd Semester Project\git\mediabazaar\MediaBazaarSystem\MediaBazaarSystem\bin\Debug\System.Buffers.dll
+C:\Users\sacli\Desktop\2nd Semester\2nd Semester Project\git\mediabazaar\MediaBazaarSystem\MediaBazaarSystem\bin\Debug\System.Memory.dll
+C:\Users\sacli\Desktop\2nd Semester\2nd Semester Project\git\mediabazaar\MediaBazaarSystem\MediaBazaarSystem\bin\Debug\System.Numerics.Vectors.dll
+C:\Users\sacli\Desktop\2nd Semester\2nd Semester Project\git\mediabazaar\MediaBazaarSystem\MediaBazaarSystem\bin\Debug\System.Runtime.CompilerServices.Unsafe.dll
+C:\Users\sacli\Desktop\2nd Semester\2nd Semester Project\git\mediabazaar\MediaBazaarSystem\MediaBazaarSystem\bin\Debug\Ubiety.Dns.Core.dll
+C:\Users\sacli\Desktop\2nd Semester\2nd Semester Project\git\mediabazaar\MediaBazaarSystem\MediaBazaarSystem\bin\Debug\Google.Protobuf.pdb
+C:\Users\sacli\Desktop\2nd Semester\2nd Semester Project\git\mediabazaar\MediaBazaarSystem\MediaBazaarSystem\bin\Debug\Google.Protobuf.xml
+C:\Users\sacli\Desktop\2nd Semester\2nd Semester Project\git\mediabazaar\MediaBazaarSystem\MediaBazaarSystem\bin\Debug\LiveCharts.pdb
+C:\Users\sacli\Desktop\2nd Semester\2nd Semester Project\git\mediabazaar\MediaBazaarSystem\MediaBazaarSystem\bin\Debug\LiveCharts.xml
+C:\Users\sacli\Desktop\2nd Semester\2nd Semester Project\git\mediabazaar\MediaBazaarSystem\MediaBazaarSystem\bin\Debug\LiveCharts.WinForms.pdb
+C:\Users\sacli\Desktop\2nd Semester\2nd Semester Project\git\mediabazaar\MediaBazaarSystem\MediaBazaarSystem\bin\Debug\LiveCharts.WinForms.xml
+C:\Users\sacli\Desktop\2nd Semester\2nd Semester Project\git\mediabazaar\MediaBazaarSystem\MediaBazaarSystem\bin\Debug\LiveCharts.Wpf.pdb
+C:\Users\sacli\Desktop\2nd Semester\2nd Semester Project\git\mediabazaar\MediaBazaarSystem\MediaBazaarSystem\bin\Debug\LiveCharts.Wpf.xml
+C:\Users\sacli\Desktop\2nd Semester\2nd Semester Project\git\mediabazaar\MediaBazaarSystem\MediaBazaarSystem\bin\Debug\MySql.Data.xml
+C:\Users\sacli\Desktop\2nd Semester\2nd Semester Project\git\mediabazaar\MediaBazaarSystem\MediaBazaarSystem\bin\Debug\Renci.SshNet.xml
+C:\Users\sacli\Desktop\2nd Semester\2nd Semester Project\git\mediabazaar\MediaBazaarSystem\MediaBazaarSystem\bin\Debug\System.Buffers.xml
+C:\Users\sacli\Desktop\2nd Semester\2nd Semester Project\git\mediabazaar\MediaBazaarSystem\MediaBazaarSystem\bin\Debug\System.Memory.xml
+C:\Users\sacli\Desktop\2nd Semester\2nd Semester Project\git\mediabazaar\MediaBazaarSystem\MediaBazaarSystem\bin\Debug\System.Numerics.Vectors.xml
+C:\Users\sacli\Desktop\2nd Semester\2nd Semester Project\git\mediabazaar\MediaBazaarSystem\MediaBazaarSystem\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
+C:\Users\sacli\Desktop\2nd Semester\2nd Semester Project\git\mediabazaar\MediaBazaarSystem\MediaBazaarSystem\obj\Debug\MediaBazaarSystem.csprojAssemblyReference.cache
+C:\Users\sacli\Desktop\2nd Semester\2nd Semester Project\git\mediabazaar\MediaBazaarSystem\MediaBazaarSystem\obj\Debug\MediaBazaarSystem.UpdateOrAdd.resources
+C:\Users\sacli\Desktop\2nd Semester\2nd Semester Project\git\mediabazaar\MediaBazaarSystem\MediaBazaarSystem\obj\Debug\MediaBazaarSystem.AdministrationSystem.resources
+C:\Users\sacli\Desktop\2nd Semester\2nd Semester Project\git\mediabazaar\MediaBazaarSystem\MediaBazaarSystem\obj\Debug\MediaBazaarSystem.AssignEmployeeSystem.resources
+C:\Users\sacli\Desktop\2nd Semester\2nd Semester Project\git\mediabazaar\MediaBazaarSystem\MediaBazaarSystem\obj\Debug\MediaBazaarSystem.ChangePassword.resources
+C:\Users\sacli\Desktop\2nd Semester\2nd Semester Project\git\mediabazaar\MediaBazaarSystem\MediaBazaarSystem\obj\Debug\MediaBazaarSystem.DeleteForm.resources
+C:\Users\sacli\Desktop\2nd Semester\2nd Semester Project\git\mediabazaar\MediaBazaarSystem\MediaBazaarSystem\obj\Debug\MediaBazaarSystem.EmployeeSystem.resources
+C:\Users\sacli\Desktop\2nd Semester\2nd Semester Project\git\mediabazaar\MediaBazaarSystem\MediaBazaarSystem\obj\Debug\MediaBazaarSystem.formLogin.resources
+C:\Users\sacli\Desktop\2nd Semester\2nd Semester Project\git\mediabazaar\MediaBazaarSystem\MediaBazaarSystem\obj\Debug\MediaBazaarSystem.Properties.Resources.resources
+C:\Users\sacli\Desktop\2nd Semester\2nd Semester Project\git\mediabazaar\MediaBazaarSystem\MediaBazaarSystem\obj\Debug\MediaBazaarSystem.ViewEmployee.resources
+C:\Users\sacli\Desktop\2nd Semester\2nd Semester Project\git\mediabazaar\MediaBazaarSystem\MediaBazaarSystem\obj\Debug\MediaBazaarSystem.csproj.GenerateResource.cache
+C:\Users\sacli\Desktop\2nd Semester\2nd Semester Project\git\mediabazaar\MediaBazaarSystem\MediaBazaarSystem\obj\Debug\MediaBazaarSystem.csproj.CoreCompileInputs.cache
+C:\Users\sacli\Desktop\2nd Semester\2nd Semester Project\git\mediabazaar\MediaBazaarSystem\MediaBazaarSystem\obj\Debug\MediaBazaarSystem.csproj.CopyComplete
+C:\Users\sacli\Desktop\2nd Semester\2nd Semester Project\git\mediabazaar\MediaBazaarSystem\MediaBazaarSystem\obj\Debug\MediaBazaarSystem.exe
+C:\Users\sacli\Desktop\2nd Semester\2nd Semester Project\git\mediabazaar\MediaBazaarSystem\MediaBazaarSystem\obj\Debug\MediaBazaarSystem.pdb

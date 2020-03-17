@@ -50,6 +50,7 @@
             this.Column5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tbPageProfile = new System.Windows.Forms.TabPage();
+            this.btnChangePwd = new System.Windows.Forms.Button();
             this.lblEmployeeName = new System.Windows.Forms.Label();
             this.pictureBoxEmployeePhoto = new System.Windows.Forms.PictureBox();
             this.label6 = new System.Windows.Forms.Label();
@@ -65,7 +66,6 @@
             this.txtBoxFirstName = new System.Windows.Forms.TextBox();
             this.btnUpdateProfile = new System.Windows.Forms.Button();
             this.lbEmployeeInfo = new System.Windows.Forms.ListBox();
-            this.btnChangePwd = new System.Windows.Forms.Button();
             this.tbControlEmp.SuspendLayout();
             this.tbPageHome.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picBoxLogout)).BeginInit();
@@ -287,6 +287,16 @@
             this.tbPageProfile.TabIndex = 1;
             this.tbPageProfile.Text = "Profile";
             // 
+            // btnChangePwd
+            // 
+            this.btnChangePwd.BackColor = System.Drawing.Color.CornflowerBlue;
+            this.btnChangePwd.Location = new System.Drawing.Point(526, 613);
+            this.btnChangePwd.Name = "btnChangePwd";
+            this.btnChangePwd.Size = new System.Drawing.Size(297, 44);
+            this.btnChangePwd.TabIndex = 18;
+            this.btnChangePwd.Text = "Change Password";
+            this.btnChangePwd.UseVisualStyleBackColor = false;
+            // 
             // lblEmployeeName
             // 
             this.lblEmployeeName.AutoSize = true;
@@ -408,6 +418,7 @@
             this.btnUpdateProfile.TabIndex = 1;
             this.btnUpdateProfile.Text = "Update Profile";
             this.btnUpdateProfile.UseVisualStyleBackColor = false;
+            this.btnUpdateProfile.Click += new System.EventHandler(this.BtnUpdateProfile_Click);
             // 
             // lbEmployeeInfo
             // 
@@ -419,16 +430,6 @@
             this.lbEmployeeInfo.Name = "lbEmployeeInfo";
             this.lbEmployeeInfo.Size = new System.Drawing.Size(330, 533);
             this.lbEmployeeInfo.TabIndex = 0;
-            // 
-            // btnChangePwd
-            // 
-            this.btnChangePwd.BackColor = System.Drawing.Color.CornflowerBlue;
-            this.btnChangePwd.Location = new System.Drawing.Point(526, 613);
-            this.btnChangePwd.Name = "btnChangePwd";
-            this.btnChangePwd.Size = new System.Drawing.Size(297, 44);
-            this.btnChangePwd.TabIndex = 18;
-            this.btnChangePwd.Text = "Change Password";
-            this.btnChangePwd.UseVisualStyleBackColor = false;
             // 
             // EmployeeSystem
             // 

@@ -17,13 +17,44 @@ namespace MediaBazaarSystem
         /**
          * The Constructor
          */
-        public EmployeeSystem(String employeeID)
+
+        public string firstName
+        {
+            get;
+            private set;
+        }
+
+        public string lastName
+        {
+            get;
+            private set;
+        }
+
+        public string eMail
+        {
+            get;
+            private set;
+        }
+
+        public string Address
+        {
+            get;
+            private set;
+        }
+
+        public string Age
+        {
+            get;
+            private set;
+        }
+
+        public EmployeeSystem(String employeeID, String employeeName, String employeeLastName, String employeeAge, String employeeAddress, String employeeEmail )
         {
             InitializeComponent();
             // Connect to DB
             string connectionString = @"Server = studmysql01.fhict.local; Uid = dbi437493; Database = dbi437493; Pwd = dbgroup01;";
             // SQL Query
-            string sql = "SELECT FirstName, Name, StartTime, EndTime, WorkDate FROM Person " +
+            string sql = "SELECT FirstName, Name, StartTime, EndTime, WorkDate, LastName, Age, Address, Email FROM Person " +
                 "INNER JOIN Role ON Person.RoleId = Role.Id " +
                 "INNER JOIN Schedule ON Person.Id = Schedule.PersonID";
 
@@ -51,7 +82,13 @@ namespace MediaBazaarSystem
                 row.Cells[ 3 ].Value = workEndTime.ToString( "hh:mm tt" ); // End Time
                 row.Cells[ 4 ].Value = reader.GetValue( 4 ).ToString(); // Date
                 dataEmpWorkSchedule.Rows.Add( row );
+
             }
+            firstName = employeeName;
+            lastName = employeeLastName;
+            eMail = employeeEmail;
+            Address = employeeAddress;
+            Age = employeeAge;
         }
 
         /**
@@ -108,6 +145,16 @@ namespace MediaBazaarSystem
                     dataEmpWorkSchedule.Rows.Add( row );
                 }
             }
+            
+        }
+
+        private void BtnUpdateProfile_Click(object sender, EventArgs e)
+        {
+            lbEmployeeInfo.Items.Add(firstName);
+            lbEmployeeInfo.Items.Add(lastName);
+            lbEmployeeInfo.Items.Add(Age);
+            lbEmployeeInfo.Items.Add(Address);
+            lbEmployeeInfo.Items.Add(eMail);
         }
     }
 }
