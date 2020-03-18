@@ -25,7 +25,7 @@ namespace MediaBazaarSystem
 
             tbCurrentPwd.UseSystemPasswordChar = true;
             tbNewPwd.UseSystemPasswordChar = true;
-            tbRNewPwd.UseSystemPasswordChar = true;
+            tbConfirmPwd.UseSystemPasswordChar = true;
             this.man = man;
             this.emp = emp;
 
@@ -73,7 +73,7 @@ namespace MediaBazaarSystem
 
             if (Cryptography.Decrypt(toDecryptPassword) == introducedPassword)
             {
-                if (tbNewPwd.Text.ToString() == tbRNewPwd.Text.ToString())
+                if (tbNewPwd.Text.ToString() == tbConfirmPwd.Text.ToString())
                 {
                     String newPassword = Cryptography.Encrypt(tbNewPwd.Text.ToString());
                     cmd.CommandText = "UPDATE person SET Password = @Password WHERE Id = @Id";

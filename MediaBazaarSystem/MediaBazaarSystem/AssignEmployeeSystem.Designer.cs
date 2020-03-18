@@ -36,17 +36,19 @@
             this.lblEndTime = new System.Windows.Forms.Label();
             this.comBoxEndTime = new System.Windows.Forms.ComboBox();
             this.comBoxStartTime = new System.Windows.Forms.ComboBox();
-            this.comBoxEmployees = new System.Windows.Forms.ComboBox();
             this.updateTimer = new System.Windows.Forms.Timer(this.components);
             this.dtpWorkDate = new System.Windows.Forms.DateTimePicker();
             this.lblWorkDate = new System.Windows.Forms.Label();
+            this.lblAvailability = new System.Windows.Forms.Label();
+            this.comboBoxAvailability = new System.Windows.Forms.ComboBox();
+            this.comBoxEmployees = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // btnDone
             // 
             this.btnDone.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.btnDone.Font = new System.Drawing.Font("Century Gothic", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnDone.Location = new System.Drawing.Point(28, 408);
+            this.btnDone.Location = new System.Drawing.Point(28, 460);
             this.btnDone.Name = "btnDone";
             this.btnDone.Size = new System.Drawing.Size(520, 46);
             this.btnDone.TabIndex = 0;
@@ -118,16 +120,6 @@
             this.comBoxStartTime.TabIndex = 3;
             this.comBoxStartTime.Text = "Select start time";
             // 
-            // comBoxEmployees
-            // 
-            this.comBoxEmployees.Font = new System.Drawing.Font("Century Gothic", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.comBoxEmployees.FormattingEnabled = true;
-            this.comBoxEmployees.Location = new System.Drawing.Point(162, 205);
-            this.comBoxEmployees.Name = "comBoxEmployees";
-            this.comBoxEmployees.Size = new System.Drawing.Size(349, 29);
-            this.comBoxEmployees.TabIndex = 4;
-            this.comBoxEmployees.Text = "Select employee";
-            // 
             // updateTimer
             // 
             this.updateTimer.Tick += new System.EventHandler(this.updateTimer_Tick);
@@ -151,12 +143,45 @@
             this.lblWorkDate.TabIndex = 9;
             this.lblWorkDate.Text = "Work Date:";
             // 
+            // lblAvailability
+            // 
+            this.lblAvailability.AutoSize = true;
+            this.lblAvailability.Font = new System.Drawing.Font("Century Gothic", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblAvailability.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.lblAvailability.Location = new System.Drawing.Point(35, 402);
+            this.lblAvailability.Name = "lblAvailability";
+            this.lblAvailability.Size = new System.Drawing.Size(112, 21);
+            this.lblAvailability.TabIndex = 11;
+            this.lblAvailability.Text = "Is Available:";
+            // 
+            // comboBoxAvailability
+            // 
+            this.comboBoxAvailability.Font = new System.Drawing.Font("Century Gothic", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.comboBoxAvailability.FormattingEnabled = true;
+            this.comboBoxAvailability.Location = new System.Drawing.Point(162, 399);
+            this.comboBoxAvailability.Name = "comboBoxAvailability";
+            this.comboBoxAvailability.Size = new System.Drawing.Size(349, 29);
+            this.comboBoxAvailability.TabIndex = 10;
+            this.comboBoxAvailability.Text = "Yes";
+            // 
+            // comBoxEmployees
+            // 
+            this.comBoxEmployees.Font = new System.Drawing.Font("Century Gothic", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.comBoxEmployees.FormattingEnabled = true;
+            this.comBoxEmployees.Location = new System.Drawing.Point(162, 205);
+            this.comBoxEmployees.Name = "comBoxEmployees";
+            this.comBoxEmployees.Size = new System.Drawing.Size(349, 29);
+            this.comBoxEmployees.TabIndex = 4;
+            this.comBoxEmployees.Text = "Select employee";
+            // 
             // AssignEmployeeSystem
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.ClientSize = new System.Drawing.Size(584, 478);
+            this.ClientSize = new System.Drawing.Size(584, 525);
+            this.Controls.Add(this.lblAvailability);
+            this.Controls.Add(this.comboBoxAvailability);
             this.Controls.Add(this.lblWorkDate);
             this.Controls.Add(this.dtpWorkDate);
             this.Controls.Add(this.lblEndTime);
@@ -184,9 +209,11 @@
         private System.Windows.Forms.Label lblEndTime;
         private System.Windows.Forms.ComboBox comBoxEndTime;
         private System.Windows.Forms.ComboBox comBoxStartTime;
-        private System.Windows.Forms.ComboBox comBoxEmployees;
         private System.Windows.Forms.Timer updateTimer;
         private System.Windows.Forms.DateTimePicker dtpWorkDate;
         private System.Windows.Forms.Label lblWorkDate;
+        private System.Windows.Forms.Label lblAvailability;
+        private System.Windows.Forms.ComboBox comboBoxAvailability;
+        private System.Windows.Forms.ComboBox comBoxEmployees;
     }
 }

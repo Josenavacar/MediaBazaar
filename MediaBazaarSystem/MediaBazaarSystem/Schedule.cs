@@ -8,13 +8,15 @@ namespace MediaBazaarSystem
 {
     public class Schedule : Staff
     {
-        private String startTime;
-        private String endTime;
-        private String workDate;
-        private String shifts;
         private bool isAvailable;
 
         public String FirstName
+        {
+            get;
+            set;
+        }
+
+        public String LastName
         {
             get;
             set;
@@ -56,9 +58,21 @@ namespace MediaBazaarSystem
             }
         }
 
-        public Schedule(String firstName, String role, DateTime startTime, DateTime endTime, DateTime workDate)
+        public Schedule(String firstName, String lastName, String role, DateTime startTime, DateTime endTime, DateTime workDate)
         {
             this.FirstName = firstName;
+            this.LastName = lastName;
+            this.Role = role;
+            this.StartTime = startTime;
+            this.EndTime = endTime;
+            this.WorkDate = workDate;
+            this.IsAvailable = true;
+        }
+
+        public void UpdateSchedule( String firstName, String lastName, String role, DateTime startTime, DateTime endTime, DateTime workDate )
+        {
+            this.FirstName = firstName;
+            this.LastName = lastName;
             this.Role = role;
             this.StartTime = startTime;
             this.EndTime = endTime;
@@ -70,7 +84,5 @@ namespace MediaBazaarSystem
         {
             return this.FirstName + " " + this.Role + " " + this.StartTime + " " + this.EndTime + " " + this.WorkDate + " " + this.IsAvailable;
         }
-
-
     }
 }

@@ -36,17 +36,19 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(83, 27);
+            this.label1.Location = new System.Drawing.Point(92, 36);
+            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(176, 26);
+            this.label1.Size = new System.Drawing.Size(257, 38);
             this.label1.TabIndex = 0;
             this.label1.Text = "You are about to remove someone. \r\nAre you sure you want to proceed?";
             // 
             // btnYes
             // 
-            this.btnYes.Location = new System.Drawing.Point(37, 89);
+            this.btnYes.Location = new System.Drawing.Point(49, 117);
+            this.btnYes.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnYes.Name = "btnYes";
-            this.btnYes.Size = new System.Drawing.Size(106, 23);
+            this.btnYes.Size = new System.Drawing.Size(141, 30);
             this.btnYes.TabIndex = 1;
             this.btnYes.Text = "Yes";
             this.btnYes.UseVisualStyleBackColor = true;
@@ -54,9 +56,10 @@
             // 
             // btnNo
             // 
-            this.btnNo.Location = new System.Drawing.Point(191, 89);
+            this.btnNo.Location = new System.Drawing.Point(255, 117);
+            this.btnNo.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnNo.Name = "btnNo";
-            this.btnNo.Size = new System.Drawing.Size(115, 23);
+            this.btnNo.Size = new System.Drawing.Size(153, 30);
             this.btnNo.TabIndex = 2;
             this.btnNo.Text = "No";
             this.btnNo.UseVisualStyleBackColor = true;
@@ -64,12 +67,14 @@
             // 
             // DeleteForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(331, 135);
+            this.ClientSize = new System.Drawing.Size(441, 176);
             this.Controls.Add(this.btnNo);
             this.Controls.Add(this.btnYes);
             this.Controls.Add(this.label1);
+            this.Font = new System.Drawing.Font("Century Gothic", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "DeleteForm";
             this.Text = "DeleteForm";
             this.ResumeLayout(false);

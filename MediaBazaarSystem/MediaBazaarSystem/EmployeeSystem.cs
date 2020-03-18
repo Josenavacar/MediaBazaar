@@ -16,7 +16,6 @@ namespace MediaBazaarSystem
     {
         private Department department;
         private Schedule schedule;
-        private String employeeID;
         private Employee employee;
 
         /**
@@ -29,7 +28,6 @@ namespace MediaBazaarSystem
             InitializeComponent();
             updateTimer.Enabled = true;
             this.UpdateSchedule();
-
             refreshProfile();
         }
 
@@ -53,9 +51,10 @@ namespace MediaBazaarSystem
             // Connect to DB
             string connectionString = @"Server = studmysql01.fhict.local; Uid = dbi437493; Database = dbi437493; Pwd = dbgroup01;";
             // SQL Query
-            string sql = "SELECT FirstName, Name, StartTime, EndTime, WorkDate FROM Person " +
+            string sql = "SELECT FirstName, LastName, Name, StartTime, EndTime, WorkDate FROM Person " +
                 "INNER JOIN Role ON Person.RoleId = Role.Id " +
                 "INNER JOIN Schedule ON Person.Id = Schedule.PersonID";
+
             // Start mysql objects
             MySqlConnection connection = new MySqlConnection( connectionString );
             MySqlCommand cmd = new MySqlCommand( sql, connection );
@@ -67,23 +66,26 @@ namespace MediaBazaarSystem
             // Add data to data grid view table
             while( reader.Read() )
             {
-                String startTime = reader.GetValue( 2 ).ToString();
-                String endTime = reader.GetValue( 3 ).ToString();
+                String firstName = reader.GetValue( 0 ).ToString();
+                String lastName = reader.GetValue( 1 ).ToString();
+                String role = reader.GetValue( 2 ).ToString();
+                String startTime = reader.GetValue( 3 ).ToString();
+                String endTime = reader.GetValue( 4 ).ToString();
                 DateTime workStartTime = Convert.ToDateTime( startTime );
                 DateTime workEndTime = Convert.ToDateTime( endTime );
-                DateTime date = Convert.ToDateTime( reader.GetValue( 4 ).ToString() );
-                String theDate = dtpWorkSchedule.Value.ToString( "MM/dd/yyyy" );
+                DateTime date = Convert.ToDateTime( reader.GetValue( 5 ).ToString() );
+                String theDate = dtpWorkSchedule.Value.ToString( "dddd, dd MMMM yyyy" );
 
                 // Check if the date in the work schedule is equal to the date from the DB
-                if( theDate == date.ToString( "MM/dd/yyyy" ) )
+                if( theDate == date.ToString( "dddd, dd MMMM yyyy" ) )
                 {
                     DataGridViewRow row = ( DataGridViewRow ) dataEmpWorkSchedule.Rows[ 0 ].Clone();
                     dataEmpWorkSchedule.Columns[ "clmnWorkDate" ].DefaultCellStyle.BackColor = Color.LightSteelBlue;
-                    row.Cells[ 0 ].Value = reader.GetValue( 0 ).ToString(); // First Name
-                    row.Cells[ 1 ].Value = reader.GetValue( 1 ).ToString(); // Name (Role)
+                    row.Cells[ 0 ].Value = firstName + " " + lastName;// First Name
+                    row.Cells[ 1 ].Value = role;// Name (Role)
                     row.Cells[ 2 ].Value = workStartTime.ToString( "hh:mm tt" );// Start Time
                     row.Cells[ 3 ].Value = workEndTime.ToString( "hh:mm tt" ); // End Time
-                    row.Cells[ 4 ].Value = date.ToString( "MM/dd/yyyy" ); // Date
+                    row.Cells[ 4 ].Value = date.ToString( "dddd, dd MMMM yyyy" ); // Date
                     dataEmpWorkSchedule.Rows.Add( row );
                 }
             }
@@ -100,9 +102,11 @@ namespace MediaBazaarSystem
             // Connect to DB
             string connectionString = @"Server = studmysql01.fhict.local; Uid = dbi437493; Database = dbi437493; Pwd = dbgroup01;";
             // SQL Query
-            string sql = "SELECT Person.Id, Person.FirstName, Role.Name, Schedule.StartTime, Schedule.EndTime, Schedule.WorkDate FROM Person " +
+            string sql = "SELECT Person.Id, Person.FirstName, Person.LastName, Role.Name, Schedule.StartTime, Schedule.EndTime, Schedule.WorkDate, Department.Name FROM Person " +
                 "INNER JOIN Role ON Person.RoleId = Role.Id " +
-                "INNER JOIN Schedule ON Person.Id = Schedule.PersonID";
+                "INNER JOIN Schedule ON Person.Id = Schedule.PersonID " +
+                "INNER JOIN Department ON Person.DepartmentID = Department.Id";
+
             // Start mysql objects
             MySqlConnection connection = new MySqlConnection( connectionString );
             MySqlCommand cmd = new MySqlCommand( sql, connection );
@@ -130,22 +134,24 @@ namespace MediaBazaarSystem
                 {
                     int employeeID = (int)reader.GetValue( 0 );
                     String firstName = reader.GetValue( 1 ).ToString();
-                    String role = reader.GetValue( 2 ).ToString();
-                    String startTime = reader.GetValue( 3 ).ToString();
-                    String endTime = reader.GetValue( 4 ).ToString();
-                    String workDate = reader.GetValue( 5 ).ToString();
+                    String lastName = reader.GetValue(2).ToString();
+                    String role = reader.GetValue( 3 ).ToString();
+                    String startTime = reader.GetValue( 4 ).ToString();
+                    String endTime = reader.GetValue( 5 ).ToString();
+                    String workDate = reader.GetValue( 6 ).ToString();
+                    String departmentName = reader.GetValue( 7 ).ToString();
                     DateTime workStartTime = Convert.ToDateTime( startTime );
                     DateTime workEndTime = Convert.ToDateTime( endTime );
                     DateTime convertedWorkDate = Convert.ToDateTime( workDate );
 
-                    if( dtpWorkSchedule.Value.Date == convertedWorkDate.Date )
+                    if( (dtpWorkSchedule.Value.Date == convertedWorkDate.Date) && ( department.Name == departmentName))
                     {
                         // Add data to data grid view table
                         DataGridViewRow row = ( DataGridViewRow ) dataEmpWorkSchedule.Rows[ 0 ].Clone();
                         dataEmpWorkSchedule.Columns[ "clmnWorkDate" ].DefaultCellStyle.BackColor = Color.LightSteelBlue;
                         dataEmpWorkSchedule.Columns[ "clmnStartTime" ].DefaultCellStyle.BackColor = Color.PaleGreen;
                         dataEmpWorkSchedule.Columns[ "clmnEndTime" ].DefaultCellStyle.BackColor = Color.PaleVioletRed;
-                        row.Cells[ 0 ].Value = firstName; // First Name
+                        row.Cells[ 0 ].Value = firstName + " " + lastName; // First Name
                         row.Cells[ 1 ].Value = role; // Name (Role)
                         row.Cells[ 2 ].Value = workStartTime.ToString( "hh:mm tt" );// Start Time
                         row.Cells[ 3 ].Value = workEndTime.ToString( "hh:mm tt" ); // End Time
@@ -153,7 +159,7 @@ namespace MediaBazaarSystem
                         dataEmpWorkSchedule.Rows.Add( row );
                     }
 
-                    schedule = new Schedule( firstName, role, workStartTime, workEndTime, convertedWorkDate );
+                    schedule = new Schedule( firstName, lastName, role, workStartTime, workEndTime, convertedWorkDate );
                     department.AddSchedule( schedule );
 
                     if( employeeID == employee.dbID )
@@ -191,7 +197,7 @@ namespace MediaBazaarSystem
                     {
                         DataGridViewRow newRow = new DataGridViewRow();
                         newRow.CreateCells( dataEmpWorkSchedule );
-                        newRow.Cells[ 0 ].Value = schedule.FirstName;
+                        newRow.Cells[ 0 ].Value = schedule.FirstName + " " + schedule.LastName;
                         newRow.Cells[ 1 ].Value = schedule.Role;
                         newRow.Cells[ 2 ].Value = schedule.StartTime.ToString( "hh:mm tt" );
                         newRow.Cells[ 3 ].Value = schedule.EndTime.ToString( "hh:mm tt" );
@@ -221,7 +227,7 @@ namespace MediaBazaarSystem
                     dataEmpWorkSchedule.Columns[ "clmnWorkDate" ].DefaultCellStyle.BackColor = Color.LightSteelBlue;
                     dataEmpWorkSchedule.Columns[ "clmnStartTime" ].DefaultCellStyle.BackColor = Color.PaleGreen;
                     dataEmpWorkSchedule.Columns[ "clmnEndTime" ].DefaultCellStyle.BackColor = Color.PaleVioletRed;
-                    row.Cells[ 0 ].Value = schedule.FirstName; // First Name
+                    row.Cells[ 0 ].Value = schedule.FirstName + " " + schedule.LastName; // First Name
                     row.Cells[ 1 ].Value = schedule.Role; // Name (Role)
                     row.Cells[ 2 ].Value = schedule.StartTime.ToString( "hh:mm tt" );// Start Time
                     row.Cells[ 3 ].Value = schedule.EndTime.ToString( "hh:mm tt" ); // End Time
@@ -234,7 +240,7 @@ namespace MediaBazaarSystem
                     dataEmpWorkSchedule.Columns[ "clmnWorkDate" ].DefaultCellStyle.BackColor = Color.LightSteelBlue;
                     dataEmpWorkSchedule.Columns[ "clmnStartTime" ].DefaultCellStyle.BackColor = Color.PaleGreen;
                     dataEmpWorkSchedule.Columns[ "clmnEndTime" ].DefaultCellStyle.BackColor = Color.PaleVioletRed;
-                    row.Cells[ 0 ].Value = schedule.FirstName; // First Name
+                    row.Cells[ 0 ].Value = schedule.FirstName + " " + schedule.LastName; // First Name
                     row.Cells[ 1 ].Value = schedule.Role; // Name (Role)
                     row.Cells[ 2 ].Value = schedule.StartTime.ToString( "hh:mm tt" );// Start Time
                     row.Cells[ 3 ].Value = schedule.EndTime.ToString( "hh:mm tt" ); // End Time
@@ -257,7 +263,7 @@ namespace MediaBazaarSystem
                 dataEmpWorkSchedule.Columns[ "clmnWorkDate" ].DefaultCellStyle.BackColor = Color.LightSteelBlue;
                 dataEmpWorkSchedule.Columns[ "clmnStartTime" ].DefaultCellStyle.BackColor = Color.PaleGreen;
                 dataEmpWorkSchedule.Columns[ "clmnEndTime" ].DefaultCellStyle.BackColor = Color.PaleVioletRed;
-                row.Cells[ 0 ].Value = schedule.FirstName; // First Name
+                row.Cells[ 0 ].Value = schedule.FirstName + " " + schedule.LastName; // First Name
                 row.Cells[ 1 ].Value = schedule.Role; // Name (Role)
                 row.Cells[ 2 ].Value = schedule.StartTime.ToString( "hh:mm tt" );// Start Time
                 row.Cells[ 3 ].Value = schedule.EndTime.ToString( "hh:mm tt" ); // End Time
@@ -311,7 +317,7 @@ namespace MediaBazaarSystem
 
         private void refreshProfile() //Adds all employee's data into the listbox and textboxes.
         {
-            lbEmployeeInfo.Items.Clear();
+            //lbEmployeeInfo.Items.Clear();
             lbEmployeeInfo.Items.Add("Name: " + employee.FirstName);
             lbEmployeeInfo.Items.Add("Surname: " + employee.LastName);
             lbEmployeeInfo.Items.Add("Age: " + employee.Age);

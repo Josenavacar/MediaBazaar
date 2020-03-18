@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using MySql.Data.MySqlClient;
 using System.Data.SqlClient;
+using System.Windows.Forms.DataVisualization.Charting;
 
 namespace MediaBazaarSystem
 {
@@ -59,20 +60,31 @@ namespace MediaBazaarSystem
                 while( reader.Read() )
                 {
                     String firstName = reader.GetValue( 1 ).ToString();
-                    String role = reader.GetValue( 2 ).ToString();
-                    String startTime = reader.GetValue( 3 ).ToString();
-                    String endTime = reader.GetValue( 4 ).ToString();
-                    String workDate = reader.GetValue( 5 ).ToString();
+                    String lastName = reader.GetValue( 2 ).ToString();
+                    String role = reader.GetValue( 3 ).ToString();
+                    String startTime = reader.GetValue( 4 ).ToString();
+                    String endTime = reader.GetValue( 5 ).ToString();
+                    String workDate = reader.GetValue( 6 ).ToString();
                     DateTime workStartTime = Convert.ToDateTime( startTime );
                     DateTime workEndTime = Convert.ToDateTime( endTime );
                     DateTime convertedWorkDate = Convert.ToDateTime( workDate );
 
                     if( dtpWorkSchedule.Value.Date == convertedWorkDate.Date )
                     {
-                        this.GetSchedule();
+                        // Add data to data grid view table
+                        DataGridViewRow row = ( DataGridViewRow ) dataAdminWorkSchedule.Rows[ 0 ].Clone();
+                        dataAdminWorkSchedule.Columns[ "clmnWorkDate" ].DefaultCellStyle.BackColor = Color.LightSteelBlue;
+                        dataAdminWorkSchedule.Columns[ "clmnStartTime" ].DefaultCellStyle.BackColor = Color.PaleGreen;
+                        dataAdminWorkSchedule.Columns[ "clmnEndTime" ].DefaultCellStyle.BackColor = Color.PaleVioletRed;
+                        row.Cells[ 0 ].Value = firstName + " " + lastName; // First Name
+                        row.Cells[ 1 ].Value = role; // Name (Role)
+                        row.Cells[ 2 ].Value = workStartTime.ToString( "hh:mm tt" );// Start Time
+                        row.Cells[ 3 ].Value = workEndTime.ToString( "hh:mm tt" ); // End Time
+                        row.Cells[ 4 ].Value = convertedWorkDate.ToString( "dddd, dd MMMM yyyy" ); // Work Date
+                        dataAdminWorkSchedule.Rows.Add( row );
                     }
 
-                    schedule = new Schedule( firstName, role, workStartTime, workEndTime, convertedWorkDate );
+                    schedule = new Schedule( firstName, lastName, role, workStartTime, workEndTime, convertedWorkDate );
                     department.AddSchedule( schedule );
                 }
             }
@@ -149,16 +161,19 @@ namespace MediaBazaarSystem
         {
             foreach( Schedule schedule in department.GetSchedules() )
             {
-                DataGridViewRow row = ( DataGridViewRow ) dataAdminWorkSchedule.Rows[ 0 ].Clone();
-                dataAdminWorkSchedule.Columns[ "clmnWorkDate" ].DefaultCellStyle.BackColor = Color.LightSteelBlue;
-                dataAdminWorkSchedule.Columns[ "clmnStartTime" ].DefaultCellStyle.BackColor = Color.PaleGreen;
-                dataAdminWorkSchedule.Columns[ "clmnEndTime" ].DefaultCellStyle.BackColor = Color.PaleVioletRed;
-                row.Cells[ 0 ].Value = schedule.FirstName; // First Name
-                row.Cells[ 1 ].Value = schedule.Role; // Name (Role)
-                row.Cells[ 2 ].Value = schedule.StartTime.ToString( "hh:mm tt" );// Start Time
-                row.Cells[ 3 ].Value = schedule.EndTime.ToString( "hh:mm tt" ); // End Time
-                row.Cells[ 4 ].Value = schedule.WorkDate.ToString( "dddd, dd MMMM yyyy" ); // Work Date
-                dataAdminWorkSchedule.Rows.Add( row );
+                if( dtpWorkSchedule.Value.Date == schedule.WorkDate.Date )
+                {
+                    DataGridViewRow row = ( DataGridViewRow ) dataAdminWorkSchedule.Rows[ 0 ].Clone();
+                    dataAdminWorkSchedule.Columns[ "clmnWorkDate" ].DefaultCellStyle.BackColor = Color.LightSteelBlue;
+                    dataAdminWorkSchedule.Columns[ "clmnStartTime" ].DefaultCellStyle.BackColor = Color.PaleGreen;
+                    dataAdminWorkSchedule.Columns[ "clmnEndTime" ].DefaultCellStyle.BackColor = Color.PaleVioletRed;
+                    row.Cells[ 0 ].Value = schedule.FirstName + schedule.LastName; // First Name
+                    row.Cells[ 1 ].Value = schedule.Role; // Name (Role)
+                    row.Cells[ 2 ].Value = schedule.StartTime.ToString( "hh:mm tt" );// Start Time
+                    row.Cells[ 3 ].Value = schedule.EndTime.ToString( "hh:mm tt" ); // End Time
+                    row.Cells[ 4 ].Value = schedule.WorkDate.ToString( "dddd, dd MMMM yyyy" ); // Work Date
+                    dataAdminWorkSchedule.Rows.Add( row );
+                }
             }
         }
 
@@ -173,7 +188,7 @@ namespace MediaBazaarSystem
             // Connect to DB
             string connectionString = @"Server = studmysql01.fhict.local; Uid = dbi437493; Database = dbi437493; Pwd = dbgroup01;";
             // SQL Query
-            string sql = "SELECT Person.Id, Person.FirstName, Role.Name, Schedule.StartTime, Schedule.EndTime, Schedule.WorkDate FROM Person " +
+            string sql = "SELECT Person.Id, Person.FirstName, Person.LastName, Role.Name, Schedule.StartTime, Schedule.EndTime, Schedule.WorkDate FROM Person " +
                 "INNER JOIN Role ON Person.RoleId = Role.Id " +
                 "INNER JOIN Schedule ON Person.Id = Schedule.PersonID";
             // Start mysql objects
@@ -214,21 +229,26 @@ namespace MediaBazaarSystem
             foreach( Employee employee in department.GetEmployees() )
             {
                 chart1.Series[ "Series1" ].IsValueShownAsLabel = true;
+
+                ChartArea chartArea = chart1.ChartAreas[ 0 ];
+                // the regular axis label interval and range
+                chartArea.AxisX.Minimum = 0;
+                chartArea.AxisX.Maximum = 10;
                 chart1.Series[ "Series1" ].Points.AddXY( employee.FirstName, employee.HoursAvailable );
-
-                lBoxEmpStats.Items.Add(
-                    "Name: " + employee.FirstName + " - " +
-                    employee.LastName + " - " +
-                    "Role: " + employee.Role + " - " +
-                    "Age: " + employee.Age
-                );
-            }
-
-            foreach(Schedule schedule in department.GetSchedules())
-            {
-                if( schedule.IsAvailable == true )
+                
+                foreach(Schedule schedule in department.GetSchedules())
                 {
-                    lBoxStatistics.Items.Add( schedule.FirstName );
+                    if( ( schedule.FirstName == employee.FirstName ) && ( schedule.WorkDate.Date == DateTime.Now.Date ) && (!lBoxEmpStats.Items.Contains(employee.FirstName)) )
+                    {
+                        lBoxEmpStats.Items.Add(
+                            employee.FirstName
+                        );
+                    }
+
+                    if( ( schedule.IsAvailable == true ) && ( !lBoxStatistics.Items.Contains( schedule.FirstName ) ) )
+                    {
+                        lBoxStatistics.Items.Add( schedule.FirstName );
+                    }
                 }
             }
         }
@@ -467,7 +487,7 @@ namespace MediaBazaarSystem
             // Connect to DB
             string connectionString = @"Server = studmysql01.fhict.local; Uid = dbi437493; Database = dbi437493; Pwd = dbgroup01;";
             // SQL Query
-            string sql = "SELECT FirstName, Name, StartTime, EndTime, WorkDate FROM Person " +
+            string sql = "SELECT FirstName, LastName, Name, StartTime, EndTime, WorkDate FROM Person " +
                 "INNER JOIN Role ON Person.RoleId = Role.Id " +
                 "INNER JOIN Schedule ON Person.Id = Schedule.PersonID";
 
@@ -482,23 +502,26 @@ namespace MediaBazaarSystem
             // Add data to data grid view table
             while( reader.Read() )
             {
-                String startTime = reader.GetValue( 2 ).ToString();
-                String endTime = reader.GetValue( 3 ).ToString();
+                String firstName = reader.GetValue( 0 ).ToString();
+                String lastName = reader.GetValue( 1 ).ToString();
+                String role = reader.GetValue( 2 ).ToString();
+                String startTime = reader.GetValue( 3 ).ToString();
+                String endTime = reader.GetValue( 4 ).ToString();
                 DateTime workStartTime = Convert.ToDateTime( startTime );
                 DateTime workEndTime = Convert.ToDateTime( endTime );
-                DateTime date = Convert.ToDateTime( reader.GetValue( 4 ).ToString() );
-                String theDate = dtpWorkSchedule.Value.ToString( "MM/dd/yyyy" );
+                DateTime date = Convert.ToDateTime( reader.GetValue( 5 ).ToString() );
+                String theDate = dtpWorkSchedule.Value.ToString( "dddd, dd MMMM yyyy" );
 
                 // Check if the date in the work schedule is equal to the date from the DB
-                if( theDate == date.ToString( "MM/dd/yyyy" ) )
+                if( theDate == date.ToString( "dddd, dd MMMM yyyy" ) )
                 {
                     DataGridViewRow row = ( DataGridViewRow ) dataAdminWorkSchedule.Rows[ 0 ].Clone();
                     dataAdminWorkSchedule.Columns[ "clmnWorkDate" ].DefaultCellStyle.BackColor = Color.LightSteelBlue;
-                    row.Cells[ 0 ].Value = reader.GetValue( 0 ).ToString(); // First Name
-                    row.Cells[ 1 ].Value = reader.GetValue( 1 ).ToString(); // Name (Role)
+                    row.Cells[ 0 ].Value = firstName + " " + lastName;// First Name
+                    row.Cells[ 1 ].Value = role;// Name (Role)
                     row.Cells[ 2 ].Value = workStartTime.ToString( "hh:mm tt" );// Start Time
                     row.Cells[ 3 ].Value = workEndTime.ToString( "hh:mm tt" ); // End Time
-                    row.Cells[ 4 ].Value = date.ToString( "MM/dd/yyyy" ); // Date
+                    row.Cells[ 4 ].Value = date.ToString( "dddd, dd MMMM yyyy" ); // Date
                     dataAdminWorkSchedule.Rows.Add( row );
                 }
             }
@@ -526,7 +549,7 @@ namespace MediaBazaarSystem
             employeeName = selectedRow.Cells[ 0 ].Value.ToString();
 
             // Open the assign employee form
-            assignEmployeeForm = new AssignEmployeeSystem( employeeName );
+            assignEmployeeForm = new AssignEmployeeSystem( department, schedule, emp );
             assignEmployeeForm.Show();
         }
 
@@ -553,7 +576,7 @@ namespace MediaBazaarSystem
                 dataAdminWorkSchedule.Columns[ "clmnWorkDate" ].DefaultCellStyle.BackColor = Color.LightSteelBlue;
                 dataAdminWorkSchedule.Columns[ "clmnStartTime" ].DefaultCellStyle.BackColor = Color.PaleGreen;
                 dataAdminWorkSchedule.Columns[ "clmnEndTime" ].DefaultCellStyle.BackColor = Color.PaleVioletRed;
-                row.Cells[ 0 ].Value = schedule.FirstName; // First Name
+                row.Cells[ 0 ].Value = schedule.FirstName + " " + schedule.LastName; // First Name
                 row.Cells[ 1 ].Value = schedule.Role; // Name (Role)
                 row.Cells[ 2 ].Value = schedule.StartTime.ToString( "hh:mm tt" );// Start Time
                 row.Cells[ 3 ].Value = schedule.EndTime.ToString( "hh:mm tt" ); // End Time
@@ -603,14 +626,6 @@ namespace MediaBazaarSystem
         private void btnViewAllEmployees_Click( object sender, EventArgs e )
         {
             this.GetStatistics();
-        }
-
-        /**
-         * Method to display all products in the system to the listbox
-         */
-        private void btnViewAllProducts_Click( object sender, EventArgs e )
-        {
-
         }
 
         /**
@@ -678,7 +693,7 @@ namespace MediaBazaarSystem
                     {
                         DataGridViewRow newRow = new DataGridViewRow();
                         newRow.CreateCells( dataAdminWorkSchedule );
-                        newRow.Cells[ 0 ].Value = schedule.FirstName;
+                        newRow.Cells[ 0 ].Value = schedule.FirstName + " " + schedule.LastName;
                         newRow.Cells[ 1 ].Value = schedule.Role;
                         newRow.Cells[ 2 ].Value = schedule.StartTime.ToString( "hh:mm tt" );
                         newRow.Cells[ 3 ].Value = schedule.EndTime.ToString( "hh:mm tt" );
@@ -708,7 +723,7 @@ namespace MediaBazaarSystem
                     dataAdminWorkSchedule.Columns[ "clmnWorkDate" ].DefaultCellStyle.BackColor = Color.LightSteelBlue;
                     dataAdminWorkSchedule.Columns[ "clmnStartTime" ].DefaultCellStyle.BackColor = Color.PaleGreen;
                     dataAdminWorkSchedule.Columns[ "clmnEndTime" ].DefaultCellStyle.BackColor = Color.PaleVioletRed;
-                    row.Cells[ 0 ].Value = schedule.FirstName; // First Name
+                    row.Cells[ 0 ].Value = schedule.FirstName + " " + schedule.LastName; // First Name
                     row.Cells[ 1 ].Value = schedule.Role; // Name (Role)
                     row.Cells[ 2 ].Value = schedule.StartTime.ToString( "hh:mm tt" );// Start Time
                     row.Cells[ 3 ].Value = schedule.EndTime.ToString( "hh:mm tt" ); // End Time
@@ -721,7 +736,7 @@ namespace MediaBazaarSystem
                     dataAdminWorkSchedule.Columns[ "clmnWorkDate" ].DefaultCellStyle.BackColor = Color.LightSteelBlue;
                     dataAdminWorkSchedule.Columns[ "clmnStartTime" ].DefaultCellStyle.BackColor = Color.PaleGreen;
                     dataAdminWorkSchedule.Columns[ "clmnEndTime" ].DefaultCellStyle.BackColor = Color.PaleVioletRed;
-                    row.Cells[ 0 ].Value = schedule.FirstName; // First Name
+                    row.Cells[ 0 ].Value = schedule.FirstName + " " + schedule.LastName; // First Name
                     row.Cells[ 1 ].Value = schedule.Role; // Name (Role)
                     row.Cells[ 2 ].Value = schedule.StartTime.ToString( "hh:mm tt" );// Start Time
                     row.Cells[ 3 ].Value = schedule.EndTime.ToString( "hh:mm tt" ); // End Time
@@ -731,16 +746,25 @@ namespace MediaBazaarSystem
             }
         }
 
+        /**
+         * Method whenever mouse hovers over the logout icon
+         */
         private void picBoxLogout_MouseEnter(object sender, EventArgs e)
         {
             picBoxLogout.Cursor = Cursors.Hand;
         }
 
+        /**
+         * Method whenever mouse is not hovering over logout icon
+         */
         private void picBoxLogout_MouseLeave(object sender, EventArgs e)
         {
             picBoxLogout.Cursor = Cursors.Default;
         }
 
+        /**
+         * Method to load data into tab page when tab page is selected
+         */
         private void tbControlAdmin_SelectedIndexChanged( object sender, EventArgs e )
         {
             if( tbControlAdmin.SelectedTab == tbControlAdmin.TabPages[ "tbPageStatistics" ] )//your specific tabname
@@ -749,6 +773,9 @@ namespace MediaBazaarSystem
             }
         }
 
+        /**
+         * Method to filter information in the list box based on role
+         */
         private void cmboBoxStatsFilter_SelectedIndexChanged( object sender, EventArgs e )
         {
             lBoxEmpStats.Items.Clear();
@@ -759,6 +786,7 @@ namespace MediaBazaarSystem
                 {
                     lBoxEmpStats.Items.Add(
                         schedule.FirstName + " - " +
+                        schedule.LastName + " - " +
                         schedule.Role + " - " +
                         schedule.StartTime.ToString( "hh:mm tt" ) + " - " +
                         schedule.EndTime.ToString( "hh:mm tt" ) + " - " +
@@ -769,6 +797,7 @@ namespace MediaBazaarSystem
                 {
                     lBoxEmpStats.Items.Add(
                         schedule.FirstName + " - " +
+                        schedule.LastName + " - " +
                         schedule.Role + " - " +
                         schedule.StartTime.ToString( "hh:mm tt" ) + " - " +
                         schedule.EndTime.ToString( "hh:mm tt" ) + " - " +
@@ -778,6 +807,9 @@ namespace MediaBazaarSystem
             }
         }
 
+        /**
+         * Method to update user information in the profile
+         */
         private void btnUpdateProfile_Click(object sender, EventArgs e)
         {
             if(checkProfileChange())
@@ -811,9 +843,12 @@ namespace MediaBazaarSystem
             }
         }
 
+        /**
+         * Method to refresh profile
+         */
         private void refreshProfile() //Adds all manager's data into the listbox and textboxes.
         {
-            lbEmployeeInfo.Items.Clear();
+            //lbEmployeeInfo.Items.Clear();
             lbEmployeeInfo.Items.Add("Name: " + manager.FirstName);
             lbEmployeeInfo.Items.Add("Surname: " + manager.LastName);
             lbEmployeeInfo.Items.Add("Age: " + manager.Age);
@@ -826,6 +861,9 @@ namespace MediaBazaarSystem
             txtBoxEmail.Text = manager.Email;
         }
 
+        /**
+         * Method to check if profile has been changed
+         */
         private bool checkProfileChange()
         {
             if(txtBoxFirstName.Text == manager.FirstName && txtBoxLastName.Text == manager.LastName && Convert.ToInt32(txtBoxAge.Text) == manager.Age && txtBoxAddress.Text == manager.Address && txtBoxEmail.Text == manager.Email)

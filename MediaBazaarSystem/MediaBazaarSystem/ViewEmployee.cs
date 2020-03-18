@@ -23,10 +23,10 @@ namespace MediaBazaarSystem
                 lblFirstName.Text += " " + employee.FirstName;
                 lblLastName.Text += " " + employee.LastName;
                 lblAddress.Text += " " + employee.Address;
-                lbMoney.Text += " " + employee.Salary;
+                lbSalary.Text += " " + employee.Salary;
                 lblAge.Text += " " + employee.Age;
-                lbTimeAv.Text += " " + employee.HoursAvailable;
-                lbWork.Text += " " + employee.Role;
+                lbHoursAvailable.Text += " " + employee.HoursAvailable;
+                lbPosition.Text += " " + employee.Role;
             }
             else if(manager != null)
             {
@@ -34,10 +34,10 @@ namespace MediaBazaarSystem
                 lblFirstName.Text += " " + manager.FirstName;
                 lblLastName.Text += " " + manager.LastName;
                 lblAddress.Text += " " + manager.Address;
-                lbMoney.Text += " " + manager.Salary;
+                lbSalary.Text += " " + manager.Salary;
                 lblAge.Text += " " + manager.Age;
-                lbTimeAv.Text += " " + manager.HoursAvailable;
-                lbWork.Text += " " + manager.Role;
+                lbHoursAvailable.Text += " " + manager.HoursAvailable;
+                lbPosition.Text += " " + manager.Role;
             }
         }
     }

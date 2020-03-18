@@ -14,14 +14,20 @@ namespace MediaBazaarSystem
 {
     public partial class AssignEmployeeSystem : Form
     {
-        private String employeeName;
         private String firstName;
+        Schedule schedule;
+        Employee employee;
 
-        public AssignEmployeeSystem(String employeeName )
+        public AssignEmployeeSystem(Department department, Schedule schedule, Employee employee )
         {
             InitializeComponent();
-            this.employeeName = employeeName;
-            comBoxEmployees.Items.Add( this.employeeName );
+            this.employee = employee;
+            this.schedule = schedule;
+
+            foreach(Employee employee1 in department.GetEmployees())
+            {
+                comBoxEmployees.Items.Add( employee1.FirstName );
+            }
 
             DateTime time = DateTime.Today;
             for( DateTime _time = time.AddHours( 08 ); _time < time.AddHours( 24 ); _time = _time.AddMinutes( 60 ) ) //from 16h to 18h hours
@@ -52,7 +58,7 @@ namespace MediaBazaarSystem
                 String endTime = reader.GetValue( 3 ).ToString();
                 String workDate = reader.GetValue( 4 ).ToString();
 
-                if( firstName == employeeName )
+                if( firstName == employee.FirstName )
                 {
                     lBoxAssignEmployee.Items.Add( firstName + " - " + startTime + " - " + endTime + " - " + workDate );
                 }
@@ -81,14 +87,15 @@ namespace MediaBazaarSystem
 
             MySqlConnection connection = new MySqlConnection( connectionString );
             MySqlCommand cmd = new MySqlCommand( sql, connection );
-            cmd.Parameters.AddWithValue( "@employeeName", this.employeeName );
+            cmd.Parameters.AddWithValue( "@employeeName", this.employee.FirstName );
             cmd.Parameters.AddWithValue( "@startTime", updateStartTime );
             cmd.Parameters.AddWithValue( "@endTime", updateEndTime );
             cmd.Parameters.AddWithValue( "@workDate", updateWorkDate );
             connection.Open();
-            int rows = cmd.ExecuteNonQuery();
-            this.Hide();
 
+            schedule.UpdateSchedule(this.employee.FirstName, this.employee.LastName, employee.Role, updateStartTime, updateEndTime, updateWorkDate);
+
+            this.Hide();
         }
 
         private void updateTimer_Tick( object sender, EventArgs e )

@@ -116,37 +116,5 @@ namespace MediaBazaarSystem
                 connection.Close();
             }
         }
-
-        /**
-         * Method to register a user to the system
-         */
-        private void btnRegister_Click( object sender, EventArgs e )
-        {
-            // Set variables
-            String email = txtBoxEmail.Text;
-            String password = Cryptography.Encrypt( txtBoxPassword.Text );
-                
-            using( MySqlConnection connection = new MySqlConnection( @"Server = studmysql01.fhict.local; Uid = dbi437493; Database = dbi437493; Pwd = dbgroup01;" ) )
-            {
-                // SQL query
-                String query = "INSERT INTO Person (email, password) VALUES (@email, @password)";
-
-                try
-                {
-                    // Open connection
-                    connection.Open();
-                    MySqlCommand cmd = new MySqlCommand( query, connection );
-                    // Use parameterised variables to prevent SQL-injection
-                    cmd.Parameters.AddWithValue( "@email", email );
-                    cmd.Parameters.AddWithValue( "@password", password );
-                    cmd.ExecuteNonQuery();
-                    connection.Close();
-                }
-                catch( Exception es )
-                {
-                    MessageBox.Show( es.Message );
-                }
-            }
-        }
     }
 }
