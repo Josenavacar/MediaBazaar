@@ -97,6 +97,7 @@ namespace MediaBazaarSystem
         private void UpdateSchedule()
         {
             // Clear table
+            lBoxEmpHistory.Items.Clear();
             this.dataEmpWorkSchedule.Rows.Clear();
             department.GetSchedules().Clear();
             // Connect to DB
@@ -111,7 +112,7 @@ namespace MediaBazaarSystem
             MySqlConnection connection = new MySqlConnection( connectionString );
             MySqlCommand cmd = new MySqlCommand( sql, connection );
             this.GetWorkScheduleDB( sql, connection );
-
+            //this.GetShifts( sql, connection );
             // Disable timer
             updateTimer.Enabled = false;
         }
@@ -159,7 +160,7 @@ namespace MediaBazaarSystem
                         dataEmpWorkSchedule.Rows.Add( row );
                     }
 
-                    schedule = new Schedule( firstName, lastName, role, workStartTime, workEndTime, convertedWorkDate );
+                    schedule = new Schedule( firstName, lastName, role, workStartTime, workEndTime, convertedWorkDate, this.department.Name );
                     department.AddSchedule( schedule );
 
                     if( employeeID == employee.dbID )
@@ -178,6 +179,7 @@ namespace MediaBazaarSystem
             }
 
             reader.Close();
+            connection.Close();
         }
 
         /**
@@ -282,27 +284,36 @@ namespace MediaBazaarSystem
             dataEmpWorkSchedule.Sort( dataEmpWorkSchedule.Columns[ 0 ], ListSortDirection.Ascending );
         }
 
+        /**
+         * Method to update the user's profile
+         */
         private void btnUpdateProfile_Click(object sender, EventArgs e)
         {
             if (checkProfileChange())
             {
+                String firstName = txtBoxFirstName.Text;
+                String lastName = txtBoxLastName.Text;
+                int age = Convert.ToInt32( txtBoxAge.Text );
+                String address = txtBoxEmail.Text;
+                String email = txtBoxEmail.Text;
+
                 //Updates employee in database.
                 string connString = @"Server = studmysql01.fhict.local; Uid = dbi437493; Database = dbi437493; Pwd = dbgroup01;";
                 MySqlConnection conn = new MySqlConnection(connString);
                 conn.Open();
                 MySqlCommand cmd = conn.CreateCommand();
                 cmd.CommandText = "UPDATE person SET Firstname = @Firstname, Lastname = @Lastname, Age = @Age, Address = @Address, Email = @Email WHERE Id = @Id";
-                cmd.Parameters.AddWithValue("@Firstname", txtBoxFirstName.Text);
-                cmd.Parameters.AddWithValue("@Lastname", txtBoxLastName.Text);
-                cmd.Parameters.AddWithValue("@Age", Convert.ToInt32(txtBoxAge.Text));
-                cmd.Parameters.AddWithValue("@Address", txtBoxAddress.Text);
-                cmd.Parameters.AddWithValue("@Email", txtBoxEmail.Text);
+                cmd.Parameters.AddWithValue("@Firstname", firstName);
+                cmd.Parameters.AddWithValue("@Lastname", lastName );
+                cmd.Parameters.AddWithValue("@Age", age );
+                cmd.Parameters.AddWithValue("@Address", address );
+                cmd.Parameters.AddWithValue("@Email", email );
                 cmd.Parameters.AddWithValue("@Id", employee.dbID);
 
                 cmd.ExecuteNonQuery();
 
                 //Updates employee in list.
-                employee.EditEmployee(txtBoxFirstName.Text, txtBoxLastName.Text, Convert.ToInt32(txtBoxAge.Text), txtBoxAddress.Text, employee.Role, employee.Salary, employee.HoursAvailable, txtBoxEmail.Text);
+                employee.EditEmployee( firstName, lastName, age, address, employee.Role, employee.Salary, employee.HoursAvailable, email, employee.Contract);
 
                 //Updates profile.
                 refreshProfile();
@@ -315,6 +326,9 @@ namespace MediaBazaarSystem
             }
         }
 
+        /**
+         * Method to refresh profile 
+         */
         private void refreshProfile() //Adds all employee's data into the listbox and textboxes.
         {
             //lbEmployeeInfo.Items.Clear();
@@ -330,6 +344,9 @@ namespace MediaBazaarSystem
             txtBoxEmail.Text = employee.Email;
         }
         
+        /**
+         * Method to check if profile has been changed
+         */
         private bool checkProfileChange()
         {
             if (txtBoxFirstName.Text == employee.FirstName && txtBoxLastName.Text == employee.LastName && Convert.ToInt32(txtBoxAge.Text) == employee.Age && txtBoxAddress.Text == employee.Address && txtBoxEmail.Text == employee.Email)
@@ -342,12 +359,231 @@ namespace MediaBazaarSystem
             }
         }
 
+        /**
+         * Method to change password
+         */
         private void btnChangePwd_Click(object sender, EventArgs e)
         {
             //On click, opens a form to change the currently logged in user's password.
             ChangePassword pwd = new ChangePassword(null, employee);
             pwd.StartPosition = FormStartPosition.CenterParent;
             pwd.ShowDialog(this);
+        }
+
+        /**
+         * Method to search the table based on the day (you can only search days and not dates e.g. tuesday or friday)
+         */
+        private void btnSearch_Click( object sender, EventArgs e )
+        {
+            lBoxEmpHistory.Items.Clear();
+            txtBoxSearch.CharacterCasing = CharacterCasing.Lower;
+            String searchedValue = txtBoxSearch.Text;
+
+            foreach( Schedule schedule in department.GetSchedules() )
+            {
+                if( schedule.FirstName == this.employee.FirstName )
+                {
+                    if( searchedValue.Contains( schedule.WorkDate.ToString( "dddd" ).ToLower() ) )
+                    {
+                        lBoxEmpHistory.Items.Add(
+                            schedule.WorkDate.ToString( "dddd, dd MMMM yyyy" ) + " - " +
+                            schedule.StartTime.ToString( "hh:mm tt" ) + " - " +
+                            schedule.EndTime.ToString( "hh:mm tt" )
+                        );
+                    }
+                }
+            }
+        }
+
+        /**
+         * Method to view employee's work history
+         */
+        private void btnViewWorkHistory_Click( object sender, EventArgs e )
+        {
+            lblWorkHistory.Text = null;
+            lblWorkHistory.Text = "Your work history:";
+            this.UpdateSchedule();
+        }
+
+        /**
+         * Method to show employee's morning shifts history
+         */
+        private void btnMorningShift_Click( object sender, EventArgs e )
+        {
+            lblWorkHistory.Text = null;
+            lblWorkHistory.Text = "Your work history: morning shifts";
+            lBoxEmpHistory.Items.Clear();
+
+            // Connect to DB
+            string connectionString = @"Server = studmysql01.fhict.local; Uid = dbi437493; Database = dbi437493; Pwd = dbgroup01;";
+            // SQL Query
+            string sql = "SELECT Person.Id, Person.FirstName, Person.LastName, Role.Name, Schedule.StartTime, Schedule.EndTime, Schedule.WorkDate, Department.Name FROM Person " +
+                "INNER JOIN Role ON Person.RoleId = Role.Id " +
+                "INNER JOIN Schedule ON Person.Id = Schedule.PersonID " +
+                "INNER JOIN Department ON Person.DepartmentID = Department.Id";
+
+            // Start mysql objects
+            MySqlConnection connection = new MySqlConnection( connectionString );
+            // Start mysql objects
+            MySqlCommand cmd = new MySqlCommand( sql, connection );
+
+            // Open connection
+            connection.Open();
+            MySqlDataReader reader = cmd.ExecuteReader();
+
+            if( reader.HasRows )
+            {
+                // Get the data
+                while( reader.Read() )
+                {
+                    int employeeID = ( int ) reader.GetValue( 0 );
+                    String firstName = reader.GetValue( 1 ).ToString();
+                    String lastName = reader.GetValue( 2 ).ToString();
+                    String role = reader.GetValue( 3 ).ToString();
+                    String startTime = reader.GetValue( 4 ).ToString();
+                    String endTime = reader.GetValue( 5 ).ToString();
+                    String workDate = reader.GetValue( 6 ).ToString();
+                    String departmentName = reader.GetValue( 7 ).ToString();
+                    DateTime workStartTime = Convert.ToDateTime( startTime );
+                    DateTime workEndTime = Convert.ToDateTime( endTime );
+                    DateTime convertedWorkDate = Convert.ToDateTime( workDate );
+
+                    if( ( this.employee.FirstName == firstName ) && ( department.Name == departmentName ) )
+                    {
+                        if( ( workStartTime.ToString( "hh:mm tt" ) == "08:00 AM" ) && ( workEndTime.ToString( "hh:mm tt" ) == "11:00 AM" ) )
+                        {
+                            lBoxEmpHistory.Items.Add(
+                                "Date: " + convertedWorkDate.ToString( "dddd, dd MMMM yyyy" ) +
+                                " --- Start time: " + workStartTime.ToString( "hh:mm tt" ) +
+                                " --- End time: " + workEndTime.ToString( "hh:mm tt" )
+                            );
+                        }
+                    }
+                }
+            }
+
+            reader.Close();
+            connection.Close();
+        }
+
+        /**
+         * Method to show employee's afternoon shifts history
+         */
+        private void btnAfternoonShift_Click( object sender, EventArgs e )
+        {
+            lblWorkHistory.Text = null;
+            lblWorkHistory.Text = "Your work history: afternoon shifts";
+            lBoxEmpHistory.Items.Clear();
+            // Connect to DB
+            string connectionString = @"Server = studmysql01.fhict.local; Uid = dbi437493; Database = dbi437493; Pwd = dbgroup01;";
+            // SQL Query
+            string sql = "SELECT Person.Id, Person.FirstName, Person.LastName, Role.Name, Schedule.StartTime, Schedule.EndTime, Schedule.WorkDate, Department.Name FROM Person " +
+                "INNER JOIN Role ON Person.RoleId = Role.Id " +
+                "INNER JOIN Schedule ON Person.Id = Schedule.PersonID " +
+                "INNER JOIN Department ON Person.DepartmentID = Department.Id";
+
+            // Start mysql objects
+            MySqlConnection connection = new MySqlConnection( connectionString );
+            // Start mysql objects
+            MySqlCommand cmd = new MySqlCommand( sql, connection );
+
+            // Open connection
+            connection.Open();
+            MySqlDataReader reader = cmd.ExecuteReader();
+
+            if( reader.HasRows )
+            {
+                // Get the data
+                while( reader.Read() )
+                {
+                    int employeeID = ( int ) reader.GetValue( 0 );
+                    String firstName = reader.GetValue( 1 ).ToString();
+                    String lastName = reader.GetValue( 2 ).ToString();
+                    String role = reader.GetValue( 3 ).ToString();
+                    String startTime = reader.GetValue( 4 ).ToString();
+                    String endTime = reader.GetValue( 5 ).ToString();
+                    String workDate = reader.GetValue( 6 ).ToString();
+                    String departmentName = reader.GetValue( 7 ).ToString();
+                    DateTime workStartTime = Convert.ToDateTime( startTime );
+                    DateTime workEndTime = Convert.ToDateTime( endTime );
+                    DateTime convertedWorkDate = Convert.ToDateTime( workDate );
+
+                    if( ( this.employee.FirstName == firstName ) && ( department.Name == departmentName ) )
+                    {
+                        if( ( workStartTime.ToString( "hh:mm tt" ) == "12:00 PM" ) && ( workEndTime.ToString( "hh:mm tt" ) == "04:00 PM" ) )
+                        {
+                            lBoxEmpHistory.Items.Add(
+                                "Date: " + convertedWorkDate.ToString( "dddd, dd MMMM yyyy" ) +
+                                " --- Start time: " + workStartTime.ToString( "hh:mm tt" ) +
+                                " --- End time: " + workEndTime.ToString( "hh:mm tt" )
+                            );
+                        }
+                    }
+                }
+            }
+
+            reader.Close();
+            connection.Close();
+        }
+
+        /**
+         * Method to show employee's evening shifts history
+         */
+        private void btnEveningShift_Click( object sender, EventArgs e )
+        {
+            lblWorkHistory.Text = null;
+            lblWorkHistory.Text = "Your work history: evening shifts";
+            lBoxEmpHistory.Items.Clear();
+            // Connect to DB
+            string connectionString = @"Server = studmysql01.fhict.local; Uid = dbi437493; Database = dbi437493; Pwd = dbgroup01;";
+            // SQL Query
+            string sql = "SELECT Person.Id, Person.FirstName, Person.LastName, Role.Name, Schedule.StartTime, Schedule.EndTime, Schedule.WorkDate, Department.Name FROM Person " +
+                "INNER JOIN Role ON Person.RoleId = Role.Id " +
+                "INNER JOIN Schedule ON Person.Id = Schedule.PersonID " +
+                "INNER JOIN Department ON Person.DepartmentID = Department.Id";
+
+            // Start mysql objects
+            MySqlConnection connection = new MySqlConnection( connectionString );
+            // Start mysql objects
+            MySqlCommand cmd = new MySqlCommand( sql, connection );
+
+            // Open connection
+            connection.Open();
+            MySqlDataReader reader = cmd.ExecuteReader();
+
+            if( reader.HasRows )
+            {
+                // Get the data
+                while( reader.Read() )
+                {
+                    int employeeID = ( int ) reader.GetValue( 0 );
+                    String firstName = reader.GetValue( 1 ).ToString();
+                    String lastName = reader.GetValue( 2 ).ToString();
+                    String role = reader.GetValue( 3 ).ToString();
+                    String startTime = reader.GetValue( 4 ).ToString();
+                    String endTime = reader.GetValue( 5 ).ToString();
+                    String workDate = reader.GetValue( 6 ).ToString();
+                    String departmentName = reader.GetValue( 7 ).ToString();
+                    DateTime workStartTime = Convert.ToDateTime( startTime );
+                    DateTime workEndTime = Convert.ToDateTime( endTime );
+                    DateTime convertedWorkDate = Convert.ToDateTime( workDate );
+
+                    if( ( this.employee.FirstName == firstName ) && ( department.Name == departmentName ) )
+                    {
+                        if( ( workStartTime.ToString( "hh:mm tt" ) == "05:00 PM" ) && ( workEndTime.ToString( "hh:mm tt" ) == "09:00 PM" ) )
+                        {
+                            lBoxEmpHistory.Items.Add(
+                                "Date: " + convertedWorkDate.ToString( "dddd, dd MMMM yyyy" ) +
+                                " --- Start time: " + workStartTime.ToString( "hh:mm tt" ) +
+                                " --- End time: " + workEndTime.ToString( "hh:mm tt" )
+                            );
+                        }
+                    }
+                }
+            }
+
+            reader.Close();
+            connection.Close();
         }
     }
 }

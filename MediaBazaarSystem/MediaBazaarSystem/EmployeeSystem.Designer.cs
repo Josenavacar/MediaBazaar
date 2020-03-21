@@ -46,11 +46,11 @@
             this.clmnWorkDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dtpWorkSchedule = new System.Windows.Forms.DateTimePicker();
             this.tbPageHistory = new System.Windows.Forms.TabPage();
+            this.btnMorningShift = new System.Windows.Forms.Button();
+            this.btnViewWorkHistory = new System.Windows.Forms.Button();
             this.lblWorkHistory = new System.Windows.Forms.Label();
-            this.button4 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
+            this.btnEveningShift = new System.Windows.Forms.Button();
+            this.btnAfternoonShift = new System.Windows.Forms.Button();
             this.lBoxEmpHistory = new System.Windows.Forms.ListBox();
             this.btnSearch = new System.Windows.Forms.Button();
             this.txtBoxSearch = new System.Windows.Forms.TextBox();
@@ -123,7 +123,7 @@
             this.cmboBoxFilter.Name = "cmboBoxFilter";
             this.cmboBoxFilter.Size = new System.Drawing.Size(178, 29);
             this.cmboBoxFilter.TabIndex = 21;
-            this.cmboBoxFilter.Text = "Filter";
+            this.cmboBoxFilter.Text = "Role Filter";
             this.cmboBoxFilter.SelectedIndexChanged += new System.EventHandler(this.cmboBoxFilter_SelectedIndexChanged);
             // 
             // btnHomeSearch
@@ -139,11 +139,12 @@
             // 
             // txtBoxHomeSearch
             // 
-            this.txtBoxHomeSearch.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtBoxHomeSearch.Font = new System.Drawing.Font("Century Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtBoxHomeSearch.Location = new System.Drawing.Point(211, 21);
             this.txtBoxHomeSearch.Name = "txtBoxHomeSearch";
-            this.txtBoxHomeSearch.Size = new System.Drawing.Size(347, 32);
+            this.txtBoxHomeSearch.Size = new System.Drawing.Size(347, 30);
             this.txtBoxHomeSearch.TabIndex = 19;
+            this.txtBoxHomeSearch.Text = "Search by first name...";
             // 
             // btnSort
             // 
@@ -247,11 +248,11 @@
             // tbPageHistory
             // 
             this.tbPageHistory.BackColor = System.Drawing.SystemColors.Menu;
+            this.tbPageHistory.Controls.Add(this.btnMorningShift);
+            this.tbPageHistory.Controls.Add(this.btnViewWorkHistory);
             this.tbPageHistory.Controls.Add(this.lblWorkHistory);
-            this.tbPageHistory.Controls.Add(this.button4);
-            this.tbPageHistory.Controls.Add(this.button3);
-            this.tbPageHistory.Controls.Add(this.button2);
-            this.tbPageHistory.Controls.Add(this.button1);
+            this.tbPageHistory.Controls.Add(this.btnEveningShift);
+            this.tbPageHistory.Controls.Add(this.btnAfternoonShift);
             this.tbPageHistory.Controls.Add(this.lBoxEmpHistory);
             this.tbPageHistory.Controls.Add(this.btnSearch);
             this.tbPageHistory.Controls.Add(this.txtBoxSearch);
@@ -260,6 +261,28 @@
             this.tbPageHistory.Size = new System.Drawing.Size(870, 675);
             this.tbPageHistory.TabIndex = 2;
             this.tbPageHistory.Text = "History";
+            // 
+            // btnMorningShift
+            // 
+            this.btnMorningShift.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.btnMorningShift.Location = new System.Drawing.Point(247, 590);
+            this.btnMorningShift.Name = "btnMorningShift";
+            this.btnMorningShift.Size = new System.Drawing.Size(168, 42);
+            this.btnMorningShift.TabIndex = 14;
+            this.btnMorningShift.Text = "Morning shift";
+            this.btnMorningShift.UseVisualStyleBackColor = false;
+            this.btnMorningShift.Click += new System.EventHandler(this.btnMorningShift_Click);
+            // 
+            // btnViewWorkHistory
+            // 
+            this.btnViewWorkHistory.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.btnViewWorkHistory.Location = new System.Drawing.Point(32, 590);
+            this.btnViewWorkHistory.Name = "btnViewWorkHistory";
+            this.btnViewWorkHistory.Size = new System.Drawing.Size(168, 42);
+            this.btnViewWorkHistory.TabIndex = 13;
+            this.btnViewWorkHistory.Text = "View Work History";
+            this.btnViewWorkHistory.UseVisualStyleBackColor = false;
+            this.btnViewWorkHistory.Click += new System.EventHandler(this.btnViewWorkHistory_Click);
             // 
             // lblWorkHistory
             // 
@@ -270,45 +293,27 @@
             this.lblWorkHistory.TabIndex = 12;
             this.lblWorkHistory.Text = "Your work history:";
             // 
-            // button4
+            // btnEveningShift
             // 
-            this.button4.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.button4.Location = new System.Drawing.Point(673, 590);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(162, 42);
-            this.button4.TabIndex = 11;
-            this.button4.Text = "Nightshift";
-            this.button4.UseVisualStyleBackColor = false;
+            this.btnEveningShift.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.btnEveningShift.Location = new System.Drawing.Point(667, 590);
+            this.btnEveningShift.Name = "btnEveningShift";
+            this.btnEveningShift.Size = new System.Drawing.Size(168, 42);
+            this.btnEveningShift.TabIndex = 11;
+            this.btnEveningShift.Text = "Evening Shift";
+            this.btnEveningShift.UseVisualStyleBackColor = false;
+            this.btnEveningShift.Click += new System.EventHandler(this.btnEveningShift_Click);
             // 
-            // button3
+            // btnAfternoonShift
             // 
-            this.button3.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.button3.Location = new System.Drawing.Point(465, 590);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(162, 42);
-            this.button3.TabIndex = 10;
-            this.button3.Text = "Dayshift";
-            this.button3.UseVisualStyleBackColor = false;
-            // 
-            // button2
-            // 
-            this.button2.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.button2.Location = new System.Drawing.Point(252, 590);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(162, 42);
-            this.button2.TabIndex = 9;
-            this.button2.Text = "Fulltime";
-            this.button2.UseVisualStyleBackColor = false;
-            // 
-            // button1
-            // 
-            this.button1.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.button1.Location = new System.Drawing.Point(32, 590);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(162, 42);
-            this.button1.TabIndex = 8;
-            this.button1.Text = "Part-time";
-            this.button1.UseVisualStyleBackColor = false;
+            this.btnAfternoonShift.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.btnAfternoonShift.Location = new System.Drawing.Point(459, 590);
+            this.btnAfternoonShift.Name = "btnAfternoonShift";
+            this.btnAfternoonShift.Size = new System.Drawing.Size(168, 42);
+            this.btnAfternoonShift.TabIndex = 10;
+            this.btnAfternoonShift.Text = "Afternoon Shift";
+            this.btnAfternoonShift.UseVisualStyleBackColor = false;
+            this.btnAfternoonShift.Click += new System.EventHandler(this.btnAfternoonShift_Click);
             // 
             // lBoxEmpHistory
             // 
@@ -316,7 +321,7 @@
             this.lBoxEmpHistory.ItemHeight = 21;
             this.lBoxEmpHistory.Location = new System.Drawing.Point(32, 128);
             this.lBoxEmpHistory.Name = "lBoxEmpHistory";
-            this.lBoxEmpHistory.Size = new System.Drawing.Size(803, 424);
+            this.lBoxEmpHistory.Size = new System.Drawing.Size(803, 403);
             this.lBoxEmpHistory.TabIndex = 7;
             // 
             // btnSearch
@@ -328,14 +333,16 @@
             this.btnSearch.TabIndex = 6;
             this.btnSearch.Text = "Search";
             this.btnSearch.UseVisualStyleBackColor = false;
+            this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
             // 
             // txtBoxSearch
             // 
-            this.txtBoxSearch.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtBoxSearch.Font = new System.Drawing.Font("Century Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtBoxSearch.Location = new System.Drawing.Point(32, 23);
             this.txtBoxSearch.Name = "txtBoxSearch";
-            this.txtBoxSearch.Size = new System.Drawing.Size(595, 32);
+            this.txtBoxSearch.Size = new System.Drawing.Size(595, 30);
             this.txtBoxSearch.TabIndex = 5;
+            this.txtBoxSearch.Text = "Search by date...";
             // 
             // tbPageProfile
             // 
@@ -565,10 +572,8 @@
         private System.Windows.Forms.ComboBox cmboBoxFilter;
         private System.Windows.Forms.Button btnHomeSearch;
         private System.Windows.Forms.TextBox txtBoxHomeSearch;
-        private System.Windows.Forms.Button button4;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnEveningShift;
+        private System.Windows.Forms.Button btnAfternoonShift;
         private System.Windows.Forms.ListBox lBoxEmpHistory;
         private System.Windows.Forms.Label lblWorkHistory;
         private System.Windows.Forms.DataGridViewTextBoxColumn clmnStaffName;
@@ -576,5 +581,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn clmnStartTime;
         private System.Windows.Forms.DataGridViewTextBoxColumn clmnEndTime;
         private System.Windows.Forms.DataGridViewTextBoxColumn clmnWorkDate;
+        private System.Windows.Forms.Button btnViewWorkHistory;
+        private System.Windows.Forms.Button btnMorningShift;
     }
 }

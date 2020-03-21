@@ -8,6 +8,7 @@ namespace MediaBazaarSystem
 {
     public class Manager : Staff
     {
+        private string charge;
 
         public int dbID
         {
@@ -62,7 +63,13 @@ namespace MediaBazaarSystem
             private set { this.hoursAvailable = value; }
         }
 
-        public Manager( int ID, String firstName, String lastName, int age, String address, String role, double salary,  int hoursAvailable, String email ) //hours worked deleted
+        public Contract Contract
+        {
+            get { return this.contract; }
+            private set { this.contract = value; }
+        }
+
+        public Manager( int ID, String firstName, String lastName, int age, String address, String role, double salary,  int hoursAvailable, String email, Contract contract ) //hours worked deleted
         {
             dbID = ID;
             FirstName = firstName;
@@ -73,9 +80,10 @@ namespace MediaBazaarSystem
             Salary = salary;
             HoursAvailable = hoursAvailable;
             Email = email;
+            Contract = contract;
         }
 
-        public void EditManager(String firstName, String lastName, int age, String address, String role, double salary, int hoursAvailable, String email)
+        public void EditManager(String firstName, String lastName, int age, String address, String role, double salary, int hoursAvailable, String email, Contract contract)
         {
             FirstName = firstName;
             LastName = lastName;
@@ -85,6 +93,7 @@ namespace MediaBazaarSystem
             Salary = salary;
             HoursAvailable = hoursAvailable;
             Email = email;
+            Contract = contract;
         }
 
         public void GenerateSalary()

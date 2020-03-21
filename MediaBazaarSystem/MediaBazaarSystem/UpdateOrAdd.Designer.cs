@@ -47,6 +47,8 @@
             this.txtBoxEmail = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.cmboBoxDepartment = new System.Windows.Forms.ComboBox();
+            this.cmboBoxContract = new System.Windows.Forms.ComboBox();
+            this.lblContract = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.numAge)).BeginInit();
             this.SuspendLayout();
             // 
@@ -81,7 +83,7 @@
             // 
             this.btnAddStaff.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.btnAddStaff.Font = new System.Drawing.Font("Century Gothic", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAddStaff.Location = new System.Drawing.Point(206, 492);
+            this.btnAddStaff.Location = new System.Drawing.Point(206, 534);
             this.btnAddStaff.Margin = new System.Windows.Forms.Padding(4);
             this.btnAddStaff.Name = "btnAddStaff";
             this.btnAddStaff.Size = new System.Drawing.Size(254, 40);
@@ -258,18 +260,44 @@
             // 
             this.cmboBoxDepartment.FormattingEnabled = true;
             this.cmboBoxDepartment.Items.AddRange(new object[] {
-            "Hardware"});
+            "Hardware",
+            "Marketing"});
             this.cmboBoxDepartment.Location = new System.Drawing.Point(261, 428);
             this.cmboBoxDepartment.Name = "cmboBoxDepartment";
             this.cmboBoxDepartment.Size = new System.Drawing.Size(199, 25);
             this.cmboBoxDepartment.TabIndex = 23;
+            // 
+            // cmboBoxContract
+            // 
+            this.cmboBoxContract.FormattingEnabled = true;
+            this.cmboBoxContract.Items.AddRange(new object[] {
+            "FullTime",
+            "PartTime"});
+            this.cmboBoxContract.Location = new System.Drawing.Point(261, 472);
+            this.cmboBoxContract.Name = "cmboBoxContract";
+            this.cmboBoxContract.Size = new System.Drawing.Size(199, 25);
+            this.cmboBoxContract.TabIndex = 25;
+            this.cmboBoxContract.Text = "Contract";
+            // 
+            // lblContract
+            // 
+            this.lblContract.AutoSize = true;
+            this.lblContract.Font = new System.Drawing.Font("Century Gothic", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblContract.Location = new System.Drawing.Point(112, 471);
+            this.lblContract.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblContract.Name = "lblContract";
+            this.lblContract.Size = new System.Drawing.Size(92, 21);
+            this.lblContract.TabIndex = 24;
+            this.lblContract.Text = "Contract:";
             // 
             // UpdateOrAdd
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.ClientSize = new System.Drawing.Size(653, 545);
+            this.ClientSize = new System.Drawing.Size(653, 587);
+            this.Controls.Add(this.cmboBoxContract);
+            this.Controls.Add(this.lblContract);
             this.Controls.Add(this.cmboBoxDepartment);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.lblEmail);
@@ -320,5 +348,7 @@
         private System.Windows.Forms.TextBox txtBoxEmail;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ComboBox cmboBoxDepartment;
+        private System.Windows.Forms.ComboBox cmboBoxContract;
+        private System.Windows.Forms.Label lblContract;
     }
 }

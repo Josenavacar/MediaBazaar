@@ -15,6 +15,7 @@ namespace MediaBazaarSystem
         protected int hoursWorked;
         protected int hoursAvailable;
         protected int personID;
+        protected Contract contract;
 
         public override string ToString()
         {

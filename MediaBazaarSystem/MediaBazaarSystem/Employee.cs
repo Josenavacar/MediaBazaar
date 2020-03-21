@@ -61,7 +61,13 @@ namespace MediaBazaarSystem
             private set { this.hoursAvailable = value; }
         }
 
-        public Employee(int ID, String firstName, String lastName, int age, String address, String role, double salary, int hoursAvailable, String email) //Removed hoursworked
+        public Contract Contract
+        {
+            get { return this.contract; }
+            private set { this.contract = value; }
+        }
+
+        public Employee(int ID, String firstName, String lastName, int age, String address, String role, double salary, int hoursAvailable, String email, Contract contract) //Removed hoursworked
         {
             dbID = ID;
             FirstName = firstName;
@@ -72,10 +78,10 @@ namespace MediaBazaarSystem
             Salary = salary;
             HoursAvailable = hoursAvailable;
             Email = email;
-
+            Contract = contract;
         }
 
-        public void EditEmployee(String firstName, String lastName, int age, String address, String role, double salary, int hoursAvailable, String email)
+        public void EditEmployee(String firstName, String lastName, int age, String address, String role, double salary, int hoursAvailable, String email, Contract contract)
         {
             FirstName = firstName;
             LastName = lastName;
@@ -85,11 +91,7 @@ namespace MediaBazaarSystem
             Salary = salary;
             HoursAvailable = hoursAvailable;
             Email = email;
-        }
-
-        public void GenerateSalary()
-        {
-
+            Contract = contract;
         }
 
         public override string ToString()

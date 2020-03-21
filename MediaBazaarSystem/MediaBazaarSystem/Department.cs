@@ -89,19 +89,6 @@ namespace MediaBazaarSystem
             return man;
         }
 
-        //public Schedule GetSchedule( String firstname )
-        //{
-        //    Manager man = null;
-        //    foreach( Schedule schedule in schedules )
-        //    {
-        //        if( schedule.FirstName == firstname )
-        //        {
-        //            man = manager;
-        //        }
-        //    }
-        //    return man;
-        //}
-
         public override string ToString()
         {
             return this.Name;
@@ -116,9 +103,5 @@ namespace MediaBazaarSystem
         {
             return this.schedules;
         }
-        //public List<Staff> GetStaffs()
-        //{
-        //    return null;
-        //}
     }
 }

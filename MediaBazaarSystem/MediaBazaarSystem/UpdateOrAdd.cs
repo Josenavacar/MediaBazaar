@@ -111,6 +111,7 @@ namespace MediaBazaarSystem
                 double salary = Convert.ToDouble( txtBoxSalary.Text ); //Salary
                 int hoursAvailable = Convert.ToInt32( txtBoxHoursAvailable.Text ); //Hours available
                 String email = txtBoxEmail.Text.ToString(); //Email
+                Contract contract = (Contract)cmboBoxContract.SelectedItem;
 
                 //Converts the string role into the ID.
                 if( role == "Manager" )
@@ -128,8 +129,8 @@ namespace MediaBazaarSystem
                     conn.Open();
                     MySqlCommand cmd = conn.CreateCommand();
 
-                    cmd.CommandText = "INSERT INTO person(Firstname, Lastname, Age, Address, Email, Password, Salary, HoursWorked, HoursAvailable, IsAvailable, RoleID, DepartmentID) " +
-                        "VALUES(@FirstN, @LastN, @Age, @Address, @Email, @Password, @Salary, @HoursWorked, @HoursAvailable, @IsAvailable, @RoleID, @DepartmentID) ";
+                    cmd.CommandText = "INSERT INTO person(Firstname, Lastname, Age, Address, Email, Password, Salary, HoursWorked, HoursAvailable, IsAvailable, RoleID, DepartmentID, ContractID) " +
+                        "VALUES(@FirstN, @LastN, @Age, @Address, @Email, @Password, @Salary, @HoursWorked, @HoursAvailable, @IsAvailable, @RoleID, @DepartmentID, @ContractID) ";
 
                     cmd.Parameters.AddWithValue( "@FirstN", FirstName );
                     cmd.Parameters.AddWithValue( "@LastN", LastName );
@@ -143,6 +144,7 @@ namespace MediaBazaarSystem
                     cmd.Parameters.AddWithValue( "@IsAvailable", "Yes" );
                     cmd.Parameters.AddWithValue( "@RoleID", roleID );
                     cmd.Parameters.AddWithValue( "@DepartmentID", department.DepartmentID );
+                    cmd.Parameters.AddWithValue( "@ContractID", contract );
                     cmd.ExecuteNonQuery(); //Inserted into database.
 
 
@@ -171,11 +173,11 @@ namespace MediaBazaarSystem
                         }
                         reader.Close();
                         conn.Close();
-                        Manager newManager = new Manager( ID, FirstName, LastName, age, address, role, salary, hoursAvailable, email ); //Adds the manager to the list.
-                        department.AddManager( newManager );
-                        MessageBox.Show( "Manager successfully added" );
-                    }
 
+                        Manager newManager = new Manager( ID, FirstName, LastName, age, address, role, salary, hoursAvailable, email, contract ); //Adds the manager to the list.
+                        department.AddManager( newManager );
+                        MessageBox.Show( "Manager successfully added." );
+                    }
                     else if( roleID == 2 )
                     {
                         conn.Open();
@@ -189,12 +191,12 @@ namespace MediaBazaarSystem
                         }
                         reader.Close();
                         conn.Close();
-                        Employee newEmployee = new Employee( ID, FirstName, LastName, age, address, role, salary, hoursAvailable, email ); //Adds employee to the list.
+
+                        Employee newEmployee = new Employee( ID, FirstName, LastName, age, address, role, salary, hoursAvailable, email, contract ); //Adds employee to the list.
                         department.AddEmployee( newEmployee );
-                        MessageBox.Show( "Employee successfully added" );
+                        MessageBox.Show( "Employee successfully added." );
                     }
                 }
-
                 else
                 {
                     //Edits existing person.
@@ -202,7 +204,7 @@ namespace MediaBazaarSystem
                     MySqlCommand cmd = conn.CreateCommand();
 
                     cmd.CommandText = "UPDATE person SET Firstname = @FirstN,  Lastname = @LastN, Age = @Age, Address = @Address, Email = @Email, Salary = @Salary," +
-                        "HoursAvailable = @HoursAvailable, IsAvailable = @IsAvailable, RoleID = @RoleID, DepartmentID = @DepartmentID WHERE Id = @PersonID";
+                        "HoursAvailable = @HoursAvailable, IsAvailable = @IsAvailable, RoleID = @RoleID, DepartmentID = @DepartmentID, ContractID = @ContractID WHERE Id = @PersonID";
 
                     cmd.Parameters.AddWithValue( "@FirstN", FirstName );
                     cmd.Parameters.AddWithValue( "@LastN", LastName );
@@ -215,9 +217,10 @@ namespace MediaBazaarSystem
                     cmd.Parameters.AddWithValue( "@RoleID", roleID );
                     cmd.Parameters.AddWithValue( "@DepartmentID", department.DepartmentID );
                     cmd.Parameters.AddWithValue( "@PersonID", employee.dbID );
+                    cmd.Parameters.AddWithValue( "@ContractID", contract );
                     cmd.ExecuteNonQuery(); //Database edit.
                     conn.Close();
-                    employee.EditEmployee( FirstName, LastName, age, address, role, salary, hoursAvailable, email ); //List edit (local).
+                    employee.EditEmployee( FirstName, LastName, age, address, role, salary, hoursAvailable, email, contract ); //List edit (local).
                     MessageBox.Show( "Employee successfully edited" );
                     conn.Close();
                 }

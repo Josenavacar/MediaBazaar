@@ -17,12 +17,14 @@ namespace MediaBazaarSystem
         private String firstName;
         Schedule schedule;
         Employee employee;
+        Department department;
 
         public AssignEmployeeSystem(Department department, Schedule schedule, Employee employee )
         {
             InitializeComponent();
             this.employee = employee;
             this.schedule = schedule;
+            this.department = department;
 
             foreach(Employee employee1 in department.GetEmployees())
             {
@@ -93,7 +95,7 @@ namespace MediaBazaarSystem
             cmd.Parameters.AddWithValue( "@workDate", updateWorkDate );
             connection.Open();
 
-            schedule.UpdateSchedule(this.employee.FirstName, this.employee.LastName, employee.Role, updateStartTime, updateEndTime, updateWorkDate);
+            schedule.UpdateSchedule(this.employee.FirstName, this.employee.LastName, employee.Role, updateStartTime, updateEndTime, updateWorkDate, this.department.Name);
 
             this.Hide();
         }

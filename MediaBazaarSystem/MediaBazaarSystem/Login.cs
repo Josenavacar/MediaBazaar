@@ -34,12 +34,14 @@ namespace MediaBazaarSystem
             String depName;
             int depID;
             int role;
+            int dbContract;
+            Contract contract;
 
             using( MySqlConnection connection = new MySqlConnection( @"Server = studmysql01.fhict.local; Uid = dbi437493; Database = dbi437493; Pwd = dbgroup01;" ) )
             {
                 // SQL query to get the user based on login credentials
                 MySqlCommand cmd = new MySqlCommand("SELECT person.Id, person.Firstname, person.Lastname, person.Age, person.Address, person.Email, person.Password, person.Salary, " +
-                    "person.HoursWorked, person.HoursAvailable, person.IsAvailable, person.RoleID, department.Name, person.DepartmentID FROM person JOIN department ON Person.DepartmentID = Department.id " +
+                    "person.HoursWorked, person.HoursAvailable, person.IsAvailable, person.RoleID, department.Name, person.DepartmentID, person.ContractID FROM person JOIN department ON Person.DepartmentID = Department.id " +
                     "WHERE email = @email", connection ); 
                 cmd.Parameters.Add("email", MySqlDbType.VarChar).Value = email;
 
@@ -62,8 +64,19 @@ namespace MediaBazaarSystem
                         //Department
                         depName = reader.GetString( 12 );
                         depID = (int)reader.GetValue(13);
-                        Department department = new Department( depName, depID );      
-                        
+                        Department department = new Department( depName, depID );
+
+                        // Get the contract
+                        dbContract = ( int ) reader.GetValue( 14 );
+                        if( dbContract == 1 )
+                        {
+                            contract = Contract.FullTime;
+                        }
+                        else
+                        {
+                            contract = Contract.PartTime;
+                        }
+
                         // Decrypt password and check if password is equal to the password user filled in
                         if( Cryptography.Decrypt( toDecryptPassword ) == password )
                         {
@@ -77,7 +90,8 @@ namespace MediaBazaarSystem
                                 String charge = "Manager";
                                 double salary = reader.GetDouble(7);
                                 int hoursavailable = (int)reader.GetValue(9);
-                                Manager manager = new Manager(ID, firstName, lastName, age, address, charge, salary, hoursavailable, email);
+
+                                Manager manager = new Manager( ID, firstName, lastName, age, address, charge, salary, hoursavailable, email, contract );
                                 AdministrationSystem administrationSystem = new AdministrationSystem( department, manager );
 
                                 administrationSystem.Show();
@@ -93,8 +107,10 @@ namespace MediaBazaarSystem
                                 String charge = "Manager";
                                 double salary = reader.GetDouble(7);
                                 int hoursavailable = (int)reader.GetValue(9);
-                                Employee employee = new Employee(ID, firstName, lastName, age, address, charge, salary, hoursavailable, email);
+
+                                Employee employee = new Employee(ID, firstName, lastName, age, address, charge, salary, hoursavailable, email, contract);
                                 EmployeeSystem employeeSystem = new EmployeeSystem(department, employee);
+
                                 employeeSystem.Show();
                                 this.Hide();
                             }
@@ -106,7 +122,7 @@ namespace MediaBazaarSystem
                     }
                     else
                     {
-                        MessageBox.Show("Email or password is incorrect. Please try again.");
+                        MessageBox.Show("Unable to connect to the database. Please contact your administrator.");
                     }
                 }
                 catch( FormatException ex )

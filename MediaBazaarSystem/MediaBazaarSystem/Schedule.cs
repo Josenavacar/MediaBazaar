@@ -58,18 +58,13 @@ namespace MediaBazaarSystem
             }
         }
 
-        public Schedule(String firstName, String lastName, String role, DateTime startTime, DateTime endTime, DateTime workDate)
+        public String DepartmentName
         {
-            this.FirstName = firstName;
-            this.LastName = lastName;
-            this.Role = role;
-            this.StartTime = startTime;
-            this.EndTime = endTime;
-            this.WorkDate = workDate;
-            this.IsAvailable = true;
+            get;
+            set;
         }
 
-        public void UpdateSchedule( String firstName, String lastName, String role, DateTime startTime, DateTime endTime, DateTime workDate )
+        public Schedule(String firstName, String lastName, String role, DateTime startTime, DateTime endTime, DateTime workDate, String departmentName)
         {
             this.FirstName = firstName;
             this.LastName = lastName;
@@ -78,11 +73,24 @@ namespace MediaBazaarSystem
             this.EndTime = endTime;
             this.WorkDate = workDate;
             this.IsAvailable = true;
+            this.DepartmentName = departmentName;
+        }
+
+        public void UpdateSchedule( String firstName, String lastName, String role, DateTime startTime, DateTime endTime, DateTime workDate, String departmentName )
+        {
+            this.FirstName = firstName;
+            this.LastName = lastName;
+            this.Role = role;
+            this.StartTime = startTime;
+            this.EndTime = endTime;
+            this.WorkDate = workDate;
+            this.IsAvailable = true;
+            this.DepartmentName = departmentName;
         }
 
         public override string ToString()
         {
-            return this.FirstName + " " + this.Role + " " + this.StartTime + " " + this.EndTime + " " + this.WorkDate + " " + this.IsAvailable;
+            return this.FirstName + " " + this.Role + " " + this.StartTime + " " + this.EndTime + " " + this.WorkDate + " " + this.IsAvailable + " " + this.DepartmentName;
         }
     }
 }
