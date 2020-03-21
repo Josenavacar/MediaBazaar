@@ -28,6 +28,7 @@ namespace MediaBazaarSystem
             InitializeComponent();
             updateTimer.Enabled = true;
             this.UpdateSchedule();
+            lblEmployeeName.Text += " " + employee.FirstName + " " + employee.LastName;
             refreshProfile();
         }
 

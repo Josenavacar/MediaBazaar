@@ -891,5 +891,15 @@ namespace MediaBazaarSystem
                 return true;
             }
         }
+
+        private void lbManagers_Click(object sender, EventArgs e)
+        {
+            lbEmployees.SelectedItem = null;
+        }
+
+        private void lbEmployees_Click(object sender, EventArgs e)
+        {
+            lbManagers.SelectedItem = null;
+        }
     }
 }

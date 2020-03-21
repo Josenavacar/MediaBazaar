@@ -121,7 +121,7 @@
             "Employee"});
             this.cmboBoxFilter.Location = new System.Drawing.Point(27, 21);
             this.cmboBoxFilter.Name = "cmboBoxFilter";
-            this.cmboBoxFilter.Size = new System.Drawing.Size(178, 29);
+            this.cmboBoxFilter.Size = new System.Drawing.Size(178, 27);
             this.cmboBoxFilter.TabIndex = 21;
             this.cmboBoxFilter.Text = "Role Filter";
             this.cmboBoxFilter.SelectedIndexChanged += new System.EventHandler(this.cmboBoxFilter_SelectedIndexChanged);
@@ -256,7 +256,7 @@
             this.tbPageHistory.Controls.Add(this.lBoxEmpHistory);
             this.tbPageHistory.Controls.Add(this.btnSearch);
             this.tbPageHistory.Controls.Add(this.txtBoxSearch);
-            this.tbPageHistory.Location = new System.Drawing.Point(4, 30);
+            this.tbPageHistory.Location = new System.Drawing.Point(4, 28);
             this.tbPageHistory.Name = "tbPageHistory";
             this.tbPageHistory.Size = new System.Drawing.Size(870, 675);
             this.tbPageHistory.TabIndex = 2;
@@ -318,7 +318,7 @@
             // lBoxEmpHistory
             // 
             this.lBoxEmpHistory.FormattingEnabled = true;
-            this.lBoxEmpHistory.ItemHeight = 21;
+            this.lBoxEmpHistory.ItemHeight = 19;
             this.lBoxEmpHistory.Location = new System.Drawing.Point(32, 128);
             this.lBoxEmpHistory.Name = "lBoxEmpHistory";
             this.lBoxEmpHistory.Size = new System.Drawing.Size(803, 403);
@@ -389,7 +389,7 @@
             this.lblEmployeeName.Name = "lblEmployeeName";
             this.lblEmployeeName.Size = new System.Drawing.Size(283, 21);
             this.lblEmployeeName.TabIndex = 15;
-            this.lblEmployeeName.Text = "Hello (here goes the user\'s name)";
+            this.lblEmployeeName.Text = "Hello,";
             // 
             // pictureBoxEmployeePhoto
             // 

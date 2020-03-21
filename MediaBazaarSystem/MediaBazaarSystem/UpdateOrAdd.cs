@@ -220,9 +220,19 @@ namespace MediaBazaarSystem
                     cmd.Parameters.AddWithValue( "@ContractID", contract );
                     cmd.ExecuteNonQuery(); //Database edit.
                     conn.Close();
-                    employee.EditEmployee( FirstName, LastName, age, address, role, salary, hoursAvailable, email, contract ); //List edit (local).
+
+                    if(roleID == 1)
+                    {
+                        cmd.Parameters.AddWithValue("@PersonID", manager.dbID);
+                        manager.EditManager(FirstName, LastName, age, address, role, salary, hoursAvailable, email, contract); //List edit (local).
+                    }
+                    else if(roleID == 2)
+                    {
+                        cmd.Parameters.AddWithValue("@PersonID", employee.dbID);
+                        employee.EditEmployee( FirstName, LastName, age, address, role, salary, hoursAvailable, email, contract ); //List edit (local).
+                    }
+
                     MessageBox.Show( "Employee successfully edited" );
-                    conn.Close();
                 }
                 this.Hide();
             }
