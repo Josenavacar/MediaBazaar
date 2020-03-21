@@ -272,7 +272,13 @@ namespace MediaBazaarSystem
                 row.Cells[ 3 ].Value = schedule.EndTime.ToString( "hh:mm tt" ); // End Time
                 row.Cells[ 4 ].Value = schedule.WorkDate.ToString( "dddd, dd MMMM yyyy" ); // Work Date
                 dataEmpWorkSchedule.Rows.Add( row );
+
             }
+            firstName = employeeName;
+            lastName = employeeLastName;
+            eMail = employeeEmail;
+            Address = employeeAddress;
+            Age = employeeAge;
         }
 
         /**
@@ -585,6 +591,16 @@ namespace MediaBazaarSystem
 
             reader.Close();
             connection.Close();
+            
+        }
+
+        private void BtnUpdateProfile_Click(object sender, EventArgs e)
+        {
+            lbEmployeeInfo.Items.Add(firstName);
+            lbEmployeeInfo.Items.Add(lastName);
+            lbEmployeeInfo.Items.Add(Age);
+            lbEmployeeInfo.Items.Add(Address);
+            lbEmployeeInfo.Items.Add(eMail);
         }
     }
 }
