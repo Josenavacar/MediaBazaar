@@ -10,6 +10,12 @@ namespace MediaBazaarSystem
     {
         private bool isAvailable;
 
+        public int dbID
+        {
+            get;
+            set;
+        }
+
         public String FirstName
         {
             get;
@@ -64,8 +70,9 @@ namespace MediaBazaarSystem
             set;
         }
 
-        public Schedule(String firstName, String lastName, String role, DateTime startTime, DateTime endTime, DateTime workDate, String departmentName)
+        public Schedule(int dbID, String firstName, String lastName, String role, DateTime startTime, DateTime endTime, DateTime workDate, String departmentName)
         {
+            this.dbID = dbID;
             this.FirstName = firstName;
             this.LastName = lastName;
             this.Role = role;
@@ -76,8 +83,9 @@ namespace MediaBazaarSystem
             this.DepartmentName = departmentName;
         }
 
-        public void UpdateSchedule( String firstName, String lastName, String role, DateTime startTime, DateTime endTime, DateTime workDate, String departmentName )
+        public void UpdateSchedule( int dbID, String firstName, String lastName, String role, DateTime startTime, DateTime endTime, DateTime workDate, String departmentName )
         {
+            this.dbID = dbID;
             this.FirstName = firstName;
             this.LastName = lastName;
             this.Role = role;
