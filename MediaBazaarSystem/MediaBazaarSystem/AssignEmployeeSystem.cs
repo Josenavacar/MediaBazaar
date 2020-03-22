@@ -14,21 +14,18 @@ namespace MediaBazaarSystem
 {
     public partial class AssignEmployeeSystem : Form
     {
-        private String firstName;
         Schedule schedule;
-        Employee employee;
         Department department;
 
-        public AssignEmployeeSystem(Department department, Schedule schedule, Employee employee )
+        public AssignEmployeeSystem(Department department, Schedule schedule )
         {
             InitializeComponent();
-            this.employee = employee;
             this.schedule = schedule;
             this.department = department;
-
-            foreach(Employee employee1 in department.GetEmployees())
+            
+            foreach(Employee emp in department.GetEmployees())
             {
-                comBoxEmployees.Items.Add( employee1.FirstName );
+                comBoxEmployees.Items.Add( emp.FirstName );
             }
 
             DateTime time = DateTime.Today;
@@ -37,34 +34,19 @@ namespace MediaBazaarSystem
                 comBoxStartTime.Items.Add( _time.ToShortTimeString() );
                 comBoxEndTime.Items.Add( _time.ToShortTimeString() );
             }
-
             this.UpdateSchedule();
-
         }
+
         private void UpdateSchedule()
         {
             lBoxAssignEmployee.Items.Clear();
 
-            string connectionString = @"Server = studmysql01.fhict.local; Uid = dbi437493; Database = dbi437493; Pwd = dbgroup01;";
-            string sql = "SELECT Person.Id, FirstName, StartTime, EndTime, WorkDate FROM Person " +
-                "INNER JOIN Schedule ON Person.Id = Schedule.PersonID";
-            MySqlConnection connection = new MySqlConnection( connectionString );
-            MySqlCommand cmd = new MySqlCommand( sql, connection );
-            connection.Open();
-            MySqlDataReader reader = cmd.ExecuteReader();
-
-            while( reader.Read() )
-            {
-                this.firstName = reader.GetValue( 1 ).ToString();
-                String startTime = reader.GetValue( 2 ).ToString();
-                String endTime = reader.GetValue( 3 ).ToString();
-                String workDate = reader.GetValue( 4 ).ToString();
-
-                if( firstName == employee.FirstName )
-                {
-                    lBoxAssignEmployee.Items.Add( firstName + " - " + startTime + " - " + endTime + " - " + workDate );
-                }
-            }
+            lBoxAssignEmployee.Items.Add( 
+                schedule.FirstName + " " + schedule.LastName + " --- " +
+                schedule.StartTime.ToString( "hh:mm tt" ) + " --- " + 
+                schedule.EndTime.ToString( "hh:mm tt" ) + " --- " + 
+                schedule.WorkDate.ToString( "dddd, dd MMMM yyyy" ) 
+            );
 
             updateTimer.Enabled = false;
         }
@@ -85,17 +67,21 @@ namespace MediaBazaarSystem
             string sql = "UPDATE Schedule " +
                 "INNER JOIN Person ON Schedule.PersonID = Person.Id " +
                 "SET StartTime=@startTime, EndTime=@endTime, WorkDate=@workDate, FirstName=@employeeName " +
-                "WHERE Person.FirstName = @employeeName";
+                "WHERE Schedule.Id = @scheduleID";
 
             MySqlConnection connection = new MySqlConnection( connectionString );
+            connection.Open();
+
             MySqlCommand cmd = new MySqlCommand( sql, connection );
-            cmd.Parameters.AddWithValue( "@employeeName", this.employee.FirstName );
+            cmd.Parameters.AddWithValue( "@scheduleID", schedule.dbID);
+            cmd.Parameters.AddWithValue( "@employeeName", schedule.FirstName );
             cmd.Parameters.AddWithValue( "@startTime", updateStartTime );
             cmd.Parameters.AddWithValue( "@endTime", updateEndTime );
             cmd.Parameters.AddWithValue( "@workDate", updateWorkDate );
-            connection.Open();
+            cmd.ExecuteNonQuery(); 
+            connection.Close();
 
-            schedule.UpdateSchedule(this.employee.FirstName, this.employee.LastName, employee.Role, updateStartTime, updateEndTime, updateWorkDate, this.department.Name);
+            schedule.UpdateSchedule(schedule.dbID, schedule.FirstName, schedule.LastName, schedule.Role, updateStartTime, updateEndTime, updateWorkDate, this.department.Name);
 
             this.Hide();
         }

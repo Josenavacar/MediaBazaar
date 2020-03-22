@@ -178,12 +178,12 @@
             // 
             this.lblPosition.AutoSize = true;
             this.lblPosition.Font = new System.Drawing.Font("Century Gothic", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblPosition.Location = new System.Drawing.Point(153, 242);
+            this.lblPosition.Location = new System.Drawing.Point(180, 242);
             this.lblPosition.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblPosition.Name = "lblPosition";
-            this.lblPosition.Size = new System.Drawing.Size(77, 21);
+            this.lblPosition.Size = new System.Drawing.Size(50, 21);
             this.lblPosition.TabIndex = 10;
-            this.lblPosition.Text = "Position:";
+            this.lblPosition.Text = "Role:";
             // 
             // lblHoursAvailable
             // 
@@ -283,7 +283,7 @@
             // 
             this.lblContract.AutoSize = true;
             this.lblContract.Font = new System.Drawing.Font("Century Gothic", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblContract.Location = new System.Drawing.Point(112, 471);
+            this.lblContract.Location = new System.Drawing.Point(138, 471);
             this.lblContract.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblContract.Name = "lblContract";
             this.lblContract.Size = new System.Drawing.Size(92, 21);
