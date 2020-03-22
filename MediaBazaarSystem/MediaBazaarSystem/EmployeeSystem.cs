@@ -266,6 +266,19 @@ namespace MediaBazaarSystem
 
             foreach(Schedule schedule in department.GetSchedules())
             {
+<<<<<<< HEAD
+                DataGridViewRow row = ( DataGridViewRow ) dataEmpWorkSchedule.Rows[ 0 ].Clone();
+                dataEmpWorkSchedule.Columns[ "clmnWorkDate" ].DefaultCellStyle.BackColor = Color.LightSteelBlue;
+                dataEmpWorkSchedule.Columns[ "clmnStartTime" ].DefaultCellStyle.BackColor = Color.PaleGreen;
+                dataEmpWorkSchedule.Columns[ "clmnEndTime" ].DefaultCellStyle.BackColor = Color.PaleVioletRed;
+                row.Cells[ 0 ].Value = schedule.FirstName + " " + schedule.LastName; // First Name
+                row.Cells[ 1 ].Value = schedule.Role; // Name (Role)
+                row.Cells[ 2 ].Value = schedule.StartTime.ToString( "hh:mm tt" );// Start Time
+                row.Cells[ 3 ].Value = schedule.EndTime.ToString( "hh:mm tt" ); // End Time
+                row.Cells[ 4 ].Value = schedule.WorkDate.ToString( "dddd, dd MMMM yyyy" ); // Work Date
+                dataEmpWorkSchedule.Rows.Add( row );
+
+=======
                 if( department.Name == schedule.DepartmentName )
                 {
                     DataGridViewRow row = ( DataGridViewRow ) dataEmpWorkSchedule.Rows[ 0 ].Clone();
@@ -279,7 +292,13 @@ namespace MediaBazaarSystem
                     row.Cells[ 4 ].Value = schedule.WorkDate.ToString( "dddd, dd MMMM yyyy" ); // Work Date
                     dataEmpWorkSchedule.Rows.Add( row );
                 }
+>>>>>>> testEnvironment
             }
+            firstName = employeeName;
+            lastName = employeeLastName;
+            eMail = employeeEmail;
+            Address = employeeAddress;
+            Age = employeeAge;
         }
 
         /**
@@ -593,6 +612,15 @@ namespace MediaBazaarSystem
             reader.Close();
             connection.Close();
             
+        }
+
+        private void BtnUpdateProfile_Click(object sender, EventArgs e)
+        {
+            lbEmployeeInfo.Items.Add(firstName);
+            lbEmployeeInfo.Items.Add(lastName);
+            lbEmployeeInfo.Items.Add(Age);
+            lbEmployeeInfo.Items.Add(Address);
+            lbEmployeeInfo.Items.Add(eMail);
         }
     }
 }
