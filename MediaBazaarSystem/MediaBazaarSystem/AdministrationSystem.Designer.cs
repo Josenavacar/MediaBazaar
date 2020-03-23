@@ -30,9 +30,9 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AdministrationSystem));
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea3 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend3 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series3 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.tbControlAdmin = new System.Windows.Forms.TabControl();
             this.tbPageHome = new System.Windows.Forms.TabPage();
             this.cmboBoxFilter = new System.Windows.Forms.ComboBox();
@@ -80,16 +80,16 @@
             this.btnUpdateProfile = new System.Windows.Forms.Button();
             this.lbEmployeeInfo = new System.Windows.Forms.ListBox();
             this.tbPageEmpManagement = new System.Windows.Forms.TabPage();
-            this.lbEmployees = new System.Windows.Forms.ListBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.lbEmployees = new System.Windows.Forms.ListBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.lbManagers = new System.Windows.Forms.ListBox();
             this.btnViewEmployeeDetails = new System.Windows.Forms.Button();
             this.btnAddEmployee = new System.Windows.Forms.Button();
             this.btnUpdateEmployee = new System.Windows.Forms.Button();
             this.btnFireEmployee = new System.Windows.Forms.Button();
             this.grpBoxManagers = new System.Windows.Forms.GroupBox();
             this.label2 = new System.Windows.Forms.Label();
+            this.lbManagers = new System.Windows.Forms.ListBox();
             this.Refresh = new System.Windows.Forms.Timer(this.components);
             this.updateTimer = new System.Windows.Forms.Timer(this.components);
             this.tbControlAdmin.SuspendLayout();
@@ -131,10 +131,10 @@
             this.tbPageHome.Controls.Add(this.picBoxLogout);
             this.tbPageHome.Controls.Add(this.dataAdminWorkSchedule);
             this.tbPageHome.Controls.Add(this.dtpWorkSchedule);
-            this.tbPageHome.Location = new System.Drawing.Point(4, 30);
+            this.tbPageHome.Location = new System.Drawing.Point(4, 28);
             this.tbPageHome.Name = "tbPageHome";
             this.tbPageHome.Padding = new System.Windows.Forms.Padding(3);
-            this.tbPageHome.Size = new System.Drawing.Size(870, 673);
+            this.tbPageHome.Size = new System.Drawing.Size(870, 675);
             this.tbPageHome.TabIndex = 0;
             this.tbPageHome.Text = "Home";
             // 
@@ -148,7 +148,7 @@
             "Employee"});
             this.cmboBoxFilter.Location = new System.Drawing.Point(28, 16);
             this.cmboBoxFilter.Name = "cmboBoxFilter";
-            this.cmboBoxFilter.Size = new System.Drawing.Size(178, 29);
+            this.cmboBoxFilter.Size = new System.Drawing.Size(178, 27);
             this.cmboBoxFilter.TabIndex = 18;
             this.cmboBoxFilter.Text = "Role Filter";
             this.cmboBoxFilter.SelectedIndexChanged += new System.EventHandler(this.cmboBoxFilter_SelectedIndexChanged);
@@ -169,9 +169,10 @@
             this.txtBoxHomeSearch.Font = new System.Drawing.Font("Century Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtBoxHomeSearch.Location = new System.Drawing.Point(212, 16);
             this.txtBoxHomeSearch.Name = "txtBoxHomeSearch";
-            this.txtBoxHomeSearch.Size = new System.Drawing.Size(347, 30);
+            this.txtBoxHomeSearch.Size = new System.Drawing.Size(347, 25);
             this.txtBoxHomeSearch.TabIndex = 16;
             this.txtBoxHomeSearch.Text = "Search by first name...";
+            this.txtBoxHomeSearch.Click += new System.EventHandler(this.txtBoxHomeSearch_Click);
             // 
             // btnSort
             // 
@@ -201,7 +202,7 @@
             this.lblAssignEmployee.Font = new System.Drawing.Font("Century Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblAssignEmployee.Location = new System.Drawing.Point(24, 88);
             this.lblAssignEmployee.Name = "lblAssignEmployee";
-            this.lblAssignEmployee.Size = new System.Drawing.Size(538, 22);
+            this.lblAssignEmployee.Size = new System.Drawing.Size(430, 20);
             this.lblAssignEmployee.TabIndex = 8;
             this.lblAssignEmployee.Text = "Double click on employee\'s name to assign them to a task";
             // 
@@ -283,7 +284,7 @@
             // 
             this.dtpWorkSchedule.Location = new System.Drawing.Point(240, 563);
             this.dtpWorkSchedule.Name = "dtpWorkSchedule";
-            this.dtpWorkSchedule.Size = new System.Drawing.Size(385, 28);
+            this.dtpWorkSchedule.Size = new System.Drawing.Size(385, 24);
             this.dtpWorkSchedule.TabIndex = 3;
             this.dtpWorkSchedule.ValueChanged += new System.EventHandler(this.dtpWorkSchedule_ValueChanged);
             // 
@@ -302,9 +303,9 @@
             this.tbPageStatistics.Controls.Add(this.btnSearch);
             this.tbPageStatistics.Controls.Add(this.txtBoxStatsSearch);
             this.tbPageStatistics.Controls.Add(this.btnViewAllEmployees);
-            this.tbPageStatistics.Location = new System.Drawing.Point(4, 30);
+            this.tbPageStatistics.Location = new System.Drawing.Point(4, 28);
             this.tbPageStatistics.Name = "tbPageStatistics";
-            this.tbPageStatistics.Size = new System.Drawing.Size(870, 673);
+            this.tbPageStatistics.Size = new System.Drawing.Size(870, 675);
             this.tbPageStatistics.TabIndex = 2;
             this.tbPageStatistics.Text = "Statistics";
             // 
@@ -313,7 +314,7 @@
             this.label4.AutoSize = true;
             this.label4.Location = new System.Drawing.Point(432, 64);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(97, 21);
+            this.label4.Size = new System.Drawing.Size(83, 19);
             this.label4.TabIndex = 26;
             this.label4.Text = "Employees";
             // 
@@ -322,26 +323,26 @@
             this.label3.AutoSize = true;
             this.label3.Location = new System.Drawing.Point(25, 64);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(113, 21);
+            this.label3.Size = new System.Drawing.Size(93, 19);
             this.label3.TabIndex = 25;
             this.label3.Text = "Department";
             // 
             // lBoxDepartmentStats
             // 
             this.lBoxDepartmentStats.FormattingEnabled = true;
-            this.lBoxDepartmentStats.ItemHeight = 21;
+            this.lBoxDepartmentStats.ItemHeight = 19;
             this.lBoxDepartmentStats.Location = new System.Drawing.Point(29, 88);
             this.lBoxDepartmentStats.Name = "lBoxDepartmentStats";
-            this.lBoxDepartmentStats.Size = new System.Drawing.Size(401, 193);
+            this.lBoxDepartmentStats.Size = new System.Drawing.Size(401, 175);
             this.lBoxDepartmentStats.TabIndex = 24;
             // 
             // lBoxEmpStats
             // 
             this.lBoxEmpStats.FormattingEnabled = true;
-            this.lBoxEmpStats.ItemHeight = 21;
+            this.lBoxEmpStats.ItemHeight = 19;
             this.lBoxEmpStats.Location = new System.Drawing.Point(436, 88);
             this.lBoxEmpStats.Name = "lBoxEmpStats";
-            this.lBoxEmpStats.Size = new System.Drawing.Size(400, 193);
+            this.lBoxEmpStats.Size = new System.Drawing.Size(400, 175);
             this.lBoxEmpStats.TabIndex = 23;
             // 
             // lblStaffIsAvilable
@@ -349,32 +350,32 @@
             this.lblStaffIsAvilable.AutoSize = true;
             this.lblStaffIsAvilable.Location = new System.Drawing.Point(469, 318);
             this.lblStaffIsAvilable.Name = "lblStaffIsAvilable";
-            this.lblStaffIsAvilable.Size = new System.Drawing.Size(330, 21);
+            this.lblStaffIsAvilable.Size = new System.Drawing.Size(274, 19);
             this.lblStaffIsAvilable.TabIndex = 22;
             this.lblStaffIsAvilable.Text = "Employees that are available for work:";
             // 
             // lBoxStatistics
             // 
             this.lBoxStatistics.FormattingEnabled = true;
-            this.lBoxStatistics.ItemHeight = 21;
+            this.lBoxStatistics.ItemHeight = 19;
             this.lBoxStatistics.Location = new System.Drawing.Point(436, 342);
             this.lBoxStatistics.Name = "lBoxStatistics";
-            this.lBoxStatistics.Size = new System.Drawing.Size(400, 256);
+            this.lBoxStatistics.Size = new System.Drawing.Size(400, 251);
             this.lBoxStatistics.TabIndex = 21;
             // 
             // hoursStatsChart
             // 
-            chartArea1.Name = "ChartArea1";
-            this.hoursStatsChart.ChartAreas.Add(chartArea1);
-            legend1.Name = "Legend1";
-            this.hoursStatsChart.Legends.Add(legend1);
+            chartArea3.Name = "ChartArea1";
+            this.hoursStatsChart.ChartAreas.Add(chartArea3);
+            legend3.Name = "Legend1";
+            this.hoursStatsChart.Legends.Add(legend3);
             this.hoursStatsChart.Location = new System.Drawing.Point(29, 318);
             this.hoursStatsChart.Name = "hoursStatsChart";
-            series1.ChartArea = "ChartArea1";
-            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.StackedBar;
-            series1.Legend = "Legend1";
-            series1.Name = "Hours";
-            this.hoursStatsChart.Series.Add(series1);
+            series3.ChartArea = "ChartArea1";
+            series3.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.StackedBar;
+            series3.Legend = "Legend1";
+            series3.Name = "Hours";
+            this.hoursStatsChart.Series.Add(series3);
             this.hoursStatsChart.Size = new System.Drawing.Size(401, 280);
             this.hoursStatsChart.TabIndex = 20;
             this.hoursStatsChart.Text = "hoursStatsChart";
@@ -388,7 +389,7 @@
             "PartTime"});
             this.cmboBoxStatsFilter.Location = new System.Drawing.Point(29, 18);
             this.cmboBoxStatsFilter.Name = "cmboBoxStatsFilter";
-            this.cmboBoxStatsFilter.Size = new System.Drawing.Size(178, 29);
+            this.cmboBoxStatsFilter.Size = new System.Drawing.Size(178, 27);
             this.cmboBoxStatsFilter.TabIndex = 19;
             this.cmboBoxStatsFilter.Text = "Contract Filter";
             this.cmboBoxStatsFilter.SelectedIndexChanged += new System.EventHandler(this.cmboBoxStatsFilter_SelectedIndexChanged);
@@ -418,11 +419,12 @@
             // txtBoxStatsSearch
             // 
             this.txtBoxStatsSearch.Font = new System.Drawing.Font("Century Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtBoxStatsSearch.Location = new System.Drawing.Point(213, 18);
+            this.txtBoxStatsSearch.Location = new System.Drawing.Point(213, 20);
             this.txtBoxStatsSearch.Name = "txtBoxStatsSearch";
-            this.txtBoxStatsSearch.Size = new System.Drawing.Size(427, 30);
+            this.txtBoxStatsSearch.Size = new System.Drawing.Size(427, 25);
             this.txtBoxStatsSearch.TabIndex = 13;
             this.txtBoxStatsSearch.Text = "Search by first name...";
+            this.txtBoxStatsSearch.Click += new System.EventHandler(this.txtBoxStatsSearch_Click);
             // 
             // btnViewAllEmployees
             // 
@@ -454,10 +456,10 @@
             this.tbPageProfile.Controls.Add(this.txtBoxFirstName);
             this.tbPageProfile.Controls.Add(this.btnUpdateProfile);
             this.tbPageProfile.Controls.Add(this.lbEmployeeInfo);
-            this.tbPageProfile.Location = new System.Drawing.Point(4, 30);
+            this.tbPageProfile.Location = new System.Drawing.Point(4, 28);
             this.tbPageProfile.Name = "tbPageProfile";
             this.tbPageProfile.Padding = new System.Windows.Forms.Padding(3);
-            this.tbPageProfile.Size = new System.Drawing.Size(870, 673);
+            this.tbPageProfile.Size = new System.Drawing.Size(870, 675);
             this.tbPageProfile.TabIndex = 1;
             this.tbPageProfile.Text = "Profile";
             // 
@@ -478,7 +480,7 @@
             this.lblAdminName.Font = new System.Drawing.Font("Century Gothic", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblAdminName.Location = new System.Drawing.Point(15, 23);
             this.lblAdminName.Name = "lblAdminName";
-            this.lblAdminName.Size = new System.Drawing.Size(55, 21);
+            this.lblAdminName.Size = new System.Drawing.Size(47, 19);
             this.lblAdminName.TabIndex = 15;
             this.lblAdminName.Text = "Hello,";
             // 
@@ -504,7 +506,7 @@
             this.lblEmail.AutoSize = true;
             this.lblEmail.Location = new System.Drawing.Point(438, 509);
             this.lblEmail.Name = "lblEmail";
-            this.lblEmail.Size = new System.Drawing.Size(57, 21);
+            this.lblEmail.Size = new System.Drawing.Size(50, 19);
             this.lblEmail.TabIndex = 11;
             this.lblEmail.Text = "Email:";
             // 
@@ -513,7 +515,7 @@
             this.txtBoxEmail.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtBoxEmail.Location = new System.Drawing.Point(526, 504);
             this.txtBoxEmail.Name = "txtBoxEmail";
-            this.txtBoxEmail.Size = new System.Drawing.Size(297, 32);
+            this.txtBoxEmail.Size = new System.Drawing.Size(297, 27);
             this.txtBoxEmail.TabIndex = 10;
             // 
             // lblAddress
@@ -521,7 +523,7 @@
             this.lblAddress.AutoSize = true;
             this.lblAddress.Location = new System.Drawing.Point(429, 465);
             this.lblAddress.Name = "lblAddress";
-            this.lblAddress.Size = new System.Drawing.Size(82, 21);
+            this.lblAddress.Size = new System.Drawing.Size(65, 19);
             this.lblAddress.TabIndex = 9;
             this.lblAddress.Text = "Address:";
             // 
@@ -530,7 +532,7 @@
             this.lblAge.AutoSize = true;
             this.lblAge.Location = new System.Drawing.Point(454, 415);
             this.lblAge.Name = "lblAge";
-            this.lblAge.Size = new System.Drawing.Size(50, 21);
+            this.lblAge.Size = new System.Drawing.Size(40, 19);
             this.lblAge.TabIndex = 8;
             this.lblAge.Text = "Age:";
             // 
@@ -539,7 +541,7 @@
             this.lblLastName.AutoSize = true;
             this.lblLastName.Location = new System.Drawing.Point(403, 364);
             this.lblLastName.Name = "lblLastName";
-            this.lblLastName.Size = new System.Drawing.Size(105, 21);
+            this.lblLastName.Size = new System.Drawing.Size(85, 19);
             this.lblLastName.TabIndex = 7;
             this.lblLastName.Text = "Last Name:";
             // 
@@ -548,7 +550,7 @@
             this.lblFirstName.AutoSize = true;
             this.lblFirstName.Location = new System.Drawing.Point(405, 312);
             this.lblFirstName.Name = "lblFirstName";
-            this.lblFirstName.Size = new System.Drawing.Size(101, 21);
+            this.lblFirstName.Size = new System.Drawing.Size(83, 19);
             this.lblFirstName.TabIndex = 6;
             this.lblFirstName.Text = "First Name:";
             // 
@@ -557,7 +559,7 @@
             this.txtBoxAddress.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtBoxAddress.Location = new System.Drawing.Point(526, 460);
             this.txtBoxAddress.Name = "txtBoxAddress";
-            this.txtBoxAddress.Size = new System.Drawing.Size(297, 32);
+            this.txtBoxAddress.Size = new System.Drawing.Size(297, 27);
             this.txtBoxAddress.TabIndex = 5;
             // 
             // txtBoxLastName
@@ -565,7 +567,7 @@
             this.txtBoxLastName.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtBoxLastName.Location = new System.Drawing.Point(526, 359);
             this.txtBoxLastName.Name = "txtBoxLastName";
-            this.txtBoxLastName.Size = new System.Drawing.Size(297, 32);
+            this.txtBoxLastName.Size = new System.Drawing.Size(297, 27);
             this.txtBoxLastName.TabIndex = 4;
             // 
             // txtBoxAge
@@ -573,7 +575,7 @@
             this.txtBoxAge.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtBoxAge.Location = new System.Drawing.Point(526, 410);
             this.txtBoxAge.Name = "txtBoxAge";
-            this.txtBoxAge.Size = new System.Drawing.Size(297, 32);
+            this.txtBoxAge.Size = new System.Drawing.Size(297, 27);
             this.txtBoxAge.TabIndex = 3;
             // 
             // txtBoxFirstName
@@ -581,7 +583,7 @@
             this.txtBoxFirstName.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtBoxFirstName.Location = new System.Drawing.Point(526, 307);
             this.txtBoxFirstName.Name = "txtBoxFirstName";
-            this.txtBoxFirstName.Size = new System.Drawing.Size(297, 32);
+            this.txtBoxFirstName.Size = new System.Drawing.Size(297, 27);
             this.txtBoxFirstName.TabIndex = 2;
             // 
             // btnUpdateProfile
@@ -600,10 +602,10 @@
             this.lbEmployeeInfo.BackColor = System.Drawing.Color.WhiteSmoke;
             this.lbEmployeeInfo.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbEmployeeInfo.FormattingEnabled = true;
-            this.lbEmployeeInfo.ItemHeight = 23;
+            this.lbEmployeeInfo.ItemHeight = 21;
             this.lbEmployeeInfo.Location = new System.Drawing.Point(19, 65);
             this.lbEmployeeInfo.Name = "lbEmployeeInfo";
-            this.lbEmployeeInfo.Size = new System.Drawing.Size(330, 510);
+            this.lbEmployeeInfo.Size = new System.Drawing.Size(330, 508);
             this.lbEmployeeInfo.TabIndex = 0;
             // 
             // tbPageEmpManagement
@@ -615,23 +617,11 @@
             this.tbPageEmpManagement.Controls.Add(this.btnUpdateEmployee);
             this.tbPageEmpManagement.Controls.Add(this.btnFireEmployee);
             this.tbPageEmpManagement.Controls.Add(this.grpBoxManagers);
-            this.tbPageEmpManagement.Location = new System.Drawing.Point(4, 30);
+            this.tbPageEmpManagement.Location = new System.Drawing.Point(4, 28);
             this.tbPageEmpManagement.Name = "tbPageEmpManagement";
-            this.tbPageEmpManagement.Size = new System.Drawing.Size(870, 673);
+            this.tbPageEmpManagement.Size = new System.Drawing.Size(870, 675);
             this.tbPageEmpManagement.TabIndex = 3;
             this.tbPageEmpManagement.Text = "Employee Management";
-            // 
-            // lbEmployees
-            // 
-            this.lbEmployees.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.lbEmployees.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbEmployees.FormattingEnabled = true;
-            this.lbEmployees.ItemHeight = 23;
-            this.lbEmployees.Location = new System.Drawing.Point(16, 63);
-            this.lbEmployees.Name = "lbEmployees";
-            this.lbEmployees.Size = new System.Drawing.Size(403, 464);
-            this.lbEmployees.TabIndex = 4;
-            this.lbEmployees.Click += new System.EventHandler(this.lbEmployees_Click);
             // 
             // groupBox1
             // 
@@ -643,26 +633,26 @@
             this.groupBox1.TabIndex = 13;
             this.groupBox1.TabStop = false;
             // 
+            // lbEmployees
+            // 
+            this.lbEmployees.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.lbEmployees.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbEmployees.FormattingEnabled = true;
+            this.lbEmployees.ItemHeight = 21;
+            this.lbEmployees.Location = new System.Drawing.Point(16, 63);
+            this.lbEmployees.Name = "lbEmployees";
+            this.lbEmployees.Size = new System.Drawing.Size(403, 445);
+            this.lbEmployees.TabIndex = 4;
+            this.lbEmployees.Click += new System.EventHandler(this.lbEmployees_Click);
+            // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(12, 24);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(97, 21);
+            this.label1.Size = new System.Drawing.Size(83, 19);
             this.label1.TabIndex = 9;
             this.label1.Text = "Employees";
-            // 
-            // lbManagers
-            // 
-            this.lbManagers.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.lbManagers.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbManagers.FormattingEnabled = true;
-            this.lbManagers.ItemHeight = 23;
-            this.lbManagers.Location = new System.Drawing.Point(12, 63);
-            this.lbManagers.Name = "lbManagers";
-            this.lbManagers.Size = new System.Drawing.Size(403, 464);
-            this.lbManagers.TabIndex = 8;
-            this.lbManagers.Click += new System.EventHandler(this.lbManagers_Click);
             // 
             // btnViewEmployeeDetails
             // 
@@ -723,9 +713,21 @@
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(8, 24);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(95, 21);
+            this.label2.Size = new System.Drawing.Size(78, 19);
             this.label2.TabIndex = 10;
             this.label2.Text = "Managers";
+            // 
+            // lbManagers
+            // 
+            this.lbManagers.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.lbManagers.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbManagers.FormattingEnabled = true;
+            this.lbManagers.ItemHeight = 21;
+            this.lbManagers.Location = new System.Drawing.Point(12, 63);
+            this.lbManagers.Name = "lbManagers";
+            this.lbManagers.Size = new System.Drawing.Size(403, 445);
+            this.lbManagers.TabIndex = 8;
+            this.lbManagers.Click += new System.EventHandler(this.lbManagers_Click);
             // 
             // Refresh
             // 
@@ -739,7 +741,7 @@
             // 
             // AdministrationSystem
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 17F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.WindowFrame;
             this.ClientSize = new System.Drawing.Size(907, 733);

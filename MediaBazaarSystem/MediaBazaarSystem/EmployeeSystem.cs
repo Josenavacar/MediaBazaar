@@ -324,6 +324,7 @@ namespace MediaBazaarSystem
                 employee.EditEmployee( firstName, lastName, age, address, employee.Role, employee.Salary, employee.HoursAvailable, email, employee.Contract);
 
                 //Updates profile.
+                lbEmployeeInfo.Items.Clear();
                 refreshProfile();
 
                 MessageBox.Show("Profile Updated Successfully");
@@ -592,6 +593,16 @@ namespace MediaBazaarSystem
 
             reader.Close();
             connection.Close();
+        }
+
+        private void txtBoxSearch_Click(object sender, EventArgs e)
+        {
+            txtBoxSearch.Text = "";
+        }
+
+        private void txtBoxHomeSearch_Click(object sender, EventArgs e)
+        {
+            txtBoxHomeSearch.Text = "";
         }
     }
 }
