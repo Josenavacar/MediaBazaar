@@ -111,7 +111,7 @@ namespace MediaBazaarSystem
                 double salary = Convert.ToDouble( txtBoxSalary.Text ); //Salary
                 int hoursAvailable = Convert.ToInt32( txtBoxHoursAvailable.Text ); //Hours available
                 String email = txtBoxEmail.Text.ToString(); //Email
-                Contract contract = (Contract)cmboBoxContract.SelectedItem;
+                Contract contract = ( Contract ) Enum.Parse( typeof( Contract ), cmboBoxContract.SelectedItem.ToString() );
 
                 //Converts the string role into the ID.
                 if( role == "Manager" )
