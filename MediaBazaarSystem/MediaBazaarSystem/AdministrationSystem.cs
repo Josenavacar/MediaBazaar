@@ -382,6 +382,9 @@ namespace MediaBazaarSystem
                     Employee fired = SearchEmp();
                     if (fired != null)
                     {
+                        cmd.CommandText = "DELETE FROM schedule WHERE PersonId = @PersonId";
+                        cmd.Parameters.AddWithValue("@PersonId", fired.dbID);
+                        cmd.ExecuteNonQuery();
                         cmd.CommandText = "DELETE FROM person WHERE Id = @Id";
                         cmd.Parameters.AddWithValue("@Id", fired.dbID);
                         cmd.ExecuteNonQuery(); //Delte from Database.
@@ -405,9 +408,12 @@ namespace MediaBazaarSystem
                     Manager fired = SearchMan();
                     if (fired != null)
                     {
+                        cmd.CommandText = "DELETE FROM schedule WHERE PersonId = @PersonId";
+                        cmd.Parameters.AddWithValue("@PersonId", fired.dbID);
+                        cmd.ExecuteNonQuery();
                         cmd.CommandText = "DELETE FROM person WHERE Id = @Id";
                         cmd.Parameters.AddWithValue("@Id", fired.dbID);
-                        cmd.ExecuteNonQuery();
+                        cmd.ExecuteNonQuery(); //Delte from Database.
 
                         department.DeleteManager(fired);
                     }

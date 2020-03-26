@@ -216,10 +216,7 @@ namespace MediaBazaarSystem
                     cmd.Parameters.AddWithValue( "@IsAvailable", "Yes" );
                     cmd.Parameters.AddWithValue( "@RoleID", roleID );
                     cmd.Parameters.AddWithValue( "@DepartmentID", department.DepartmentID );
-                    cmd.Parameters.AddWithValue( "@PersonID", employee.dbID );
                     cmd.Parameters.AddWithValue( "@ContractID", contract );
-                    cmd.ExecuteNonQuery(); //Database edit.
-                    conn.Close();
 
                     if(roleID == 1)
                     {
@@ -231,6 +228,9 @@ namespace MediaBazaarSystem
                         cmd.Parameters.AddWithValue("@PersonID", employee.dbID);
                         employee.EditEmployee( FirstName, LastName, age, address, role, salary, hoursAvailable, email, contract ); //List edit (local).
                     }
+
+                    cmd.ExecuteNonQuery(); //Database edit.
+                    conn.Close();
 
                     MessageBox.Show( "Employee successfully edited" );
                 }
