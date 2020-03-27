@@ -102,142 +102,148 @@ namespace MediaBazaarSystem
                 string connString = @"Server = studmysql01.fhict.local; Uid = dbi437493; Database = dbi437493; Pwd = dbgroup01;";
                 MySqlConnection conn = new MySqlConnection( connString );
 
-                int roleID = 0; //This variable will store the role ID to be stored into the database.
-                String FirstName = txtBoxFirstName.Text.ToString(); //First name
-                String LastName = txtBoxLastName.Text.ToString(); //Last name
-                int age = Convert.ToInt32( numAge.Value ); //Age
-                String address = tbAddress.Text.ToString(); //Address
-                String role = comBoxPosition.SelectedItem.ToString(); //Role (as a string instead of an ID for ease of use and clarity in a list of C#)
-                double salary = Convert.ToDouble( txtBoxSalary.Text ); //Salary
-                int hoursAvailable = Convert.ToInt32( txtBoxHoursAvailable.Text ); //Hours available
-                String email = txtBoxEmail.Text.ToString(); //Email
-                Contract contract = ( Contract ) Enum.Parse( typeof( Contract ), cmboBoxContract.SelectedItem.ToString() );
-
-
-
-                //Converts the string role into the ID.
-                if( role == "Manager" )
+                try
                 {
-                    roleID = 1;
-                }
-                else if( role == "Employee" )
-                {
-                    roleID = 2;
-                }
+                    int roleID = 0; //This variable will store the role ID to be stored into the database.
+                    String FirstName = txtBoxFirstName.Text.ToString(); //First name
+                    String LastName = txtBoxLastName.Text.ToString(); //Last name
+                    int age = Convert.ToInt32(numAge.Value); //Age
+                    String address = tbAddress.Text.ToString(); //Address
+                    String role = comBoxPosition.SelectedItem.ToString(); //Role (as a string instead of an ID for ease of use and clarity in a list of C#)
+                    double salary = Convert.ToDouble(txtBoxSalary.Text); //Salary
+                    int hoursAvailable = Convert.ToInt32(txtBoxHoursAvailable.Text); //Hours available
+                    String email = txtBoxEmail.Text.ToString(); //Email
+                    Contract contract = (Contract)Enum.Parse(typeof(Contract), cmboBoxContract.SelectedItem.ToString());
 
-                if( employee == null && manager == null ) //If only a department was given, we will add a new person.
-                {
-                    String password = Cryptography.Encrypt( "temp" );
-                    conn.Open();
-                    MySqlCommand cmd = conn.CreateCommand();
-
-                    cmd.CommandText = "INSERT INTO person(Firstname, Lastname, Age, Address, Email, Password, Salary, HoursWorked, HoursAvailable, IsAvailable, RoleID, DepartmentID, ContractID) " +
-                        "VALUES(@FirstN, @LastN, @Age, @Address, @Email, @Password, @Salary, @HoursWorked, @HoursAvailable, @IsAvailable, @RoleID, @DepartmentID, @ContractID) ";
-
-                    cmd.Parameters.AddWithValue( "@FirstN", FirstName );
-                    cmd.Parameters.AddWithValue( "@LastN", LastName );
-                    cmd.Parameters.AddWithValue( "@Age", age );
-                    cmd.Parameters.AddWithValue( "@Address", address );
-                    cmd.Parameters.AddWithValue( "@Email", email );
-                    cmd.Parameters.AddWithValue( "@Password", password );
-                    cmd.Parameters.AddWithValue( "@Salary", salary );
-                    cmd.Parameters.AddWithValue( "@HoursWorked", 0 );
-                    cmd.Parameters.AddWithValue( "@HoursAvailable", hoursAvailable );
-                    cmd.Parameters.AddWithValue( "@IsAvailable", "Yes" );
-                    cmd.Parameters.AddWithValue( "@RoleID", roleID );
-                    cmd.Parameters.AddWithValue( "@DepartmentID", department.DepartmentID );
-                    cmd.Parameters.AddWithValue( "@ContractID", contract );
-                    cmd.ExecuteNonQuery(); //Inserted into database.
-
-
-                    MySqlCommand scheduleCmd = conn.CreateCommand();
-
-                    scheduleCmd.CommandText = "INSERT INTO schedule(StartTime, EndTime, WorkDate, PersonID) " +
-                        "VALUES(@StartTime, @EndTime, @WorkDate, LAST_INSERT_ID()) ";
-
-                    scheduleCmd.Parameters.AddWithValue( "@StartTime", DateTime.Today.TimeOfDay );
-                    scheduleCmd.Parameters.AddWithValue( "@EndTime", DateTime.Today.TimeOfDay );
-                    scheduleCmd.Parameters.AddWithValue( "@WorkDate", DateTime.Today );
-                    scheduleCmd.ExecuteNonQuery(); //Inserted into database.
-                    conn.Close();
-
-                    //Checks for role (1 = Manager, 2 = Employee)
-                    if( roleID == 1 )
+                    //Converts the string role into the ID.
+                    if (role == "Manager")
                     {
+                        roleID = 1;
+                    }
+                    else if (role == "Employee")
+                    {
+                        roleID = 2;
+                    }
+
+                    if (employee == null && manager == null) //If only a department was given, we will add a new person.
+                    {
+                        String password = Cryptography.Encrypt("temp");
                         conn.Open();
-                        MySqlCommand cmd2 = conn.CreateCommand();
-                        cmd2.CommandText = "SELECT Id FROM person ORDER BY Id DESC LIMIT 1"; //Extracts the Id assigned from the database.
-                        MySqlDataReader reader = cmd2.ExecuteReader();
-                        int ID = 0;
-                        while( reader.Read() )
-                        {
-                            ID = ( int ) reader.GetValue( 0 );
-                        }
-                        reader.Close();
+                        MySqlCommand cmd = conn.CreateCommand();
+
+                        cmd.CommandText = "INSERT INTO person(Firstname, Lastname, Age, Address, Email, Password, Salary, HoursWorked, HoursAvailable, IsAvailable, RoleID, DepartmentID, ContractID) " +
+                            "VALUES(@FirstN, @LastN, @Age, @Address, @Email, @Password, @Salary, @HoursWorked, @HoursAvailable, @IsAvailable, @RoleID, @DepartmentID, @ContractID) ";
+
+                        cmd.Parameters.AddWithValue("@FirstN", FirstName);
+                        cmd.Parameters.AddWithValue("@LastN", LastName);
+                        cmd.Parameters.AddWithValue("@Age", age);
+                        cmd.Parameters.AddWithValue("@Address", address);
+                        cmd.Parameters.AddWithValue("@Email", email);
+                        cmd.Parameters.AddWithValue("@Password", password);
+                        cmd.Parameters.AddWithValue("@Salary", salary);
+                        cmd.Parameters.AddWithValue("@HoursWorked", 0);
+                        cmd.Parameters.AddWithValue("@HoursAvailable", hoursAvailable);
+                        cmd.Parameters.AddWithValue("@IsAvailable", "Yes");
+                        cmd.Parameters.AddWithValue("@RoleID", roleID);
+                        cmd.Parameters.AddWithValue("@DepartmentID", department.DepartmentID);
+                        cmd.Parameters.AddWithValue("@ContractID", contract);
+                        cmd.ExecuteNonQuery(); //Inserted into database.
+
+
+                        MySqlCommand scheduleCmd = conn.CreateCommand();
+
+                        scheduleCmd.CommandText = "INSERT INTO schedule(StartTime, EndTime, WorkDate, PersonID) " +
+                            "VALUES(@StartTime, @EndTime, @WorkDate, LAST_INSERT_ID()) ";
+
+                        scheduleCmd.Parameters.AddWithValue("@StartTime", DateTime.Today.TimeOfDay);
+                        scheduleCmd.Parameters.AddWithValue("@EndTime", DateTime.Today.TimeOfDay);
+                        scheduleCmd.Parameters.AddWithValue("@WorkDate", DateTime.Today);
+                        scheduleCmd.ExecuteNonQuery(); //Inserted into database.
                         conn.Close();
 
-                        Manager newManager = new Manager( ID, FirstName, LastName, age, address, role, salary, hoursAvailable, email, contract ); //Adds the manager to the list.
-                        department.AddManager( newManager );
-                        MessageBox.Show( "Manager successfully added." );
-                    }
-                    else if( roleID == 2 )
-                    {
-                        conn.Open();
-                        MySqlCommand cmd2 = conn.CreateCommand();
-                        cmd2.CommandText = "SELECT Id FROM person ORDER BY Id DESC LIMIT 1"; //Extracts the Id assigned from the database.
-                        MySqlDataReader reader = cmd2.ExecuteReader();
-                        int ID = 0;
-                        while( reader.Read() )
+                        //Checks for role (1 = Manager, 2 = Employee)
+                        if (roleID == 1)
                         {
-                            ID = ( int ) reader.GetValue( 0 );
+                            conn.Open();
+                            MySqlCommand cmd2 = conn.CreateCommand();
+                            cmd2.CommandText = "SELECT Id FROM person ORDER BY Id DESC LIMIT 1"; //Extracts the Id assigned from the database.
+                            MySqlDataReader reader = cmd2.ExecuteReader();
+                            int ID = 0;
+                            while (reader.Read())
+                            {
+                                ID = (int)reader.GetValue(0);
+                            }
+                            reader.Close();
+                            conn.Close();
+
+                            Manager newManager = new Manager(ID, FirstName, LastName, age, address, role, salary, hoursAvailable, email, contract); //Adds the manager to the list.
+                            department.AddManager(newManager);
+                            MessageBox.Show("Manager successfully added.");
                         }
-                        reader.Close();
+                        else if (roleID == 2)
+                        {
+                            conn.Open();
+                            MySqlCommand cmd2 = conn.CreateCommand();
+                            cmd2.CommandText = "SELECT Id FROM person ORDER BY Id DESC LIMIT 1"; //Extracts the Id assigned from the database.
+                            MySqlDataReader reader = cmd2.ExecuteReader();
+                            int ID = 0;
+                            while (reader.Read())
+                            {
+                                ID = (int)reader.GetValue(0);
+                            }
+                            reader.Close();
+                            conn.Close();
+
+                            Employee newEmployee = new Employee(ID, FirstName, LastName, age, address, role, salary, hoursAvailable, email, contract); //Adds employee to the list.
+                            department.AddEmployee(newEmployee);
+                            MessageBox.Show("Employee successfully added.");
+                        }
+                    }
+                    else
+                    {
+                        //Edits existing person.
+                        conn.Open();
+                        MySqlCommand cmd = conn.CreateCommand();
+
+                        cmd.CommandText = "UPDATE person SET Firstname = @FirstN,  Lastname = @LastN, Age = @Age, Address = @Address, Email = @Email, Salary = @Salary," +
+                            "HoursAvailable = @HoursAvailable, IsAvailable = @IsAvailable, RoleID = @RoleID, DepartmentID = @DepartmentID, ContractID = @ContractID WHERE Id = @PersonID";
+
+                        cmd.Parameters.AddWithValue( "@FirstN", FirstName );
+                        cmd.Parameters.AddWithValue( "@LastN", LastName );
+                        cmd.Parameters.AddWithValue( "@Age", age );
+                        cmd.Parameters.AddWithValue( "@Address", address );
+                        cmd.Parameters.AddWithValue( "@Email", email );
+                        cmd.Parameters.AddWithValue( "@Salary", salary );
+                        cmd.Parameters.AddWithValue( "@HoursAvailable", hoursAvailable );
+                        cmd.Parameters.AddWithValue( "@IsAvailable", "Yes" );
+                        cmd.Parameters.AddWithValue( "@RoleID", roleID );
+                        cmd.Parameters.AddWithValue( "@DepartmentID", department.DepartmentID );
+
+                        if( roleID == 1 )
+                        {
+                            cmd.Parameters.AddWithValue( "@PersonID", manager.dbID );
+                            manager.EditManager( FirstName, LastName, age, address, role, salary, hoursAvailable, email, contract ); //List edit (local).
+                        }
+                        else if( roleID == 2 )
+                        {
+                            cmd.Parameters.AddWithValue( "@PersonID", employee.dbID );
+                            employee.EditEmployee( FirstName, LastName, age, address, role, salary, hoursAvailable, email, contract ); //List edit (local).
+                        }
+
+                        cmd.Parameters.AddWithValue( "@ContractID", contract );
+                        cmd.ExecuteNonQuery(); //Database edit.
                         conn.Close();
 
-                        Employee newEmployee = new Employee( ID, FirstName, LastName, age, address, role, salary, hoursAvailable, email, contract ); //Adds employee to the list.
-                        department.AddEmployee( newEmployee );
-                        MessageBox.Show( "Employee successfully added." );
+                        MessageBox.Show("Employee successfully edited");
                     }
+
+                    this.Hide();
+
                 }
-                else
+                catch(Exception)
                 {
-                    //Edits existing person.
-                    conn.Open();
-                    MySqlCommand cmd = conn.CreateCommand();
-
-                    cmd.CommandText = "UPDATE person SET Firstname = @FirstN,  Lastname = @LastN, Age = @Age, Address = @Address, Email = @Email, Salary = @Salary," +
-                        "HoursAvailable = @HoursAvailable, IsAvailable = @IsAvailable, RoleID = @RoleID, DepartmentID = @DepartmentID, ContractID = @ContractID WHERE Id = @PersonID";
-
-                    cmd.Parameters.AddWithValue( "@FirstN", FirstName );
-                    cmd.Parameters.AddWithValue( "@LastN", LastName );
-                    cmd.Parameters.AddWithValue( "@Age", age );
-                    cmd.Parameters.AddWithValue( "@Address", address );
-                    cmd.Parameters.AddWithValue( "@Email", email );
-                    cmd.Parameters.AddWithValue( "@Salary", salary );
-                    cmd.Parameters.AddWithValue( "@HoursAvailable", hoursAvailable );
-                    cmd.Parameters.AddWithValue( "@IsAvailable", "Yes" );
-                    cmd.Parameters.AddWithValue( "@RoleID", roleID );
-                    cmd.Parameters.AddWithValue( "@DepartmentID", department.DepartmentID );
-                    if( roleID == 1 )
-                    {
-                        cmd.Parameters.AddWithValue( "@PersonID", manager.dbID );
-                        manager.EditManager( FirstName, LastName, age, address, role, salary, hoursAvailable, email, contract ); //List edit (local).
-                    }
-                    else if( roleID == 2 )
-                    {
-                        cmd.Parameters.AddWithValue( "@PersonID", employee.dbID );
-                        employee.EditEmployee( FirstName, LastName, age, address, role, salary, hoursAvailable, email, contract ); //List edit (local).
-                    }
-                    //cmd.Parameters.AddWithValue( "@PersonID", this.employee.dbID );
-                    cmd.Parameters.AddWithValue( "@ContractID", contract );
-                    cmd.ExecuteNonQuery(); //Database edit.
-                    conn.Close();
-
-
-
-                    MessageBox.Show( "Employee successfully edited" );
+                    MessageBox.Show("Information not filled properly, please try again");
                 }
-                this.Hide();
             }
         }
     }

@@ -260,8 +260,9 @@ namespace MediaBazaarSystem
          */
         private void btnAddEmployee_Click(object sender, EventArgs e)
         {
-            UpdateOrAdd form1 = new UpdateOrAdd(department);
-            form1.Show();
+            UpdateOrAdd form = new UpdateOrAdd(department);
+            form.StartPosition = FormStartPosition.CenterParent;
+            form.ShowDialog(this);
         }
 
         /**
@@ -382,6 +383,9 @@ namespace MediaBazaarSystem
                     Employee fired = SearchEmp();
                     if (fired != null)
                     {
+                        cmd.CommandText = "DELETE FROM schedule WHERE PersonId = @PersonId";
+                        cmd.Parameters.AddWithValue("@PersonId", fired.dbID);
+                        cmd.ExecuteNonQuery();
                         cmd.CommandText = "DELETE FROM person WHERE Id = @Id";
                         cmd.Parameters.AddWithValue("@Id", fired.dbID);
                         cmd.ExecuteNonQuery(); //Delte from Database.
@@ -405,9 +409,12 @@ namespace MediaBazaarSystem
                     Manager fired = SearchMan();
                     if (fired != null)
                     {
+                        cmd.CommandText = "DELETE FROM schedule WHERE PersonId = @PersonId";
+                        cmd.Parameters.AddWithValue("@PersonId", fired.dbID);
+                        cmd.ExecuteNonQuery();
                         cmd.CommandText = "DELETE FROM person WHERE Id = @Id";
                         cmd.Parameters.AddWithValue("@Id", fired.dbID);
-                        cmd.ExecuteNonQuery();
+                        cmd.ExecuteNonQuery(); //Delte from Database.
 
                         department.DeleteManager(fired);
                     }
@@ -863,6 +870,7 @@ namespace MediaBazaarSystem
                 manager.EditManager(txtBoxFirstName.Text, txtBoxLastName.Text, Convert.ToInt32(txtBoxAge.Text), txtBoxAddress.Text, manager.Role, manager.Salary, manager.HoursAvailable, txtBoxEmail.Text, this.manager.Contract);
 
                 //Updates profile.
+                lbEmployeeInfo.Items.Clear();
                 refreshProfile();
 
                 MessageBox.Show("Profile Updated Successfully");
@@ -914,6 +922,16 @@ namespace MediaBazaarSystem
         private void lbEmployees_Click(object sender, EventArgs e)
         {
             lbManagers.SelectedItem = null;
+        }
+
+        private void txtBoxHomeSearch_Click(object sender, EventArgs e)
+        {
+            txtBoxHomeSearch.Text = "";
+        }
+
+        private void txtBoxStatsSearch_Click(object sender, EventArgs e)
+        {
+            txtBoxStatsSearch.Text = "";
         }
     }
 }
