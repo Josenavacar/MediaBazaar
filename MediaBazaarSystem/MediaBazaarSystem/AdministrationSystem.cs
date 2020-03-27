@@ -574,11 +574,11 @@ namespace MediaBazaarSystem
                         schedule = s;
                     }
                 }
-            }
 
-            // Open the assign employee form
-            assignEmployeeForm = new AssignEmployeeSystem( department, schedule );
-            assignEmployeeForm.Show();
+                // Open the assign employee form
+                assignEmployeeForm = new AssignEmployeeSystem( department, schedule );
+                assignEmployeeForm.Show();
+            }
         }
 
         /**
