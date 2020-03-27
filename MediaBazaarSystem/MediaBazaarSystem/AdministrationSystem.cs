@@ -23,6 +23,7 @@ namespace MediaBazaarSystem
         public static bool ensure; //Used for double checking when deleting from the database.
         int idManage;
         private String employeeName;
+        private String employeeRole;
         private String employeeStartTime;
         private String employeeEndTime;
         private String employeeWorkDate;
@@ -548,15 +549,23 @@ namespace MediaBazaarSystem
             int index = e.RowIndex;
             DataGridViewRow selectedRow = dataAdminWorkSchedule.Rows[ index ];
             employeeName = selectedRow.Cells[ 0 ].Value.ToString();
+            employeeRole = selectedRow.Cells[ 1 ].Value.ToString();
             employeeStartTime = selectedRow.Cells[ 2 ].Value.ToString();
             employeeEndTime = selectedRow.Cells[ 3 ].Value.ToString();
             employeeWorkDate = selectedRow.Cells[ 4 ].Value.ToString();
 
-            foreach(Schedule s in department.GetSchedules())
+            if( employeeRole == "Manager" )
             {
-                if((s.FirstName + " " + s.LastName == employeeName) && (s.StartTime.ToString( "hh:mm tt" ) == employeeStartTime) && ( s.EndTime.ToString( "hh:mm tt" ) == employeeEndTime )  )
+                MessageBox.Show( "You can't assign a top ranking manager to a shift! Please contact your administrator." );
+            }
+            else if(employeeRole == "Employee")
+            {
+                foreach( Schedule s in department.GetSchedules() )
                 {
-                    schedule = s;
+                    if( ( s.FirstName + " " + s.LastName == employeeName ) && ( s.StartTime.ToString( "hh:mm tt" ) == employeeStartTime ) && ( s.EndTime.ToString( "hh:mm tt" ) == employeeEndTime ) )
+                    {
+                        schedule = s;
+                    }
                 }
             }
 

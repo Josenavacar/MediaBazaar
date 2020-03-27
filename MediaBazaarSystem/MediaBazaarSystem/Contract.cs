@@ -8,7 +8,7 @@ namespace MediaBazaarSystem
 {
     public enum Contract
     {
-        FullTime,
-        PartTime
+        FullTime = 1,
+        PartTime = 2
     }
 }

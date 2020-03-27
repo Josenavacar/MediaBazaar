@@ -113,6 +113,8 @@ namespace MediaBazaarSystem
                 String email = txtBoxEmail.Text.ToString(); //Email
                 Contract contract = ( Contract ) Enum.Parse( typeof( Contract ), cmboBoxContract.SelectedItem.ToString() );
 
+
+
                 //Converts the string role into the ID.
                 if( role == "Manager" )
                 {
@@ -216,21 +218,22 @@ namespace MediaBazaarSystem
                     cmd.Parameters.AddWithValue( "@IsAvailable", "Yes" );
                     cmd.Parameters.AddWithValue( "@RoleID", roleID );
                     cmd.Parameters.AddWithValue( "@DepartmentID", department.DepartmentID );
-                    cmd.Parameters.AddWithValue( "@PersonID", employee.dbID );
+                    if( roleID == 1 )
+                    {
+                        cmd.Parameters.AddWithValue( "@PersonID", manager.dbID );
+                        manager.EditManager( FirstName, LastName, age, address, role, salary, hoursAvailable, email, contract ); //List edit (local).
+                    }
+                    else if( roleID == 2 )
+                    {
+                        cmd.Parameters.AddWithValue( "@PersonID", employee.dbID );
+                        employee.EditEmployee( FirstName, LastName, age, address, role, salary, hoursAvailable, email, contract ); //List edit (local).
+                    }
+                    //cmd.Parameters.AddWithValue( "@PersonID", this.employee.dbID );
                     cmd.Parameters.AddWithValue( "@ContractID", contract );
                     cmd.ExecuteNonQuery(); //Database edit.
                     conn.Close();
 
-                    if(roleID == 1)
-                    {
-                        cmd.Parameters.AddWithValue("@PersonID", manager.dbID);
-                        manager.EditManager(FirstName, LastName, age, address, role, salary, hoursAvailable, email, contract); //List edit (local).
-                    }
-                    else if(roleID == 2)
-                    {
-                        cmd.Parameters.AddWithValue("@PersonID", employee.dbID);
-                        employee.EditEmployee( FirstName, LastName, age, address, role, salary, hoursAvailable, email, contract ); //List edit (local).
-                    }
+
 
                     MessageBox.Show( "Employee successfully edited" );
                 }
