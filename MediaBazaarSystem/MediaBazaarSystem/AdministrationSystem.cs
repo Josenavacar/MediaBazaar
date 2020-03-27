@@ -23,6 +23,7 @@ namespace MediaBazaarSystem
         public static bool ensure; //Used for double checking when deleting from the database.
         int idManage;
         private String employeeName;
+        private String employeeRole;
         private String employeeStartTime;
         private String employeeEndTime;
         private String employeeWorkDate;
@@ -259,8 +260,9 @@ namespace MediaBazaarSystem
          */
         private void btnAddEmployee_Click(object sender, EventArgs e)
         {
-            UpdateOrAdd form1 = new UpdateOrAdd(department);
-            form1.Show();
+            UpdateOrAdd form = new UpdateOrAdd(department);
+            form.StartPosition = FormStartPosition.CenterParent;
+            form.ShowDialog(this);
         }
 
         /**
@@ -381,6 +383,9 @@ namespace MediaBazaarSystem
                     Employee fired = SearchEmp();
                     if (fired != null)
                     {
+                        cmd.CommandText = "DELETE FROM schedule WHERE PersonId = @PersonId";
+                        cmd.Parameters.AddWithValue("@PersonId", fired.dbID);
+                        cmd.ExecuteNonQuery();
                         cmd.CommandText = "DELETE FROM person WHERE Id = @Id";
                         cmd.Parameters.AddWithValue("@Id", fired.dbID);
                         cmd.ExecuteNonQuery(); //Delte from Database.
@@ -404,9 +409,12 @@ namespace MediaBazaarSystem
                     Manager fired = SearchMan();
                     if (fired != null)
                     {
+                        cmd.CommandText = "DELETE FROM schedule WHERE PersonId = @PersonId";
+                        cmd.Parameters.AddWithValue("@PersonId", fired.dbID);
+                        cmd.ExecuteNonQuery();
                         cmd.CommandText = "DELETE FROM person WHERE Id = @Id";
                         cmd.Parameters.AddWithValue("@Id", fired.dbID);
-                        cmd.ExecuteNonQuery();
+                        cmd.ExecuteNonQuery(); //Delte from Database.
 
                         department.DeleteManager(fired);
                     }
@@ -548,21 +556,29 @@ namespace MediaBazaarSystem
             int index = e.RowIndex;
             DataGridViewRow selectedRow = dataAdminWorkSchedule.Rows[ index ];
             employeeName = selectedRow.Cells[ 0 ].Value.ToString();
+            employeeRole = selectedRow.Cells[ 1 ].Value.ToString();
             employeeStartTime = selectedRow.Cells[ 2 ].Value.ToString();
             employeeEndTime = selectedRow.Cells[ 3 ].Value.ToString();
             employeeWorkDate = selectedRow.Cells[ 4 ].Value.ToString();
 
-            foreach(Schedule s in department.GetSchedules())
+            if( employeeRole == "Manager" )
             {
-                if((s.FirstName + " " + s.LastName == employeeName) && (s.StartTime.ToString( "hh:mm tt" ) == employeeStartTime) && ( s.EndTime.ToString( "hh:mm tt" ) == employeeEndTime )  )
-                {
-                    schedule = s;
-                }
+                MessageBox.Show( "You can't assign a top ranking manager to a shift! Please contact your administrator." );
             }
+            else if(employeeRole == "Employee")
+            {
+                foreach( Schedule s in department.GetSchedules() )
+                {
+                    if( ( s.FirstName + " " + s.LastName == employeeName ) && ( s.StartTime.ToString( "hh:mm tt" ) == employeeStartTime ) && ( s.EndTime.ToString( "hh:mm tt" ) == employeeEndTime ) )
+                    {
+                        schedule = s;
+                    }
+                }
 
-            // Open the assign employee form
-            assignEmployeeForm = new AssignEmployeeSystem( department, schedule );
-            assignEmployeeForm.Show();
+                // Open the assign employee form
+                assignEmployeeForm = new AssignEmployeeSystem( department, schedule );
+                assignEmployeeForm.Show();
+            }
         }
 
         /**
@@ -854,6 +870,7 @@ namespace MediaBazaarSystem
                 manager.EditManager(txtBoxFirstName.Text, txtBoxLastName.Text, Convert.ToInt32(txtBoxAge.Text), txtBoxAddress.Text, manager.Role, manager.Salary, manager.HoursAvailable, txtBoxEmail.Text, this.manager.Contract);
 
                 //Updates profile.
+                lbEmployeeInfo.Items.Clear();
                 refreshProfile();
 
                 MessageBox.Show("Profile Updated Successfully");
@@ -905,6 +922,16 @@ namespace MediaBazaarSystem
         private void lbEmployees_Click(object sender, EventArgs e)
         {
             lbManagers.SelectedItem = null;
+        }
+
+        private void txtBoxHomeSearch_Click(object sender, EventArgs e)
+        {
+            txtBoxHomeSearch.Text = "";
+        }
+
+        private void txtBoxStatsSearch_Click(object sender, EventArgs e)
+        {
+            txtBoxStatsSearch.Text = "";
         }
     }
 }
