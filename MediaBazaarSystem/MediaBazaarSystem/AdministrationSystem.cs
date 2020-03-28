@@ -202,6 +202,7 @@ namespace MediaBazaarSystem
                 "INNER JOIN Role ON Person.RoleId = Role.Id " +
                 "INNER JOIN Schedule ON Person.Id = Schedule.PersonID " +
                 "INNER JOIN Department ON Person.DepartmentID = Department.Id";
+
             // Start mysql objects
             MySqlConnection connection = new MySqlConnection( connectionString );
             MySqlCommand cmd = new MySqlCommand( sql, connection );

@@ -162,7 +162,7 @@ namespace MediaBazaarSystem
                         dataEmpWorkSchedule.Rows.Add( row );
                     }
 
-                    schedule = new Schedule(scheduleID, firstName, lastName, role, workStartTime, workEndTime, convertedWorkDate, this.department.Name );
+                    schedule = new Schedule(scheduleID, firstName, lastName, role, workStartTime, workEndTime, convertedWorkDate, departmentName );
                     department.AddSchedule( schedule );
 
                     if( employeeID == employee.dbID )
