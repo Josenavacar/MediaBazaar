@@ -123,7 +123,7 @@ namespace MediaBazaarSystem
                     int ID = ( int ) reader.GetValue( 0 );
                     String firstName = reader.GetString( 1 );
                     String lastName = reader.GetString( 2 );
-                    int age = ( int ) reader.GetValue( 3 );
+                    DateTime birthDate = ( DateTime ) reader.GetValue( 3 );
                     String address = reader.GetString( 4 );
                     String email = reader.GetString( 5 );
                     String charge = "Manager";
@@ -132,7 +132,21 @@ namespace MediaBazaarSystem
                     int dbContract = ( int ) reader.GetValue( 13 );
                     Contract contract;
 
-                    if( dbContract == 1 )
+                    //Calculate age
+                    int age = birthDate.Year - DateTime.Now.Year - 1;
+                    if (birthDate.Month > DateTime.Now.Month)
+                    {
+                        age++;
+                    }
+                    else if (birthDate.Month == DateTime.Now.Month)
+                    {
+                        if (birthDate.Day >= DateTime.Now.Day)
+                        {
+                            age++;
+                        }
+                    }
+
+                    if ( dbContract == 1 )
                     {
                         contract = Contract.FullTime;
                     }
@@ -141,7 +155,7 @@ namespace MediaBazaarSystem
                         contract = Contract.PartTime;
                     }
 
-                    Manager man = new Manager( ID, firstName, lastName, age, address, charge, salary, hoursavailable, email, contract );
+                    Manager man = new Manager( ID, firstName, lastName, age, birthDate, address, charge, salary, hoursavailable, email, contract );
 
                     if( department.GetManager( firstName, lastName ) == null )
                     {
@@ -155,7 +169,7 @@ namespace MediaBazaarSystem
                     int ID = ( int ) reader.GetValue( 0 );
                     String firstName = reader.GetString( 1 );
                     String lastName = reader.GetString( 2 );
-                    int age = ( int ) reader.GetValue( 3 );
+                    DateTime birthDate = ( DateTime ) reader.GetValue( 3 );
                     String address = reader.GetString( 4 );
                     String email = reader.GetString( 5 );
                     String charge = "Employee";
@@ -164,7 +178,21 @@ namespace MediaBazaarSystem
                     int dbContract = ( int ) reader.GetValue( 13 );
                     Contract contract;
 
-                    if( dbContract == 1 )
+                    //Calculate age
+                    int age = birthDate.Year - DateTime.Now.Year - 1;
+                    if (birthDate.Month > DateTime.Now.Month)
+                    {
+                        age++;
+                    }
+                    else if (birthDate.Month == DateTime.Now.Month)
+                    {
+                        if (birthDate.Day >= DateTime.Now.Day)
+                        {
+                            age++;
+                        }
+                    }
+
+                    if ( dbContract == 1 )
                     {
                         contract = Contract.FullTime;
                     }
@@ -173,7 +201,7 @@ namespace MediaBazaarSystem
                         contract = Contract.PartTime;
                     }
 
-                    emp = new Employee( ID, firstName, lastName, age, address, charge, salary, hoursavailable, email, contract );
+                    emp = new Employee( ID, firstName, lastName, age, birthDate, address, charge, salary, hoursavailable, email, contract );
 
                     if( department.GetEmployee( firstName, lastName ) == null )
                     {
@@ -577,7 +605,6 @@ namespace MediaBazaarSystem
          */
         private void updateTimer_Tick( object sender, EventArgs e )
         {
-            updateTimer.Interval = 500;
             this.UpdateSchedule();
             this.GetStatistics();
         }
@@ -850,7 +877,7 @@ namespace MediaBazaarSystem
                 cmd.CommandText = "UPDATE person SET Firstname = @Firstname, Lastname = @Lastname, Age = @Age, Address = @Address, Email = @Email WHERE Id = @Id";
                 cmd.Parameters.AddWithValue("@Firstname", txtBoxFirstName.Text);
                 cmd.Parameters.AddWithValue("@Lastname", txtBoxLastName.Text);
-                cmd.Parameters.AddWithValue("@Age", Convert.ToInt32(txtBoxAge.Text));
+                cmd.Parameters.AddWithValue("@Age", Convert.ToDateTime(txtBoxAge.Text));
                 cmd.Parameters.AddWithValue("@Address", txtBoxAddress.Text);
                 cmd.Parameters.AddWithValue("@Email", txtBoxEmail.Text);
                 cmd.Parameters.AddWithValue("@Id", manager.dbID);
@@ -858,7 +885,7 @@ namespace MediaBazaarSystem
                 cmd.ExecuteNonQuery();
 
                 //Updates manager in list.
-                manager.EditManager(txtBoxFirstName.Text, txtBoxLastName.Text, Convert.ToInt32(txtBoxAge.Text), txtBoxAddress.Text, manager.Role, manager.Salary, manager.HoursAvailable, txtBoxEmail.Text, this.manager.Contract);
+                manager.EditManager(txtBoxFirstName.Text, txtBoxLastName.Text, Convert.ToDateTime(txtBoxAge.Text), txtBoxAddress.Text, manager.Role, manager.Salary, manager.HoursAvailable, txtBoxEmail.Text, this.manager.Contract);
 
                 //Updates profile.
                 lbEmployeeInfo.Items.Clear();
@@ -880,12 +907,13 @@ namespace MediaBazaarSystem
             //lbEmployeeInfo.Items.Clear();
             lbEmployeeInfo.Items.Add("Name: " + manager.FirstName);
             lbEmployeeInfo.Items.Add("Surname: " + manager.LastName);
+            lbEmployeeInfo.Items.Add("Date of Birth: " + manager.dateOfBirth);
             lbEmployeeInfo.Items.Add("Age: " + manager.Age);
             lbEmployeeInfo.Items.Add("Address: " + manager.Address);
             lbEmployeeInfo.Items.Add("Email: " + manager.Email);
             txtBoxFirstName.Text = manager.FirstName;
             txtBoxLastName.Text = manager.LastName;
-            txtBoxAge.Text = manager.Age.ToString();
+            txtBoxAge.Text = manager.dateOfBirth.ToString();
             txtBoxAddress.Text = manager.Address;
             txtBoxEmail.Text = manager.Email;
         }
@@ -895,7 +923,7 @@ namespace MediaBazaarSystem
          */
         private bool checkProfileChange()
         {
-            if(txtBoxFirstName.Text == manager.FirstName && txtBoxLastName.Text == manager.LastName && Convert.ToInt32(txtBoxAge.Text) == manager.Age && txtBoxAddress.Text == manager.Address && txtBoxEmail.Text == manager.Email)
+            if(txtBoxFirstName.Text == manager.FirstName && txtBoxLastName.Text == manager.LastName && Convert.ToDateTime(txtBoxAge.Text) == manager.dateOfBirth && txtBoxAddress.Text == manager.Address && txtBoxEmail.Text == manager.Email)
             {
                 return false;
             }

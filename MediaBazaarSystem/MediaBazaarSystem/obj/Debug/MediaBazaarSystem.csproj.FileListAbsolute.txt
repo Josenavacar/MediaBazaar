@@ -150,3 +150,16 @@ C:\Users\Jose\Desktop\Semester 2\ProjectGIT\mediabazaar\MediaBazaarSystem\MediaB
 C:\Users\Jose\Desktop\Semester 2\ProjectGIT\mediabazaar\MediaBazaarSystem\MediaBazaarSystem\bin\Debug\LiveCharts.Wpf.pdb
 C:\Users\Jose\Desktop\Semester 2\ProjectGIT\mediabazaar\MediaBazaarSystem\MediaBazaarSystem\bin\Debug\LiveCharts.Wpf.xml
 C:\Users\Gebruiker\Documents\GitHub\MediaBazaar\mediabazaar\MediaBazaarSystem\MediaBazaarSystem\obj\Debug\MediaBazaarSystem.UpdateOrAdd.resources
+C:\Users\Jose\Desktop\Age implementation\MediaBazaarSystem\MediaBazaarSystem\obj\Debug\MediaBazaarSystem.csprojAssemblyReference.cache
+C:\Users\Jose\Desktop\Age implementation\MediaBazaarSystem\MediaBazaarSystem\obj\Debug\MediaBazaarSystem.UpdateOrAdd.resources
+C:\Users\Jose\Desktop\Age implementation\MediaBazaarSystem\MediaBazaarSystem\obj\Debug\MediaBazaarSystem.AdministrationSystem.resources
+C:\Users\Jose\Desktop\Age implementation\MediaBazaarSystem\MediaBazaarSystem\obj\Debug\MediaBazaarSystem.AssignEmployeeSystem.resources
+C:\Users\Jose\Desktop\Age implementation\MediaBazaarSystem\MediaBazaarSystem\obj\Debug\MediaBazaarSystem.ChangePassword.resources
+C:\Users\Jose\Desktop\Age implementation\MediaBazaarSystem\MediaBazaarSystem\obj\Debug\MediaBazaarSystem.DeleteForm.resources
+C:\Users\Jose\Desktop\Age implementation\MediaBazaarSystem\MediaBazaarSystem\obj\Debug\MediaBazaarSystem.EmployeeSystem.resources
+C:\Users\Jose\Desktop\Age implementation\MediaBazaarSystem\MediaBazaarSystem\obj\Debug\MediaBazaarSystem.formLogin.resources
+C:\Users\Jose\Desktop\Age implementation\MediaBazaarSystem\MediaBazaarSystem\obj\Debug\MediaBazaarSystem.Properties.Resources.resources
+C:\Users\Jose\Desktop\Age implementation\MediaBazaarSystem\MediaBazaarSystem\obj\Debug\MediaBazaarSystem.ViewEmployee.resources
+C:\Users\Jose\Desktop\Age implementation\MediaBazaarSystem\MediaBazaarSystem\obj\Debug\MediaBazaarSystem.csproj.GenerateResource.cache
+C:\Users\Jose\Desktop\Age implementation\MediaBazaarSystem\MediaBazaarSystem\obj\Debug\MediaBazaarSystem.exe
+C:\Users\Jose\Desktop\Age implementation\MediaBazaarSystem\MediaBazaarSystem\obj\Debug\MediaBazaarSystem.pdb

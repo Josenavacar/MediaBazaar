@@ -85,13 +85,28 @@ namespace MediaBazaarSystem
                                 int ID = (int)reader.GetValue(0);
                                 String firstName = reader.GetString(1);
                                 String lastName = reader.GetString(2);
-                                int age = (int)reader.GetValue(3);
+                                DateTime birthDate = (DateTime)reader.GetValue(3);
+
+                                //Calculate age
+                                int age = birthDate.Year - DateTime.Now.Year - 1;
+                                if (birthDate.Month > DateTime.Now.Month)
+                                {
+                                    age++;
+                                }
+                                else if (birthDate.Month == DateTime.Now.Month)
+                                {
+                                    if (birthDate.Day >= DateTime.Now.Day)
+                                    {
+                                        age++;
+                                    }
+                                }
+
                                 String address = reader.GetString(4);
                                 String charge = "Manager";
                                 double salary = reader.GetDouble(7);
                                 int hoursavailable = (int)reader.GetValue(9);
 
-                                Manager manager = new Manager( ID, firstName, lastName, age, address, charge, salary, hoursavailable, email, contract );
+                                Manager manager = new Manager( ID, firstName, lastName, age, birthDate, address, charge, salary, hoursavailable, email, contract );
                                 AdministrationSystem administrationSystem = new AdministrationSystem( department, manager );
 
                                 administrationSystem.Show();
@@ -102,13 +117,28 @@ namespace MediaBazaarSystem
                                 int ID = (int)reader.GetValue(0);
                                 String firstName = reader.GetString(1);
                                 String lastName = reader.GetString(2);
-                                int age = (int)reader.GetValue(3);
+                                DateTime birthDate = (DateTime)reader.GetValue(3);
+
+                                //Calculate age
+                                int age = birthDate.Year - DateTime.Now.Year - 1;
+                                if(birthDate.Month > DateTime.Now.Month)
+                                {
+                                    age++;
+                                }
+                                else if(birthDate.Month == DateTime.Now.Month)
+                                {
+                                    if(birthDate.Day >= DateTime.Now.Day)
+                                    {
+                                        age++;
+                                    }
+                                }
+
                                 String address = reader.GetString(4);
                                 String charge = "Manager";
                                 double salary = reader.GetDouble(7);
                                 int hoursavailable = (int)reader.GetValue(9);
 
-                                Employee employee = new Employee(ID, firstName, lastName, age, address, charge, salary, hoursavailable, email, contract);
+                                Employee employee = new Employee(ID, firstName, lastName, age, birthDate, address, charge, salary, hoursavailable, email, contract);
                                 EmployeeSystem employeeSystem = new EmployeeSystem(department, employee);
 
                                 employeeSystem.Show();
