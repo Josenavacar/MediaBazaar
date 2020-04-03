@@ -39,7 +39,7 @@
             this.updateTimer = new System.Windows.Forms.Timer(this.components);
             this.dtpWorkDate = new System.Windows.Forms.DateTimePicker();
             this.lblWorkDate = new System.Windows.Forms.Label();
-            this.comBoxEmployees = new System.Windows.Forms.ComboBox();
+            this.txtBoxEmployeeName = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // btnDone
@@ -141,15 +141,14 @@
             this.lblWorkDate.TabIndex = 9;
             this.lblWorkDate.Text = "Work Date:";
             // 
-            // comBoxEmployees
+            // txtBoxEmployeeName
             // 
-            this.comBoxEmployees.Font = new System.Drawing.Font("Century Gothic", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.comBoxEmployees.FormattingEnabled = true;
-            this.comBoxEmployees.Location = new System.Drawing.Point(174, 252);
-            this.comBoxEmployees.Name = "comBoxEmployees";
-            this.comBoxEmployees.Size = new System.Drawing.Size(349, 29);
-            this.comBoxEmployees.TabIndex = 4;
-            this.comBoxEmployees.Text = "Select employee";
+            this.txtBoxEmployeeName.Font = new System.Drawing.Font("Century Gothic", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtBoxEmployeeName.Location = new System.Drawing.Point(174, 252);
+            this.txtBoxEmployeeName.Name = "txtBoxEmployeeName";
+            this.txtBoxEmployeeName.ReadOnly = true;
+            this.txtBoxEmployeeName.Size = new System.Drawing.Size(349, 28);
+            this.txtBoxEmployeeName.TabIndex = 10;
             // 
             // AssignEmployeeSystem
             // 
@@ -157,12 +156,12 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlLight;
             this.ClientSize = new System.Drawing.Size(584, 525);
+            this.Controls.Add(this.txtBoxEmployeeName);
             this.Controls.Add(this.lblWorkDate);
             this.Controls.Add(this.dtpWorkDate);
             this.Controls.Add(this.lblEndTime);
             this.Controls.Add(this.lblStartTime);
             this.Controls.Add(this.lblEmployeeName);
-            this.Controls.Add(this.comBoxEmployees);
             this.Controls.Add(this.comBoxStartTime);
             this.Controls.Add(this.comBoxEndTime);
             this.Controls.Add(this.lBoxAssignEmployee);
@@ -187,6 +186,6 @@
         private System.Windows.Forms.Timer updateTimer;
         private System.Windows.Forms.DateTimePicker dtpWorkDate;
         private System.Windows.Forms.Label lblWorkDate;
-        private System.Windows.Forms.ComboBox comBoxEmployees;
+        private System.Windows.Forms.TextBox txtBoxEmployeeName;
     }
 }

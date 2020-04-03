@@ -22,11 +22,8 @@ namespace MediaBazaarSystem
             InitializeComponent();
             this.schedule = schedule;
             this.department = department;
-            
-            foreach(Employee emp in department.GetEmployees())
-            {
-                comBoxEmployees.Items.Add( emp.FirstName );
-            }
+
+            txtBoxEmployeeName.Text = this.schedule.FirstName + " " + this.schedule.LastName;
 
             DateTime time = DateTime.Today;
             for( DateTime _time = time.AddHours( 08 ); _time < time.AddHours( 24 ); _time = _time.AddMinutes( 60 ) ) //from 16h to 18h hours
@@ -54,7 +51,6 @@ namespace MediaBazaarSystem
         private void btnDone_Click( object sender, EventArgs e )
         {
             updateTimer.Enabled = true;
-
             String startTime = comBoxStartTime.SelectedItem.ToString();
             String endTime = comBoxEndTime.SelectedItem.ToString();
             String workDate = dtpWorkDate.Value.ToString();
