@@ -1,6 +1,10 @@
 <?php
+	require(ROOT . "model/InventoryModel.php");
+
 	function index()
 	{
-		render("home/index");	
+		$units = getAllInventory();
+
+		render("home/index", array('units' => $units));	
 	}
 ?>

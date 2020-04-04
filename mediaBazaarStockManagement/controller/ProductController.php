@@ -3,8 +3,7 @@
 
 	function index()
 	{
-		$persons = getAllProducts();
-
-		render("products/view", array('persons' => $persons));	
+		$products = getAllProducts();
+		render("products/view", array('products' => $products));	
 	}
 ?>
