@@ -1,0 +1,25 @@
+# The first line, RewriteEngine on, alerts the parser that a series of directives related to rewrite is coming.
+RewriteEngine On
+
+# Prevent people from looking directly into folders
+# Disabling Indexes
+# Many web hosting accounts will have disable this already as part of their global configuration. But not all do so.
+# If you need to disable automatically generated directory listings, doing so is easy:
+Options -Indexes
+
+# means that if the file with the specified name in the site doesn’t exist, 
+# or the directory in the site doesn’t exist then procede to the rewrite rule below.
+# REQUEST_FILENAME
+# The full local filesystem path to the file or script matching the request, 
+# if this has already been determined by the server at the time REQUEST_FILENAME isreferenced. 
+# Otherwise, such as when used in virtual host context, the same value as REQUEST_URI. 
+# Depending on the value of AcceptPathInfo, the server may have only used someleading components of the REQUEST_URI to map the request to a file.
+# -d Is directory.
+# -f Is regular file.
+#-l Is symbolic link.
+RewriteCond %{REQUEST_FILENAME} !-d 
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-l
+
+# save url in $1 variable 
+RewriteRule ^(.+)$ index.php?url=$1 [QSA,L]
