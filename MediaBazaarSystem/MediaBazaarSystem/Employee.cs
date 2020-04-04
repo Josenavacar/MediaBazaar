@@ -79,7 +79,7 @@ namespace MediaBazaarSystem
             FirstName = firstName;
             LastName = lastName;
             Age = age;
-            dateOfBirth = birthDate;
+            dateOfBirth = birthDate.Date;
             Address = address;
             Role = role;
             Salary = salary;
@@ -92,10 +92,10 @@ namespace MediaBazaarSystem
         {
             FirstName = firstName;
             LastName = lastName;
-            dateOfBirth = birthDate;
+            dateOfBirth = birthDate.Date;
 
             //Calculate age
-            int tempage = birthDate.Year - DateTime.Now.Year - 1;
+            int tempage = DateTime.Now.Year - birthDate.Year - 1;
             if (birthDate.Month > DateTime.Now.Month)
             {
                 tempage++;

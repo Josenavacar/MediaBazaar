@@ -85,10 +85,11 @@ namespace MediaBazaarSystem
                                 int ID = (int)reader.GetValue(0);
                                 String firstName = reader.GetString(1);
                                 String lastName = reader.GetString(2);
-                                DateTime birthDate = (DateTime)reader.GetValue(3);
+                                DateTime birthDateWithTime = (DateTime)reader.GetValue(3);
+                                DateTime birthDate = birthDateWithTime.Date;
 
                                 //Calculate age
-                                int age = birthDate.Year - DateTime.Now.Year - 1;
+                                int age = DateTime.Now.Year - birthDate.Year - 1;
                                 if (birthDate.Month > DateTime.Now.Month)
                                 {
                                     age++;
@@ -117,10 +118,11 @@ namespace MediaBazaarSystem
                                 int ID = (int)reader.GetValue(0);
                                 String firstName = reader.GetString(1);
                                 String lastName = reader.GetString(2);
-                                DateTime birthDate = (DateTime)reader.GetValue(3);
+                                DateTime birthDateWithTime = (DateTime)reader.GetValue(3);
+                                DateTime birthDate = birthDateWithTime.Date;
 
                                 //Calculate age
-                                int age = birthDate.Year - DateTime.Now.Year - 1;
+                                int age = DateTime.Now.Year - birthDate.Year - 1;
                                 if(birthDate.Month > DateTime.Now.Month)
                                 {
                                     age++;

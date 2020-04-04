@@ -118,7 +118,7 @@ namespace MediaBazaarSystem
 
             while( reader.Read() )
             {
-                int role = ( int ) reader.GetValue( 11 );
+                int role = ( int ) reader.GetValue( 12 );
                 if( role == 1 )
                 {
                     int ID = ( int ) reader.GetValue( 0 );
@@ -134,7 +134,7 @@ namespace MediaBazaarSystem
                     Contract contract;
 
                     //Calculate age
-                    int age = birthDate.Year - DateTime.Now.Year - 1;
+                    int age = DateTime.Now.Year - birthDate.Year - 1;
                     if (birthDate.Month > DateTime.Now.Month)
                     {
                         age++;
@@ -180,7 +180,7 @@ namespace MediaBazaarSystem
                     Contract contract;
 
                     //Calculate age
-                    int age = birthDate.Year - DateTime.Now.Year - 1;
+                    int age = DateTime.Now.Year - birthDate.Year - 1;
                     if (birthDate.Month > DateTime.Now.Month)
                     {
                         age++;
@@ -916,13 +916,14 @@ namespace MediaBazaarSystem
             //lbEmployeeInfo.Items.Clear();
             lbEmployeeInfo.Items.Add("Name: " + manager.FirstName);
             lbEmployeeInfo.Items.Add("Surname: " + manager.LastName);
-            lbEmployeeInfo.Items.Add("Date of Birth: " + manager.dateOfBirth);
+            lbEmployeeInfo.Items.Add("Date of Birth: " + manager.dateOfBirth.Date.ToShortDateString());
             lbEmployeeInfo.Items.Add("Age: " + manager.Age);
             lbEmployeeInfo.Items.Add("Address: " + manager.Address);
             lbEmployeeInfo.Items.Add("Email: " + manager.Email);
+
             txtBoxFirstName.Text = manager.FirstName;
             txtBoxLastName.Text = manager.LastName;
-            txtBoxAge.Text = manager.dateOfBirth.ToString();
+            txtBoxAge.Text = manager.dateOfBirth.Date.ToShortDateString();
             txtBoxAddress.Text = manager.Address;
             txtBoxEmail.Text = manager.Email;
         }

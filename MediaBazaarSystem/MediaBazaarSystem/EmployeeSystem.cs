@@ -343,13 +343,14 @@ namespace MediaBazaarSystem
             //lbEmployeeInfo.Items.Clear();
             lbEmployeeInfo.Items.Add("Name: " + employee.FirstName);
             lbEmployeeInfo.Items.Add("Surname: " + employee.LastName);
-            lbEmployeeInfo.Items.Add("Date of Birth: " + employee.dateOfBirth);
+            lbEmployeeInfo.Items.Add("Date of Birth: " + employee.dateOfBirth.Date.ToShortDateString());
             lbEmployeeInfo.Items.Add("Age: " + employee.Age);
             lbEmployeeInfo.Items.Add("Address: " + employee.Address);
             lbEmployeeInfo.Items.Add("Email: " + employee.Email);
+        
             txtBoxFirstName.Text = employee.FirstName;
             txtBoxLastName.Text = employee.LastName;
-            txtBoxAge.Text = employee.Age.ToString();
+            txtBoxAge.Text = employee.dateOfBirth.ToShortDateString();
             txtBoxAddress.Text = employee.Address;
             txtBoxEmail.Text = employee.Email;
         }
@@ -359,7 +360,7 @@ namespace MediaBazaarSystem
          */
         private bool checkProfileChange()
         {
-            if (txtBoxFirstName.Text == employee.FirstName && txtBoxLastName.Text == employee.LastName && Convert.ToDateTime(txtBoxAge.Text) == employee.dateOfBirth && txtBoxAddress.Text == employee.Address && txtBoxEmail.Text == employee.Email)
+            if (txtBoxFirstName.Text == employee.FirstName && txtBoxLastName.Text == employee.LastName && Convert.ToDateTime(txtBoxAge.Text).Date == employee.dateOfBirth.Date && txtBoxAddress.Text == employee.Address && txtBoxEmail.Text == employee.Email)
             {
                 return false;
             }
