@@ -12,6 +12,7 @@ namespace MediaBazaarSystem
         protected String firstName;
         protected String lastName;
         protected int age;
+        protected DateTime birthDate;
         protected String address;
 
         public override string ToString()

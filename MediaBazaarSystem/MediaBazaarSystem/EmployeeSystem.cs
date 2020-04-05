@@ -301,7 +301,7 @@ namespace MediaBazaarSystem
             {
                 String firstName = txtBoxFirstName.Text;
                 String lastName = txtBoxLastName.Text;
-                int age = Convert.ToInt32( txtBoxAge.Text );
+                DateTime birthDate = Convert.ToDateTime( txtBoxAge.Text );
                 String address = txtBoxEmail.Text;
                 String email = txtBoxEmail.Text;
 
@@ -313,7 +313,7 @@ namespace MediaBazaarSystem
                 cmd.CommandText = "UPDATE person SET Firstname = @Firstname, Lastname = @Lastname, Age = @Age, Address = @Address, Email = @Email WHERE Id = @Id";
                 cmd.Parameters.AddWithValue("@Firstname", firstName);
                 cmd.Parameters.AddWithValue("@Lastname", lastName );
-                cmd.Parameters.AddWithValue("@Age", age );
+                cmd.Parameters.AddWithValue("@Age", birthDate );
                 cmd.Parameters.AddWithValue("@Address", address );
                 cmd.Parameters.AddWithValue("@Email", email );
                 cmd.Parameters.AddWithValue("@Id", employee.dbID);
@@ -321,7 +321,7 @@ namespace MediaBazaarSystem
                 cmd.ExecuteNonQuery();
 
                 //Updates employee in list.
-                employee.EditEmployee( firstName, lastName, age, address, employee.Role, employee.Salary, employee.HoursAvailable, email, employee.Contract);
+                employee.EditEmployee( firstName, lastName, birthDate, address, employee.Role, employee.Salary, employee.HoursAvailable, email, employee.Contract);
 
                 //Updates profile.
                 lbEmployeeInfo.Items.Clear();
@@ -343,12 +343,14 @@ namespace MediaBazaarSystem
             //lbEmployeeInfo.Items.Clear();
             lbEmployeeInfo.Items.Add("Name: " + employee.FirstName);
             lbEmployeeInfo.Items.Add("Surname: " + employee.LastName);
+            lbEmployeeInfo.Items.Add("Date of Birth: " + employee.dateOfBirth.Date.ToShortDateString());
             lbEmployeeInfo.Items.Add("Age: " + employee.Age);
             lbEmployeeInfo.Items.Add("Address: " + employee.Address);
             lbEmployeeInfo.Items.Add("Email: " + employee.Email);
+        
             txtBoxFirstName.Text = employee.FirstName;
             txtBoxLastName.Text = employee.LastName;
-            txtBoxAge.Text = employee.Age.ToString();
+            txtBoxAge.Text = employee.dateOfBirth.ToShortDateString();
             txtBoxAddress.Text = employee.Address;
             txtBoxEmail.Text = employee.Email;
         }
@@ -358,7 +360,7 @@ namespace MediaBazaarSystem
          */
         private bool checkProfileChange()
         {
-            if (txtBoxFirstName.Text == employee.FirstName && txtBoxLastName.Text == employee.LastName && Convert.ToInt32(txtBoxAge.Text) == employee.Age && txtBoxAddress.Text == employee.Address && txtBoxEmail.Text == employee.Email)
+            if (txtBoxFirstName.Text == employee.FirstName && txtBoxLastName.Text == employee.LastName && Convert.ToDateTime(txtBoxAge.Text).Date == employee.dateOfBirth.Date && txtBoxAddress.Text == employee.Address && txtBoxEmail.Text == employee.Email)
             {
                 return false;
             }

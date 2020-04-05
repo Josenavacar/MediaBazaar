@@ -34,7 +34,6 @@
             this.btnAddStaff = new System.Windows.Forms.Button();
             this.lblFirstName = new System.Windows.Forms.Label();
             this.lblLastName = new System.Windows.Forms.Label();
-            this.numAge = new System.Windows.Forms.NumericUpDown();
             this.lblAge = new System.Windows.Forms.Label();
             this.lblAddress = new System.Windows.Forms.Label();
             this.comBoxPosition = new System.Windows.Forms.ComboBox();
@@ -49,7 +48,7 @@
             this.cmboBoxDepartment = new System.Windows.Forms.ComboBox();
             this.cmboBoxContract = new System.Windows.Forms.ComboBox();
             this.lblContract = new System.Windows.Forms.Label();
-            ((System.ComponentModel.ISupportInitialize)(this.numAge)).BeginInit();
+            this.tbBirthDate = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // txtBoxFirstName
@@ -114,41 +113,16 @@
             this.lblLastName.TabIndex = 5;
             this.lblLastName.Text = "Last name:";
             // 
-            // numAge
-            // 
-            this.numAge.Font = new System.Drawing.Font("Century Gothic", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.numAge.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.numAge.Location = new System.Drawing.Point(261, 139);
-            this.numAge.Margin = new System.Windows.Forms.Padding(4);
-            this.numAge.Maximum = new decimal(new int[] {
-            67,
-            0,
-            0,
-            0});
-            this.numAge.Minimum = new decimal(new int[] {
-            18,
-            0,
-            0,
-            0});
-            this.numAge.Name = "numAge";
-            this.numAge.Size = new System.Drawing.Size(199, 24);
-            this.numAge.TabIndex = 6;
-            this.numAge.Value = new decimal(new int[] {
-            18,
-            0,
-            0,
-            0});
-            // 
             // lblAge
             // 
             this.lblAge.AutoSize = true;
             this.lblAge.Font = new System.Drawing.Font("Century Gothic", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblAge.Location = new System.Drawing.Point(190, 141);
+            this.lblAge.Location = new System.Drawing.Point(133, 141);
             this.lblAge.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblAge.Name = "lblAge";
-            this.lblAge.Size = new System.Drawing.Size(40, 19);
+            this.lblAge.Size = new System.Drawing.Size(97, 19);
             this.lblAge.TabIndex = 7;
-            this.lblAge.Text = "Age:";
+            this.lblAge.Text = "Date of Birth:";
             // 
             // lblAddress
             // 
@@ -292,12 +266,24 @@
             this.lblContract.TabIndex = 24;
             this.lblContract.Text = "Contract:";
             // 
+            // tbBirthDate
+            // 
+            this.tbBirthDate.Font = new System.Drawing.Font("Century Gothic", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbBirthDate.Location = new System.Drawing.Point(261, 138);
+            this.tbBirthDate.Margin = new System.Windows.Forms.Padding(4);
+            this.tbBirthDate.Name = "tbBirthDate";
+            this.tbBirthDate.Size = new System.Drawing.Size(199, 24);
+            this.tbBirthDate.TabIndex = 26;
+            this.tbBirthDate.Text = "DD/MM/YYYY";
+            this.tbBirthDate.Click += new System.EventHandler(this.tbBirthDate_Click);
+            // 
             // UpdateOrAdd
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlLight;
             this.ClientSize = new System.Drawing.Size(653, 587);
+            this.Controls.Add(this.tbBirthDate);
             this.Controls.Add(this.cmboBoxContract);
             this.Controls.Add(this.lblContract);
             this.Controls.Add(this.cmboBoxDepartment);
@@ -312,7 +298,6 @@
             this.Controls.Add(this.comBoxPosition);
             this.Controls.Add(this.lblAddress);
             this.Controls.Add(this.lblAge);
-            this.Controls.Add(this.numAge);
             this.Controls.Add(this.lblLastName);
             this.Controls.Add(this.lblFirstName);
             this.Controls.Add(this.btnAddStaff);
@@ -323,7 +308,6 @@
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "UpdateOrAdd";
             this.Text = "Add Employee";
-            ((System.ComponentModel.ISupportInitialize)(this.numAge)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -337,7 +321,6 @@
         private System.Windows.Forms.Button btnAddStaff;
         private System.Windows.Forms.Label lblFirstName;
         private System.Windows.Forms.Label lblLastName;
-        private System.Windows.Forms.NumericUpDown numAge;
         private System.Windows.Forms.Label lblAge;
         private System.Windows.Forms.Label lblAddress;
         private System.Windows.Forms.ComboBox comBoxPosition;
@@ -352,5 +335,6 @@
         private System.Windows.Forms.ComboBox cmboBoxDepartment;
         private System.Windows.Forms.ComboBox cmboBoxContract;
         private System.Windows.Forms.Label lblContract;
+        private System.Windows.Forms.TextBox tbBirthDate;
     }
 }

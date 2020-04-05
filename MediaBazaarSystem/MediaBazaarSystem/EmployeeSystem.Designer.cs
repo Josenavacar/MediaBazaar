@@ -413,7 +413,7 @@
             // lblEmail
             // 
             this.lblEmail.AutoSize = true;
-            this.lblEmail.Location = new System.Drawing.Point(447, 509);
+            this.lblEmail.Location = new System.Drawing.Point(444, 509);
             this.lblEmail.Name = "lblEmail";
             this.lblEmail.Size = new System.Drawing.Size(50, 19);
             this.lblEmail.TabIndex = 11;
@@ -430,7 +430,7 @@
             // lblAddress
             // 
             this.lblAddress.AutoSize = true;
-            this.lblAddress.Location = new System.Drawing.Point(422, 465);
+            this.lblAddress.Location = new System.Drawing.Point(429, 465);
             this.lblAddress.Name = "lblAddress";
             this.lblAddress.Size = new System.Drawing.Size(65, 19);
             this.lblAddress.TabIndex = 9;
@@ -439,16 +439,16 @@
             // lblAge
             // 
             this.lblAge.AutoSize = true;
-            this.lblAge.Location = new System.Drawing.Point(454, 415);
+            this.lblAge.Location = new System.Drawing.Point(397, 415);
             this.lblAge.Name = "lblAge";
-            this.lblAge.Size = new System.Drawing.Size(40, 19);
+            this.lblAge.Size = new System.Drawing.Size(97, 19);
             this.lblAge.TabIndex = 8;
-            this.lblAge.Text = "Age:";
+            this.lblAge.Text = "Date of Birth:";
             // 
             // lblLastName
             // 
             this.lblLastName.AutoSize = true;
-            this.lblLastName.Location = new System.Drawing.Point(399, 364);
+            this.lblLastName.Location = new System.Drawing.Point(409, 364);
             this.lblLastName.Name = "lblLastName";
             this.lblLastName.Size = new System.Drawing.Size(85, 19);
             this.lblLastName.TabIndex = 7;
@@ -457,7 +457,7 @@
             // lblFirstName
             // 
             this.lblFirstName.AutoSize = true;
-            this.lblFirstName.Location = new System.Drawing.Point(403, 312);
+            this.lblFirstName.Location = new System.Drawing.Point(411, 312);
             this.lblFirstName.Name = "lblFirstName";
             this.lblFirstName.Size = new System.Drawing.Size(83, 19);
             this.lblFirstName.TabIndex = 6;
