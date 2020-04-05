@@ -50,7 +50,7 @@ namespace MediaBazaarSystem
             
             txtBoxFirstName.Text = manager.FirstName;
             txtBoxLastName.Text = manager.LastName;
-            numAge.Value = manager.Age;
+            tbBirthDate.Text = manager.dateOfBirth.ToString();
             tbAddress.Text = manager.Address;
             comBoxPosition.SelectedItem = manager.Role;
             txtBoxSalary.Text = manager.Salary.ToString();
@@ -72,14 +72,14 @@ namespace MediaBazaarSystem
             this.employee = emp;
             this.manager = null;
             
-            txtBoxFirstName.Text = emp.FirstName;
-            txtBoxLastName.Text = emp.LastName;
-            numAge.Value = emp.Age;
-            tbAddress.Text = emp.Address;
-            comBoxPosition.SelectedItem = emp.Role;
-            txtBoxSalary.Text = emp.Salary.ToString();
-            txtBoxHoursAvailable.Text = emp.HoursAvailable.ToString();
-            txtBoxEmail.Text = emp.Email.ToString();
+            txtBoxFirstName.Text = employee.FirstName;
+            txtBoxLastName.Text = employee.LastName;
+            tbBirthDate.Text = employee.dateOfBirth.ToString();
+            tbAddress.Text = employee.Address;
+            comBoxPosition.SelectedItem = employee.Role;
+            txtBoxSalary.Text = employee.Salary.ToString();
+            txtBoxHoursAvailable.Text = employee.HoursAvailable.ToString();
+            txtBoxEmail.Text = employee.Email.ToString();
 
             btnAddStaff.Text = "Edit";
             this.Text = "Update " + employee.FirstName + " " + employee.LastName;
@@ -107,13 +107,27 @@ namespace MediaBazaarSystem
                     int roleID = 0; //This variable will store the role ID to be stored into the database.
                     String FirstName = txtBoxFirstName.Text.ToString(); //First name
                     String LastName = txtBoxLastName.Text.ToString(); //Last name
-                    int age = Convert.ToInt32(numAge.Value); //Age
+                    DateTime birthDate = Convert.ToDateTime(tbBirthDate.Text); //Date of Birth
                     String address = tbAddress.Text.ToString(); //Address
                     String role = comBoxPosition.SelectedItem.ToString(); //Role (as a string instead of an ID for ease of use and clarity in a list of C#)
                     double salary = Convert.ToDouble(txtBoxSalary.Text); //Salary
                     int hoursAvailable = Convert.ToInt32(txtBoxHoursAvailable.Text); //Hours available
                     String email = txtBoxEmail.Text.ToString(); //Email
                     Contract contract = (Contract)Enum.Parse(typeof(Contract), cmboBoxContract.SelectedItem.ToString());
+
+                    //Calculate age
+                    int age = birthDate.Year - DateTime.Now.Year - 1;
+                    if (birthDate.Month > DateTime.Now.Month)
+                    {
+                        age++;
+                    }
+                    else if (birthDate.Month == DateTime.Now.Month)
+                    {
+                        if (birthDate.Day >= DateTime.Now.Day)
+                        {
+                            age++;
+                        }
+                    }
 
                     //Converts the string role into the ID.
                     if (role == "Manager")
@@ -136,7 +150,7 @@ namespace MediaBazaarSystem
 
                         cmd.Parameters.AddWithValue("@FirstN", FirstName);
                         cmd.Parameters.AddWithValue("@LastN", LastName);
-                        cmd.Parameters.AddWithValue("@Age", age);
+                        cmd.Parameters.AddWithValue("@Age", birthDate);
                         cmd.Parameters.AddWithValue("@Address", address);
                         cmd.Parameters.AddWithValue("@Email", email);
                         cmd.Parameters.AddWithValue("@Password", password);
@@ -176,7 +190,7 @@ namespace MediaBazaarSystem
                             reader.Close();
                             conn.Close();
 
-                            Manager newManager = new Manager(ID, FirstName, LastName, age, address, role, salary, hoursAvailable, email, contract); //Adds the manager to the list.
+                            Manager newManager = new Manager(ID, FirstName, LastName, age, birthDate, address, role, salary, hoursAvailable, email, contract); //Adds the manager to the list.
                             department.AddManager(newManager);
                             MessageBox.Show("Manager successfully added.");
                         }
@@ -194,7 +208,7 @@ namespace MediaBazaarSystem
                             reader.Close();
                             conn.Close();
 
-                            Employee newEmployee = new Employee(ID, FirstName, LastName, age, address, role, salary, hoursAvailable, email, contract); //Adds employee to the list.
+                            Employee newEmployee = new Employee(ID, FirstName, LastName, age, birthDate, address, role, salary, hoursAvailable, email, contract); //Adds employee to the list.
                             department.AddEmployee(newEmployee);
                             MessageBox.Show("Employee successfully added.");
                         }
@@ -208,26 +222,27 @@ namespace MediaBazaarSystem
                         cmd.CommandText = "UPDATE person SET Firstname = @FirstN,  Lastname = @LastN, Age = @Age, Address = @Address, Email = @Email, Salary = @Salary," +
                             "HoursAvailable = @HoursAvailable, IsAvailable = @IsAvailable, RoleID = @RoleID, DepartmentID = @DepartmentID, ContractID = @ContractID WHERE Id = @PersonID";
 
-                        cmd.Parameters.AddWithValue( "@FirstN", FirstName );
-                        cmd.Parameters.AddWithValue( "@LastN", LastName );
-                        cmd.Parameters.AddWithValue( "@Age", age );
-                        cmd.Parameters.AddWithValue( "@Address", address );
-                        cmd.Parameters.AddWithValue( "@Email", email );
-                        cmd.Parameters.AddWithValue( "@Salary", salary );
-                        cmd.Parameters.AddWithValue( "@HoursAvailable", hoursAvailable );
-                        cmd.Parameters.AddWithValue( "@IsAvailable", "Yes" );
-                        cmd.Parameters.AddWithValue( "@RoleID", roleID );
-                        cmd.Parameters.AddWithValue( "@DepartmentID", department.DepartmentID );
+                        cmd.Parameters.AddWithValue("@FirstN", FirstName);
+                        cmd.Parameters.AddWithValue("@LastN", LastName);
+                        cmd.Parameters.AddWithValue("@Age", birthDate);
+                        cmd.Parameters.AddWithValue("@Address", address);
+                        cmd.Parameters.AddWithValue("@Email", email);
+                        cmd.Parameters.AddWithValue("@Salary", salary);
+                        cmd.Parameters.AddWithValue("@HoursAvailable", hoursAvailable);
+                        cmd.Parameters.AddWithValue("@IsAvailable", "Yes");
+                        cmd.Parameters.AddWithValue("@RoleID", roleID);
+                        cmd.Parameters.AddWithValue("@DepartmentID", department.DepartmentID);
+                        cmd.Parameters.AddWithValue("@ContractID", contract);
 
-                        if( roleID == 1 )
+                        if (roleID == 1)
                         {
-                            cmd.Parameters.AddWithValue( "@PersonID", manager.dbID );
-                            manager.EditManager( FirstName, LastName, age, address, role, salary, hoursAvailable, email, contract ); //List edit (local).
+                            cmd.Parameters.AddWithValue("@PersonID", manager.dbID);
+                            manager.EditManager(FirstName, LastName, birthDate, address, role, salary, hoursAvailable, email, contract); //List edit (local).
                         }
                         else if( roleID == 2 )
                         {
-                            cmd.Parameters.AddWithValue( "@PersonID", employee.dbID );
-                            employee.EditEmployee( FirstName, LastName, age, address, role, salary, hoursAvailable, email, contract ); //List edit (local).
+                            cmd.Parameters.AddWithValue("@PersonID", employee.dbID);
+                            employee.EditEmployee(FirstName, LastName, birthDate, address, role, salary, hoursAvailable, email, contract); //List edit (local).
                         }
 
                         cmd.Parameters.AddWithValue( "@ContractID", contract );
@@ -245,6 +260,11 @@ namespace MediaBazaarSystem
                     MessageBox.Show("Information not filled properly, please try again");
                 }
             }
+        }
+
+        private void tbBirthDate_Click(object sender, EventArgs e)
+        {
+            tbBirthDate.Text = "";
         }
     }
 }

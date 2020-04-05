@@ -8,8 +8,6 @@ namespace MediaBazaarSystem
 {
     public class Manager : Staff
     {
-        private string charge;
-
         public int dbID
         {
             get { return this.personID; }
@@ -45,6 +43,12 @@ namespace MediaBazaarSystem
             private set { this.age = value; }
         }
 
+        public DateTime dateOfBirth
+        {
+            get { return this.birthDate; }
+            private set { this.birthDate = value; }
+        }
+
         public String Role
         {
             get { return this.role; }
@@ -69,12 +73,13 @@ namespace MediaBazaarSystem
             private set { this.contract = value; }
         }
 
-        public Manager( int ID, String firstName, String lastName, int age, String address, String role, double salary,  int hoursAvailable, String email, Contract contract ) //hours worked deleted
+        public Manager( int ID, String firstName, String lastName, int age, DateTime birthDate, String address, String role, double salary,  int hoursAvailable, String email, Contract contract ) //hours worked deleted
         {
             dbID = ID;
             FirstName = firstName;
             LastName = lastName;
             Age = age;
+            dateOfBirth = birthDate.Date;
             Address = address;
             Role = role;
             Salary = salary;
@@ -83,11 +88,27 @@ namespace MediaBazaarSystem
             Contract = contract;
         }
 
-        public void EditManager(String firstName, String lastName, int age, String address, String role, double salary, int hoursAvailable, String email, Contract contract)
+        public void EditManager(String firstName, String lastName, DateTime birthDate, String address, String role, double salary, int hoursAvailable, String email, Contract contract)
         {
             FirstName = firstName;
             LastName = lastName;
-            Age = age;
+            dateOfBirth = birthDate.Date;
+
+            //Calculate age
+            int tempage = DateTime.Now.Year - birthDate.Year - 1;
+            if (birthDate.Month > DateTime.Now.Month)
+            {
+                tempage++;
+            }
+            else if (birthDate.Month == DateTime.Now.Month)
+            {
+                if (birthDate.Day >= DateTime.Now.Day)
+                {
+                    tempage++;
+                }
+            }
+            Age = tempage;
+            
             Address = address;
             Role = role;
             Salary = salary;

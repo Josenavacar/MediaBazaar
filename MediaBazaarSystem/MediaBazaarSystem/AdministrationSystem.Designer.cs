@@ -30,9 +30,9 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AdministrationSystem));
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea3 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend3 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series3 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea4 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend4 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series4 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.tbControlAdmin = new System.Windows.Forms.TabControl();
             this.tbPageHome = new System.Windows.Forms.TabPage();
             this.cmboBoxFilter = new System.Windows.Forms.ComboBox();
@@ -365,17 +365,17 @@
             // 
             // hoursStatsChart
             // 
-            chartArea3.Name = "ChartArea1";
-            this.hoursStatsChart.ChartAreas.Add(chartArea3);
-            legend3.Name = "Legend1";
-            this.hoursStatsChart.Legends.Add(legend3);
+            chartArea4.Name = "ChartArea1";
+            this.hoursStatsChart.ChartAreas.Add(chartArea4);
+            legend4.Name = "Legend1";
+            this.hoursStatsChart.Legends.Add(legend4);
             this.hoursStatsChart.Location = new System.Drawing.Point(29, 318);
             this.hoursStatsChart.Name = "hoursStatsChart";
-            series3.ChartArea = "ChartArea1";
-            series3.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.StackedBar;
-            series3.Legend = "Legend1";
-            series3.Name = "Hours";
-            this.hoursStatsChart.Series.Add(series3);
+            series4.ChartArea = "ChartArea1";
+            series4.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.StackedBar;
+            series4.Legend = "Legend1";
+            series4.Name = "Hours";
+            this.hoursStatsChart.Series.Add(series4);
             this.hoursStatsChart.Size = new System.Drawing.Size(401, 280);
             this.hoursStatsChart.TabIndex = 20;
             this.hoursStatsChart.Text = "hoursStatsChart";
@@ -530,11 +530,11 @@
             // lblAge
             // 
             this.lblAge.AutoSize = true;
-            this.lblAge.Location = new System.Drawing.Point(454, 415);
+            this.lblAge.Location = new System.Drawing.Point(388, 415);
             this.lblAge.Name = "lblAge";
-            this.lblAge.Size = new System.Drawing.Size(40, 19);
+            this.lblAge.Size = new System.Drawing.Size(100, 19);
             this.lblAge.TabIndex = 8;
-            this.lblAge.Text = "Age:";
+            this.lblAge.Text = "Date Of Birth:";
             // 
             // lblLastName
             // 
@@ -737,6 +737,7 @@
             // 
             // updateTimer
             // 
+            this.updateTimer.Interval = 500;
             this.updateTimer.Tick += new System.EventHandler(this.updateTimer_Tick);
             // 
             // AdministrationSystem
@@ -744,7 +745,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.WindowFrame;
-            this.ClientSize = new System.Drawing.Size(907, 733);
+            this.ClientSize = new System.Drawing.Size(902, 733);
             this.Controls.Add(this.tbControlAdmin);
             this.Font = new System.Drawing.Font("Century Gothic", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Name = "AdministrationSystem";
