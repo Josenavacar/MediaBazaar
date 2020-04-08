@@ -3,8 +3,10 @@
 // if its login or home then hide side menu
 // else if not login page...hide the login button
 $( document ).ready(function() {
-  if(($(location).attr('href') == "http://localhost/projs/mediabazaar/mediaBazaarStockManagement/") || 
-  	($(location).attr('href') == "http://localhost/projs/mediabazaar/mediaBazaarStockManagement/login"))
+  let pathArray = window.location.pathname.split('/');
+
+  if((pathArray[2] + "/" + pathArray[3] == "mediaBazaarStockManagement/login") || 
+  	(pathArray[2] + "/" == "mediaBazaarStockManagement/"))
   {
   	$("#sidebar-wrapper").hide();
   	$("#menu-toggle").hide();
