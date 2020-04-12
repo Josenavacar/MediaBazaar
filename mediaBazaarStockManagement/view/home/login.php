@@ -5,8 +5,9 @@
                         <img src="images/project_logo.png" alt="">
                     </div>
                     <h2 class="text-center">Login</h2>   
-                    <div class="form-group">
-                        <input type="text" class="form-control" name="passcode" placeholder="Please enter passcode here..." required="required">
+                    <div class="form-label-group">
+                        <input type="text" class="form-control" name="passcode" placeholder="Passcode" required="required">
+                        <label>Passcode</label>
                     </div>       
                     <div class="form-group">
                         <button type="submit" class="btn btn-primary btn-lg btn-block">Sign in</button>

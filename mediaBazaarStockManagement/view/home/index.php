@@ -20,7 +20,6 @@
 					</tbody>
 				</table>				
 			</div>
-            <a class="btn btn-dark" href="product">Products</a>
         </div>
     </div>
     <!-- /#page-content-wrapper -->
