@@ -6,12 +6,12 @@ $( document ).ready(function() {
   let pathArray = window.location.pathname.split('/');
 
   if((pathArray[2] + "/" + pathArray[3] == "mediaBazaarStockManagement/login") || 
-  	(pathArray[2] + "/" == "mediaBazaarStockManagement/"))
+  	("/" + pathArray[1] + "/" + pathArray[2] + "/" == $(location).attr('pathname')))
   {
   	$("#sidebar-wrapper").hide();
   	$("#menu-toggle").hide();
   }
-  else if($(location).attr('href') != "http://localhost/projs/mediabazaar/mediaBazaarStockManagement/login")
+  else if(pathArray[2] + "/" + pathArray[3] != "mediaBazaarStockManagement/login")
   {
     $(".loginbutton").hide();
   }
