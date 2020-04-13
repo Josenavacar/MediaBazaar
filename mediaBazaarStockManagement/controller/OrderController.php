@@ -1,4 +1,6 @@
 <?php
+    require(ROOT . "model/OrderModel.php");
+
     function index()
     {
         $orders = getAllOrders();
