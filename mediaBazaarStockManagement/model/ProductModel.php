@@ -7,5 +7,3 @@
 		$db = null;
 		return $query->fetchAll();
 	}
-
-
