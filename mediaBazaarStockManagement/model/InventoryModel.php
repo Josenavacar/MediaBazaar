@@ -8,12 +8,3 @@
 		return $query->fetchAll();
 	}
 
-	function createRequest()
-	{
-		$db = openDatabaseConnection();
-		$sql = "INSERT";
-		$query = $db->prepare($sql);
-		$query->execute();
-		$db = null;
-		return true;
-	}
