@@ -4,7 +4,7 @@
 				<table class="table table-hover">
 					<thead class="table-primary">
 						<tr>
-                            <th scope="col">ID</th>
+                            <th scope="col">Order ID</th>
 							<th scope="col">Name</th>
                             <th scope="col">Quantity</th>
 							<th scope="col">Price</th>
@@ -14,7 +14,7 @@
 						<?php foreach ($orders as $order) { ?>
 							<tr>
 								<td><?php echo $order['OrderID']; ?></td>
-                                <td><?php echo $order['Id']; ?></td>
+                                <td><?php echo $order['Name']; ?></td>
                                 <td><?php echo $order['Quantity']; ?></td>
 								<td><?php echo "€" . " " . $order['TotalPrice']; ?></td>
 							</tr>
