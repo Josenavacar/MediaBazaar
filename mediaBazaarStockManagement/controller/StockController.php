@@ -12,25 +12,14 @@
 
 	function stockrequest()
 	{		
-		 // print_r($order = json_decode($_POST['data'], true));
-		// return $order;
-		// 
+		$results = [];
 		if (isset($_POST['data'])) {
 		    $data = $_POST['data'];
-
-		    foreach ($data as $value) {
-
-		        // Same here...
-		        echo $value;
-		        return $value;
-		    }
-		    // result();
+		    returnRequest($data);
 		}
 	}
 
 	function result()
 	{
-		$data = stockrequest();
-		echo $data;
 		render("stock/result");
 	}

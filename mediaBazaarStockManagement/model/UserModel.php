@@ -23,3 +23,14 @@
 		}
 		return false;
 	}
+
+	function getUserByEmail($email)
+	{
+		$db = openDatabaseConnection();
+		$sql = "SELECT email FROM person WHERE email = :email";
+		$query = $db->prepare($sql);
+		$query->execute(array(":email" => $email));
+
+		$db = null;
+		return $query->fetch();
+	}

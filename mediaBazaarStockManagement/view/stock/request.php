@@ -12,10 +12,10 @@
                                 </div>                                
                             </div>
 
-                            <select class="form-control">
+                            <select id="departments" class="form-control">
                                 <option hidden >Departments</option>
                                 <?php foreach($departments as $department) { ?>
-                                    <option id="department"><?php echo $department["Name"] ?></option>
+                                    <option data-id="<?php echo $department["Name"]; ?>" value="<?php echo $department["Name"] ?>" id="department"><?php echo $department["Name"] ?></option>
                                 <?php } ?>
                             </select>
                         </div>
@@ -43,8 +43,8 @@
                         <div class="input-group">
                             <div class="col-lg-6 mb-3">
                                 <div class="form-label-group">
-                                    <input id="total_price" placeholder="Price" type="text" class="form-control">
-                                    <label>Price</label>
+                                    <input id="total_price" placeholder="Price in euros" type="text" class="form-control">
+                                    <label>Price in &euro;</label>
                                 </div>    
                             </div>
                         </div>
@@ -61,7 +61,7 @@
     <!-- /#page-content-wrapper -->
 </div>
 
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js" type="text/javascript"></script>
 <script type="text/javascript">
     document.getElementById("quantity").addEventListener("change", getQuantity);
 
@@ -74,9 +74,14 @@
     {
         let price = $('#products').find(':selected').attr('data-price');
         let quantity = document.getElementById("quantity").value;
-        let totalPrice = quantity * price;
-        document.getElementById("total_price").value = totalPrice;
+        let totalPrice = parseInt(quantity) * parseFloat(price);
+        document.getElementById("total_price").value = numberWithCommas(totalPrice.toFixed(2));
         return totalPrice;
+    }
+
+    function numberWithCommas(x) 
+    {
+        return x.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
     }
 
     $("#submit").click(function (event) 
@@ -84,29 +89,29 @@
         event.preventDefault();
         let totalPrice = calculateTotalPrice();
         let email = document.getElementById("email").value;
-        let department = document.getElementById("department").value;
+        let department = $('#departments').find(':selected').attr('data-id');
+        let quantity = document.getElementById("quantity").value;
         let product = document.getElementById("products").value;
         let data = 
         {
             totalPrice: totalPrice, 
             email: email,
             department: department,
-            product: product
+            product: product,
+            quantity: quantity
         };
 
         $.ajax
         ({
             type: "POST",
             url: "http://localhost/mediabazaar/mediaBazaarStockManagement/stock/stockrequest",
-            
             data: 
             {
                 data: data
             },
             success: function (data) 
             {
-                // console.log(data);
-                window.location.href = "http://localhost/mediabazaar/mediaBazaarStockManagement/stock/result";
+                console.log(data)
             },
             error: function (data) 
             {
