@@ -47,7 +47,12 @@
 					$query->bindValue(":last_insert_id", $latest_id);
 					$query->execute();
 
-					$sql3 = 'UPDATE inventory SET ';
+					$sql3 = 'UPDATE inventory SET UnitsInStock = UnitsInStock + :quantity WHERE ProductID = :product';
+					$query = $db->prepare($sql3);
+					$query->bindParam(":quantity", $quantity, PDO::PARAM_INT);
+					$query->bindParam(":product", $product['Id'], PDO::PARAM_INT);
+					$query->execute();
+
 					$db = null;
 				}
 				else
