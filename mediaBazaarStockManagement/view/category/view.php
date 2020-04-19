@@ -4,17 +4,17 @@
 				<table class="table table-hover">
 					<thead class="table-primary">
 						<tr>
-                            <th scope="col">Product ID</th>
+                            <th scope="col">Order ID</th>
 							<th scope="col">Name</th>
-							<th scope="col">Price</th>
+                            <th scope="col">Category</th>
 						</tr>
 					</thead>
 					<tbody>
-						<?php foreach ($products as $product) { ?>
+						<?php foreach ($categories as $category) { ?>
 							<tr>
-                                <td><?php echo $product['Id']; ?></td>
-								<td><?php echo $product['Name']; ?></td>
-								<td><?php echo "€" . " " . $product['Price']; ?></td>
+								<td><?php echo $category['Id']; ?></td>
+                                <td><?php echo $category['Name']; ?></td>
+                                <td><?php echo $category['Category']; ?></td>
 							</tr>
 						<?php } ?>
 					</tbody>
