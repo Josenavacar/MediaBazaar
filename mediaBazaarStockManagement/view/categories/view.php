@@ -1,20 +1,20 @@
         <div class="container-fluid">
-            <h1 class="mt-4">Products</h1>
+            <h1 class="mt-4">Categories</h1>
 			<div class="table-responsive">
 				<table class="table table-hover">
 					<thead class="table-primary">
 						<tr>
-                            <th scope="col">Order ID</th>
+                            <th scope="col">Category ID</th>
 							<th scope="col">Name</th>
-                            <th scope="col">Category</th>
+                            <th scope="col">Description</th>
 						</tr>
 					</thead>
 					<tbody>
 						<?php foreach ($categories as $category) { ?>
 							<tr>
 								<td><?php echo $category['Id']; ?></td>
-                                <td><?php echo $category['Name']; ?></td>
-                                <td><?php echo $category['Category']; ?></td>
+                                <td><a href="category/product/<?=$category['Id']?>"><?php echo $category['Name']; ?></a></td>
+                                <td><?php echo $category['Description']; ?></td>
 							</tr>
 						<?php } ?>
 					</tbody>

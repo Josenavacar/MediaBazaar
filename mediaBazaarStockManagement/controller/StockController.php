@@ -18,8 +18,3 @@
 		    returnRequest($data);
 		}
 	}
-
-	function result()
-	{
-		render("stock/result");
-	}

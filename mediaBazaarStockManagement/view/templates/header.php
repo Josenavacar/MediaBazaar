@@ -9,10 +9,10 @@
 
   <title>Stock Management</title>
   <!-- Bootstrap core CSS -->
-  <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="bootstrap/css/bootstrap.min.css" type="text/css" rel="stylesheet">
   <!-- Custom styles for this template -->
-  <link href="css/media_bazaar_css.css" rel="stylesheet">
-  <link rel="stylesheet" href="css/floating_css.css">
+  <link href="css/media_bazaar_css.css" type="text/css" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="css/floating_css.css">
 
 </head>
 
@@ -41,6 +41,7 @@
     <div id="page-content-wrapper">
         <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
             <button class="btn btn-outline-primary" id="menu-toggle">Toggle Menu</button>
+            <button class="btn btn-outline-dark" id="backButton">Back</button>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
               <span class="navbar-toggler-icon"></span>
             </button>

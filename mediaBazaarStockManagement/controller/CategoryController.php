@@ -3,7 +3,12 @@
 
     function index()
     {
-        $categories = getAllProductsPerCategory();
-		render("category/view", array('categories' => $categories));	
+        $categories = getAllCategories();
+		render("categories/view", array('categories' => $categories));	
+    }
+
+    function product($category_id)
+    {
+    	render("categories/product", array('products' => getProducts($category_id)));
     }
 ?>
