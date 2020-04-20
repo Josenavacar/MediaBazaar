@@ -55,9 +55,9 @@
 <script type="text/javascript">
 	// console.log(window.location.pathname.split("/")[0].pop());
 	// console.log(window.location.pathname.split("/").pop());
-	// console.log(window.history.go(-1))
+// $("#backButton").show();
 	$(document).ready(function() {
-
+		$("#sidebar-wrapper").hide();
 		document.getElementById("backButton").addEventListener("click", function(){
 			window.history.go(-1);
 		});

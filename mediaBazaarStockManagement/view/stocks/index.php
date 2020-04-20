@@ -111,7 +111,8 @@
             },
             success: function (data) 
             {
-                console.log(data)
+                window.location.replace(window.location.pathname = "order");
+                // console.log(data)
             },
             error: function (data) 
             {

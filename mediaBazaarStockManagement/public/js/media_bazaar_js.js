@@ -2,7 +2,8 @@
 // check the URL
 // if its login or home then hide side menu
 // else if not login page...hide the login button
-$( document ).ready(function() {
+$( document ).ready(function() 
+{
   let pathArray = window.location.pathname.split('/');
 
   if((pathArray[2] + "/" + pathArray[3] == "mediaBazaarStockManagement/login") || 
@@ -14,6 +15,17 @@ $( document ).ready(function() {
   else if(pathArray[2] + "/" + pathArray[3] != "mediaBazaarStockManagement/login")
   {
     $(".loginbutton").hide();
+  }
+
+  let param = window.location.pathname.split("/").pop();
+
+  if((param == "1") || (param == "2"))
+  {
+    $("#backButton").show();
+  }
+  else
+  {
+    $("#backButton").hide();
   }
 });
 

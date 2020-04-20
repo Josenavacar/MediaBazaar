@@ -7,7 +7,7 @@
 	{
 		$products = getAllProducts();
 		$departments = getAllDepartments();
-		render("stock/request", array('products' => $products, 'departments' => $departments));	
+		render("stocks/index", array('products' => $products, 'departments' => $departments));	
 	}
 
 	function stockrequest()
