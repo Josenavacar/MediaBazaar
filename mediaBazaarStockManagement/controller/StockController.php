@@ -15,6 +15,8 @@
 		$results = [];
 		if (isset($_POST['data'])) {
 		    $data = $_POST['data'];
-		    returnRequest($data);
+		    // returnRequest($data);
+            $response_array['status'] = 'status123';
+    		echo json_encode($response_array);
 		}
 	}

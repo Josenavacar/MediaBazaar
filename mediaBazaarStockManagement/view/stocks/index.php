@@ -1,5 +1,8 @@
         <div class="container-fluid">
             <div class="request-form">
+
+                <div id="jsonResponse"></div>
+
                 <form id="stockRequestForm" method="POST">
                     <h2 class="text-center">Stock Request</h2>
                     <hr>   
@@ -43,8 +46,8 @@
                         <div class="input-group">
                             <div class="col-lg-6 mb-3">
                                 <div class="form-label-group">
-                                    <input id="total_price" placeholder="Price in euros" type="text" class="form-control">
-                                    <label>Price in &euro;</label>
+                                    <input id="total_price" placeholder="Total Price in euros" type="text" class="form-control">
+                                    <label>Total Price in &euro;</label>
                                 </div>    
                             </div>
                         </div>
@@ -75,13 +78,13 @@
         let price = $('#products').find(':selected').attr('data-price');
         let quantity = document.getElementById("quantity").value;
         let totalPrice = parseInt(quantity) * parseFloat(price);
-        document.getElementById("total_price").value = numberWithCommas(totalPrice.toFixed(2));
+        document.getElementById("total_price").value = numberWithCommas(totalPrice);
         return totalPrice;
     }
 
     function numberWithCommas(x) 
     {
-        return x.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
+        return '\u20AC ' + x.toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,');
     }
 
     $("#submit").click(function (event) 
@@ -111,13 +114,24 @@
             },
             success: function (data) 
             {
-                window.location.replace(window.location.pathname = "order");
-                // console.log(data)
+                Swal.fire({
+                    icon: 'Success',
+                    title: 'Order is made',
+                    html: 'Your order ' + '<a href="order">ID</a>.'
+                })
+
+                // let phpResponse = JSON.stringify(data, undefined, 4);
+                // $('#jsonResponse').fadeIn().delay(1000).fadeOut();  
+                // $('#jsonResponse').text(phpResponse);
+                // window.location.replace(window.location.pathname = "order");
             },
             error: function (data) 
             {
                 console.log(data);
             }
         });
+        return 
     });
+
+
 </script>

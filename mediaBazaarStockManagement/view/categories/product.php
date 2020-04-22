@@ -25,7 +25,7 @@
 						<tr>
                             <th scope="col">Product ID</th>
 							<th scope="col">Name</th>
-							<th scope="col">Price</th>
+							<th scope="col">Price Per Unit</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -45,31 +45,21 @@
 </div>
   <!-- /#wrapper -->
 
-  <!-- Bootstrap core JavaScript -->
-  <script src="../../jquery/jquery.min.js"></script>
-  <script src="../../bootstrap/js/bootstrap.bundle.min.js"></script>
-  <script type="text/javascript" src="../../js/media_bazaar_js.js"></script>
-  <!-- Menu Toggle Script -->
+<!-- Bootstrap core JavaScript -->
+<script src="../../jquery/jquery.min.js"></script>
+<script src="../../bootstrap/js/bootstrap.bundle.min.js"></script>
+<script type="text/javascript" src="../../js/media_bazaar_js.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js" type="text/javascript"></script>
 
 <script type="text/javascript">
-	// console.log(window.location.pathname.split("/")[0].pop());
-	// console.log(window.location.pathname.split("/").pop());
-// $("#backButton").show();
-	$(document).ready(function() {
+	$(document).ready(function() 
+	{
 		$("#sidebar-wrapper").hide();
 		document.getElementById("backButton").addEventListener("click", function(){
 			window.history.go(-1);
 		});
 		$("#menu-toggle").hide();
 	});
-
-	// function GoBack(event) 
-	// {
-	// 	// event.preventDefault();
-	// 	window.history.go(-1)
-	// }
-
 </script>
 </body>
 

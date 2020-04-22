@@ -6,7 +6,7 @@
 						<tr>
                             <th scope="col">Product ID</th>
 							<th scope="col">Name</th>
-							<th scope="col">Price</th>
+							<th scope="col">Price Per Unit</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -14,7 +14,7 @@
 							<tr>
                                 <td><?php echo $product['Id']; ?></td>
 								<td><?php echo $product['Name']; ?></td>
-								<td><?php echo "€" . " " . $product['Price']; ?></td>
+								<td id="price"><?php echo "€" . " " . $product['Price']; ?></td>
 							</tr>
 						<?php } ?>
 					</tbody>
@@ -24,4 +24,15 @@
     </div>
     <!-- /#page-content-wrapper -->
 </div>
+<script type="text/javascript">
+	$(document).ready(function() {
+		let price = document.getElementById("#price");
+		alert(price)
+
+	    function numberWithCommas(x) 
+	    {
+	        return '\u20AC ' + x.toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,');
+	    }
+	});
+</script>
 
