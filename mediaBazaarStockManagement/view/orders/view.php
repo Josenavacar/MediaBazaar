@@ -13,10 +13,11 @@
 					<tbody>
 						<?php foreach ($orders as $order) { ?>
 							<tr>
-								<td><?php echo $order['OrderID']; ?></td>
+								<td><?php echo "OD_Nr". $order['OrderID']; ?></td>
                                 <td><?php echo $order['Name']; ?></td>
                                 <td><?php echo $order['Quantity']; ?></td>
 								<td><?php echo "€" . " " . $order['TotalPrice']; ?></td>
+                                <td><?php echo "€" . " " . $order['Price']; ?></td>
 							</tr>
 						<?php } ?>
 					</tbody>

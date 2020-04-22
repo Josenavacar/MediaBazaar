@@ -12,7 +12,7 @@
 					<tbody>
 						<?php foreach ($products as $product) { ?>
 							<tr>
-                                <td><?php echo $product['Id']; ?></td>
+                                <td><?php echo "PR_Nr" . $product['Id']; ?></td>
 								<td><?php echo $product['Name']; ?></td>
 								<td id="price"><?php echo "€" . " " . $product['Price']; ?></td>
 							</tr>

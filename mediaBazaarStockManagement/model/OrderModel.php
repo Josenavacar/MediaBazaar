@@ -2,7 +2,7 @@
     function getAllOrders()
     {
         $db = openDatabaseConnection();
-		$sql = "SELECT product_order.OrderID, product.Name, product_order.Quantity, product_order.TotalPrice 
+		$sql = "SELECT product_order.OrderID, product.Name, product_order.Quantity, product_order.TotalPrice, product.Price 
 				FROM product_order 
 				INNER JOIN product 
 				ON product_order.ProductID = product.Id;";
