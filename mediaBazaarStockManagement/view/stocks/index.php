@@ -4,7 +4,7 @@
                 <div id="jsonResponse"></div>
 
                 <form id="stockRequestForm" method="POST">
-                    <h2 class="text-center">Stock Request</h2>
+                    <h2 class="text-center">Make A New Stock Request</h2>
                     <hr>   
                     <div class="form-group">
                         <div class="input-group">
@@ -67,7 +67,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js" type="text/javascript"></script>
 <script type="text/javascript">
     document.getElementById("quantity").addEventListener("change", getQuantity);
-
+    
     function getQuantity()
     {
         calculateTotalPrice();
@@ -82,6 +82,7 @@
         return totalPrice;
     }
 
+    // https://blog.abelotech.com/posts/number-currency-formatting-javascript/
     function numberWithCommas(x) 
     {
         return '\u20AC ' + x.toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,');

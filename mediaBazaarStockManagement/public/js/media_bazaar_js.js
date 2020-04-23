@@ -4,6 +4,21 @@
 // else if not login page...hide the login button
 $( document ).ready(function() 
 {
+  document.getElementById("customSwitch1").addEventListener("change", darkMode);
+
+  function darkMode()
+  {
+    if(customSwitch1.checked)
+    {
+      document.body.style.backgroundColor = "#273746";
+      document.getElementById("#page-content-wrapper").backgroundColor = "#273746"
+    }
+    else
+    {
+      document.body.style.backgroundColor = "";
+    }
+  }
+
   let pathArray = window.location.pathname.split('/');
 
   if((pathArray[2] + "/" + pathArray[3] == "mediaBazaarStockManagement/login") || 
