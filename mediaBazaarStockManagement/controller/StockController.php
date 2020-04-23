@@ -17,6 +17,8 @@
 		{
 		    $data = $_POST['data'];
 		    makeRequest($data);
+
+		    // print_r(date("Y-m-d H:i:s"));
   			// response_array['status'] = 'status123';
     		// echo json_encode($response_array);
 		}

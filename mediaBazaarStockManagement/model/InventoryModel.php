@@ -22,6 +22,8 @@
 
 				if($user != null)
 				{
+				    date_default_timezone_set('Europe/Amsterdam');
+			    	$orderDate = date("Y-m-d H:i:s");
 					$department = getDepartment($data['department']);
 					$product = getProduct($data['product']);
 					$quantity = $data['quantity'];
@@ -29,8 +31,10 @@
 					$depId = $department['Id'];
 
 					$db = openDatabaseConnection();
-					$sql = "INSERT INTO `order` (DepartmentID) VALUES (:depId)";
+					$sql = "INSERT INTO `order` (UserID, OrderDate, DepartmentID) VALUES (:userId, :orderDate, :depId)";
 					$query = $db->prepare($sql);
+					$query->bindParam(":userId", $user['Id'], PDO::PARAM_INT);
+					$query->bindParam(":orderDate", $orderDate);
 					$query->bindParam(":depId", $depId, PDO::PARAM_INT);
 					$query->execute();
 					$latest_id = $db->lastInsertId();
@@ -50,8 +54,8 @@
 					$query->execute();
 
 					sendEmail($data['email'], $latest_id);
+					echo $latest_id;
 					$db = null;
-					return $latest_id;
 				}
 				else
 				{

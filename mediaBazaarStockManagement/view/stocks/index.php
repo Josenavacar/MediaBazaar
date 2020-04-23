@@ -28,7 +28,7 @@
                                 <select id="products" class="form-control">
                                     <option hidden >Products</option>
                                     <?php foreach($products as $product) { ?>
-                                        <option data-price="<?php echo $product["Price"]; ?>" value="<?php echo $product["Name"]; ?>" id="product"> <?php echo $product["Name"] ?></option>
+                                        <option data-toggle="tooltip" title="<?php echo $product["Price"]; ?>" data-price="<?php echo $product["Price"]; ?>" value="<?php echo $product["Name"]; ?>" id="product"> <?php echo $product["Name"] ?></option>
                                     <?php } ?>
                                 </select>                              
                             </div>
@@ -66,6 +66,11 @@
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js" type="text/javascript"></script>
 <script type="text/javascript">
+    $(document).ready(function() {
+        // let productPrice = $('#products').find(':selected').attr('data-toggle');
+        // $(productPrice)tooltip({})
+    });
+
     document.getElementById("quantity").addEventListener("change", getQuantity);
     
     function getQuantity()
@@ -116,9 +121,9 @@
             success: function (data) 
             {
                 Swal.fire({
-                    icon: 'Success',
+                    icon: 'success',
                     title: 'Order is made',
-                    html: 'Your order ' + '<a href="order">ID</a>.'
+                    html: 'Your order ' + '<a href="order">ID: ' + data + '</a>'
                 })
 
                 // let phpResponse = JSON.stringify(data, undefined, 4);
