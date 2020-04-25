@@ -12,7 +12,7 @@
 					<tbody>
 						<?php foreach ($categories as $category) { ?>
 							<tr>
-								<td><?php echo "CAT-NR " . $category['Id']; ?></td>
+								<td><?php echo "CAT-ID " . $category['Id']; ?></td>
                                 <td><a href="category/product/<?=$category['Id']?>"><?php echo $category['Name']; ?></a></td>
                                 <td><?php echo $category['Description']; ?></td>
 							</tr>

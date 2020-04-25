@@ -23,7 +23,7 @@
 					<tbody>
 						<?php foreach ($orders as $order) { ?>
 							<tr>
-								<td><?php echo "OD-NR ". $order['OrderID']; ?></td>
+								<td><?php echo "OD-ID ". $order['OrderID']; ?></td>
                                 <td><?php echo $order['Name']; ?></td>
                                 <td><?php echo $order['Quantity']; ?></td>
 								<td><?php echo "€" . " " . $order['TotalPrice']; ?></td>
