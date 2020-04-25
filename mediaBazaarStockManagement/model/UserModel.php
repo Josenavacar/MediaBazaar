@@ -18,6 +18,10 @@
 		{
 			if($_POST['passcode'] == $user['Passcode'])
 			{
+				session_start();
+				$_SESSION["user_id"] = $user['Id'];
+				$_SESSION["user_name"] = $user['Email'];
+				$_SESSION['loggedin_time'] = time();    
 				return true;
 			}
 		}

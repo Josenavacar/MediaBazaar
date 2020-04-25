@@ -1,5 +1,4 @@
 <?php
-// session_start();
 // DATABASE
 define('DB_TYPE', 'mysql');
 define('DB_HOST', 'studmysql01.fhict.local');

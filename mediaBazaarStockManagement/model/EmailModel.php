@@ -16,16 +16,16 @@
 		try 
 		{
 			$mail->isSMTP();
-			$mail->Username = '440569@student.fontys.nl';
-			$mail->Password = '';
+			$mail->Username = 'media_bazaar_nl@hotmail.com';
+			$mail->Password = 'mediaBazaarNL';
 			$mail->SMTPAuth = true;
 			$mail->Host = 'smtp.live.com';
 			$mail->Port = 587;
 
 		   	/* Set the mail sender. */
-		   	$mail->setFrom('440569@student.fontys.nl', 'Darth Vader', 0);
+		   	$mail->setFrom('media_bazaar_nl@hotmail.com', 'Media Bazaar Management', 0);
 		   	/* Add a recipient. */
-		   	$mail->addAddress($adminEmail, 'Emperor');
+		   	$mail->addAddress($adminEmail, 'Stock Manager');
 	  		/* Set the subject. */
 		   	$mail->Subject = 'Order confirmation';
 		   	/* Set the mail message body. */

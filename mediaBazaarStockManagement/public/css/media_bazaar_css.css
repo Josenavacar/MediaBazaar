@@ -7,6 +7,13 @@ body {
   overflow-x: hidden;
 }
 
+#clock
+{
+  color: #E67E22;
+  /*margin: 5%;*/
+  size: 50px;
+}
+
 #sidebar-wrapper {
   min-height: 100vh;
   margin-left: -15rem;
@@ -63,8 +70,18 @@ body {
 .login-form {
   width: 350px;
   margin: 0 auto;
+  margin-right: -25%;
   padding: 100px 0 30px;    
 }
+
+.img-fluid
+{
+  height: 80%;
+  width: 80%;
+  margin-left: -40%;
+  margin-top: 5%;
+}
+
 .login-form form {
   color: #7a7a7a;
   border-radius: 2px;
