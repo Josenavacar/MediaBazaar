@@ -34,7 +34,7 @@
 					$sql = "INSERT INTO `order` (UserID, OrderDate, DepartmentID) VALUES (:userId, :orderDate, :depId)";
 					$query = $db->prepare($sql);
 					$query->bindParam(":userId", $user['Id'], PDO::PARAM_INT);
-					$query->bindParam(":orderDate", $orderDate);
+					$query->bindValue(":orderDate", $orderDate);
 					$query->bindParam(":depId", $depId, PDO::PARAM_INT);
 					$query->execute();
 					$latest_id = $db->lastInsertId();
