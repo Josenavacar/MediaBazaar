@@ -22,7 +22,7 @@
 						<?php foreach ($products as $product) { ?>
 							<tr>
                                 <td><?php echo "PR-ID " . $product['Id']; ?></td>
-								<td><?php echo $product['Name']; ?></td>
+                                <td><a href="product/product/<?=$product['Id']?>"><?php echo $product['Name']; ?></a></td>
 								<td id="price"><?php echo "€" . " " . $product['Price']; ?></td>
 							</tr>
 						<?php } ?>
