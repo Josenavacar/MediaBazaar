@@ -18,6 +18,10 @@
 		{
 			if($_POST['passcode'] == $user['Passcode'])
 			{
+				session_start();
+				$_SESSION["user_id"] = $user['Id'];
+				$_SESSION["user_name"] = $user['Email'];
+				$_SESSION['loggedin_time'] = time();    
 				return true;
 			}
 		}
@@ -27,7 +31,7 @@
 	function getUserByEmail($email)
 	{
 		$db = openDatabaseConnection();
-		$sql = "SELECT email FROM person WHERE email = :email";
+		$sql = "SELECT * FROM person WHERE email = :email";
 		$query = $db->prepare($sql);
 		$query->execute(array(":email" => $email));
 

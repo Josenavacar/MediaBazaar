@@ -4,6 +4,42 @@
 // else if not login page...hide the login button
 $( document ).ready(function() 
 {
+  document.getElementById("customSwitch1").addEventListener("change", darkMode);
+
+  function darkMode()
+  {
+    if(customSwitch1.checked)
+    {
+      document.body.style.backgroundColor = "#273746";
+      document.getElementById("#page-content-wrapper").backgroundColor = "#273746"
+    }
+    else
+    {
+      document.body.style.backgroundColor = "";
+    }
+  }
+
+  // function digitalClock() {
+  //   let d = new Date();
+  //   let h = d.getHours();
+  //   let m = d.getMinutes();       
+  //   let s = d.getSeconds();   
+  //   let hrs;
+  //   let mins;
+  //   let tsecs;
+  //   let secs;
+  //   hrs = h;
+  //   mins = m;
+  //   secs = s;
+  //   let ctime = hrs + ":" + mins + ":" + secs + " CEST";
+  //   document.getElementById("clock").firstChild.nodeValue = ctime;
+  // }
+
+  // window.onload = function() {
+  //   digitalClock();
+  //   setInterval('digitalClock()', 1000);
+  // }
+
   let pathArray = window.location.pathname.split('/');
 
   if((pathArray[2] + "/" + pathArray[3] == "mediaBazaarStockManagement/login") || 
@@ -37,3 +73,4 @@ $("#menu-toggle").click(function(e)
 		$("#wrapper").toggleClass("toggled");
 	}
 );
+

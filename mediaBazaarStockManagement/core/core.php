@@ -1,15 +1,9 @@
 <?php
 	session_start();
-	
+
 	// Database connection
 	function openDatabaseConnection() 
 	{
-		// $options = array(PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC, PDO::ATTR_ERRMODE => PDO::ERRMODE_WARNING);
-		// $db = new PDO(DB_TYPE . ':host=' . DB_HOST . ';dbname=' . DB_NAME . ';charset=' . DB_CHARSET, DB_USER, DB_PASS, $options);
-		// return $db;
-
-
-
 		$options    =   
 		[
             PDO::ATTR_EMULATE_PREPARES  =>  false,
@@ -35,6 +29,8 @@
 	{
 		if ($data) 
 		{
+			// call the session control to check the session time!
+			require_once(ROOT . "core/sessionControl.php");
 			foreach($data as $key => $value) 
 			{
 				$$key = $value;
@@ -47,4 +43,5 @@
 		require(ROOT . 'view/' . $filename . '.php');
 		// footer
 		require(ROOT . 'view/templates/footer.php');
+
 	}

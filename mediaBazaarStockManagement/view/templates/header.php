@@ -13,12 +13,11 @@
   <!-- Custom styles for this template -->
   <link href="css/media_bazaar_css.css" type="text/css" rel="stylesheet">
   <link rel="stylesheet" type="text/css" href="css/floating_css.css">
-
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 
 <body>
 	<div class="d-flex" id="wrapper">
-
     <!-- Sidebar -->
     <div class="bg-light border-right" id="sidebar-wrapper">
         <div class="sidebar-heading">
@@ -42,6 +41,12 @@
         <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
             <button class="btn btn-outline-primary" id="menu-toggle">Toggle Menu</button>
             <button class="btn btn-outline-dark" id="backButton">Back</button>
+
+            <div class="custom-control custom-switch">
+                <input type="checkbox" class="custom-control-input" id="customSwitch1" data-toggle="toggle">
+                <label class="custom-control-label" for="customSwitch1">Dark mode</label>
+            </div>
+            
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
               <span class="navbar-toggler-icon"></span>
             </button>

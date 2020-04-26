@@ -1,6 +1,6 @@
 <?php
 	require(ROOT . "model/UserModel.php");
-	// require(ROOT . "model/DepartmentModel.php");
+	require(ROOT . "model/EmailModel.php");
 
 	function getAllInventory()
 	{
@@ -12,9 +12,9 @@
 		return $query->fetchAll();
 	}
 
-	function returnRequest($results)
+	function makeRequest($data)
 	{
-		foreach ($results as $key => $value) {
+		foreach ($data as $key => $value) {
 
 			if($key == 'email')
 			{
@@ -22,19 +22,19 @@
 
 				if($user != null)
 				{
-					$department = getDepartment($results['department']);
-					// print_r($department['Id']);
-					$product = getProduct($results['product']);
-					// print_r($product['Id']);
-					$quantity = $results['quantity'];
-					// print_r($quantity);
-					$total_price = (double)$results['totalPrice'];
-					// print_r($total_price);
+				    date_default_timezone_set('Europe/Amsterdam');
+			    	$orderDate = date("Y-m-d H:i:s");
+					$department = getDepartment($data['department']);
+					$product = getProduct($data['product']);
+					$quantity = $data['quantity'];
+					$total_price = (double)$data['totalPrice'];
 					$depId = $department['Id'];
 
 					$db = openDatabaseConnection();
-					$sql = "INSERT INTO `order` (DepartmentID) VALUES (:depId)";
+					$sql = "INSERT INTO `order` (UserID, OrderDate, DepartmentID) VALUES (:userId, :orderDate, :depId)";
 					$query = $db->prepare($sql);
+					$query->bindParam(":userId", $user['Id'], PDO::PARAM_INT);
+					$query->bindValue(":orderDate", $orderDate);
 					$query->bindParam(":depId", $depId, PDO::PARAM_INT);
 					$query->execute();
 					$latest_id = $db->lastInsertId();
@@ -53,6 +53,8 @@
 					$query->bindParam(":product", $product['Id'], PDO::PARAM_INT);
 					$query->execute();
 
+					sendEmail($data['email'], $latest_id);
+					echo $latest_id;
 					$db = null;
 				}
 				else
@@ -60,9 +62,5 @@
 					echo "User not found!";
 				}
 			}
-			// echo $key;
-			// echo "\n";
-			// echo $value;
-			// echo "\n";
 		}
 	}
