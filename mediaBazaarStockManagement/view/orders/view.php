@@ -18,6 +18,7 @@
                             <th scope="col">Quantity</th>
 							<th scope="col">Total Price</th>
                             <th scope="col">Price Per Unit</th>
+                            <th scope="col">Order Date</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -28,6 +29,7 @@
                                 <td><?php echo $order['Quantity']; ?></td>
 								<td><?php echo "€" . " " . $order['TotalPrice']; ?></td>
                                 <td><?php echo "€" . " " . $order['Price']; ?></td>
+                                <td><?php echo $order['OrderDate']; ?></td>
 							</tr>
 						<?php } ?>
 					</tbody>
@@ -38,6 +40,7 @@
     <!-- /#page-content-wrapper -->
 </div>
 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js" type="text/javascript"></script>
 <script type="text/javascript">
 	document.getElementById("myInput").addEventListener("keyup", myFunction);
 
@@ -59,4 +62,10 @@
 	    }       
 	  }
 	}
+
+	// $(document).ready(function() {
+	// 	let rowCount = $('#myTable tr').length;
+	// 	console.log(rowCount)
+	// 	if()
+	// });
 </script>
