@@ -55,7 +55,8 @@ $( document ).ready(function()
 
   let param = window.location.pathname.split("/").pop();
 
-  if((param == "1") || (param == "2"))
+  //if((param == "1") || (param == "2"))
+  if(param != "0")
   {
     $("#backButton").show();
   }
