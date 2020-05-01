@@ -119,9 +119,9 @@ namespace MediaBazaarSystem
 
         public override string ToString()
         {
-            return "First name: " + this.FirstName + " Last name: " + this.LastName + 
-                " Age: " + this.Age + " Address: " + this.Address + 
-                " Role: " + this.Role + " Salary: " + this.Salary + 
+            return "First name: " + this.FirstName + " Last name: " + this.LastName +
+                " Age: " + this.Age + " Address: " + this.Address +
+                " Role: " + this.Role + " Salary: " + this.Salary +
                 " Hours Available: " + this.HoursAvailable;
         }
     }

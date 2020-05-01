@@ -17,7 +17,7 @@ namespace MediaBazaarSystem
 
         public override string ToString()
         {
-            return "ID: " + this.ID + ". Name: " + this.firstName + this.lastName + ". Age: " + this.age + ". Address: " + this.address;
+            return "ID: " + this.ID + ", Name: " + this.firstName + this.lastName + ". Age: " + this.age + ". Address: " + this.address;
         }
     }
 }
