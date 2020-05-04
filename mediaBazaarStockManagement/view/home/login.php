@@ -17,16 +17,53 @@
                         </div>
                         <h2 class="text-center">Login</h2>   
                         <div class="form-label-group">
-                            <input type="text" class="form-control" name="passcode" placeholder="Passcode" required="required">
+                            <input type="password" id="passcode" class="form-control" name="passcode" placeholder="Passcode" required="required">
                             <label>Passcode</label>
+                        </div>
+                        <div class="form-group">
+                            <input type="checkbox" id="showPasscode">Show Passcode
                         </div>       
                         <div class="form-group">
                             <button type="submit" class="btn btn-primary btn-lg btn-block">Sign in</button>
                         </div>
                     </form>
+                    <p id="text"></p>
                 </div>
             </div>
         </div>
     </div>
     <!-- /#page-content-wrapper -->
 </div>
+
+<script type="text/javascript">
+    document.getElementById("showPasscode").addEventListener("change", displayPassword);
+    document.getElementById("passcode").addEventListener("keyup", checkingCapsLock);
+    let passcode = document.getElementById("passcode");
+    let text = document.getElementById("text");
+    function displayPassword() 
+    {
+        if (passcode.type === "password") 
+        {
+            passcode.type = "text";
+        } 
+        else 
+        {
+            passcode.type = "password";
+        }
+    }
+
+    function checkingCapsLock(event)
+    {
+        event.preventDefault();
+
+        if (event.getModifierState("CapsLock")) 
+        {
+            text.style.display = "block";
+            text.innerHTML = "WARNING! Caps lock is ON.";
+        } 
+        else 
+        {
+            text.style.display = "none"
+        }
+    }
+</script>
