@@ -29,7 +29,7 @@
 				</table>
                 <div class="input-group">
                     <div class="col-lg-6 mb-3">
-                        <a href="" class="btn btn-md btn-outline-info btn-block">Add a category</a>
+                        <a href="category/add" class="btn btn-md btn-outline-info btn-block">Add a category</a>
                     </div>
                 </div> 				
 			</div>

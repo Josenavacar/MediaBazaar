@@ -60,6 +60,10 @@ $( document ).ready(function()
   {
     $("#backButton").show();
   }
+  else if((param === "add"))
+  {
+    $("#backButton").show();
+  }
   else
   {
     $("#backButton").hide();
