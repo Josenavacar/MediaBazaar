@@ -56,8 +56,8 @@
 	}
 
 	$(document).ready(function() {
-		let price = document.getElementById("#price");
-		alert(price)
+		let price = document.getElementById("#price").value;
+		// alert(price)
 
 	    function numberWithCommas(x) 
 	    {

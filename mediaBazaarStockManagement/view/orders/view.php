@@ -29,7 +29,7 @@
                                 <td><?php echo $order['Quantity']; ?></td>
 								<td><?php echo "€" . " " . $order['TotalPrice']; ?></td>
                                 <td><?php echo "€" . " " . $order['Price']; ?></td>
-                                <td><?php echo $order['OrderDate']; ?></td>
+                                <td><?php echo date("F j, Y", strtotime($order['OrderDate'])); ?></td>
 							</tr>
 						<?php } ?>
 					</tbody>

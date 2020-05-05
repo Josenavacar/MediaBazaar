@@ -4,7 +4,6 @@
 	function index()
 	{
 		$units = getAllInventory();
-
 		render("home/index", array('units' => $units));	
 	}
 ?>

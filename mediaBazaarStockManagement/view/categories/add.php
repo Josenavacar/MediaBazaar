@@ -18,7 +18,7 @@
 
 <body>
     <div class="container-fluid">
-        <h1 class="mt-4">Add a new category</h1>
+        <h1 class="mt-4 text-center">Add a new category</h1>
 		<form>
 			<div class="form-group">
 				<div class="input-group">
