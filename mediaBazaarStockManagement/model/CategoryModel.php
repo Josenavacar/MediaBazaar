@@ -30,4 +30,17 @@
 
         return $query->fetchAll();  
     }
+
+    function addCategory($data)
+    {
+        $db = openDatabaseConnection();
+        $sql = 'INSERT INTO category (Name, Description) VALUES (:name, :description)';
+        $query = $db->prepare($sql);
+        $query->bindValue(":name", $data['name']);
+        $query->bindValue(":description", $data['description']);
+        $query->execute();
+        $latest_id = $db->lastInsertId();
+        echo $latest_id;
+        $db = null;
+    }
 ?>
