@@ -11,14 +11,14 @@
 
             <div class="col-12 col-md-5 col-xl-4 order-md-1 my-5">
                 <div class="login-form">
-                    <form action="<?= URL ?>login/login" method="post">
+                    <form action="<?= URL ?>login/login" method="post" id="loginForm">
                         <div class="avatar">
                             <img src="images/project_logo.png" alt="">
                         </div>
                         <h2 class="text-center">Login</h2>   
                         <div class="form-label-group">
                             <input type="password" id="passcode" class="form-control" name="passcode" placeholder="Passcode" required="required">
-                            <label>Passcode</label>
+                            <label for="passcode">Passcode</label>
                         </div>
                         <div class="form-group">
                             <input type="checkbox" id="showPasscode">Show Passcode
@@ -35,11 +35,31 @@
     <!-- /#page-content-wrapper -->
 </div>
 
+<script src="https://code.jquery.com/jquery-3.5.0.min.js" integrity="sha256-xNzN2a4ltkB44Mc/Jz3pT4iU1cmeR0FkXs4pru/JxaQ=" crossorigin="anonymous"></script>
+
 <script type="text/javascript">
     document.getElementById("showPasscode").addEventListener("change", displayPassword);
     document.getElementById("passcode").addEventListener("keyup", checkingCapsLock);
     let passcode = document.getElementById("passcode");
     let text = document.getElementById("text");
+    let passc = document.getElementById("passcode").value;
+
+    // $(document).ready(function() {
+    //     $(".error").remove();
+    //     $("#loginForm").submit(function(event) {
+    //         event.preventDefault();
+            
+    //         if(passc.length < 4)
+    //         {
+    //             $('#passcode').after('<span class="error">Please enter more than 3 digits!</span>');
+    //         }
+    //         else if(passc.length > 5)
+    //         {
+    //             $('#passcode').after('<span class="error">You can only enter 4 digits!</span>');
+    //         }
+    //     });
+    // });
+
     function displayPassword() 
     {
         if (passcode.type === "password") 

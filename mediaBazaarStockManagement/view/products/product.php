@@ -33,7 +33,7 @@
 					<tbody>
 						<?php foreach ($products as $product) { ?>
 							<tr>
-                                <td><?php echo "PR_Nr" . $product['Id']; ?></td>
+                                <td><?php echo "PR-ID " . $product['Id']; ?></td>
                                 <td><?php echo $product['Name']; ?></td>
 								<td id="price"><?php echo "€" . " " . $product['Price']; ?></td>
                                 <td><?php echo $product['Category']; ?></td>

@@ -11,4 +11,9 @@
     {
     	render("categories/product", array('products' => getProducts($category_id)));
     }
+
+    function addProduct()
+    {
+        render("categories/add");
+    }
 ?>
