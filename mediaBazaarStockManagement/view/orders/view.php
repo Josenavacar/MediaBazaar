@@ -1,3 +1,14 @@
+<?php 
+	// session_start();
+	if(isset($_SESSION['order_ID']))
+	{
+		$order_ID = $_SESSION['order_ID'];
+	}
+	else 
+	{
+		$order_ID = "";
+	}
+?>
         <div class="container-fluid">
             <h1 class="mt-4">Orders</h1>
 			<div class="table-responsive">
@@ -33,6 +44,8 @@
 							</tr>
 						<?php } ?>
 					</tbody>
+					<div class="alert alert-success orderAlert" role="alert">
+					</div>
 				</table>				
 			</div>
         </div>
@@ -43,20 +56,33 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js" type="text/javascript"></script>
 <script type="text/javascript">
 	document.getElementById("myInput").addEventListener("keyup", myFunction);
+	let orderID = '<?php echo $order_ID; ?>'
 
-	function myFunction() {
+	$(".orderAlert").text('Your order ID: ' + orderID);
+	$(".orderAlert").fadeOut( 2500 );
+	
+	function myFunction() 
+	{
 	  var input, filter, table, tr, td, i, txtValue;
 	  input = document.getElementById("myInput");
 	  filter = input.value.toUpperCase();
 	  table = document.getElementById("myTable");
 	  tr = table.getElementsByTagName("tr");
-	  for (i = 0; i < tr.length; i++) {
+
+	  for (i = 0; i < tr.length; i++) 
+	  {
 	    td = tr[i].getElementsByTagName("td")[0];
-	    if (td) {
+
+	    if (td) 
+	    {
 	      txtValue = td.textContent || td.innerText;
-	      if (txtValue.toUpperCase().indexOf(filter) > -1) {
+
+	      if (txtValue.toUpperCase().indexOf(filter) > -1) 
+	      {
 	        tr[i].style.display = "";
-	      } else {
+	      } 
+	      else 
+	      {
 	        tr[i].style.display = "none";
 	      }
 	    }       

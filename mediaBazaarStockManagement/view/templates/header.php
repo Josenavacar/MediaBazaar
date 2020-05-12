@@ -28,7 +28,7 @@
             <a href="home" class="list-group-item list-group-item-action bg-light">Inventory</a>
             <a href="order" class="list-group-item list-group-item-action bg-light">Orders</a>
             <a href="login" class="loginbutton list-group-item list-group-item-action bg-light">Login</a>
-            <a href="product" class="list-group-item list-group-item-action bg-light">Products</a>
+            <!-- <a href="product" class="list-group-item list-group-item-action bg-light">Products</a> -->
             <a href="category" class="list-group-item list-group-item-action bg-light">Categories</a>
             <a href="stock" class="list-group-item list-group-item-action bg-light">Stock Request</a>
             <a href="login/logout" class="list-group-item list-group-item-action bg-light">Logout</a>
@@ -44,7 +44,7 @@
 
             <div class="custom-control custom-switch">
                 <input type="checkbox" class="custom-control-input" id="customSwitch1" data-toggle="toggle">
-                <label class="custom-control-label" for="customSwitch1">Dark mode</label>
+                <!-- <label class="custom-control-label" for="customSwitch1">Dark mode</label> -->
             </div>
             
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">

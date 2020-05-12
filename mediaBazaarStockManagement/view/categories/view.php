@@ -15,6 +15,7 @@
                             <th scope="col">Category ID</th>
 							<th scope="col">Name</th>
                             <th scope="col">Description</th>
+                            <th scope="col">Edit</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -23,6 +24,7 @@
 								<td><?php echo "CAT-ID " . $category['Id']; ?></td>
                                 <td><a href="category/product/<?=$category['Id']?>"><?php echo $category['Name']; ?></a></td>
                                 <td><?php echo $category['Description']; ?></td>
+                                <td><a class="btn btn-outline-dark" href="category/edit/<?=$category['Id']?>">Edit</a></td>
 							</tr>
 						<?php } ?>
 					</tbody>

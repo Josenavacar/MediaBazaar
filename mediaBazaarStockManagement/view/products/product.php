@@ -18,7 +18,7 @@
 
 <body>
         <div class="container-fluid">
-            <h1 class="mt-4">Products</h1>
+            <h1 class="mt-4">Product Information</h1>
 			<div class="table-responsive">
 				<table class="table table-hover">
 					<thead class="table-primary">

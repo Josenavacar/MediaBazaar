@@ -18,7 +18,25 @@
         render("categories/add", array('categories' => $categories));
     }
 
+    function edit()
+    {
+        
+    }
+
     function addRequest()
+    {
+        if (isset($_POST['data'])) 
+        {
+            $data = $_POST['data'];
+            addCategory($data);
+
+            // print_r(date("Y-m-d H:i:s"));
+            // response_array['status'] = 'status123';
+            // echo json_encode($response_array);
+        }
+    }
+
+    function editRequest()
     {
         if (isset($_POST['data'])) 
         {

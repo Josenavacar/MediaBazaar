@@ -23,10 +23,18 @@
 							<tbody>
 								<?php foreach ($units as $unit) { ?>
 									<tr>
-		                                <td><?php echo "PR-ID " .  $unit['Id']; ?></td>
-										<td><?php echo $unit['Name']; ?></td>
+		                                <td id="pid"><?php echo "PR-ID " .  $unit['Id']; ?></td>
+										<td><a href="product/product/<?=$unit['Id']?>"><?php echo $unit['Name']; ?></a></td>
 										<td><?php echo "€" . " " . $unit['Price']; ?></td>
-										<td><?php echo $unit['UnitsInStock']; ?></td>
+										<?php if ($unit['UnitsInStock'] > 200) 
+										{
+											echo '<td>'.$unit['UnitsInStock'].'</td>';
+										}
+										else
+										{
+											echo '<td data-toggle="tooltip" title="'.$unit['UnitsInStock'].'"><span class="badge badge badge-danger">Low on supplies!</span></td>';
+										} 
+										?>
 									</tr>
 								<?php } ?>
 							</tbody>
@@ -48,22 +56,37 @@
 <script type="text/javascript">
     document.getElementById("myInput").addEventListener("keyup", myFunction);
 
-	function myFunction() {
-	  var input, filter, table, tr, td, i, txtValue;
+	function myFunction() 
+	{
+	  let input, filter, table, tr, td, i, txtValue;
 	  input = document.getElementById("myInput");
 	  filter = input.value.toUpperCase();
 	  table = document.getElementById("myTable");
 	  tr = table.getElementsByTagName("tr");
-	  for (i = 0; i < tr.length; i++) {
-	    td = tr[i].getElementsByTagName("td")[0];
-	    if (td) {
-	      txtValue = td.textContent || td.innerText;
-	      if (txtValue.toUpperCase().indexOf(filter) > -1) {
+
+	  for (i = 0; i < tr.length; i++) 
+	  {
+	    tdID = tr[i].getElementsByTagName("td")[0];
+	    tdName = tr[i].getElementsByTagName("td")[1];
+
+	    if (tdID && tdName) 
+	    {
+	      txtValue = tdID.textContent || tdID.innerText;
+	      txtValue2 = tdName.textContent || tdName.innerText;
+
+	      if (txtValue.toUpperCase().indexOf(filter) > -1) 
+	      {
 	        tr[i].style.display = "";
-	      } else {
+	      } 
+	      else if (txtValue2.toUpperCase().indexOf(filter) > -1) 
+	      {
+	        tr[i].style.display = "";
+	      } 
+	      else
+	      {
 	        tr[i].style.display = "none";
 	      }
-	    }       
+	    } 
 	  }
 	}
 

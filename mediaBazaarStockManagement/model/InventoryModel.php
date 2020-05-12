@@ -54,6 +54,9 @@
 					$query->execute();
 
 					sendEmail($data['email'], $latest_id);
+
+					// session_start();
+					$_SESSION['order_ID'] = $latest_id;
 					echo $latest_id;
 					$db = null;
 				}

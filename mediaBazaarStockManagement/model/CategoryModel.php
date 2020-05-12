@@ -27,8 +27,18 @@
         $query->execute(array(":category_id" => $category_id));
 
         $db = null;
-
         return $query->fetchAll();  
+    }
+
+    function getCategory($category_id)
+    {
+        $db = openDatabaseConnection();
+        $sql = "SELECT * FROM category WHERE Id = :category_id";
+        $query = $db->prepare($sql);
+        $query->execute(array(":category_id" => $category_id));
+
+        $db = null;
+        return $query->fetch();   
     }
 
     function addCategory($data)
