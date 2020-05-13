@@ -21,6 +21,7 @@
 			$mail->SMTPAuth = true;
 			$mail->Host = 'smtp.live.com';
 			$mail->Port = 587;
+			$mail->IsHTML(true);
 
 		   	/* Set the mail sender. */
 		   	$mail->setFrom('media_bazaar_nl@hotmail.com', 'Media Bazaar Management', 0);
@@ -29,7 +30,11 @@
 	  		/* Set the subject. */
 		   	$mail->Subject = 'Order confirmation';
 		   	/* Set the mail message body. */
-		    $mail->Body = "This is your order ID: " . " " . $orderID;
+		    $mail->Body = 
+		    "Your order is confirmed!" . " " .
+		    "This is your order ID: " . $orderID . ". " . " " .
+		    "<a href='http://localhost/mediabazaar/mediaBazaarStockManagement/order'>Go to orders</a>";
+
 		   	/* Finally send the mail. */
 		   	$mail->send();
 		}

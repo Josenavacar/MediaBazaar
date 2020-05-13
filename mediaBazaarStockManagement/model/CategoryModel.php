@@ -49,8 +49,27 @@
         $query->bindValue(":name", $data['name']);
         $query->bindValue(":description", $data['description']);
         $query->execute();
-        $latest_id = $db->lastInsertId();
-        echo $latest_id;
+        // $latest_id = $db->lastInsertId();
+        // echo $latest_id;
         $db = null;
+        echo "success";
+    }
+
+    function editCategory($data)
+    {
+        $id = (int)$data['category_id'];
+        $name = $data['name'];
+        $description = $data['description'];
+
+        $db = openDatabaseConnection();
+        $sql = 'UPDATE category SET Name = :name, Description = :description WHERE Id = :categoryID';
+        $query = $db->prepare($sql);
+        $query->bindValue(":categoryID", $id);
+        $query->bindValue(":name", $name);
+        $query->bindValue(":description", $description);
+        $query->execute();
+
+        $db = null;
+        echo "success";
     }
 ?>

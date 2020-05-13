@@ -12,15 +12,14 @@
     	render("categories/product", array('products' => getProducts($category_id)));
     }
 
-    function add()
+    function edit($category_id)
     {
-        $categories = getAllCategories();
-        render("categories/add", array('categories' => $categories));
+        render("categories/edit", array('category' => getCategory($category_id)));
     }
 
-    function edit()
+    function add()
     {
-        
+        render("categories/add");
     }
 
     function addRequest()
@@ -29,10 +28,6 @@
         {
             $data = $_POST['data'];
             addCategory($data);
-
-            // print_r(date("Y-m-d H:i:s"));
-            // response_array['status'] = 'status123';
-            // echo json_encode($response_array);
         }
     }
 
@@ -41,11 +36,7 @@
         if (isset($_POST['data'])) 
         {
             $data = $_POST['data'];
-            addCategory($data);
-
-            // print_r(date("Y-m-d H:i:s"));
-            // response_array['status'] = 'status123';
-            // echo json_encode($response_array);
+            editCategory($data);
         }
     }
 ?>

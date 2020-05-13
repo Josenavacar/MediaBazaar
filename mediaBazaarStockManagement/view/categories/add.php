@@ -86,23 +86,17 @@
 	            },
 	            success: function (data) 
 	            {
-	                Swal.fire({
+	                Swal.fire
+	                ({
 	                    icon: 'success',
 	                    title: 'New category is added',
-	                    // html: 'Your category ' + '<a href="category">ID: ' + data + '</a>'
 	                })
-
-	                // let phpResponse = JSON.stringify(data, undefined, 4);
-	                // $('#jsonResponse').fadeIn().delay(1000).fadeOut();  
-	                // $('#jsonResponse').text(phpResponse);
-	                // window.location.replace(window.location.pathname = "order");
 	            },
 	            error: function (data) 
 	            {
 	                console.log(data);
 	            }
 	        });
-	        return 
 	    });
 
 	</script>

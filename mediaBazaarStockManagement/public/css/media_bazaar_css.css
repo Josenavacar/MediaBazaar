@@ -3,7 +3,8 @@
  * Copyright 2013-2019 Start Bootstrap
  * Licensed under MIT (https://github.com/BlackrockDigital/startbootstrap-simple-sidebar/blob/master/LICENSE)
  */
-body {
+body 
+{
   overflow-x: hidden;
 }
 
@@ -14,7 +15,8 @@ body {
   size: 50px;
 }
 
-#sidebar-wrapper {
+#sidebar-wrapper 
+{
   min-height: 100vh;
   margin-left: -15rem;
   -webkit-transition: margin .25s ease-out;
@@ -23,51 +25,66 @@ body {
   transition: margin .25s ease-out;
 }
 
-#sidebar-wrapper .sidebar-heading {
+#sidebar-wrapper .sidebar-heading 
+{
   padding: 0.875rem 1.25rem;
   font-size: 1.2rem;
 }
 
-#sidebar-wrapper .list-group {
+#sidebar-wrapper .list-group 
+{
   width: 15rem;
 }
 
-#page-content-wrapper {
+#page-content-wrapper 
+{
   min-width: 100vw;
 }
 
-#wrapper.toggled #sidebar-wrapper {
+#wrapper.toggled #sidebar-wrapper 
+{
   margin-left: 0;
 }
 
-@media (min-width: 768px) {
-  #sidebar-wrapper {
+@media (min-width: 768px) 
+{
+  #sidebar-wrapper 
+  {
     margin-left: 0;
   }
 
-  #page-content-wrapper {
+  #page-content-wrapper 
+  {
     min-width: 0;
     width: 100%;
   }
 
-  #wrapper.toggled #sidebar-wrapper {
+  #wrapper.toggled #sidebar-wrapper 
+  {
     margin-left: -15rem;
   }
 }
 
-.form-control {
+.form-control 
+{
   min-height: 41px;
   background: #fff;
   box-shadow: none !important;
   border-color: #e3e3e3;
 }
-.form-control:focus {
+
+.form-control:focus 
+{
   border-color: #70c5c0;
 }
-.form-control, .btn {        
+
+.form-control, .btn 
+{        
     border-radius: 2px;
 }
-.login-form {
+
+.login-form 
+{
   width: 350px;
   margin: 0 auto;
   margin-right: -25%;
@@ -82,7 +99,8 @@ body {
   margin-top: 5%;
 }
 
-.login-form form {
+.login-form form 
+{
   color: #7a7a7a;
   border-radius: 2px;
   margin-bottom: 15px;
@@ -92,11 +110,15 @@ body {
   padding: 30px;  
   position: relative; 
 }
-.login-form h2 {
+
+.login-form h2 
+{
   font-size: 22px;
   margin: 35px 0 25px;
 }
-.login-form .avatar {
+
+.login-form .avatar 
+{
   position: absolute;
   margin: 0 auto;
   left: 0;
@@ -109,43 +131,63 @@ body {
   background: #70c5c0;
   box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.1);
 }
-.login-form .avatar img {
+
+.login-form .avatar img 
+{
   width: 100%;
   height: 100%;
 } 
-.login-form input[type="checkbox"] {
+
+.login-form input[type="checkbox"] 
+{
   margin-top: 2px;
 }
-.login-form .btn {        
+
+.login-form .btn 
+{        
   font-size: 16px;
   font-weight: bold;
   background: #70c5c0;
   border: none;
   margin-bottom: 20px;
 }
-.login-form .btn:hover, .login-form .btn:focus {
+
+.login-form .btn:hover, .login-form .btn:focus 
+{
   background: #50b8b3;
   outline: none !important;
 }    
-.login-form a {
+
+.login-form a 
+{
   color: #fff;
   text-decoration: underline;
 }
-.login-form a:hover {
+
+.login-form a:hover 
+{
   text-decoration: none;
 }
-.login-form form a {
+
+.login-form form a 
+{
   color: #7a7a7a;
   text-decoration: none;
 }
-.login-form form a:hover {
+
+.login-form form a:hover 
+{
   text-decoration: underline;
 }
-.request-form {
+
+.request-form 
+{
   width: 70%;
   margin: 0 auto;
   padding: 100px 0 30px;    
 }
-.submit {
+
+.submit 
+{
   width: 30%;  
 }

@@ -58,40 +58,33 @@
 	document.getElementById("myInput").addEventListener("keyup", myFunction);
 	let orderID = '<?php echo $order_ID; ?>'
 
-	$(".orderAlert").text('Your order ID: ' + orderID);
-	$(".orderAlert").fadeOut( 2500 );
+	if(orderID == "")
+	{
+		$(".orderAlert").hide();
+	}
+	else
+	{
+		$(".orderAlert").text('Your order ID: ' + orderID);
+		$(".orderAlert").fadeOut( 2500 );
+	}
 	
 	function myFunction() 
 	{
-	  var input, filter, table, tr, td, i, txtValue;
-	  input = document.getElementById("myInput");
-	  filter = input.value.toUpperCase();
-	  table = document.getElementById("myTable");
-	  tr = table.getElementsByTagName("tr");
-
-	  for (i = 0; i < tr.length; i++) 
-	  {
-	    td = tr[i].getElementsByTagName("td")[0];
-
-	    if (td) 
-	    {
-	      txtValue = td.textContent || td.innerText;
-
-	      if (txtValue.toUpperCase().indexOf(filter) > -1) 
-	      {
-	        tr[i].style.display = "";
-	      } 
-	      else 
-	      {
-	        tr[i].style.display = "none";
-	      }
-	    }       
-	  }
+		// Write on keyup event of keyword input element
+        let searchText = $(this).val().toLowerCase();
+        // Show only matching TR, hide rest of them
+        $.each($("#myTable tbody tr"), function() 
+        {
+            if($(this).text().toLowerCase().indexOf(searchText) === -1)
+            {
+               // $('.notfound').show();
+               $(this).hide();
+            }
+            else
+            {
+            	// $('.notfound').hide();
+                $(this).show();
+            }
+        });
 	}
-
-	// $(document).ready(function() {
-	// 	let rowCount = $('#myTable tr').length;
-	// 	console.log(rowCount)
-	// 	if()
-	// });
 </script>

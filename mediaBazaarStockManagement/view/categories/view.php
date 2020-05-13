@@ -15,7 +15,7 @@
                             <th scope="col">Category ID</th>
 							<th scope="col">Name</th>
                             <th scope="col">Description</th>
-                            <th scope="col">Edit</th>
+                            <th scope="col"></th>
 						</tr>
 					</thead>
 					<tbody>
@@ -30,8 +30,8 @@
 					</tbody>
 				</table>
                 <div class="input-group">
-                    <div class="col-lg-6 mb-3">
-                        <a href="category/add" class="btn btn-md btn-outline-info btn-block">Add a category</a>
+                    <div class="col-lg-6 mb-3"> 
+                        <a href="category/add" class="btn btn-md btn-outline-info btn-block">Add category</a>
                     </div>
                 </div> 				
 			</div>
@@ -43,22 +43,40 @@
 <script type="text/javascript">
     document.getElementById("myInput").addEventListener("keyup", myFunction);
 
-	function myFunction() {
-	  var input, filter, table, tr, td, i, txtValue;
-	  input = document.getElementById("myInput");
-	  filter = input.value.toUpperCase();
-	  table = document.getElementById("myTable");
-	  tr = table.getElementsByTagName("tr");
-	  for (i = 0; i < tr.length; i++) {
-	    td = tr[i].getElementsByTagName("td")[0];
-	    if (td) {
-	      txtValue = td.textContent || td.innerText;
-	      if (txtValue.toUpperCase().indexOf(filter) > -1) {
-	        tr[i].style.display = "";
-	      } else {
-	        tr[i].style.display = "none";
-	      }
-	    }       
-	  }
+	function myFunction() 
+	{
+		// Write on keyup event of keyword input element
+        let searchText = $(this).val().toLowerCase();
+        // Show only matching TR, hide rest of them
+        $.each($("#myTable tbody tr"), function() 
+        {
+            if($(this).text().toLowerCase().indexOf(searchText) === -1)
+            {
+               // $('.notfound').show();
+               $(this).hide();
+            }
+            else
+            {
+            	// $('.notfound').hide();
+                $(this).show();
+            }
+        });
+		
+	  // var input, filter, table, tr, td, i, txtValue;
+	  // input = document.getElementById("myInput");
+	  // filter = input.value.toUpperCase();
+	  // table = document.getElementById("myTable");
+	  // tr = table.getElementsByTagName("tr");
+	  // for (i = 0; i < tr.length; i++) {
+	  //   td = tr[i].getElementsByTagName("td")[0];
+	  //   if (td) {
+	  //     txtValue = td.textContent || td.innerText;
+	  //     if (txtValue.toUpperCase().indexOf(filter) > -1) {
+	  //       tr[i].style.display = "";
+	  //     } else {
+	  //       tr[i].style.display = "none";
+	  //     }
+	  //   }       
+	  // }
 	}
 </script>

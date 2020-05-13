@@ -28,7 +28,7 @@
                                 <select id="products" class="form-control">
                                     <option hidden >Products</option>
                                     <?php foreach($products as $product) { ?>
-                                        <option data-toggle="tooltip" title="<?php echo $product["Price"]; ?>" data-price="<?php echo $product["Price"]; ?>" value="<?php echo $product["Name"]; ?>" id="product"> <?php echo $product["Name"] ?></option>
+                                        <option data-toggle="tooltip" title="Price: &euro; <?php echo $product["Price"]; ?>" data-price="<?php echo $product["Price"]; ?>" value="<?php echo $product["Name"]; ?>" id="product"> <?php echo $product["Name"] ?></option>
                                     <?php } ?>
                                 </select>                              
                             </div>
