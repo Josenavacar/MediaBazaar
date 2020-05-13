@@ -163,3 +163,46 @@ C:\Users\Jose\Desktop\Age implementation\MediaBazaarSystem\MediaBazaarSystem\obj
 C:\Users\Jose\Desktop\Age implementation\MediaBazaarSystem\MediaBazaarSystem\obj\Debug\MediaBazaarSystem.csproj.GenerateResource.cache
 C:\Users\Jose\Desktop\Age implementation\MediaBazaarSystem\MediaBazaarSystem\obj\Debug\MediaBazaarSystem.exe
 C:\Users\Jose\Desktop\Age implementation\MediaBazaarSystem\MediaBazaarSystem\obj\Debug\MediaBazaarSystem.pdb
+C:\xampp\htdocs\mediabazaar\MediaBazaarSystem\MediaBazaarSystem\bin\Debug\MediaBazaarSystem.exe.config
+C:\xampp\htdocs\mediabazaar\MediaBazaarSystem\MediaBazaarSystem\bin\Debug\MediaBazaarSystem.exe
+C:\xampp\htdocs\mediabazaar\MediaBazaarSystem\MediaBazaarSystem\bin\Debug\MediaBazaarSystem.pdb
+C:\xampp\htdocs\mediabazaar\MediaBazaarSystem\MediaBazaarSystem\bin\Debug\BouncyCastle.Crypto.dll
+C:\xampp\htdocs\mediabazaar\MediaBazaarSystem\MediaBazaarSystem\bin\Debug\Google.Protobuf.dll
+C:\xampp\htdocs\mediabazaar\MediaBazaarSystem\MediaBazaarSystem\bin\Debug\LiveCharts.dll
+C:\xampp\htdocs\mediabazaar\MediaBazaarSystem\MediaBazaarSystem\bin\Debug\LiveCharts.WinForms.dll
+C:\xampp\htdocs\mediabazaar\MediaBazaarSystem\MediaBazaarSystem\bin\Debug\LiveCharts.Wpf.dll
+C:\xampp\htdocs\mediabazaar\MediaBazaarSystem\MediaBazaarSystem\bin\Debug\MySql.Data.dll
+C:\xampp\htdocs\mediabazaar\MediaBazaarSystem\MediaBazaarSystem\bin\Debug\Renci.SshNet.dll
+C:\xampp\htdocs\mediabazaar\MediaBazaarSystem\MediaBazaarSystem\bin\Debug\System.Buffers.dll
+C:\xampp\htdocs\mediabazaar\MediaBazaarSystem\MediaBazaarSystem\bin\Debug\System.Memory.dll
+C:\xampp\htdocs\mediabazaar\MediaBazaarSystem\MediaBazaarSystem\bin\Debug\System.Numerics.Vectors.dll
+C:\xampp\htdocs\mediabazaar\MediaBazaarSystem\MediaBazaarSystem\bin\Debug\System.Runtime.CompilerServices.Unsafe.dll
+C:\xampp\htdocs\mediabazaar\MediaBazaarSystem\MediaBazaarSystem\bin\Debug\Ubiety.Dns.Core.dll
+C:\xampp\htdocs\mediabazaar\MediaBazaarSystem\MediaBazaarSystem\bin\Debug\Google.Protobuf.pdb
+C:\xampp\htdocs\mediabazaar\MediaBazaarSystem\MediaBazaarSystem\bin\Debug\Google.Protobuf.xml
+C:\xampp\htdocs\mediabazaar\MediaBazaarSystem\MediaBazaarSystem\bin\Debug\LiveCharts.pdb
+C:\xampp\htdocs\mediabazaar\MediaBazaarSystem\MediaBazaarSystem\bin\Debug\LiveCharts.xml
+C:\xampp\htdocs\mediabazaar\MediaBazaarSystem\MediaBazaarSystem\bin\Debug\LiveCharts.WinForms.pdb
+C:\xampp\htdocs\mediabazaar\MediaBazaarSystem\MediaBazaarSystem\bin\Debug\LiveCharts.WinForms.xml
+C:\xampp\htdocs\mediabazaar\MediaBazaarSystem\MediaBazaarSystem\bin\Debug\LiveCharts.Wpf.pdb
+C:\xampp\htdocs\mediabazaar\MediaBazaarSystem\MediaBazaarSystem\bin\Debug\LiveCharts.Wpf.xml
+C:\xampp\htdocs\mediabazaar\MediaBazaarSystem\MediaBazaarSystem\bin\Debug\MySql.Data.xml
+C:\xampp\htdocs\mediabazaar\MediaBazaarSystem\MediaBazaarSystem\bin\Debug\Renci.SshNet.xml
+C:\xampp\htdocs\mediabazaar\MediaBazaarSystem\MediaBazaarSystem\bin\Debug\System.Buffers.xml
+C:\xampp\htdocs\mediabazaar\MediaBazaarSystem\MediaBazaarSystem\bin\Debug\System.Memory.xml
+C:\xampp\htdocs\mediabazaar\MediaBazaarSystem\MediaBazaarSystem\bin\Debug\System.Numerics.Vectors.xml
+C:\xampp\htdocs\mediabazaar\MediaBazaarSystem\MediaBazaarSystem\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
+C:\xampp\htdocs\mediabazaar\MediaBazaarSystem\MediaBazaarSystem\obj\Debug\MediaBazaarSystem.csprojAssemblyReference.cache
+C:\xampp\htdocs\mediabazaar\MediaBazaarSystem\MediaBazaarSystem\obj\Debug\MediaBazaarSystem.UpdateOrAdd.resources
+C:\xampp\htdocs\mediabazaar\MediaBazaarSystem\MediaBazaarSystem\obj\Debug\MediaBazaarSystem.AdministrationSystem.resources
+C:\xampp\htdocs\mediabazaar\MediaBazaarSystem\MediaBazaarSystem\obj\Debug\MediaBazaarSystem.AssignEmployeeSystem.resources
+C:\xampp\htdocs\mediabazaar\MediaBazaarSystem\MediaBazaarSystem\obj\Debug\MediaBazaarSystem.ChangePassword.resources
+C:\xampp\htdocs\mediabazaar\MediaBazaarSystem\MediaBazaarSystem\obj\Debug\MediaBazaarSystem.DeleteForm.resources
+C:\xampp\htdocs\mediabazaar\MediaBazaarSystem\MediaBazaarSystem\obj\Debug\MediaBazaarSystem.EmployeeSystem.resources
+C:\xampp\htdocs\mediabazaar\MediaBazaarSystem\MediaBazaarSystem\obj\Debug\MediaBazaarSystem.formLogin.resources
+C:\xampp\htdocs\mediabazaar\MediaBazaarSystem\MediaBazaarSystem\obj\Debug\MediaBazaarSystem.Properties.Resources.resources
+C:\xampp\htdocs\mediabazaar\MediaBazaarSystem\MediaBazaarSystem\obj\Debug\MediaBazaarSystem.ViewEmployee.resources
+C:\xampp\htdocs\mediabazaar\MediaBazaarSystem\MediaBazaarSystem\obj\Debug\MediaBazaarSystem.csproj.GenerateResource.cache
+C:\xampp\htdocs\mediabazaar\MediaBazaarSystem\MediaBazaarSystem\obj\Debug\MediaBazaarSystem.csproj.CopyComplete
+C:\xampp\htdocs\mediabazaar\MediaBazaarSystem\MediaBazaarSystem\obj\Debug\MediaBazaarSystem.exe
+C:\xampp\htdocs\mediabazaar\MediaBazaarSystem\MediaBazaarSystem\obj\Debug\MediaBazaarSystem.pdb
