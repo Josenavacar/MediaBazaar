@@ -42,23 +42,6 @@
     document.getElementById("passcode").addEventListener("keyup", checkingCapsLock);
     let passcode = document.getElementById("passcode");
     let text = document.getElementById("text");
-    let passc = document.getElementById("passcode").value;
-
-    // $(document).ready(function() {
-    //     $(".error").remove();
-    //     $("#loginForm").submit(function(event) {
-    //         event.preventDefault();
-            
-    //         if(passc.length < 4)
-    //         {
-    //             $('#passcode').after('<span class="error">Please enter more than 3 digits!</span>');
-    //         }
-    //         else if(passc.length > 5)
-    //         {
-    //             $('#passcode').after('<span class="error">You can only enter 4 digits!</span>');
-    //         }
-    //     });
-    // });
 
     function displayPassword() 
     {

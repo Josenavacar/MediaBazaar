@@ -3,19 +3,19 @@
 
                 <div id="jsonResponse"></div>
 
-                <form id="stockRequestForm" method="POST">
+                <form id="stockRequestForm">
                     <h2 class="text-center">Make A New Stock Request</h2>
                     <hr>   
                     <div class="form-group">
                         <div class="input-group">
                             <div class="col-lg-6 mb-3">
                                 <div class="form-label-group">
-                                    <input id="email" name="email" placeholder="Email" type="text" class="form-control">
+                                    <input id="email" name="email" placeholder="Email" type="text" class="form-control" required="true">
                                     <label>Email</label>
                                 </div>                                
                             </div>
 
-                            <select id="departments" class="form-control">
+                            <select id="departments" class="form-control" required="true">
                                 <option hidden >Departments</option>
                                 <?php foreach($departments as $department) { ?>
                                     <option data-id="<?php echo $department["Name"]; ?>" value="<?php echo $department["Name"] ?>" id="department"><?php echo $department["Name"] ?></option>
@@ -25,7 +25,7 @@
 
                         <div class="input-group">
                             <div class="col-lg-6 mb-3">
-                                <select id="products" class="form-control">
+                                <select id="products" class="form-control" required="true">
                                     <option hidden >Products</option>
                                     <?php foreach($products as $product) { ?>
                                         <option data-toggle="tooltip" title="Price: &euro; <?php echo $product["Price"]; ?>" data-price="<?php echo $product["Price"]; ?>" value="<?php echo $product["Name"]; ?>" id="product"> <?php echo $product["Name"] ?></option>
@@ -33,7 +33,7 @@
                                 </select>                              
                             </div>
 
-                            <select id="quantity" class="form-control">
+                            <select id="quantity" class="form-control" required="true">
                                 <option hidden >Quantity</option>
                                 <option value="100">100</option>
                                 <option value="200">200</option>
@@ -46,7 +46,7 @@
                         <div class="input-group">
                             <div class="col-lg-6 mb-3">
                                 <div class="form-label-group">
-                                    <input id="total_price" placeholder="Total Price in euros" type="text" class="form-control">
+                                    <input id="total_price" placeholder="Total Price in euros" type="text" class="form-control" readonly>
                                     <label>Total Price in &euro;</label>
                                 </div>    
                             </div>
@@ -66,11 +66,6 @@
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js" type="text/javascript"></script>
 <script type="text/javascript">
-    $(document).ready(function() {
-        // let productPrice = $('#products').find(':selected').attr('data-toggle');
-        // $(productPrice)tooltip({})
-    });
-
     document.getElementById("quantity").addEventListener("change", getQuantity);
     
     function getQuantity()
@@ -110,33 +105,52 @@
             quantity: quantity
         };
 
-        $.ajax
-        ({
-            type: "POST",
-            url: "http://localhost/mediabazaar/mediaBazaarStockManagement/stock/stockrequest",
-            data: 
-            {
-                data: data
-            },
-            success: function (data) 
-            {
-                Swal.fire({
-                    icon: 'success',
-                    title: 'Order is made',
-                    html: 'Your order ' + '<a href="order">ID: ' + data + '</a>'
-                })
-
-                // let phpResponse = JSON.stringify(data, undefined, 4);
-                // $('#jsonResponse').fadeIn().delay(1000).fadeOut();  
-                // $('#jsonResponse').text(phpResponse);
-                // window.location.replace(window.location.pathname = "order");
-            },
-            error: function (data) 
-            {
-                console.log(data);
-            }
-        });
-        return 
+        if ((email === "") ||( quantity === "Quantity") || (product === "Products")) 
+        {
+            Swal.fire
+            ({
+                icon: 'error',
+                title: 'Request failed',
+                html: "All fields needs to be filled and selected!"
+            })
+        }
+        else
+        {
+            $.ajax
+            ({
+                type: "POST",
+                url: "http://localhost/mediabazaar/mediaBazaarStockManagement/stock/stockrequest",
+                data: 
+                {
+                    data: data
+                },
+                success: function (data) 
+                {
+                    if(data === "User not found!")
+                    {
+                        Swal.fire
+                        ({
+                            icon: 'warning',
+                            title: 'Request failed',
+                            html: "Please enter the correct email"
+                        })
+                    }
+                    else
+                    {
+                        Swal.fire
+                        ({
+                            icon: 'success',
+                            title: 'Order is made',
+                            html: 'Your order ' + '<a href="order">ID: ' + data + '</a>'
+                        })
+                    }
+                },
+                error: function (data) 
+                {
+                    console.log(data);
+                }
+            });
+        }
     });
 
 

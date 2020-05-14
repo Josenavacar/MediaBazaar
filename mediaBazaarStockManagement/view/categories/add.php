@@ -63,7 +63,6 @@
 			$("#menu-toggle").hide();
 		});
 
-
 	    $("#submit").click(function (event) 
 	    {
 	        event.preventDefault();
@@ -76,27 +75,40 @@
 	            description: description
 	        };
 
-	        $.ajax
-	        ({
-	            type: "POST",
-	            url: "http://localhost/mediabazaar/mediaBazaarStockManagement/category/addRequest",
-	            data: 
-	            {
-	                data: data
-	            },
-	            success: function (data) 
-	            {
-	                Swal.fire
-	                ({
-	                    icon: 'success',
-	                    title: 'New category is added',
-	                })
-	            },
-	            error: function (data) 
-	            {
-	                console.log(data);
-	            }
-	        });
+	        if (name === "" || description === "") 
+	        {
+	            Swal.fire
+	            ({
+	                icon: 'error',
+	                title: 'Request failed',
+	                html: "All fields needs to be filled and selected!"
+	            })
+	        }
+	        else
+	        {
+		        $.ajax
+		        ({
+		            type: "POST",
+		            url: "http://localhost/mediabazaar/mediaBazaarStockManagement/category/addRequest",
+		            data: 
+		            {
+		                data: data
+		            },
+		            success: function (data) 
+		            {
+		                Swal.fire
+		                ({
+		                    icon: 'success',
+		                    title: 'New category is added',
+		                })
+		            },
+		            error: function (data) 
+		            {
+		                console.log(data);
+		            }
+		        });
+
+	        }
 	    });
 
 	</script>

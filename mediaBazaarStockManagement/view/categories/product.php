@@ -18,7 +18,7 @@
     <div class="container-fluid">
         <h1 class="mt-4">Products</h1>
 		<div class="table-responsive">
-			<table class="table table-hover">
+			<table class="table table-hover" id="myTable">
 				<thead class="table-primary">
 					<tr>
                         <th scope="col">Product ID</th>
@@ -35,7 +35,10 @@
 						</tr>
 					<?php } ?>
 				</tbody>
-			</table>			
+			</table>
+			<div class="alert alert-warning" id="noDataAlert" role="alert">
+			  	They are currently no products for this category!
+			</div>			
 		</div>
     </div>
 
@@ -48,11 +51,18 @@
 	<script type="text/javascript">
 		$(document).ready(function() 
 		{
+			$("#noDataAlert").hide();
 			$("#sidebar-wrapper").hide();
+			$("#menu-toggle").hide();
+
 			document.getElementById("backButton").addEventListener("click", function(){
 				window.history.go(-1);
 			});
-			$("#menu-toggle").hide();
+
+			if($("#myTable tbody").children().length == 0)
+			{
+				$("#noDataAlert").show();
+			}
 		});
 	</script>
 </body>

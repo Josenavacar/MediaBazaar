@@ -102,7 +102,7 @@
 		 		{
 		 			$price = $key['Price'];
 		 			$name = $key['Name'];
-		 			echo "['$name', $price, '#b87333'],";
+		 			echo "['$name', $price, 'stroke-color: #C5A5CF; stroke-width: 4; fill-color: #703593'],";
 		 		}
 		 	?>
         ]);
@@ -149,7 +149,7 @@
         {
             legend: 
             { 
-            	position: 'none' 
+            	position: 'top' 
             }
         };
 
