@@ -7,3 +7,4 @@
 
 	// call route function
 	route();
+?>
