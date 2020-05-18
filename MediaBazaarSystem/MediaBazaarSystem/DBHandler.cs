@@ -34,8 +34,9 @@ namespace MediaBazaarSystem
             Contract contract;
 
             String sql = "SELECT person.Id, person.Firstname, person.Lastname, person.Age, person.Address, person.Email, person.Password, person.Salary, " +
-    "person.HoursWorked, person.HoursAvailable, person.IsAvailable, person.RoleID, department.Name, person.DepartmentID, person.ContractID FROM person JOIN department ON Person.DepartmentID = Department.id " +
-    "WHERE email = @email";
+                            "person.HoursWorked, person.HoursAvailable, person.IsAvailable, person.RoleID, department.Name, person.DepartmentID, person.ContractID " +
+                         "FROM person JOIN department ON Person.DepartmentID = Department.id " +
+                         "WHERE email = @email";
 
             MySqlConnection connection = this.ConnectToDatabase();
             MySqlCommand cmd = new MySqlCommand( sql, connection);
@@ -47,15 +48,18 @@ namespace MediaBazaarSystem
             {
                 if( reader.Read() )
                 {
+                    // Variables 
                     int ID = ( int ) reader.GetValue( 0 );
                     String firstName = reader.GetString( 1 );
                     String lastName = reader.GetString( 2 );
                     DateTime birthDateWithTime = ( DateTime ) reader.GetValue( 3 );
                     DateTime birthDate = birthDateWithTime.Date;
                     String address = reader.GetString( 4 );
+                    toDecryptPassword = reader.GetString( 6 );
                     String charge = "Manager";
                     double salary = reader.GetDouble( 7 );
                     int hoursavailable = ( int ) reader.GetValue( 9 );
+                    role = ( int ) reader.GetValue( 11 );
 
                     //Calculate age
                     int age = DateTime.Now.Year - birthDate.Year - 1;
@@ -71,11 +75,6 @@ namespace MediaBazaarSystem
                             age++;
                         }
                     }
-
-                    // The number is based on the column... 
-                    //E.g. password is column 6 and email is column 5
-                    toDecryptPassword = reader.GetString( 6 );
-                    role = ( int ) reader.GetValue( 11 );
 
                     //Department
                     depName = reader.GetString( 12 );
