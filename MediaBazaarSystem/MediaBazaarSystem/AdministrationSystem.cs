@@ -511,7 +511,7 @@ namespace MediaBazaarSystem
         private void picBoxLogout_Click( object sender, EventArgs e )
         {
             this.Hide();
-            formLogin login = new formLogin();
+            LoginForm login = new LoginForm();
             login.Show();
         }
 
