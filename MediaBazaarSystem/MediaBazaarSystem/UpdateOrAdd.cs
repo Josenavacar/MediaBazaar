@@ -52,7 +52,7 @@ namespace MediaBazaarSystem
             txtBoxLastName.Text = manager.LastName;
             tbBirthDate.Text = manager.dateOfBirth.ToString();
             tbAddress.Text = manager.Address;
-            comBoxPosition.SelectedItem = manager.Role;
+            comBoxRole.SelectedItem = manager.Role;
             txtBoxSalary.Text = manager.Salary.ToString();
             txtBoxHoursAvailable.Text = manager.HoursAvailable.ToString();
             txtBoxEmail.Text = manager.Email.ToString();
@@ -76,7 +76,7 @@ namespace MediaBazaarSystem
             txtBoxLastName.Text = employee.LastName;
             tbBirthDate.Text = employee.dateOfBirth.ToString();
             tbAddress.Text = employee.Address;
-            comBoxPosition.SelectedItem = employee.Role;
+            comBoxRole.SelectedItem = employee.Role;
             txtBoxSalary.Text = employee.Salary.ToString();
             txtBoxHoursAvailable.Text = employee.HoursAvailable.ToString();
             txtBoxEmail.Text = employee.Email.ToString();
@@ -109,7 +109,7 @@ namespace MediaBazaarSystem
                     String LastName = txtBoxLastName.Text.ToString(); //Last name
                     DateTime birthDate = Convert.ToDateTime(tbBirthDate.Text); //Date of Birth
                     String address = tbAddress.Text.ToString(); //Address
-                    String role = comBoxPosition.SelectedItem.ToString(); //Role (as a string instead of an ID for ease of use and clarity in a list of C#)
+                    String role = comBoxRole.SelectedItem.ToString(); //Role (as a string instead of an ID for ease of use and clarity in a list of C#)
                     double salary = Convert.ToDouble(txtBoxSalary.Text); //Salary
                     int hoursAvailable = Convert.ToInt32(txtBoxHoursAvailable.Text); //Hours available
                     int passcode = Convert.ToInt32( txtBoxPasscode.Text );

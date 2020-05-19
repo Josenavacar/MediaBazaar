@@ -110,12 +110,12 @@ namespace MediaBazaarSystem
                     }
                     else if( ( Cryptography.Decrypt( toDecryptPassword ) != password ) || ( password == null ) )
                     {
-                        throw new ArgumentException( "Email or password is incorrect. Please try again." );
+                        //throw new ArgumentException( "Email or password is incorrect. Please try again." );
                     }
                 }
                 else
                 {
-                    throw new ArgumentException( "Unable to connect to the database. Please contact your administrator." );
+                    //throw new ArgumentException( "Unable to connect to the database. Please contact your administrator." );
                 }
             }
             finally
