@@ -248,7 +248,6 @@ namespace MediaBazaarSystem
                             employee.EditEmployee(FirstName, LastName, birthDate, address, role, salary, hoursAvailable, email, contract); //List edit (local).
                         }
 
-                        cmd.Parameters.AddWithValue( "@ContractID", contract );
                         cmd.ExecuteNonQuery(); //Database edit.
                         conn.Close();
 
@@ -257,12 +256,12 @@ namespace MediaBazaarSystem
 
                     this.Hide();
 
-                }
-                catch(Exception)
-                {
-                    MessageBox.Show("Information not filled properly, please try again");
-                }
             }
+                catch (Exception)
+            {
+                MessageBox.Show("Information not filled properly, please try again");
+            }
+        }
         }
 
         private void tbBirthDate_Click(object sender, EventArgs e)
