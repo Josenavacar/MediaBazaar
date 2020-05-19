@@ -117,6 +117,7 @@
     <Compile Include="Contract.cs" />
     <Compile Include="Cryptography.cs" />
     <Compile Include="DBHandler.cs" />
+    <Compile Include="DatabaseHelper.cs" />
     <Compile Include="DeleteForm.cs">
       <SubType>Form</SubType>
     </Compile>
