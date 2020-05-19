@@ -45,9 +45,12 @@
 	            <div class="col">
 					<h6>Price per unit in euros</h6>
 					<div id="barchart"></div>
+<!-- 					<hr>
+					<h6>Products with a low supply</h6>
+					<div id="histochart"></div> -->
 					<hr>
 					<h6>Products with a low supply</h6>
-					<div id="histochart"></div>
+					<div id="curve_chart"></div>
 	            </div>
             </div>
 			</div>
@@ -64,6 +67,7 @@
     google.charts.load("current", {packages:["corechart"]});
     google.charts.setOnLoadCallback(drawBarChart);
   	google.charts.setOnLoadCallback(drawHistoChart);
+	google.charts.setOnLoadCallback(drawLineChart);
 
   	/**
   	 * [myFunction description]
@@ -156,4 +160,39 @@
         let chart = new google.visualization.Histogram(document.getElementById('histochart'));
         chart.draw(data, options);
   	}
+
+
+  	/**
+  	 * [drawLineChart description]
+  	 * @return {[type]} [description]
+  	 */
+	function drawLineChart() 
+	{
+		let data = google.visualization.arrayToDataTable
+		([
+			['Product', 'Units'],
+			<?php 
+				foreach ($units as $key) 
+				{
+					if($key['UnitsInStock'] < 200)
+					{
+						$stock = $key['UnitsInStock'];
+						$name = $key['Name'];
+						echo "['$name', $stock],";
+					}
+				}
+			?>
+		]);
+
+		var options = 
+		{
+			legend: { position: 'top' },
+			width: 650,
+			height: 550,
+			pointSize: 10,
+		};
+
+		let chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
+		chart.draw(data, options);
+	}
 </script>
