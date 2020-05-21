@@ -156,11 +156,11 @@ namespace MediaBazaarSystem
                         contract = Contract.PartTime;
                     }
 
-                    Manager man = new Manager( ID, firstName, lastName, age, birthDate, address, charge, salary, hoursavailable, email, contract );
+                    Manager man = new Manager( ID, firstName, lastName, birthDate, address, salary, hoursavailable, email, contract );
 
-                    if( department.GetManager( firstName, lastName ) == null )
+                    if( department.GetStaffMember( firstName, lastName ) == null )
                     {
-                        department.AddManager( man );
+                        department.AddStaff( man );
                     }
 
                     idManage = ID;

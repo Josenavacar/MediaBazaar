@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Navigation;
 
 namespace MediaBazaarSystem
 {
@@ -10,9 +11,11 @@ namespace MediaBazaarSystem
     {
         private int ID;
         private String name;
-        private List<Employee> employees;
-        private List<Manager> managers;
+        //private List<Employee> employees;
+        //private List<Manager> managers;
         private List<Schedule> schedules;
+
+        private List<Staff> staff;
 
         public int DepartmentID
         {
@@ -29,65 +32,94 @@ namespace MediaBazaarSystem
         public Department(String name, int ID)
         {
             this.Name = name;
-            employees = new List<Employee>();
-            managers = new List<Manager>();
+
+            staff = new List<Staff>();
+            //employees = new List<Employee>();
+            //managers = new List<Manager>();
             schedules = new List<Schedule>();
             DepartmentID = ID;
         }
-
-        public void AddEmployee(Employee employee)
+        public void AddStaffMember(Staff employed)
         {
-            employees.Add(employee);
+            staff.Add(employed);
         }
-        public void DeleteEmployee(Employee employee)
+        public void DeleteStaffMember(Staff unemployed)
         {
-            employees.Remove(employee);
-        }
-        public void DeleteManager(Manager manager)
-        {
-            managers.Remove(manager);
+            staff.Remove(unemployed);
         }
 
-        public void AddManager(Manager manager)
+        public Staff GetStaffMember(String firstname, String lastname)
         {
-            managers.Add(manager);
-        }
-
-        public List<Employee> GetEmployees()
-        {
-            return employees;
-        }
-
-        public List<Manager> GetManagers()
-        {
-            return managers;
-        }
-
-        public Employee GetEmployee(String firstname, String lastname)
-        {
-            Employee emp = null;
-            foreach(Employee employee in employees)
+            foreach(Staff person in staff)
             {
-                if( employee.FirstName == firstname && employee.LastName == lastname)
+                if(person.FirstName == firstname && person.LastName == lastname)
                 {
-                    emp = employee;
+                    return person;
                 }
             }
-            return emp;
+            return null;
         }
 
-        public Manager GetManager( String firstname, String lastname )
+        public List<Staff> GetStaff()
         {
-            Manager man = null;
-            foreach( Manager manager in managers )
-            {
-                if( manager.FirstName == firstname && manager.LastName == lastname )
-                {
-                    man = manager;
-                }
-            }
-            return man;
+            return this.staff;
         }
+
+
+        //public void AddEmployee(Staff employee)
+        //{
+
+        //    employees.Add(employee);
+        //}
+        //public void DeleteEmployee(Staff employee)
+        //{
+        //    employees.Remove(employee);
+        //}
+        //public void DeleteManager(Staff manager)
+        //{
+        //    managers.Remove((Manager) manager);
+        //}
+
+        //public void AddManager(Staff manager)
+        //{
+        //    managers.Add((Manager) manager);
+        //}
+
+        //public List<Employee> GetEmployees()
+        //{
+        //    return employees;
+        //}
+
+        //public List<Manager> GetManagers()
+        //{
+        //    return managers;
+        //}
+
+        //public Employee GetEmployee(String firstname, String lastname)
+        //{
+        //    Employee emp = null;
+        //    foreach(Employee employee in employees)
+        //    {
+        //        if( employee.FirstName == firstname && employee.LastName == lastname)
+        //        {
+        //            emp = employee;
+        //        }
+        //    }
+        //    return emp;
+        //}
+
+        //public Manager GetManager( String firstname, String lastname )
+        //{
+        //    Manager man = null;
+        //    foreach( Manager manager in managers )
+        //    {
+        //        if( manager.FirstName == firstname && manager.LastName == lastname )
+        //        {
+        //            man = manager;
+        //        }
+        //    }
+        //    return man;
+        //}
 
         public override string ToString()
         {
