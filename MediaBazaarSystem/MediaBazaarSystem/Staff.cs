@@ -6,8 +6,14 @@ using System.Threading.Tasks;
 
 namespace MediaBazaarSystem
 {
-    public class Staff : Person
+    public abstract class Staff
     {
+        protected int ID;
+        protected String firstName;
+        protected String lastName;
+        protected int age;
+        protected DateTime birthDate;
+        protected String address;
         protected String role;
         protected String password;
         protected String email;
@@ -141,7 +147,7 @@ namespace MediaBazaarSystem
 
         public override string ToString()
         {
-            return base.ToString() + this.role + this.password + this.email + this.salary + this.hoursWorked + this.hoursAvailable;
+            return "ID: " + this.ID + ", Name: " + this.firstName + this.lastName + ". Age: " + this.age + ". Address: " + this.address + this.role + this.password + this.email + this.salary + this.hoursWorked + this.hoursAvailable;
         }
     }
 }

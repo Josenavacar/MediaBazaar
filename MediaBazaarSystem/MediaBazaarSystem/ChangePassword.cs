@@ -67,11 +67,11 @@ namespace MediaBazaarSystem
 
             while (reader.Read())
             {
-                toDecryptPassword = reader.GetString(0);
+                toDecryptPassword = reader.GetString( 0 );
             }
             reader.Close();
 
-            if (Cryptography.Decrypt(toDecryptPassword) == introducedPassword)
+            if( Cryptography.Decrypt( toDecryptPassword ) == introducedPassword )
             {
                 if (tbNewPwd.Text.ToString() == tbConfirmPwd.Text.ToString())
                 {
@@ -91,7 +91,7 @@ namespace MediaBazaarSystem
             }
             else
             {
-                MessageBox.Show("Current password incorrect");
+                MessageBox.Show( "Current password incorrect" );
             }
             conn.Close();
         }
