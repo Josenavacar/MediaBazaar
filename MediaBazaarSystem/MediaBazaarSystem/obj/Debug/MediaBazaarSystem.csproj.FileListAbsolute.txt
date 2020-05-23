@@ -250,3 +250,17 @@ C:\wamp64\www\mediabazaar\MediaBazaarSystem\MediaBazaarSystem\obj\Debug\MediaBaz
 C:\wamp64\www\mediabazaar\MediaBazaarSystem\MediaBazaarSystem\obj\Debug\MediaBazaarSystem.exe
 C:\wamp64\www\mediabazaar\MediaBazaarSystem\MediaBazaarSystem\obj\Debug\MediaBazaarSystem.pdb
 C:\wamp64\www\mediabazaar\MediaBazaarSystem\MediaBazaarSystem\obj\Debug\MediaBazaarSystem.LoginForm.resources
+D:\xampp\htdocs\mediabazaar\MediaBazaarSystem\MediaBazaarSystem\obj\Debug\MediaBazaarSystem.csprojAssemblyReference.cache
+D:\xampp\htdocs\mediabazaar\MediaBazaarSystem\MediaBazaarSystem\obj\Debug\MediaBazaarSystem.UpdateOrAdd.resources
+D:\xampp\htdocs\mediabazaar\MediaBazaarSystem\MediaBazaarSystem\obj\Debug\MediaBazaarSystem.AdministrationSystem.resources
+D:\xampp\htdocs\mediabazaar\MediaBazaarSystem\MediaBazaarSystem\obj\Debug\MediaBazaarSystem.AssignEmployeeSystem.resources
+D:\xampp\htdocs\mediabazaar\MediaBazaarSystem\MediaBazaarSystem\obj\Debug\MediaBazaarSystem.ChangePassword.resources
+D:\xampp\htdocs\mediabazaar\MediaBazaarSystem\MediaBazaarSystem\obj\Debug\MediaBazaarSystem.DeleteForm.resources
+D:\xampp\htdocs\mediabazaar\MediaBazaarSystem\MediaBazaarSystem\obj\Debug\MediaBazaarSystem.EmployeeSystem.resources
+D:\xampp\htdocs\mediabazaar\MediaBazaarSystem\MediaBazaarSystem\obj\Debug\MediaBazaarSystem.LoginForm.resources
+D:\xampp\htdocs\mediabazaar\MediaBazaarSystem\MediaBazaarSystem\obj\Debug\MediaBazaarSystem.Properties.Resources.resources
+D:\xampp\htdocs\mediabazaar\MediaBazaarSystem\MediaBazaarSystem\obj\Debug\MediaBazaarSystem.ViewEmployee.resources
+D:\xampp\htdocs\mediabazaar\MediaBazaarSystem\MediaBazaarSystem\obj\Debug\MediaBazaarSystem.csproj.GenerateResource.cache
+D:\xampp\htdocs\mediabazaar\MediaBazaarSystem\MediaBazaarSystem\obj\Debug\MediaBazaarSystem.csproj.CoreCompileInputs.cache
+D:\xampp\htdocs\mediabazaar\MediaBazaarSystem\MediaBazaarSystem\obj\Debug\MediaBazaarSystem.exe
+D:\xampp\htdocs\mediabazaar\MediaBazaarSystem\MediaBazaarSystem\obj\Debug\MediaBazaarSystem.pdb

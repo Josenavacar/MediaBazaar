@@ -160,7 +160,7 @@ namespace MediaBazaarSystem
 
                     if( department.GetStaffMember( firstName, lastName ) == null )
                     {
-                        department.AddStaff( man );
+                        department.AddStaffMember( man );
                     }
 
                     idManage = ID;
@@ -202,11 +202,11 @@ namespace MediaBazaarSystem
                         contract = Contract.PartTime;
                     }
 
-                    emp = new Employee( ID, firstName, lastName, age, birthDate, address, charge, salary, hoursavailable, email, contract );
+                    emp = new Employee( ID, firstName, lastName, birthDate, address, salary, hoursavailable, email, contract );
 
-                    if( department.GetEmployee( firstName, lastName ) == null )
+                    if( department.GetStaffMember( firstName, lastName ) == null )
                     {
-                        department.AddEmployee( emp );
+                        department.AddStaffMember( emp );
                     }
 
                     idManage = ID;
@@ -359,7 +359,7 @@ namespace MediaBazaarSystem
             String[] name = auxEmp.Split(','); //Splits the string by the comma.
             String firstName = name[1].Trim();
             String lastName = name[0].Trim();
-            Employee emp = department.GetEmployee(firstName, lastName);
+            Employee emp = (Employee)department.GetStaffMember(firstName, lastName);
 
             if (emp == null)
             {
@@ -419,7 +419,7 @@ namespace MediaBazaarSystem
                         cmd.Parameters.AddWithValue("@Id", fired.dbID);
                         cmd.ExecuteNonQuery(); //Delte from Database.
 
-                        department.DeleteEmployee(fired); //Delete from list.
+                        department.DeleteStaffMember(fired); //Delete from list.
                     }
 
                     ensure = false; //Set ensure back to false for future calls.
@@ -445,7 +445,7 @@ namespace MediaBazaarSystem
                         cmd.Parameters.AddWithValue("@Id", fired.dbID);
                         cmd.ExecuteNonQuery(); //Delte from Database.
 
-                        department.DeleteManager(fired);
+                        department.DeleteStaffMember(fired);
                     }
 
                     ensure = false; //Set ensure back to false for future calls.
@@ -458,12 +458,12 @@ namespace MediaBazaarSystem
         /**
          * Jose???
          */
-        private void Refresh_Tick(object sender, EventArgs e)
+        private void Refresh_Tick(object sender, EventArgs e)  ///////////TO CHANGE////////////////////////////////
         {
             //Employees
             int indexEmp = lbEmployees.SelectedIndex;
             lbEmployees.Items.Clear(); //Empties empoloyee listbox
-            List<Employee> listEmp = department.GetEmployees(); 
+            List<Staff> listEmp = department.GetStaff(); 
             foreach (Employee emp in listEmp) //Refills employee listbox
             {
                 String outpEmp = emp.LastName + ", " + emp.FirstName;
