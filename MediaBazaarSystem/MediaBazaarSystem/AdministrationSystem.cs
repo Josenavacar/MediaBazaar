@@ -265,7 +265,7 @@ namespace MediaBazaarSystem
             lBoxStatistics.Items.Clear();
             hoursStatsChart.Series[ "Hours" ].Points.Clear();
 
-            foreach( Employee employee in department.GetEmployees() )
+            foreach( Employee employee in department.GetStaff() )
             {
                 hoursStatsChart.Series[ "Hours" ].IsValueShownAsLabel = true;
                 ChartArea chartArea = hoursStatsChart.ChartAreas[ 0 ];
@@ -485,7 +485,7 @@ namespace MediaBazaarSystem
             //Managers
             int indexMan = lbManagers.SelectedIndex;
             lbManagers.Items.Clear(); //Empties managers listbox
-            List<Manager> listMan = department.GetManagers();
+            List<Staff> listMan = department.GetStaff();
             foreach (Manager man in listMan) //Refills managers listbox
             {
                 String outpMan = man.LastName + ", " + man.FirstName;
@@ -661,12 +661,12 @@ namespace MediaBazaarSystem
         {
             lBoxDepartmentStats.Items.Clear();
             
-            int length = department.GetEmployees().Count;
+            int length = department.GetStaff().Count;
             lBoxDepartmentStats.Items.Add( "Number of employees that are employed: " + length );
 
             int fTime = 0;
             int pTime = 0;
-            foreach(Employee employee in department.GetEmployees())
+            foreach(Staff employee in department.GetStaff())
             {
                 if( employee.Contract == Contract.FullTime )
                 {
@@ -690,7 +690,7 @@ namespace MediaBazaarSystem
             }
             lBoxDepartmentStats.Items.Add( "Number of schedules related to this department: " + dep );
 
-            int managers = department.GetManagers().Count;
+            int managers = department.GetStaff().Count;
             lBoxDepartmentStats.Items.Add( "Number of managers: " + managers );
         }
 
