@@ -15,6 +15,7 @@ namespace MediaBazaarSystem
 {
     public partial class AdministrationSystem : Form
     {
+        DatabaseHelper dataBase;
         private AssignEmployeeSystem assignEmployeeForm;
         private Department department;
         private Manager manager;
@@ -42,6 +43,7 @@ namespace MediaBazaarSystem
             this.UpdateSchedule();
             this.UpdateEmployeeManagement();
             hoursStatsChart.Titles.Add( "Hours Available" );
+            dataBase = new DatabaseHelper();
 
             //Profile
             refreshProfile();
@@ -879,23 +881,7 @@ namespace MediaBazaarSystem
         {
             if(checkProfileChange())
             {
-                //Updates manager in database.
-                string connString = @"Server = studmysql01.fhict.local; Uid = dbi437493; Database = dbi437493; Pwd = dbgroup01;";
-                MySqlConnection conn = new MySqlConnection(connString);
-                conn.Open();
-                MySqlCommand cmd = conn.CreateCommand();
-                cmd.CommandText = "UPDATE person SET Firstname = @Firstname, Lastname = @Lastname, Age = @Age, Address = @Address, Email = @Email WHERE Id = @Id";
-                cmd.Parameters.AddWithValue("@Firstname", txtBoxFirstName.Text);
-                cmd.Parameters.AddWithValue("@Lastname", txtBoxLastName.Text);
-                cmd.Parameters.AddWithValue("@Age", Convert.ToDateTime(txtBoxAge.Text));
-                cmd.Parameters.AddWithValue("@Address", txtBoxAddress.Text);
-                cmd.Parameters.AddWithValue("@Email", txtBoxEmail.Text);
-                cmd.Parameters.AddWithValue("@Id", manager.dbID);
-
-                cmd.ExecuteNonQuery();
-
-                //Updates manager in list.
-                manager.EditManager(txtBoxFirstName.Text, txtBoxLastName.Text, Convert.ToDateTime(txtBoxAge.Text), txtBoxAddress.Text, manager.Role, manager.Salary, manager.HoursAvailable, txtBoxEmail.Text, this.manager.Contract);
+                dataBase.updateProfile(manager, txtBoxFirstName.Text, txtBoxLastName.Text, Convert.ToDateTime(txtBoxAge.Text), txtBoxAddress.Text, txtBoxEmail.Text);
 
                 //Updates profile.
                 lbEmployeeInfo.Items.Clear();
@@ -905,7 +891,7 @@ namespace MediaBazaarSystem
             }
             else
             {
-                MessageBox.Show("No changes made");
+                MessageBox.Show("Information incorrect or not changed.");
             }
         }
 
@@ -935,6 +921,10 @@ namespace MediaBazaarSystem
         private bool checkProfileChange()
         {
             if(txtBoxFirstName.Text == manager.FirstName && txtBoxLastName.Text == manager.LastName && Convert.ToDateTime(txtBoxAge.Text) == manager.dateOfBirth && txtBoxAddress.Text == manager.Address && txtBoxEmail.Text == manager.Email)
+            {
+                return false;
+            }
+            else if (String.IsNullOrEmpty(txtBoxFirstName.Text) || String.IsNullOrEmpty(txtBoxLastName.Text) || String.IsNullOrEmpty(txtBoxAge.Text) || String.IsNullOrEmpty(txtBoxAddress.Text) || String.IsNullOrEmpty(txtBoxEmail.Text))
             {
                 return false;
             }

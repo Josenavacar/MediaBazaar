@@ -117,6 +117,16 @@ namespace MediaBazaarSystem
             Age = age;
         }
 
+        public void editStaffMember(int ID, String firstName, String lastName, DateTime birthDate, String address, String email)
+        {
+            this.ID = ID;
+            this.FirstName = firstName;
+            this.lastName = lastName;
+            this.dateOfBirth = birthDate;
+            this.Address = address;
+            this.Email = email;
+        }
+
         //public void EditMStaff(String firstName, String lastName, DateTime birthDate, String address, String role, double salary, int hoursAvailable, String email, Contract contract)
         //{
         //    FirstName = firstName;

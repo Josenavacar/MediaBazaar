@@ -223,9 +223,29 @@ namespace MediaBazaarSystem
 
             return dep.GetStaff();
         }
+        public void updateProfile(Staff memberToChange, String FirstName, String LastName, DateTime age, String address, String email)
+        {
+            MySqlConnection conn = new MySqlConnection(connString);
+            // Open connection
+            conn.Open();
+            MySqlCommand cmd = conn.CreateCommand();
+
+            cmd.CommandText = "UPDATE person SET Firstname = @Firstname, Lastname = @Lastname, Age = @Age, Address = @Address, Email = @Email WHERE Id = @Id";
+            cmd.Parameters.AddWithValue("@Firstname", FirstName);
+            cmd.Parameters.AddWithValue("@Lastname", LastName);
+            cmd.Parameters.AddWithValue("@Age", age);
+            cmd.Parameters.AddWithValue("@Address", address);
+            cmd.Parameters.AddWithValue("@Email", email);
+            cmd.Parameters.AddWithValue("@Id", memberToChange.dbID);
+
+            cmd.ExecuteNonQuery();
+
+            memberToChange.editStaffMember(FirstName, LastName, age, address, email);
+        }
 
 
         //////////////////////////////////////////////////////////////////W.I.P.////////////////////////////////////////////////////////////////////////////////////
+
         public void getWorkSchedule(String sql) 
         {
             MySqlConnection conn = new MySqlConnection(connString);
