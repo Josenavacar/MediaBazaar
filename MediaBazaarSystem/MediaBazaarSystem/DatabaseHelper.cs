@@ -180,7 +180,7 @@ namespace MediaBazaarSystem
             String sql = "SELECT * FROM person JOIN role ON person.RoleID = role.Id WHERE DepartmentID = @DepartmentID";
 
             MySqlCommand cmd = new MySqlCommand(sql, conn);
-            cmd.Parameters.AddWithValue("@DepartmentID", dep.DepartmentID);
+            //cmd.Parameters.AddWithValue("@DepartmentID", dep.DepartmentID);
             MySqlDataReader reader = cmd.ExecuteReader();
 
             List<Staff> result = new List<Staff>();
@@ -207,7 +207,7 @@ namespace MediaBazaarSystem
                     contract = Contract.PartTime;
                 }
 
-                if(role == "Manager")
+                if(role == "Manager" || role == "StockManager")
                 {
                     Manager man = new Manager(ID, firstName, lastName, birthDate, address, salary, hoursavailable, email, contract);
                     dep.AddStaffMember(man);
@@ -223,6 +223,7 @@ namespace MediaBazaarSystem
 
             return dep.GetStaff();
         }
+
         public void updateProfile(Staff memberToChange, String FirstName, String LastName, DateTime age, String address, String email)
         {
             MySqlConnection conn = new MySqlConnection(connString);

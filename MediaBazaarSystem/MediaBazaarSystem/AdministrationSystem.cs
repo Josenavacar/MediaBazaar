@@ -17,6 +17,7 @@ namespace MediaBazaarSystem
     {
         DatabaseHelper dataBase;
         private AssignEmployeeSystem assignEmployeeForm;
+
         private Department department;
         private Manager manager;
         private Schedule schedule;
@@ -107,114 +108,131 @@ namespace MediaBazaarSystem
         /**
          * Method to get database info on employees
          */
-        private void GetEmployeeManagementDB(String sql, MySqlConnection connection)
+        //private void GetEmployeeManagementDB(String sql, MySqlConnection connection)
+        //{
+        //    this.lbEmployees.Items.Clear();
+        //    this.lbManagers.Items.Clear();
+
+        //    MySqlCommand cmd2 = new MySqlCommand( sql, connection );
+        //    connection.Open();
+        //    cmd2.Parameters.Add( "DepartmentID", MySqlDbType.VarChar ).Value = department.DepartmentID;
+        //    MySqlDataReader reader;
+        //    reader = cmd2.ExecuteReader();
+
+        //    while( reader.Read() )
+        //    {
+        //        int role = ( int ) reader.GetValue( 12 );
+        //        if( role == 1 )
+        //        {
+        //            int ID = ( int ) reader.GetValue( 0 );
+        //            String firstName = reader.GetString( 1 );
+        //            String lastName = reader.GetString( 2 );
+        //            DateTime birthDate = ( DateTime ) reader.GetValue( 3 );
+        //            String address = reader.GetString( 4 );
+        //            String email = reader.GetString( 5 );
+        //            String charge = "Manager";
+        //            double salary = reader.GetDouble( 7 );
+        //            int hoursavailable = ( int ) reader.GetValue( 9 );
+        //            int dbContract = ( int ) reader.GetValue( 13 );
+        //            Contract contract;
+
+        //            //Calculate age
+        //            int age = DateTime.Now.Year - birthDate.Year - 1;
+        //            if (birthDate.Month > DateTime.Now.Month)
+        //            {
+        //                age++;
+        //            }
+        //            else if (birthDate.Month == DateTime.Now.Month)
+        //            {
+        //                if (birthDate.Day >= DateTime.Now.Day)
+        //                {
+        //                    age++;
+        //                }
+        //            }
+
+        //            if ( dbContract == 1 )
+        //            {
+        //                contract = Contract.FullTime;
+        //            }
+        //            else
+        //            {
+        //                contract = Contract.PartTime;
+        //            }
+
+        //            Manager man = new Manager( ID, firstName, lastName, birthDate, address, salary, hoursavailable, email, contract );
+
+        //            if( department.GetStaffMember( firstName, lastName ) == null )
+        //            {
+        //                department.AddStaffMember( man );
+        //            }
+
+        //            idManage = ID;
+        //        }
+        //        else if( role == 2 )
+        //        {
+        //            int ID = ( int ) reader.GetValue( 0 );
+        //            String firstName = reader.GetString( 1 );
+        //            String lastName = reader.GetString( 2 );
+        //            DateTime birthDate = ( DateTime ) reader.GetValue( 3 );
+        //            String address = reader.GetString( 4 );
+        //            String email = reader.GetString( 5 );
+        //            String charge = "Employee";
+        //            double salary = reader.GetDouble( 7 );
+        //            int hoursavailable = ( int ) reader.GetValue( 9 );
+        //            int dbContract = ( int ) reader.GetValue( 13 );
+        //            Contract contract;
+
+        //            //Calculate age
+        //            int age = DateTime.Now.Year - birthDate.Year - 1;
+        //            if (birthDate.Month > DateTime.Now.Month)
+        //            {
+        //                age++;
+        //            }
+        //            else if (birthDate.Month == DateTime.Now.Month)
+        //            {
+        //                if (birthDate.Day >= DateTime.Now.Day)
+        //                {
+        //                    age++;
+        //                }
+        //            }
+
+        //            if ( dbContract == 1 )
+        //            {
+        //                contract = Contract.FullTime;
+        //            }
+        //            else
+        //            {
+        //                contract = Contract.PartTime;
+        //            }
+
+        //            emp = new Employee( ID, firstName, lastName, birthDate, address, salary, hoursavailable, email, contract );
+
+        //            if( department.GetStaffMember( firstName, lastName ) == null )
+        //            {
+        //                department.AddStaffMember( emp );
+        //            }
+
+        //            idManage = ID;
+        //        }
+        //    }
+        //    reader.Close();
+        //}
+
+        private void LoadStaff()
         {
-            this.lbEmployees.Items.Clear();
-            this.lbManagers.Items.Clear();
-
-            MySqlCommand cmd2 = new MySqlCommand( sql, connection );
-            connection.Open();
-            cmd2.Parameters.Add( "DepartmentID", MySqlDbType.VarChar ).Value = department.DepartmentID;
-            MySqlDataReader reader;
-            reader = cmd2.ExecuteReader();
-
-            while( reader.Read() )
+            List<Staff> staff = dataBase.getStaffFromDB(department);
+            foreach(Staff staffmember in staff)
             {
-                int role = ( int ) reader.GetValue( 12 );
-                if( role == 1 )
+                String staffname = staffmember.FirstName + " " + staffmember.LastName;
+                if (staffmember is Employee) //staffmember.Role == Position.Employee
                 {
-                    int ID = ( int ) reader.GetValue( 0 );
-                    String firstName = reader.GetString( 1 );
-                    String lastName = reader.GetString( 2 );
-                    DateTime birthDate = ( DateTime ) reader.GetValue( 3 );
-                    String address = reader.GetString( 4 );
-                    String email = reader.GetString( 5 );
-                    String charge = "Manager";
-                    double salary = reader.GetDouble( 7 );
-                    int hoursavailable = ( int ) reader.GetValue( 9 );
-                    int dbContract = ( int ) reader.GetValue( 13 );
-                    Contract contract;
-
-                    //Calculate age
-                    int age = DateTime.Now.Year - birthDate.Year - 1;
-                    if (birthDate.Month > DateTime.Now.Month)
-                    {
-                        age++;
-                    }
-                    else if (birthDate.Month == DateTime.Now.Month)
-                    {
-                        if (birthDate.Day >= DateTime.Now.Day)
-                        {
-                            age++;
-                        }
-                    }
-
-                    if ( dbContract == 1 )
-                    {
-                        contract = Contract.FullTime;
-                    }
-                    else
-                    {
-                        contract = Contract.PartTime;
-                    }
-
-                    Manager man = new Manager( ID, firstName, lastName, birthDate, address, salary, hoursavailable, email, contract );
-
-                    if( department.GetStaffMember( firstName, lastName ) == null )
-                    {
-                        department.AddStaffMember( man );
-                    }
-
-                    idManage = ID;
+                    lbEmployees.Items.Add(staffmember);
                 }
-                else if( role == 2 )
+                else if(staffmember is Manager) //staffmember.Role == Position.HRManager || staffmember.Role == Position.StockManager
                 {
-                    int ID = ( int ) reader.GetValue( 0 );
-                    String firstName = reader.GetString( 1 );
-                    String lastName = reader.GetString( 2 );
-                    DateTime birthDate = ( DateTime ) reader.GetValue( 3 );
-                    String address = reader.GetString( 4 );
-                    String email = reader.GetString( 5 );
-                    String charge = "Employee";
-                    double salary = reader.GetDouble( 7 );
-                    int hoursavailable = ( int ) reader.GetValue( 9 );
-                    int dbContract = ( int ) reader.GetValue( 13 );
-                    Contract contract;
-
-                    //Calculate age
-                    int age = DateTime.Now.Year - birthDate.Year - 1;
-                    if (birthDate.Month > DateTime.Now.Month)
-                    {
-                        age++;
-                    }
-                    else if (birthDate.Month == DateTime.Now.Month)
-                    {
-                        if (birthDate.Day >= DateTime.Now.Day)
-                        {
-                            age++;
-                        }
-                    }
-
-                    if ( dbContract == 1 )
-                    {
-                        contract = Contract.FullTime;
-                    }
-                    else
-                    {
-                        contract = Contract.PartTime;
-                    }
-
-                    emp = new Employee( ID, firstName, lastName, birthDate, address, salary, hoursavailable, email, contract );
-
-                    if( department.GetStaffMember( firstName, lastName ) == null )
-                    {
-                        department.AddStaffMember( emp );
-                    }
-
-                    idManage = ID;
+                    lbManagers.Items.Add(staffmember);
                 }
             }
-            reader.Close();
         }
 
         /**

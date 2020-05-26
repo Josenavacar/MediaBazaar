@@ -124,7 +124,7 @@
       <DependentUpon>DeleteForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Department.cs" />
-    <Compile Include="Role.cs" />
+    <Compile Include="Position.cs" />
     <Compile Include="UpdateOrAdd.cs">
       <SubType>Form</SubType>
     </Compile>

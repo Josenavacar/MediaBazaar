@@ -8,11 +8,10 @@ namespace MediaBazaarSystem
 {
     public class Manager : Staff
     {
-        
 
         public Manager( int ID, String firstName, String lastName, DateTime birthDate, String address, double salary,  int hoursAvailable, String email, Contract contract ) : base(ID, firstName, lastName, birthDate, address, salary, hoursAvailable, email, contract)
         {
-            Role = "Manager";
+            Role = Position.HRManager;
         }
 
         public override string ToString()

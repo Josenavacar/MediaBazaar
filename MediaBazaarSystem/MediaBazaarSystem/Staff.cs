@@ -8,19 +8,11 @@ namespace MediaBazaarSystem
 {
     public abstract class Staff
     {
-        protected int ID;
-        protected String firstName;
-        protected String lastName;
-        protected int age;
+        protected String firstName, lastName, address, password, email;
+        protected int ID, hoursWorked, hoursAvailable, personID, age;
         protected DateTime birthDate;
-        protected String address;
-        protected String role;
-        protected String password;
-        protected String email;
+        protected Position role;
         protected double salary;
-        protected int hoursWorked;
-        protected int hoursAvailable;
-        protected int personID;
         protected Contract contract;
 
         public int dbID
@@ -64,7 +56,7 @@ namespace MediaBazaarSystem
             set { this.birthDate = value; }
         }
 
-        public String Role
+        public Position Role
         {
             get { return this.role; }
             set { this.role = value; }
@@ -95,7 +87,7 @@ namespace MediaBazaarSystem
             LastName = lastName;
             dateOfBirth = birthDate.Date;
             Address = address;
-            Role = role;
+            Role = Position.Unknown;
             Salary = salary;
             HoursAvailable = hoursAvailable;
             Email = email;

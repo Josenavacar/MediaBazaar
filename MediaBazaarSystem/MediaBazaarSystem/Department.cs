@@ -40,10 +40,12 @@ namespace MediaBazaarSystem
             schedules = new List<Schedule>();
             DepartmentID = ID;
         }
+
         public void AddStaffMember(Staff employed)
         {
             staff.Add(employed);
         }
+
         public void DeleteStaffMember(Staff unemployed)
         {
             staff.Remove(unemployed);
