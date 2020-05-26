@@ -6,18 +6,29 @@
 		render("home/login");	
 	}
 
-	function login()
+	function loginRequest()
 	{
-		if(!userLogin())
-		{
-			header("Location:" . URL . "login");
-			exit();
-		}
-		else
-		{
-			header("Location:" . URL . "home");
-			exit();
-		}
+        if (isset($_POST['data'])) 
+        {
+            $data = $_POST['data'];
+            userLogin($data);
+        }
+	}
+
+	function loginCodeRequest()
+	{
+        if (isset($_POST['data'])) 
+        {
+            $data = $_POST['data'];
+            if($_SESSION["special_code"] == $data['value'])
+            {
+            	echo "success";
+            }
+            else
+            {
+            	echo "error";
+            }
+        }
 	}
 
 	function logout()

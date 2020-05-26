@@ -1,6 +1,6 @@
 <?php
-	require(ROOT . "model/UserModel.php");
-	require(ROOT . "model/EmailModel.php");
+	require_once(ROOT . "model/UserModel.php");
+	require_once(ROOT . "model/EmailModel.php");
 
 	function getAllInventory()
 	{
@@ -14,8 +14,11 @@
 
 	function makeRequest($data)
 	{
-		foreach ($data as $key => $value) {
+		$emailOrderID = '';
+		$emailAddress = '';
 
+		foreach ($data as $key => $value) 
+		{
 			if($key == 'email')
 			{
 				$user = getUserByEmail($value);
@@ -53,7 +56,8 @@
 					$query->bindParam(":product", $product['Id'], PDO::PARAM_INT);
 					$query->execute();
 
-					sendEmail($data['email'], $latest_id);
+					$emailOrderID = $latest_id;
+					$emailAddress = $data['email'];
 
 					// session_start();
 					$_SESSION['order_ID'] = $latest_id;
@@ -66,4 +70,6 @@
 				}
 			}
 		}
+
+		sendEmail($emailOrderID, $emailAddress);
 	}

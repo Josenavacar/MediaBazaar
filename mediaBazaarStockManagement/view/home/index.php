@@ -170,7 +170,7 @@
 	{
 		let data = google.visualization.arrayToDataTable
 		([
-			['Product', 'Units'],
+			['Product', 'The amount of units in stock'],
 			<?php 
 				foreach ($units as $key) 
 				{

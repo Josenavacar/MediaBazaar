@@ -1,4 +1,13 @@
 <?php
+	require_once(ROOT . "model/EmailModel.php");
+
+	function generateLoginCode()
+	{
+		$length = 6;    
+		$sessionID = substr(str_shuffle('0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ'),1,$length);
+		return $sessionID;
+	}
+
 	function getAllUsers()
 	{
 		$db = openDatabaseConnection();
@@ -11,21 +20,37 @@
 		return $query->fetchAll();
 	}
 
-	function userLogin()
+
+	function userLogin($data)
 	{
-		$users = getAllUsers();
-		foreach ($users as $user) 
+		$db = openDatabaseConnection();
+		$sql = "SELECT * FROM person WHERE email = :email";
+		$query = $db->prepare($sql);
+		$query->execute(array(":email" => $data['email']));
+		$row = $query->fetch(PDO::FETCH_ASSOC);
+
+		if(!empty($row))
 		{
-			if($_POST['passcode'] == $user['Passcode'])
-			{
-				session_start();
-				$_SESSION["user_id"] = $user['Id'];
-				$_SESSION["user_name"] = $user['Email'];
-				$_SESSION['loggedin_time'] = time();    
-				return true;
-			}
+			// session_start();
+			$_SESSION["user_id"] = $row['Id'];
+			$_SESSION["user_name"] = $row['Email'];
+			$_SESSION['loggedin_time'] = time();
+
+			echo "success";  
+			sendLoginCode($row['Email'], generateLoginCode());
 		}
-		return false;
+		else
+		{
+			// Initialize the session			 
+			// Unset all of the session variables
+			session_unset();
+			 
+			// Destroy the session.
+			session_destroy();
+			echo "No User found";
+		}
+
+		$db = null;
 	}
 
 	function getUserByEmail($email)
