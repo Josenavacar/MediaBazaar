@@ -36,15 +36,15 @@ namespace MediaBazaarSystem
         public AdministrationSystem( Department department, Manager manager )
         {
             InitializeComponent();
+            dataBase = new DatabaseHelper();
             this.dataAdminWorkSchedule.Rows.Clear();
             this.department = department;
             this.manager = manager;
             lblAdminName.Text += " " + manager.FirstName + " " + manager.LastName;
             updateTimer.Enabled = true;
             this.UpdateSchedule();
-            this.UpdateEmployeeManagement();
+            this.LoadStaff();
             hoursStatsChart.Titles.Add( "Hours Available" );
-            dataBase = new DatabaseHelper();
 
             //Profile
             refreshProfile();
@@ -343,29 +343,8 @@ namespace MediaBazaarSystem
 
                 if(staff != null)
                 {
-                    UpdateOrAdd form1 = new UpdateOrAdd();
-                }
-            }
-
-
-
-            if (lbEmployees.SelectedItem != null) //Checks if an employee is selected in the listbox.
-            {
-                Employee emp = SearchEmp();
-                if (emp != null)
-                {
-                    UpdateOrAdd form1 = new UpdateOrAdd(department, emp);
-                    form1.Show();
-                }
-            }
-
-            else if(lbManagers.SelectedItem != null) //Checks if a manager is selected in the listbox.
-            {
-                Manager man = SearchMan();
-                if (man != null)
-                {
-                    UpdateOrAdd form1 = new UpdateOrAdd(department, man);
-                    form1.Show();
+                    UpdateOrAdd form = new UpdateOrAdd(department, staff);
+                    form.Show();
                 }
             }
             else
@@ -448,66 +427,28 @@ namespace MediaBazaarSystem
          */
         private void btnFireEmployee_Click(object sender, EventArgs e)
         {
-            string connString = @"Server = studmysql01.fhict.local; Uid = dbi437493; Database = dbi437493; Pwd = dbgroup01;";
-            MySqlConnection conn = new MySqlConnection(connString);
-            conn.Open();
+            //string connString = @"Server = studmysql01.fhict.local; Uid = dbi437493; Database = dbi437493; Pwd = dbgroup01;";
+            //MySqlConnection conn = new MySqlConnection(connString);
+            //conn.Open();
 
-            MySqlCommand cmd = conn.CreateCommand();
-            
+            //MySqlCommand cmd = conn.CreateCommand();
 
-            if (lbEmployees.SelectedItem != null)
+            if(lbEmployees.SelectedItem != null || lbManagers.SelectedItem != null)
             {
-                //Opens a form that will double check for deleting, if ensure is returned back as true, the employee will be deleted from the database.
                 DeleteForm check = new DeleteForm(ensure);
                 check.StartPosition = FormStartPosition.CenterParent; //Makes the form pop up in the middle of the parent form (this).
                 check.ShowDialog(this);
 
-                if(ensure)
-                {
-                    Employee fired = SearchEmp();
-                    if (fired != null)
-                    {
-                        cmd.CommandText = "DELETE FROM schedule WHERE PersonId = @PersonId";
-                        cmd.Parameters.AddWithValue("@PersonId", fired.dbID);
-                        cmd.ExecuteNonQuery();
-                        cmd.CommandText = "DELETE FROM person WHERE Id = @Id";
-                        cmd.Parameters.AddWithValue("@Id", fired.dbID);
-                        cmd.ExecuteNonQuery(); //Delte from Database.
-
-                        department.DeleteStaffMember(fired); //Delete from list.
-                    }
-
-                    ensure = false; //Set ensure back to false for future calls.
-                }
-            }
-
-            else if (lbManagers.SelectedItem != null)
-            {
-                //Opens a form that will double check for deleting, if ensure is returned back as true, the manager will be deleted from the database.
-                DeleteForm check = new DeleteForm(ensure);
-                check.StartPosition = FormStartPosition.CenterParent;
-                check.ShowDialog(this);
-
                 if (ensure)
                 {
-                    Manager fired = SearchMan();
-                    if (fired != null)
+                    Staff fired = SearchSelectedStaff();
+                    if(fired != null)
                     {
-                        cmd.CommandText = "DELETE FROM schedule WHERE PersonId = @PersonId";
-                        cmd.Parameters.AddWithValue("@PersonId", fired.dbID);
-                        cmd.ExecuteNonQuery();
-                        cmd.CommandText = "DELETE FROM person WHERE Id = @Id";
-                        cmd.Parameters.AddWithValue("@Id", fired.dbID);
-                        cmd.ExecuteNonQuery(); //Delte from Database.
-
+                        dataBase.deleteStaffMember(fired.dbID);
                         department.DeleteStaffMember(fired);
                     }
-
-                    ensure = false; //Set ensure back to false for future calls.
                 }
             }
-
-            conn.Close();
         }
 
         /**
@@ -532,7 +473,7 @@ namespace MediaBazaarSystem
                     lbEmployees.SelectedIndex = indexEmp;
                 }
             }
-            catch(Exception ex) //If an element was deleted, this would lead to a crash, instead of that we will select nothing.
+            catch(Exception) //If an element was deleted, this would lead to a crash, instead of that we will select nothing.
             {
                 lbEmployees.SelectedItem = null;
             }
@@ -554,7 +495,7 @@ namespace MediaBazaarSystem
                     lbManagers.SelectedIndex = indexMan;
                 }
             }
-            catch(Exception ex) //If an element was deleted, this would lead to a crash, instead of that we will select nothing.
+            catch(Exception) //If an element was deleted, this would lead to a crash, instead of that we will select nothing.
             {
                 lbManagers.SelectedItem = null;
             }
@@ -756,9 +697,9 @@ namespace MediaBazaarSystem
         {
             lBoxEmpStats.Items.Clear();
 
-            foreach(Employee employee in department.GetEmployees())
+            foreach(Employee employee in department.GetStaff())
             {
-                if( (!lBoxEmpStats.Items.Contains( employee.FirstName )) && (employee.Role == "Employee") )
+                if( (!lBoxEmpStats.Items.Contains( employee.FirstName )) && (employee.Role == Position.Employee) )
                 {
                     lBoxEmpStats.Items.Add( employee.FirstName + " " + employee.LastName );
                 }
@@ -777,9 +718,9 @@ namespace MediaBazaarSystem
 
             try
             {
-                foreach( Employee employee in department.GetEmployees() )
+                foreach( Employee employee in department.GetStaff() )
                 {
-                    if( searchedValue.Contains( employee.FirstName.ToLower() ) )
+                    if( searchedValue.Contains( employee.FirstName.ToLower() ) && employee.Role == Position.Employee )
                     {
                         lBoxEmpStats.Items.Add(
                             employee.dbID + " - " +
@@ -791,7 +732,7 @@ namespace MediaBazaarSystem
                     }
                 }
             }
-            catch( Exception ex )
+            catch( Exception )
             {
                 MessageBox.Show( "Sorry, that person doesn't exist" );
             }
@@ -823,7 +764,7 @@ namespace MediaBazaarSystem
                     }
                 }
             }
-            catch(Exception ex)
+            catch(Exception)
             {
                 MessageBox.Show( "Sorry, that person doesn't exist" );
             }
@@ -904,9 +845,9 @@ namespace MediaBazaarSystem
         {
             lBoxEmpStats.Items.Clear();
 
-            foreach( Employee employee in department.GetEmployees() )
+            foreach( Employee employee in department.GetStaff() )
             {
-                if( (cmboBoxStatsFilter.SelectedItem.ToString() == "FullTime") && (employee.Contract == Contract.FullTime))
+                if( (cmboBoxStatsFilter.SelectedItem.ToString() == "FullTime") && (employee.Contract == Contract.FullTime) && employee.Role == Position.Employee )
                 {
                     lBoxEmpStats.Items.Add(
                         "Name: " + employee.FirstName + " " +
@@ -915,7 +856,7 @@ namespace MediaBazaarSystem
                         "Salary: " + employee.Salary
                     );
                 }
-                else if( ( cmboBoxStatsFilter.SelectedItem.ToString() == "PartTime" ) && ( employee.Contract == Contract.PartTime ) )
+                else if( ( cmboBoxStatsFilter.SelectedItem.ToString() == "PartTime" ) && ( employee.Contract == Contract.PartTime ) && employee.Role == Position.Employee )
                 {
                     lBoxEmpStats.Items.Add(
                         "Name: " + employee.FirstName + " " +

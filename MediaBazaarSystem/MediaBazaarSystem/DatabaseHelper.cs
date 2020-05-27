@@ -16,7 +16,7 @@ namespace MediaBazaarSystem
     public class DatabaseHelper
     {
         private string connString = @"Server = studmysql01.fhict.local; Uid = dbi437493; Database = dbi437493; Pwd = dbgroup01;";
-        
+
 
         //public void addWorker(String query, String FirstName, String LastName, DateTime birthDate, String address, String email, String password, double salary, 
         //    int hoursAvailable, int roleID, Contract contract, Department department)
@@ -108,7 +108,103 @@ namespace MediaBazaarSystem
         //    }
         //}
 
-        public void addStaffToDB( Staff man, int departmentID )
+        public void StaffLogin(String email, String password)
+        {
+            Contract contract;
+
+            String sql = "SELECT person.Id, person.Firstname, person.Lastname, person.Age, person.Address, person.Email, person.Password, person.Salary, " +
+                            "person.HoursWorked, person.HoursAvailable, person.IsAvailable, person.RoleID, department.Name, person.DepartmentID, person.ContractID " +
+                         "FROM person JOIN department ON Person.DepartmentID = Department.id " +
+                         "WHERE email = @email";
+
+            MySqlConnection conn = new MySqlConnection(connString);
+            MySqlCommand cmd = new MySqlCommand(sql, conn);
+            cmd.Parameters.AddWithValue("email", email);
+            conn.Open();
+            MySqlDataReader reader = cmd.ExecuteReader();
+
+            try
+            {
+                if (reader.Read())
+                {
+                    // Variables 
+                    int ID = (int)reader.GetValue(0);
+                    String firstName = reader.GetString(1);
+                    String lastName = reader.GetString(2);
+                    DateTime birthDateWithTime = (DateTime)reader.GetValue(3);
+                    DateTime birthDate = birthDateWithTime.Date;
+                    String address = reader.GetString(4);
+                    String toDecryptPassword = reader.GetString(6);
+                    double salary = reader.GetDouble(7);
+                    int hoursavailable = (int)reader.GetValue(9);
+                    int role = (int)reader.GetValue(11);
+
+                    //Calculate age
+                    int age = DateTime.Now.Year - birthDate.Year - 1;
+
+                    if (birthDate.Month > DateTime.Now.Month)
+                    {
+                        age++;
+                    }
+                    else if (birthDate.Month == DateTime.Now.Month)
+                    {
+                        if (birthDate.Day >= DateTime.Now.Day)
+                        {
+                            age++;
+                        }
+                    }
+
+                    //Department
+                    String depName = reader.GetString(12);
+                    int depID = (int)reader.GetValue(13);
+                    Department department = new Department(depName, depID);
+
+                    // Get the contract
+                    int dbContract = (int)reader.GetValue(14);
+                    if (dbContract == 1)
+                    {
+                        contract = Contract.FullTime;
+                    }
+                    else
+                    {
+                        contract = Contract.PartTime;
+                    }
+
+                    // Decrypt password and check if password is equal to the password user filled in
+                    if (Cryptography.Decrypt(toDecryptPassword) == password)
+                    {
+                        if (role == 1) // Manager
+                        {
+                            Manager manager = new Manager(ID, firstName, lastName, birthDate, address, salary, hoursavailable, email, contract);
+                            AdministrationSystem administrationSystem = new AdministrationSystem(department, manager);
+                            administrationSystem.Show();
+                        }
+                        else if (role == 2) // Employee
+                        {
+                            Employee employee = new Employee(ID, firstName, lastName, birthDate, address, salary, hoursavailable, email, contract);
+                            EmployeeSystem employeeSystem = new EmployeeSystem(department, employee);
+                            employeeSystem.Show();
+                        }
+                    }
+                    else if ((Cryptography.Decrypt(toDecryptPassword) != password) || (password == null))
+                    {
+                        //throw new ArgumentException( "Email or password is incorrect. Please try again." );
+                    }
+                }
+                else
+                {
+                    //throw new ArgumentException( "Unable to connect to the database. Please contact your administrator." );
+                }
+            }
+            finally
+            {
+                conn.Close();
+            }
+        }
+    
+
+
+    public void addStaffToDB( Staff man, int departmentID )
         {
             if(man != null)
             {
@@ -260,7 +356,7 @@ namespace MediaBazaarSystem
 
             cmd.ExecuteNonQuery();
 
-            memberToChange.editStaffMember(FirstName, LastName, age, address, email);
+            memberToChange.editStaffMember(FirstName, LastName, birthDate , address, email);
         }
 
         public void managerUpdateProfile(Staff memberToChange, String FirstName, String LastName, DateTime birthDate, String address, String email, double salary, int hoursAvailable, int roleID, int DepartmentID, Contract contract)
@@ -293,60 +389,74 @@ namespace MediaBazaarSystem
 
 
         //////////////////////////////////////////////////////////////////W.I.P.////////////////////////////////////////////////////////////////////////////////////
-
-        public void getWorkSchedule(String sql) 
+        public void deleteStaffMember(int ID)
         {
             MySqlConnection conn = new MySqlConnection(connString);
-
-            MySqlCommand cmd = new MySqlCommand(sql, conn);
-            // Open connection
             conn.Open();
-            MySqlDataReader reader = cmd.ExecuteReader();
 
-            if (reader.HasRows)
-            {
-                // Get the data
-                while (reader.Read())
-                {
-                    String firstName = reader.GetValue(1).ToString();
-                    String lastName = reader.GetValue(2).ToString();
-                    String role = reader.GetValue(3).ToString();
-                    String startTime = reader.GetValue(4).ToString();
-                    String endTime = reader.GetValue(5).ToString();
-                    String workDate = reader.GetValue(6).ToString();
-                    DateTime workStartTime = Convert.ToDateTime(startTime);
-                    DateTime workEndTime = Convert.ToDateTime(endTime);
-                    DateTime convertedWorkDate = Convert.ToDateTime(workDate);
-                    String departmentName = reader.GetValue(7).ToString();
-                    int scheduleID = (int)reader.GetValue(8);
+            MySqlCommand cmd = conn.CreateCommand();
+            cmd.CommandText = "DELETE FROM schedule WHERE PersonId = @PersonId";
+            cmd.Parameters.AddWithValue("@PersonId", ID);
+            cmd.ExecuteNonQuery();
+            cmd.CommandText = "DELETE FROM person WHERE Id = @Id";
+            cmd.Parameters.AddWithValue("@Id", ID);
+            cmd.ExecuteNonQuery();
+        }   
 
-                    if ((dtpWorkSchedule.Value.Date == convertedWorkDate.Date) && (department.Name == departmentName))
-                    {
-                        // Add data to data grid view table
-                        DataGridViewRow row = (DataGridViewRow)dataAdminWorkSchedule.Rows[0].Clone();
-                        dataAdminWorkSchedule.Columns["clmnWorkDate"].DefaultCellStyle.BackColor = Color.LightSteelBlue;
-                        dataAdminWorkSchedule.Columns["clmnStartTime"].DefaultCellStyle.BackColor = Color.PaleGreen;
-                        dataAdminWorkSchedule.Columns["clmnEndTime"].DefaultCellStyle.BackColor = Color.PaleVioletRed;
-                        row.Cells[0].Value = firstName + " " + lastName; // First Name
-                        row.Cells[1].Value = role; // Name (Role)
-                        row.Cells[2].Value = workStartTime.ToString("hh:mm tt");// Start Time
-                        row.Cells[3].Value = workEndTime.ToString("hh:mm tt"); // End Time
-                        row.Cells[4].Value = convertedWorkDate.ToString("dddd, dd MMMM yyyy"); // Work Date
-                        dataAdminWorkSchedule.Rows.Add(row);
-                    }
 
-                    schedule = new Schedule(scheduleID, firstName, lastName, role, workStartTime, workEndTime, convertedWorkDate, departmentName);
-                    department.AddSchedule(schedule);
-                }
-            }
-            else
-            {
-                MessageBox.Show("Sorry there's no data. Contact your administrator for more information.");
-            }
+        //public void getWorkSchedule(String sql) 
+        //{
+        //    MySqlConnection conn = new MySqlConnection(connString);
 
-            reader.Close();
-            conn.Close();
-        }
+        //    MySqlCommand cmd = new MySqlCommand(sql, conn);
+        //    // Open connection
+        //    conn.Open();
+        //    MySqlDataReader reader = cmd.ExecuteReader();
+
+        //    if (reader.HasRows)
+        //    {
+        //        // Get the data
+        //        while (reader.Read())
+        //        {
+        //            String firstName = reader.GetValue(1).ToString();
+        //            String lastName = reader.GetValue(2).ToString();
+        //            String role = reader.GetValue(3).ToString();
+        //            String startTime = reader.GetValue(4).ToString();
+        //            String endTime = reader.GetValue(5).ToString();
+        //            String workDate = reader.GetValue(6).ToString();
+        //            DateTime workStartTime = Convert.ToDateTime(startTime);
+        //            DateTime workEndTime = Convert.ToDateTime(endTime);
+        //            DateTime convertedWorkDate = Convert.ToDateTime(workDate);
+        //            String departmentName = reader.GetValue(7).ToString();
+        //            int scheduleID = (int)reader.GetValue(8);
+
+        //            if ((dtpWorkSchedule.Value.Date == convertedWorkDate.Date) && (department.Name == departmentName))
+        //            {
+        //                // Add data to data grid view table
+        //                DataGridViewRow row = (DataGridViewRow)dataAdminWorkSchedule.Rows[0].Clone();
+        //                dataAdminWorkSchedule.Columns["clmnWorkDate"].DefaultCellStyle.BackColor = Color.LightSteelBlue;
+        //                dataAdminWorkSchedule.Columns["clmnStartTime"].DefaultCellStyle.BackColor = Color.PaleGreen;
+        //                dataAdminWorkSchedule.Columns["clmnEndTime"].DefaultCellStyle.BackColor = Color.PaleVioletRed;
+        //                row.Cells[0].Value = firstName + " " + lastName; // First Name
+        //                row.Cells[1].Value = role; // Name (Role)
+        //                row.Cells[2].Value = workStartTime.ToString("hh:mm tt");// Start Time
+        //                row.Cells[3].Value = workEndTime.ToString("hh:mm tt"); // End Time
+        //                row.Cells[4].Value = convertedWorkDate.ToString("dddd, dd MMMM yyyy"); // Work Date
+        //                dataAdminWorkSchedule.Rows.Add(row);
+        //            }
+
+        //            schedule = new Schedule(scheduleID, firstName, lastName, role, workStartTime, workEndTime, convertedWorkDate, departmentName);
+        //            department.AddSchedule(schedule);
+        //        }
+        //    }
+        //    else
+        //    {
+        //        MessageBox.Show("Sorry there's no data. Contact your administrator for more information.");
+        //    }
+
+        //    reader.Close();
+        //    conn.Close();
+        //}
 
     }
 }

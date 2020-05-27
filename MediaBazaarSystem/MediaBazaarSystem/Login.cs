@@ -31,8 +31,8 @@ namespace MediaBazaarSystem
             String email = txtBoxEmail.Text;
             String password = txtBoxPassword.Text;
 
-            DBHandler dBHandler = new DBHandler();
-            dBHandler.StaffLogin( email, password );
+            DatabaseHelper dataBase = new DatabaseHelper();
+            dataBase.StaffLogin( email, password );
             this.Hide();
         }
     }

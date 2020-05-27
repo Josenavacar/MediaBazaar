@@ -18,8 +18,14 @@ namespace MediaBazaarSystem
         Department department;
         //Employee employee;
         //Manager manager;
-
         Staff staffMember;
+
+        String FirstName, LastName, address, email;
+        DateTime birthDate;
+        double salary;
+        int hoursAvailable, roleID, DepartmentID;
+        Position role;
+        Contract contract;
 
         //This form is used by 3 different methods, Add employee, add manager and update employee/manager, for that reason the constructor is overloaded,
         //if a department alone is given, then the method will add a new person, if a department + a manager is given, a manager is to be updated, and if
@@ -52,6 +58,13 @@ namespace MediaBazaarSystem
             this.department = dep;
             this.staffMember = staffMember;
 
+            SetUpForm();
+
+            dataBase = new DatabaseHelper();
+        }
+
+        private void SetUpForm()
+        {
             txtBoxFirstName.Text = staffMember.FirstName;
             txtBoxLastName.Text = staffMember.LastName;
             tbBirthDate.Text = staffMember.dateOfBirth.ToString();
@@ -60,8 +73,6 @@ namespace MediaBazaarSystem
             txtBoxSalary.Text = staffMember.Salary.ToString();
             txtBoxHoursAvailable.Text = staffMember.HoursAvailable.ToString();
             txtBoxEmail.Text = staffMember.Email.ToString();
-
-            dataBase = new DatabaseHelper();
         }
 
         ///**
@@ -298,17 +309,7 @@ namespace MediaBazaarSystem
 
         private void btnEditStaff_Click(object sender, EventArgs e)
         {
-            String FirstName = txtBoxFirstName.Text.ToString(); //First name
-            String LastName = txtBoxLastName.Text.ToString(); //Last name
-            DateTime birthDate = Convert.ToDateTime(tbBirthDate.Text); //Date of Birth
-            String address = tbAddress.Text.ToString(); //Address
-            String email = txtBoxEmail.Text.ToString(); //Email
-            double salary = Convert.ToDouble(txtBoxSalary.Text); //Salary
-            int hoursAvailable = Convert.ToInt32(txtBoxHoursAvailable.Text); //Hours available
-            int roleID = comBoxRole.SelectedIndex + 1;
-            Position role = (Position)roleID; //Role (as a string instead of an ID for ease of use and clarity in a list of C#)
-            int DepartmentID = cmboBoxDepartment.SelectedIndex + 1;
-            Contract contract = (Contract)Enum.Parse(typeof(Contract), cmboBoxContract.SelectedItem.ToString());
+            ReadInfoFromForm();
             //int passcode = Convert.ToInt32(txtBoxPasscode.Text);
 
             dataBase.managerUpdateProfile(staffMember, FirstName, LastName, birthDate, address, email, salary, hoursAvailable, roleID, DepartmentID, contract);
@@ -317,18 +318,8 @@ namespace MediaBazaarSystem
 
         private void btnAddStaff_Click(object sender, EventArgs e)
         {
+            ReadInfoFromForm();
             int tempID = -1;
-            String FirstName = txtBoxFirstName.Text.ToString(); //First name
-            String LastName = txtBoxLastName.Text.ToString(); //Last name
-            DateTime birthDate = Convert.ToDateTime(tbBirthDate.Text); //Date of Birth
-            String address = tbAddress.Text.ToString(); //Address
-            String email = txtBoxEmail.Text.ToString(); //Email
-            double salary = Convert.ToDouble(txtBoxSalary.Text); //Salary
-            int hoursAvailable = Convert.ToInt32(txtBoxHoursAvailable.Text); //Hours available
-            int roleID = comBoxRole.SelectedIndex + 1;
-            Position role = (Position)roleID; //Role (as a string instead of an ID for ease of use and clarity in a list of C#)
-            int DepartmentID = cmboBoxDepartment.SelectedIndex + 1;
-            Contract contract = (Contract)Enum.Parse(typeof(Contract), cmboBoxContract.SelectedItem.ToString());
 
             Staff newStaffMember = null;
 
@@ -348,6 +339,21 @@ namespace MediaBazaarSystem
             {
                 department.AddStaffMember(newStaffMember);
             }
+        }
+
+        private void ReadInfoFromForm()
+        {
+            this.FirstName = txtBoxFirstName.Text.ToString(); //First name
+            this.LastName = txtBoxLastName.Text.ToString(); //Last name
+            this.birthDate = Convert.ToDateTime(tbBirthDate.Text); //Date of Birth
+            this.address = tbAddress.Text.ToString(); //Address
+            this.email = txtBoxEmail.Text.ToString(); //Email
+            this.salary = Convert.ToDouble(txtBoxSalary.Text); //Salary
+            this.hoursAvailable = Convert.ToInt32(txtBoxHoursAvailable.Text); //Hours available
+            this.roleID = comBoxRole.SelectedIndex + 1;
+            this.role = (Position)roleID; //Role (as a string instead of an ID for ease of use and clarity in a list of C#)
+            this.DepartmentID = cmboBoxDepartment.SelectedIndex + 1;
+            this.contract = (Contract)Enum.Parse(typeof(Contract), cmboBoxContract.SelectedItem.ToString());
         }
     }
 }
