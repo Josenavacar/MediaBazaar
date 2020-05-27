@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MediaBazaarSystem
 {
-    public abstract class Staff
+    public class Staff
     {
         protected String firstName, lastName, address, password, email;
         protected int ID, hoursWorked, hoursAvailable, personID, age;
@@ -116,6 +116,19 @@ namespace MediaBazaarSystem
             this.dateOfBirth = birthDate;
             this.Address = address;
             this.Email = email;
+        }
+
+        public void editStaffMember(String firstName, String lastName, DateTime birthDate, String address, String email, double salary, int hoursAvailable, Position role, Contract contract)
+        {
+            this.FirstName = firstName;
+            this.lastName = lastName;
+            this.dateOfBirth = birthDate;
+            this.Address = address;
+            this.Email = email;
+            this.Salary = salary;
+            this.HoursAvailable = hoursAvailable;
+            this.Role = role;
+            this.Contract = contract;
         }
 
         //public void EditMStaff(String firstName, String lastName, DateTime birthDate, String address, String role, double salary, int hoursAvailable, String email, Contract contract)

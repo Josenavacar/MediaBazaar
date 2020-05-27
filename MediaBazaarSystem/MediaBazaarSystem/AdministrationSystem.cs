@@ -263,19 +263,20 @@ namespace MediaBazaarSystem
         /**
          * Method to update the employee management 
          */
-        private void UpdateEmployeeManagement()
-        {
-            this.lbEmployees.Items.Clear();
-            this.lbManagers.Items.Clear();
+         // I believe its unnecessary
+        //private void UpdateEmployeeManagement()
+        //{
+        //    this.lbEmployees.Items.Clear();
+        //    this.lbManagers.Items.Clear();
 
-            string connectionString = @"Server = studmysql01.fhict.local; Uid = dbi437493; Database = dbi437493; Pwd = dbgroup01;";
-            MySqlConnection connection = new MySqlConnection( connectionString );
-            //Employee related
-            String sql2 = "SELECT * FROM person WHERE DepartmentID = @DepartmentID";
-            MySqlCommand cmd2 = new MySqlCommand( sql2, connection );
-            cmd2.Parameters.Add( "DepartmentID", MySqlDbType.VarChar ).Value = department.DepartmentID;
-            this.GetEmployeeManagementDB( sql2, connection );
-        }
+        //    string connectionString = @"Server = studmysql01.fhict.local; Uid = dbi437493; Database = dbi437493; Pwd = dbgroup01;";
+        //    MySqlConnection connection = new MySqlConnection( connectionString );
+        //    //Employee related
+        //    String sql2 = "SELECT * FROM person WHERE DepartmentID = @DepartmentID";
+        //    MySqlCommand cmd2 = new MySqlCommand( sql2, connection );
+        //    cmd2.Parameters.Add( "DepartmentID", MySqlDbType.VarChar ).Value = department.DepartmentID;
+        //    this.GetEmployeeManagementDB( sql2, connection );
+        //}
 
         /**
          * Method to get statistics
@@ -319,21 +320,13 @@ namespace MediaBazaarSystem
          */
         private void btnViewEmployeeDetails_Click(object sender, EventArgs e)
         {
-            if(lbEmployees.SelectedItem != null) //Checks if an employee is selected in the listbox.
+            if(lbEmployees.SelectedItem != null || lbManagers != null)
             {
-                Employee emp = SearchEmp(); 
-                if (emp != null)
+                Staff staff = SearchSelectedStaff();
+
+                if(staff != null)
                 {
-                    ViewEmployee form1 = new ViewEmployee(emp, null);
-                    form1.Show();
-                }
-            }
-            else if(lbManagers.SelectedItem != null) //Checks if a manager is selected in the listbox.
-            {
-                Manager man = SearchMan(); 
-                if(man != null)
-                {
-                    ViewEmployee form1 = new ViewEmployee(null, man);
+                    ViewEmployee form1 = new ViewEmployee(staff);
                     form1.Show();
                 }
             }
@@ -344,6 +337,18 @@ namespace MediaBazaarSystem
          */
         private void btnUpdateEmployee_Click(object sender, EventArgs e)
         {
+            if(lbEmployees.SelectedItem != null || lbManagers.SelectedItem != null)
+            {
+                Staff staff = SearchSelectedStaff();
+
+                if(staff != null)
+                {
+                    UpdateOrAdd form1 = new UpdateOrAdd();
+                }
+            }
+
+
+
             if (lbEmployees.SelectedItem != null) //Checks if an employee is selected in the listbox.
             {
                 Employee emp = SearchEmp();
@@ -373,40 +378,70 @@ namespace MediaBazaarSystem
         /**
          * Method that returns an employee selected on the listbox or null if it doesn't exist.
          */
-        private Employee SearchEmp()
+        //private Employee SearchEmp()
+        //{
+        //    String auxEmp = lbEmployees.SelectedItem.ToString();
+        //    String[] name = auxEmp.Split(','); //Splits the string by the comma.
+        //    String firstName = name[1].Trim();
+        //    String lastName = name[0].Trim();
+        //    Employee emp = (Employee)department.GetStaffMember(firstName, lastName);
+
+        //    if (emp == null)
+        //    {
+        //        MessageBox.Show("Employee not found.");
+        //    }
+
+        //    return emp;
+        //}
+
+        private Staff SearchSelectedStaff()
         {
-            String auxEmp = lbEmployees.SelectedItem.ToString();
-            String[] name = auxEmp.Split(','); //Splits the string by the comma.
-            String firstName = name[1].Trim();
-            String lastName = name[0].Trim();
-            Employee emp = (Employee)department.GetStaffMember(firstName, lastName);
+            String auxName = null;
+            Staff searching = null;
 
-            if (emp == null)
+            if (lbEmployees.SelectedItem != null)
             {
-                MessageBox.Show("Employee not found.");
+                auxName = lbEmployees.SelectedItem.ToString();
             }
+            else if(lbManagers.SelectedItem != null)
+            {
+                auxName = lbEmployees.SelectedItem.ToString();
+            }
+            
+            if(!String.IsNullOrEmpty(auxName))
+            {
+                String[] name = auxName.Split(','); //Splits the string by the comma.
+                String firstName = name[1].Trim();
+                String lastName = name[0].Trim();
+                searching = department.GetStaffMember(firstName, lastName);
 
-            return emp;
+                if (searching == null)
+                {
+                    MessageBox.Show("Employee not found.");
+                }
+            }
+            
+            return searching;
         }
 
         /**
          * Method that returns a manager selected on the listbox or null if it doesn't exist.
          */
-        private Manager SearchMan()
-        {
-            String auxMan = lbManagers.SelectedItem.ToString();
-            String[] name = auxMan.Split(','); //Splits the string by the comma.
-            String firstName = name[1].Trim();
-            String lastName = name[0].Trim();
-            Manager man = department.GetManager(firstName, lastName);
+        //private Manager SearchMan()
+        //{
+        //    String auxMan = lbManagers.SelectedItem.ToString();
+        //    String[] name = auxMan.Split(','); //Splits the string by the comma.
+        //    String firstName = name[1].Trim();
+        //    String lastName = name[0].Trim();
+        //    Manager man = department.GetManager(firstName, lastName);
 
-            if (man == null)
-            {
-                MessageBox.Show("Employee not found.");
-            }
+        //    if (man == null)
+        //    {
+        //        MessageBox.Show("Employee not found.");
+        //    }
 
-            return man;
-        }
+        //    return man;
+        //}
 
         /**
          * Method to delete employee from the database

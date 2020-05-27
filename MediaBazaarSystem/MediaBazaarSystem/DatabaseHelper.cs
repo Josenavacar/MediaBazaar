@@ -108,70 +108,72 @@ namespace MediaBazaarSystem
         //    }
         //}
 
-        public void addStaffToDB( Staff man, Department department )
+        public void addStaffToDB( Staff man, int departmentID )
         {
-            MySqlConnection conn = new MySqlConnection(connString);
+            if(man != null)
+            {
+                MySqlConnection conn = new MySqlConnection(connString);
 
-            int age = man.dateOfBirth.Year - DateTime.Now.Year - 1;
-            if (man.dateOfBirth.Month > DateTime.Now.Month)
-            {
-                age++;
-            }
-            else if (man.dateOfBirth.Month == DateTime.Now.Month)
-            {
-                if (man.dateOfBirth.Day >= DateTime.Now.Day)
+                int age = man.dateOfBirth.Year - DateTime.Now.Year - 1;
+                if (man.dateOfBirth.Month > DateTime.Now.Month)
                 {
                     age++;
                 }
+                else if (man.dateOfBirth.Month == DateTime.Now.Month)
+                {
+                    if (man.dateOfBirth.Day >= DateTime.Now.Day)
+                    {
+                        age++;
+                    }
+                }
+                int roleID = (int)man.Role;
+
+                String password = Cryptography.Encrypt("temp");
+                conn.Open();
+                MySqlCommand cmd = conn.CreateCommand();
+
+                cmd.CommandText = "INSERT INTO person(Firstname, Lastname, Age, Address, Email, Password, Salary, HoursWorked, HoursAvailable, IsAvailable, RoleID, DepartmentID, ContractID) " +
+                    "VALUES(@FirstN, @LastN, @Age, @Address, @Email, @Password, @Salary, @HoursWorked, @HoursAvailable, @IsAvailable, @RoleID, @DepartmentID, @ContractID) ";
+
+                cmd.Parameters.AddWithValue("@FirstN", man.FirstName);
+                cmd.Parameters.AddWithValue("@LastN", man.LastName);
+                cmd.Parameters.AddWithValue("@Age", man.dateOfBirth);
+                cmd.Parameters.AddWithValue("@Address", man.Address);
+                cmd.Parameters.AddWithValue("@Email", man.Email);
+                cmd.Parameters.AddWithValue("@Password", password);
+                cmd.Parameters.AddWithValue("@Salary", man.Salary);
+                cmd.Parameters.AddWithValue("@HoursWorked", 0);
+                cmd.Parameters.AddWithValue("@HoursAvailable", man.HoursAvailable);
+                cmd.Parameters.AddWithValue("@IsAvailable", "Yes");
+                cmd.Parameters.AddWithValue("@RoleID", roleID);
+                cmd.Parameters.AddWithValue("@DepartmentID", departmentID);
+                cmd.Parameters.AddWithValue("@ContractID", man.Contract);
+                cmd.ExecuteNonQuery(); //Inserted into database.
+
+
+                MySqlCommand scheduleCmd = conn.CreateCommand();
+
+                scheduleCmd.CommandText = "INSERT INTO schedule(StartTime, EndTime, WorkDate, PersonID) " +
+                    "VALUES(@StartTime, @EndTime, @WorkDate, LAST_INSERT_ID()) ";
+
+                scheduleCmd.Parameters.AddWithValue("@StartTime", DateTime.Today.TimeOfDay);
+                scheduleCmd.Parameters.AddWithValue("@EndTime", DateTime.Today.TimeOfDay);
+                scheduleCmd.Parameters.AddWithValue("@WorkDate", DateTime.Today);
+                scheduleCmd.ExecuteNonQuery(); //Inserted into database.
+
+                MySqlCommand cmd2 = conn.CreateCommand();
+                cmd2.CommandText = "SELECT Id FROM person ORDER BY Id DESC LIMIT 1"; //Extracts the Id assigned from the database.
+                MySqlDataReader reader = cmd2.ExecuteReader();
+                int ID = 0;
+                while (reader.Read())
+                {
+                    ID = (int)reader.GetValue(0);
+                }
+                reader.Close();
+                conn.Close();
+
+                man.dbID = ID;
             }
-
-            String password = Cryptography.Encrypt("temp");
-            conn.Open();
-            MySqlCommand cmd = conn.CreateCommand();
-
-            cmd.CommandText = "INSERT INTO person(Firstname, Lastname, Age, Address, Email, Password, Salary, HoursWorked, HoursAvailable, IsAvailable, RoleID, DepartmentID, ContractID) " +
-                "VALUES(@FirstN, @LastN, @Age, @Address, @Email, @Password, @Salary, @HoursWorked, @HoursAvailable, @IsAvailable, @RoleID, @DepartmentID, @ContractID) ";
-
-            cmd.Parameters.AddWithValue("@FirstN", man.FirstName);
-            cmd.Parameters.AddWithValue("@LastN", man.LastName);
-            cmd.Parameters.AddWithValue("@Age", man.dateOfBirth);
-            cmd.Parameters.AddWithValue("@Address", man.Address);
-            cmd.Parameters.AddWithValue("@Email", man.Email);
-            cmd.Parameters.AddWithValue("@Password", password);
-            cmd.Parameters.AddWithValue("@Salary", man.Salary);
-            cmd.Parameters.AddWithValue("@HoursWorked", 0);
-            cmd.Parameters.AddWithValue("@HoursAvailable", man.HoursAvailable);
-            cmd.Parameters.AddWithValue("@IsAvailable", "Yes");
-            cmd.Parameters.AddWithValue("@RoleID", 1);
-            cmd.Parameters.AddWithValue("@DepartmentID", department.DepartmentID);
-            cmd.Parameters.AddWithValue("@ContractID", man.Contract);
-            cmd.ExecuteNonQuery(); //Inserted into database.
-
-
-            MySqlCommand scheduleCmd = conn.CreateCommand();
-
-            scheduleCmd.CommandText = "INSERT INTO schedule(StartTime, EndTime, WorkDate, PersonID) " +
-                "VALUES(@StartTime, @EndTime, @WorkDate, LAST_INSERT_ID()) ";
-
-            scheduleCmd.Parameters.AddWithValue("@StartTime", DateTime.Today.TimeOfDay);
-            scheduleCmd.Parameters.AddWithValue("@EndTime", DateTime.Today.TimeOfDay);
-            scheduleCmd.Parameters.AddWithValue("@WorkDate", DateTime.Today);
-            scheduleCmd.ExecuteNonQuery(); //Inserted into database.
-
-            MySqlCommand cmd2 = conn.CreateCommand();
-            cmd2.CommandText = "SELECT Id FROM person ORDER BY Id DESC LIMIT 1"; //Extracts the Id assigned from the database.
-            MySqlDataReader reader = cmd2.ExecuteReader();
-            int ID = 0;
-            while (reader.Read())
-            {
-                ID = (int)reader.GetValue(0);
-            }
-            reader.Close();
-            conn.Close();
-
-            man.dbID = ID;
-            
-            department.AddStaffMember(man);
         }
 
         public List<Staff> getStaffFromDB(Department dep)
@@ -224,7 +226,24 @@ namespace MediaBazaarSystem
             return dep.GetStaff();
         }
 
-        public void updateProfile(Staff memberToChange, String FirstName, String LastName, DateTime age, String address, String email)
+        public int getStaffID()
+        {
+            MySqlConnection conn = new MySqlConnection(connString);
+            String sql = "SELECT Id FROM person ORDER BY Id DESC LIMIT 1"; //Extracts the Id assigned from the database.
+
+            MySqlCommand cmd = new MySqlCommand(sql, conn);
+            MySqlDataReader reader = cmd.ExecuteReader();
+
+            int ID = 0;
+            while (reader.Read())
+            {
+                ID = (int)reader.GetValue(0);
+            }
+
+            return ID;
+        }
+
+        public void updateProfile(Staff memberToChange, String FirstName, String LastName, DateTime birthDate, String address, String email)
         {
             MySqlConnection conn = new MySqlConnection(connString);
             // Open connection
@@ -234,7 +253,7 @@ namespace MediaBazaarSystem
             cmd.CommandText = "UPDATE person SET Firstname = @Firstname, Lastname = @Lastname, Age = @Age, Address = @Address, Email = @Email WHERE Id = @Id";
             cmd.Parameters.AddWithValue("@Firstname", FirstName);
             cmd.Parameters.AddWithValue("@Lastname", LastName);
-            cmd.Parameters.AddWithValue("@Age", age);
+            cmd.Parameters.AddWithValue("@Age", birthDate);
             cmd.Parameters.AddWithValue("@Address", address);
             cmd.Parameters.AddWithValue("@Email", email);
             cmd.Parameters.AddWithValue("@Id", memberToChange.dbID);
@@ -242,6 +261,34 @@ namespace MediaBazaarSystem
             cmd.ExecuteNonQuery();
 
             memberToChange.editStaffMember(FirstName, LastName, age, address, email);
+        }
+
+        public void managerUpdateProfile(Staff memberToChange, String FirstName, String LastName, DateTime birthDate, String address, String email, double salary, int hoursAvailable, int roleID, int DepartmentID, Contract contract)
+        {
+            MySqlConnection conn = new MySqlConnection(connString);
+            // Open connection
+            conn.Open();
+            MySqlCommand cmd = conn.CreateCommand();
+
+            cmd.CommandText = "UPDATE person SET Firstname = @FirstN,  Lastname = @LastN, Age = @Age, Address = @Address, Email = @Email, Salary = @Salary," +
+                            "HoursAvailable = @HoursAvailable, IsAvailable = @IsAvailable, Passcode = @Passcode,RoleID = @RoleID, DepartmentID = @DepartmentID, ContractID = @ContractID WHERE Id = @PersonID";
+
+            cmd.Parameters.AddWithValue("@FirstN", FirstName);
+            cmd.Parameters.AddWithValue("@LastN", LastName);
+            cmd.Parameters.AddWithValue("@Age", birthDate);
+            cmd.Parameters.AddWithValue("@Address", address);
+            cmd.Parameters.AddWithValue("@Email", email);
+            cmd.Parameters.AddWithValue("@Salary", salary);
+            cmd.Parameters.AddWithValue("@HoursAvailable", hoursAvailable);
+            cmd.Parameters.AddWithValue("@IsAvailable", "Yes");
+            //cmd.Parameters.AddWithValue("@Passcode", passcode);
+            cmd.Parameters.AddWithValue("@RoleID", roleID);
+            cmd.Parameters.AddWithValue("@DepartmentID", DepartmentID);
+            cmd.Parameters.AddWithValue("@ContractID", contract);
+
+            cmd.ExecuteNonQuery();
+
+            memberToChange.editStaffMember(FirstName, LastName, birthDate, address, email);
         }
 
 
