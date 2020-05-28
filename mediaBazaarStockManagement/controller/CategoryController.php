@@ -12,10 +12,6 @@
     	render("categories/product", array('products' => getProducts($category_id)));
     }
 
-    function edit($category_id)
-    {
-        render("categories/edit", array('category' => getCategory($category_id)));
-    }
 
     function add()
     {
@@ -24,18 +20,23 @@
 
     function addRequest()
     {
-        if (isset($_POST['data'])) 
+        if (isset($_POST['add'])) 
         {
-            $data = $_POST['data'];
+            $data = $_POST['add'];
             addCategory($data);
         }
     }
 
+    function edit($category_id)
+    {
+        render("categories/edit", array('category' => getCategory($category_id)));
+    }
+
     function editRequest()
     {
-        if (isset($_POST['data'])) 
+        if (isset($_POST['edit'])) 
         {
-            $data = $_POST['data'];
+            $data = $_POST['edit'];
             editCategory($data);
         }
     }

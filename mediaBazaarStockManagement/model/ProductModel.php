@@ -9,12 +9,12 @@
 		return $query->fetchAll();
 	}
 
-	function getProduct($product)
+	function getProduct($product_id)
 	{
 		$db = openDatabaseConnection();
-		$sql = "SELECT * FROM product WHERE name = :product";
+		$sql = "SELECT * FROM product WHERE Id = :product_id";
 		$query = $db->prepare($sql);
-		$query->execute(array(":product" => $product));
+		$query->execute(array(":product_id" => $product_id));
 
 		$db = null;
 		return $query->fetch();

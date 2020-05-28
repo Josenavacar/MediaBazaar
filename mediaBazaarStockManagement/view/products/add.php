@@ -15,28 +15,51 @@
 </head>
 <body>
     <div class="container-fluid">
-        <h1 class="mt-4 text-center">Add a new category</h1>
-		<form>
-			<div class="form-group">
-				<div class="input-group">
-					<div class="col-lg">
-                        <input id="categoryName" name="categoryName" placeholder="Enter name here..." type="text" class="form-control" required="required">
-		            </div>
-            	</div>
-			</div>
-            <div class="form-group">
-				<div class="input-group">
-					<div class="col-lg">
-						<textarea class="form-control" id="description" placeholder="Description" name="description" rows="3" required="required"></textarea>
-					</div>
+    	<div class="col">
+        	<h1 class="mt-4 text-center">Add a new product</h1>
+			<form>
+				<div class="form-group">
+					<div class="input-group">
+						<div class="col-md-6">
+							<div class="form-label-group">
+		                        <input id="name" name="name" placeholder="Enter name here..." type="text" class="form-control" required="required">
+		                        <label for="name">Name</label>
+	                        </div>
+			            </div>
+						<div class="col-md-6">
+							<div class="form-label-group">
+	                        	<input id="price" name="price" placeholder="Price" type="text" class="form-control" required="required">
+	                        	<label for="price">Price</label>
+                        	</div>
+			            </div>
+	            	</div>
 				</div>
-            </div>
-            <div class="input-group">
-                <div class="col-lg">
-                    <button id="submit" type="submit" class="btn btn-md btn-outline-info btn-block submit">Submit</button>
-                </div>
-            </div>  
-		</form>
+	            <div class="form-group">
+					<div class="input-group">
+						<div class="col-lg">
+							<textarea class="form-control" id="description" placeholder="Description" name="description" rows="3" required="required"></textarea>
+						</div>
+					</div>
+	            </div>
+	            <div class="form-group">
+	            	<div class="input-group">
+	            		<div class="col-lg">
+		                    <select id="categories" class="form-control" required="true">
+		                        <option hidden >Categories</option>
+			                        <?php foreach($categories as $category) { ?>
+			                            <option data-id="<?php echo $category['Name']; ?>" value="<?php echo $category['Name'] ?>" id="category"><?php echo $category["Name"] ?></option>
+			                        <?php } ?>
+		                    </select>
+	            		</div>
+	            	</div>
+	            </div>
+	            <div class="input-group">
+	                <div class="col-lg">
+	                    <button id="submit" type="submit" class="btn btn-md btn-outline-info btn-block submit">Submit</button>
+	                </div>
+	            </div>  
+			</form>
+    	</div>
     </div>
 </div>
 <!-- /#page-content-wrapper -->
@@ -61,7 +84,7 @@
 		});
 
 		/**
-		 * Ajax request to PHP to add a category to the DB
+		 * Ajax request to PHP to add product to the DB
 		 * @param  {[type]} event) 	                {	        event.preventDefault();	        let name [description]
 		 * @return {[type]}        [description]
 		 */
@@ -74,7 +97,9 @@
 	        let data = 
 	        {
 	            name: name,
-	            description: description
+	            price: price,
+	            description: description,
+	            category: category
 	        };
 
 			let url = $(location).attr("href")
@@ -82,7 +107,7 @@
 			let last_part = '/' + parts[parts.length-1]
 			url = url.replace(last_part, '/addRequest');
 
-	        if (name === "" || description === "") 
+	        if ((name === "") || (description === "") || (price === "") || (category === "")) 
 	        {
 	            Swal.fire
 	            ({
@@ -106,7 +131,7 @@
 		                Swal.fire
 		                ({
 		                    icon: 'success',
-		                    title: 'New category is added',
+		                    title: 'New product is added',
 		                })
 		            },
 		            error: function (data) 

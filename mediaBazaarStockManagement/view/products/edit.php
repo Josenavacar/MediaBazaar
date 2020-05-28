@@ -15,28 +15,33 @@
 </head>
 <body>
     <div class="container-fluid">
-        <h1 class="mt-4 text-center">Edit <?php echo $category['Name']; ?></h1>
-		<form>
-			<div class="form-group">
-				<div class="input-group">
-					<div class="col-lg">
-                        <input id="categoryName" name="categoryName" value="<?php echo $category['Name']; ?>" type="text" class="form-control" required="required">
-		            </div>
-            	</div>
-			</div>
-            <div class="form-group">
-				<div class="input-group">
-					<div class="col-lg">
-						<textarea class="form-control" id="description" name="description" rows="3" required="required"><?php echo $category['Description']; ?></textarea>
-					</div>
+    	<div class="col">
+	        <h1 class="mt-4 text-center">Edit <?php echo $product['Name']; ?></h1>
+			<form>
+				<div class="form-group">
+					<div class="input-group">
+						<div class="col-md-6">
+	                        <input id="productName" name="productName" value="<?php echo $product['Name']; ?>" type="text" class="form-control" required="required">
+			            </div>
+						<div class="col-md-6">
+	                        <input id="productPrice" name="productPrice" value="<?php echo $product['Price']; ?>" placeholder="Price" type="text" class="form-control" required="required">
+			            </div>
+	            	</div>
 				</div>
-            </div>
-            <div class="input-group">
-                <div class="col-lg">
-                    <button id="submit" type="submit" class="btn btn-md btn-outline-info btn-block submit">Submit</button>
-                </div>
-            </div>  
-		</form>
+	            <div class="form-group">
+					<div class="input-group">
+						<div class="col-lg">
+							<textarea class="form-control" id="description" name="description" rows="3" required="required"><?php echo $product['Description']; ?></textarea>
+						</div>
+					</div>
+	            </div>
+	            <div class="input-group">
+	                <div class="col-lg">
+	                    <button id="submit" type="submit" class="btn btn-md btn-outline-info btn-block submit">Submit</button>
+	                </div>
+	            </div>  
+			</form>
+    	</div>
     </div>
 </div>
 <!-- /#page-content-wrapper -->
@@ -58,24 +63,29 @@
 			$("#menu-toggle").hide();
 		});
 
-
+		/**
+		 * Ajax request to PHP to edit a product 
+		 * @param  {[type]} event) 	                {	        event.preventDefault();	        let name [description]
+		 * @return {[type]}        [description]
+		 */
 	    $("#submit").click(function (event) 
 	    {
 	        event.preventDefault();
-	        let category_id = '<?php echo $category['Id']; ?>';
-	        let name = document.getElementById("categoryName").value;
+	        let name = document.getElementById("productName").value;
+	        let price = document.getElementById("productPrice").value;
 	        let description = document.getElementById("description").value;
 
 	        let data = 
 	        {
-	        	category_id: category_id,
 	            name: name,
+	            price: price,
 	            description: description
 	        };
+
 			let url = $(location).attr("href")
 			let parts = url.split("/")
 			let last_part = '/' + parts[parts.length-3] + '/' + parts[parts.length-2] + '/' + parts[parts.length-1]
-			url = url.replace(last_part, '/category/editRequest');
+			url = url.replace(last_part, '/product/editRequest');
 
 	        $.ajax
 	        ({
@@ -87,11 +97,12 @@
 	            },
 	            success: function (data) 
 	            {
-	                Swal.fire
-	                ({
-	                    icon: 'success',
-	                    title: 'Category is successfully updated!'
-	                })
+	            	console.log(data)
+	                // Swal.fire
+	                // ({
+	                //     icon: 'success',
+	                //     title: 'Product is successfully updated!'
+	                // })
 	            },
 	            error: function (data) 
 	            {

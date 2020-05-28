@@ -31,13 +31,19 @@
 
 		if(!empty($row))
 		{
-			// session_start();
-			$_SESSION["user_id"] = $row['Id'];
-			$_SESSION["user_name"] = $row['Email'];
-			$_SESSION['loggedin_time'] = time();
+			if(($row['Email'] == $data['email']) AND ($row['Passcode'] == $data['passcode']))
+			{
+				$_SESSION["user_id"] = $row['Id'];
+				$_SESSION["user_name"] = $row['Email'];
+				$_SESSION['loggedin_time'] = time();
 
-			echo "success";  
-			sendLoginCode($row['Email'], generateLoginCode());
+				echo "success";  
+				sendLoginCode($row['Email'], generateLoginCode());
+			}
+			else
+			{
+				echo "User not found";
+			}
 		}
 		else
 		{
@@ -47,7 +53,7 @@
 			 
 			// Destroy the session.
 			session_destroy();
-			echo "No User found";
+			echo "User not found";
 		}
 
 		$db = null;

@@ -3,10 +3,10 @@
 	/**
 	 * Check if the session is longer than 60 seconds, if so then logout
 	 */
-	if((time() - $_SESSION['loggedin_time']) > 1800) //30 * 60
+	if((time() - $_SESSION['loggedin_time']) > 60 * 60 * 2) //30 * 60 1800
 	{
 		// Initialize the session
-		session_start();
+		// session_start();
 		 
 		// Unset all of the session variables
 		session_unset();
