@@ -31,7 +31,7 @@
 						<tr>
 							<td><?php echo "PR-ID " . $product['Id']; ?></td>
                             <td><?php echo $product['Name']; ?></td>
-                            <td><?php echo "€" . " " . $product['Price']; ?></td>
+                            <td><?php echo "€" . " " . number_format($product['Price'], 2); ?></td>
 						</tr>
 					<?php } ?>
 				</tbody>

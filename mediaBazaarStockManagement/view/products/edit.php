@@ -24,7 +24,7 @@
 	                        <input id="productName" name="productName" value="<?php echo $product['Name']; ?>" type="text" class="form-control" required="required">
 			            </div>
 						<div class="col-md-6">
-	                        <input id="productPrice" name="productPrice" value="<?php echo $product['Price']; ?>" placeholder="Price" type="text" class="form-control" required="required">
+	                        <input id="productPrice" name="productPrice" value="<?php echo number_format($product['Price'], 2); ?>" placeholder="Price" type="text" class="form-control" required="required">
 			            </div>
 	            	</div>
 				</div>

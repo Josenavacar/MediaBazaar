@@ -24,7 +24,7 @@
 					<tr>
                         <td><?php echo "PR-ID " . $product['Id']; ?></td>
                         <td><a href="product/product/<?=$product['Id']?>"><?php echo $product['Name']; ?></a></td>
-						<td id="price"><?php echo "€" . " " . $product['Price']; ?></td>
+						<td id="price"><?php echo "€" . " " . number_format($product['Price'], 2); ?></td>
 						<td><a class="btn btn-outline-dark" href="product/edit/<?=$product['Id']?>">Edit</a></td>
 					</tr>
 				<?php } ?>

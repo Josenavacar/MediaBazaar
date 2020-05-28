@@ -1,5 +1,64 @@
 <div class="container-fluid">
     <h1 class="mt-4">Inventory</h1>
+    <hr>
+	<div id="saleStats" class="row">
+		<div class="col-sm-6">
+			<div class="card card bg-light">
+				<div class="card-header">Historical: Best Selling Products</div>
+				<div class="card-body text-info">
+					<?php foreach ($bestSellingProducts as $product) { ?>
+						<p class="card-text"><?php echo $product['Name']; ?></p>
+					<?php } ?>
+				</div>
+			    <div class="card-footer">
+			        <small class="text-muted"></small>
+			    </div>
+			</div>
+		</div>
+		<div class="col">
+			<div class="card card bg-light">
+				<div class="card-header">Historical: Total number of orders</div>
+				<div class="card-body text-info">
+					<p class="card-text"><?php echo count($orders); ?></p>
+				</div>
+			    <div class="card-footer">
+			        <small class="text-muted"></small>
+			    </div>
+			</div>
+			<br>
+			<div class="card card bg-light">
+				<div class="card-header">Total number of products in system</div>
+				<div class="card-body text-info">
+					<p class="card-text"><?php echo count($products); ?></p>
+				</div>
+			    <div class="card-footer">
+			        <small class="text-muted"></small>
+			    </div>
+			</div>
+		</div>
+		<div class="col">
+			<div class="card card bg-light">
+				<div class="card-header">Total orders so far for the month of <?php echo date("F"); ?></div>
+				<div class="card-body text-info">
+					<p class="card-text"><?php echo count($ordersPerMonth); ?></p>
+				</div>
+			    <div class="card-footer">
+			        <small class="text-muted"></small>
+			    </div>
+			</div>
+			<br>
+			<div class="card card bg-light">
+				<div class="card-header">Total number of categories in system</div>
+				<div class="card-body text-info">
+					<p class="card-text"><?php echo count($categories); ?></p>
+				</div>
+			    <div class="card-footer">
+			        <small class="text-muted"></small>
+			    </div>
+			</div>
+		</div>
+	</div>
+	<hr>
     <div class="row">
         <div class="col">
 			<div class="table-responsive">
@@ -25,7 +84,7 @@
 							<tr>
                                 <td id="pid"><?php echo "PR-ID " .  $unit['Id']; ?></td>
 								<td><a href="product/product/<?=$unit['Id']?>"><?php echo $unit['Name']; ?></a></td>
-								<td><?php echo "€" . " " . $unit['Price']; ?></td>
+								<td><?php echo "€" . " " . number_format($unit['Price'], 2); ?></td>
 								<?php if ($unit['UnitsInStock'] > 200) 
 								{
 									echo '<td>'.$unit['UnitsInStock'].'</td>';
@@ -46,54 +105,14 @@
         <div class="col">
 			<h6>Price per unit in euros</h6>
 			<div id="barchart"></div>
-<!-- 					<hr>
-			<h6>Products with a low supply</h6>
-			<div id="histochart"></div> -->
 			<hr>
 			<h6>Products with a low supply</h6>
 			<div id="curve_chart"></div>
         </div>
     </div>
     <hr>
-	<div id="saleStats" class="row">
-		<div class="col-sm-6">
-			<div class="card card bg-light">
-				<div class="card-header">Best Selling Products</div>
-				<div class="card-body text-info">
-					<?php foreach ($bestSellingProducts as $product) { ?>
-						<p class="card-text"><?php echo $product['Name']; ?></p>
-					<?php } ?>
-				</div>
-			    <div class="card-footer">
-			        <small class="text-muted"></small>
-			    </div>
-			</div>
-		</div>
-		<div class="col">
-			<div class="card card bg-light">
-				<div class="card-header">Total orders</div>
-				<div class="card-body text-info">
-					<p class="card-text"><?php echo count($orders); ?></p>
-				</div>
-			    <div class="card-footer">
-			        <small class="text-muted"></small>
-			    </div>
-			</div>
-		</div>
-		<div class="col">
-			<div class="card card bg-light">
-				<div class="card-header">Total orders</div>
-				<div class="card-body text-info">
-					<p class="card-text"><?php echo count($orders); ?></p>
-				</div>
-			    <div class="card-footer">
-			        <small class="text-muted"></small>
-			    </div>
-			</div>
-		</div>
-	</div>
+    <br>
 </div>
-<br>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js" type="text/javascript"></script>
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
