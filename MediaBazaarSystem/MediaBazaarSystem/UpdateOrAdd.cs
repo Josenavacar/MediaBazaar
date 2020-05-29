@@ -314,6 +314,9 @@ namespace MediaBazaarSystem
 
             dataBase.managerUpdateProfile(staffMember, FirstName, LastName, birthDate, address, email, salary, hoursAvailable, roleID, DepartmentID, contract);
             staffMember.editStaffMember(FirstName, LastName, birthDate, address, email, salary, hoursAvailable, role, contract);
+
+            MessageBox.Show("Staff member edited successfully");
+            this.Close();
         }
 
         private void btnAddStaff_Click(object sender, EventArgs e)
@@ -339,6 +342,9 @@ namespace MediaBazaarSystem
             {
                 department.AddStaffMember(newStaffMember);
             }
+
+            MessageBox.Show("Staff member added successfully");
+            this.Close();
         }
 
         private void ReadInfoFromForm()

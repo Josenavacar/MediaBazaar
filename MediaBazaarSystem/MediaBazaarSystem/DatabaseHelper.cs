@@ -275,10 +275,11 @@ namespace MediaBazaarSystem
         public List<Staff> getStaffFromDB(Department dep)
         {
             MySqlConnection conn = new MySqlConnection(connString);
+            conn.Open();
             String sql = "SELECT * FROM person JOIN role ON person.RoleID = role.Id WHERE DepartmentID = @DepartmentID";
 
             MySqlCommand cmd = new MySqlCommand(sql, conn);
-            //cmd.Parameters.AddWithValue("@DepartmentID", dep.DepartmentID);
+            cmd.Parameters.AddWithValue("@DepartmentID", dep.DepartmentID);
             MySqlDataReader reader = cmd.ExecuteReader();
 
             List<Staff> result = new List<Staff>();
@@ -367,8 +368,9 @@ namespace MediaBazaarSystem
             MySqlCommand cmd = conn.CreateCommand();
 
             cmd.CommandText = "UPDATE person SET Firstname = @FirstN,  Lastname = @LastN, Age = @Age, Address = @Address, Email = @Email, Salary = @Salary," +
-                            "HoursAvailable = @HoursAvailable, IsAvailable = @IsAvailable, Passcode = @Passcode,RoleID = @RoleID, DepartmentID = @DepartmentID, ContractID = @ContractID WHERE Id = @PersonID";
+                            "HoursAvailable = @HoursAvailable, IsAvailable = @IsAvailable, RoleID = @RoleID, DepartmentID = @DepartmentID, ContractID = @ContractID WHERE Id = @PersonID";
 
+            cmd.Parameters.AddWithValue("@PersonID", memberToChange.dbID);
             cmd.Parameters.AddWithValue("@FirstN", FirstName);
             cmd.Parameters.AddWithValue("@LastN", LastName);
             cmd.Parameters.AddWithValue("@Age", birthDate);

@@ -21,9 +21,7 @@ namespace MediaBazaarSystem
         private Department department;
         private Manager manager;
         private Schedule schedule;
-        private Employee emp;
         public static bool ensure; //Used for double checking when deleting from the database.
-        int idManage;
         private String employeeName;
         private String employeeRole;
         private String employeeStartTime;
@@ -460,10 +458,14 @@ namespace MediaBazaarSystem
             int indexEmp = lbEmployees.SelectedIndex;
             lbEmployees.Items.Clear(); //Empties empoloyee listbox
             List<Staff> listEmp = department.GetStaff(); 
-            foreach (Employee emp in listEmp) //Refills employee listbox
+            foreach (Staff emp in listEmp) //Refills employee listbox
             {
-                String outpEmp = emp.LastName + ", " + emp.FirstName;
-                lbEmployees.Items.Add( outpEmp );
+                if(emp.Role == Position.Employee)
+                {
+                    String outpEmp = emp.LastName + ", " + emp.FirstName;
+                    lbEmployees.Items.Add(outpEmp);
+                }
+                
             }
 
             try //Makes sure that the user does not notice this operation by reselecting the exact same item that he had selected.
@@ -482,10 +484,13 @@ namespace MediaBazaarSystem
             int indexMan = lbManagers.SelectedIndex;
             lbManagers.Items.Clear(); //Empties managers listbox
             List<Staff> listMan = department.GetStaff();
-            foreach (Manager man in listMan) //Refills managers listbox
+            foreach (Staff man in listMan) //Refills managers listbox
             {
-                String outpMan = man.LastName + ", " + man.FirstName;
-                lbManagers.Items.Add( outpMan );
+                if(man.Role == Position.HRManager || man.Role == Position.StockManager)
+                {
+                    String outpMan = man.LastName + ", " + man.FirstName;
+                    lbManagers.Items.Add(outpMan);
+                }
             }
 
             try //Makes sure that the user does not notice this operation by reselecting the exact same item that he had selected.

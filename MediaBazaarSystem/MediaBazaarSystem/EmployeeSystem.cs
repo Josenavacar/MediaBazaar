@@ -14,6 +14,7 @@ namespace MediaBazaarSystem
 {
     public partial class EmployeeSystem : Form
     {
+        DatabaseHelper dataBase;
         private Department department;
         private Schedule schedule;
         private Employee employee;
@@ -23,9 +24,10 @@ namespace MediaBazaarSystem
          */
         public EmployeeSystem(Department department, Employee employee)
         {
+            InitializeComponent();
+            dataBase = new DatabaseHelper();
             this.employee = employee;
             this.department = department;
-            InitializeComponent();
             updateTimer.Enabled = true;
             this.UpdateSchedule();
             lblEmployeeName.Text += " " + employee.FirstName + " " + employee.LastName;
@@ -297,31 +299,46 @@ namespace MediaBazaarSystem
          */
         private void btnUpdateProfile_Click(object sender, EventArgs e)
         {
+            //if (checkProfileChange())
+            //{
+            //    String firstName = txtBoxFirstName.Text;
+            //    String lastName = txtBoxLastName.Text;
+            //    DateTime birthDate = Convert.ToDateTime( txtBoxAge.Text );
+            //    String address = txtBoxEmail.Text;
+            //    String email = txtBoxEmail.Text;
+
+            //    //Updates employee in database.
+            //    string connString = @"Server = studmysql01.fhict.local; Uid = dbi437493; Database = dbi437493; Pwd = dbgroup01;";
+            //    MySqlConnection conn = new MySqlConnection(connString);
+            //    conn.Open();
+            //    MySqlCommand cmd = conn.CreateCommand();
+            //    cmd.CommandText = "UPDATE person SET Firstname = @Firstname, Lastname = @Lastname, Age = @Age, Address = @Address, Email = @Email WHERE Id = @Id";
+            //    cmd.Parameters.AddWithValue("@Firstname", firstName);
+            //    cmd.Parameters.AddWithValue("@Lastname", lastName );
+            //    cmd.Parameters.AddWithValue("@Age", birthDate );
+            //    cmd.Parameters.AddWithValue("@Address", address );
+            //    cmd.Parameters.AddWithValue("@Email", email );
+            //    cmd.Parameters.AddWithValue("@Id", employee.dbID);
+
+            //    cmd.ExecuteNonQuery();
+
+            //    //Updates employee in list.
+            //    employee.EditEmployee( firstName, lastName, birthDate, address, employee.Role, employee.Salary, employee.HoursAvailable, email, employee.Contract);
+
+            //    //Updates profile.
+            //    lbEmployeeInfo.Items.Clear();
+            //    refreshProfile();
+
+            //    MessageBox.Show("Profile Updated Successfully");
+            //}
+            //else
+            //{
+            //    MessageBox.Show("No changes made");
+            //}
+
             if (checkProfileChange())
             {
-                String firstName = txtBoxFirstName.Text;
-                String lastName = txtBoxLastName.Text;
-                DateTime birthDate = Convert.ToDateTime( txtBoxAge.Text );
-                String address = txtBoxEmail.Text;
-                String email = txtBoxEmail.Text;
-
-                //Updates employee in database.
-                string connString = @"Server = studmysql01.fhict.local; Uid = dbi437493; Database = dbi437493; Pwd = dbgroup01;";
-                MySqlConnection conn = new MySqlConnection(connString);
-                conn.Open();
-                MySqlCommand cmd = conn.CreateCommand();
-                cmd.CommandText = "UPDATE person SET Firstname = @Firstname, Lastname = @Lastname, Age = @Age, Address = @Address, Email = @Email WHERE Id = @Id";
-                cmd.Parameters.AddWithValue("@Firstname", firstName);
-                cmd.Parameters.AddWithValue("@Lastname", lastName );
-                cmd.Parameters.AddWithValue("@Age", birthDate );
-                cmd.Parameters.AddWithValue("@Address", address );
-                cmd.Parameters.AddWithValue("@Email", email );
-                cmd.Parameters.AddWithValue("@Id", employee.dbID);
-
-                cmd.ExecuteNonQuery();
-
-                //Updates employee in list.
-                employee.EditEmployee( firstName, lastName, birthDate, address, employee.Role, employee.Salary, employee.HoursAvailable, email, employee.Contract);
+                dataBase.updateProfile(employee, txtBoxFirstName.Text, txtBoxLastName.Text, Convert.ToDateTime(txtBoxAge.Text), txtBoxAddress.Text, txtBoxEmail.Text);
 
                 //Updates profile.
                 lbEmployeeInfo.Items.Clear();
@@ -331,7 +348,7 @@ namespace MediaBazaarSystem
             }
             else
             {
-                MessageBox.Show("No changes made");
+                MessageBox.Show("Information incorrect or not changed.");
             }
         }
 
@@ -360,7 +377,11 @@ namespace MediaBazaarSystem
          */
         private bool checkProfileChange()
         {
-            if (txtBoxFirstName.Text == employee.FirstName && txtBoxLastName.Text == employee.LastName && Convert.ToDateTime(txtBoxAge.Text).Date == employee.dateOfBirth.Date && txtBoxAddress.Text == employee.Address && txtBoxEmail.Text == employee.Email)
+            if (txtBoxFirstName.Text == employee.FirstName && txtBoxLastName.Text == employee.LastName && Convert.ToDateTime(txtBoxAge.Text) == employee.dateOfBirth && txtBoxAddress.Text == employee.Address && txtBoxEmail.Text == employee.Email)
+            {
+                return false;
+            }
+            else if (String.IsNullOrEmpty(txtBoxFirstName.Text) || String.IsNullOrEmpty(txtBoxLastName.Text) || String.IsNullOrEmpty(txtBoxAge.Text) || String.IsNullOrEmpty(txtBoxAddress.Text) || String.IsNullOrEmpty(txtBoxEmail.Text))
             {
                 return false;
             }
