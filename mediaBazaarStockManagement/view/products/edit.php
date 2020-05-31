@@ -24,6 +24,7 @@
 	                        <input id="productName" name="productName" value="<?php echo $product['Name']; ?>" type="text" class="form-control" required="required">
 			            </div>
 						<div class="col-md-6">
+							<input type="hidden" id="productID" name="productID" value="<?= $product['Id'];?>">
 	                        <input id="productPrice" name="productPrice" value="<?php echo number_format($product['Price'], 2); ?>" placeholder="Price" type="text" class="form-control" required="required">
 			            </div>
 	            	</div>
@@ -46,7 +47,7 @@
 </div>
 <!-- /#page-content-wrapper -->
 </div>
-  <!-- /#wrapper -->
+  	<!-- /#wrapper -->
 	<script src="https://code.jquery.com/jquery-3.5.0.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
 	<script type="text/javascript" src="../../js/media_bazaar_js.js"></script>
@@ -65,18 +66,20 @@
 
 		/**
 		 * Ajax request to PHP to edit a product 
-		 * @param  {[type]} event) 	                {	        event.preventDefault();	        let name [description]
+		 * @param  {[type]} event)
 		 * @return {[type]}        [description]
 		 */
 	    $("#submit").click(function (event) 
 	    {
 	        event.preventDefault();
+	        let id = document.getElementById("productID").value;
 	        let name = document.getElementById("productName").value;
 	        let price = document.getElementById("productPrice").value;
 	        let description = document.getElementById("description").value;
 
 	        let data = 
 	        {
+	        	id: id,
 	            name: name,
 	            price: price,
 	            description: description
@@ -97,12 +100,14 @@
 	            },
 	            success: function (data) 
 	            {
-	            	console.log(data)
-	                // Swal.fire
-	                // ({
-	                //     icon: 'success',
-	                //     title: 'Product is successfully updated!'
-	                // })
+	            	if(data == 'success')
+	            	{
+		                Swal.fire
+		                ({
+		                    icon: 'success',
+		                    title: 'Product is successfully updated!'
+		                })
+	            	}
 	            },
 	            error: function (data) 
 	            {

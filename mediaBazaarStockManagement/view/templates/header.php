@@ -30,7 +30,7 @@
             <a href="login" class="loginbutton list-group-item list-group-item-action bg-light">Login</a>
             <a href="category" class="list-group-item list-group-item-action bg-light">Category Management</a>
             <a href="product" class="list-group-item list-group-item-action bg-light">Product Management</a>
-            <a href="stock" class="list-group-item list-group-item-action bg-light">Stock Request</a>
+            <a href="stock" class="list-group-item list-group-item-action bg-light">Request New Stock</a>
             <a href="login/logout" class="list-group-item list-group-item-action bg-light">Logout</a>
         </div>
     </div>

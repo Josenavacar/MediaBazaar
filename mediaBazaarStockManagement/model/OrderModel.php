@@ -24,7 +24,7 @@
 				INNER JOIN `order`
 				ON product_order.OrderID = order.Id
 				GROUP BY product_order.ProductID
-				HAVING count(*) > 2;
+				HAVING count(*) >= 5;
 				";
 		$query = $db->prepare($sql);
 		$query->execute();

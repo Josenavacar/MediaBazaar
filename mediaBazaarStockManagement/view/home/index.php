@@ -1,11 +1,32 @@
 <div class="container-fluid">
-    <h1 class="mt-4">Inventory</h1>
-    <hr>
+	<br>
+    <h1>Inventory</h1>
+    <br>
 	<div id="saleStats" class="row">
+		<div class="col-md-6">
+			<div id="weather" class="card card text-black border-dark">
+				<div class="card-header"><?php echo $data->name; ?> Weather Status</div>
+				<div class="card-body ">
+			        <div id="time"></div>
+			        <hr>
+			        <div class="weather-forecast">
+			        	<div><?php echo ucwords($data->weather[0]->description); ?></div>
+			            <img src="http://openweathermap.org/img/w/<?php echo $data->weather[0]->icon; ?>.png" class="weather-icon" /> 
+			                <?php echo round($data->main->temp); ?>&deg;C
+			        </div>
+			        <hr>
+			        <div class="time">
+			            <div>Humidity: <?php echo $data->main->humidity; ?> %</div>
+			            <div>Wind: <?php echo $data->wind->speed; ?> km/h</div>
+			        </div>
+				</div>
+			</div>
+		    <br>	
+		</div>
 		<div class="col-sm-6">
-			<div class="card card bg-light">
-				<div class="card-header">Historical: Best Selling Products</div>
-				<div class="card-body text-info">
+			<div class="card card text-black border-info">
+				<div class="card-header">Top 5 Best Selling Products</div>
+				<div class="card-body ">
 					<?php foreach ($bestSellingProducts as $product) { ?>
 						<p class="card-text"><?php echo $product['Name']; ?></p>
 					<?php } ?>
@@ -16,20 +37,18 @@
 			</div>
 		</div>
 		<div class="col">
-			<div class="card card bg-light">
-				<div class="card-header">Historical: Total number of orders</div>
-				<div class="card-body text-info">
-					<p class="card-text"><?php echo count($orders); ?></p>
+			<div class="card card text-black border-success">
+				<div class="card-body ">
+					<p class="card-text">Historical: Total number of orders: <?php echo count($orders); ?></p>
 				</div>
 			    <div class="card-footer">
 			        <small class="text-muted"></small>
 			    </div>
 			</div>
 			<br>
-			<div class="card card bg-light">
-				<div class="card-header">Total number of products in system</div>
-				<div class="card-body text-info">
-					<p class="card-text"><?php echo count($products); ?></p>
+			<div class="card card text-black border-primary">
+				<div class="card-body ">
+					<p class="card-text">Total number of products in system: <?php echo count($products); ?></p>
 				</div>
 			    <div class="card-footer">
 			        <small class="text-muted"></small>
@@ -37,20 +56,18 @@
 			</div>
 		</div>
 		<div class="col">
-			<div class="card card bg-light">
-				<div class="card-header">Total orders so far for the month of <?php echo date("F"); ?></div>
-				<div class="card-body text-info">
-					<p class="card-text"><?php echo count($ordersPerMonth); ?></p>
+			<div class="card card text-black border-danger">
+				<div class="card-body ">
+					<p class="card-text">Total orders for this month: <?php echo count($ordersPerMonth); ?></p>
 				</div>
 			    <div class="card-footer">
 			        <small class="text-muted"></small>
 			    </div>
 			</div>
 			<br>
-			<div class="card card bg-light">
-				<div class="card-header">Total number of categories in system</div>
-				<div class="card-body text-info">
-					<p class="card-text"><?php echo count($categories); ?></p>
+			<div class="card card text-black border-warning">
+				<div class="card-body ">
+					<p class="card-text">Total number of categories in system: <?php echo count($categories); ?></p>
 				</div>
 			    <div class="card-footer">
 			        <small class="text-muted"></small>
@@ -58,7 +75,9 @@
 			</div>
 		</div>
 	</div>
+	<br>
 	<hr>
+	<br>
     <div class="row">
         <div class="col">
 			<div class="table-responsive">
@@ -126,16 +145,32 @@
 
 	$(document).ready(function() 
 	{
+
+
 		let timePassed = 1
-		$(".text-muted").text('Last update' + ' ' +timePassed + ' ' + 'minute ago');
+		$(".text-muted").text('Last update' + ' ' +timePassed + ' ' + 'minute ago')
 
 		setInterval(function()
 		{
 			timePassed++
 		    $("#saleStats")
-		    $(".text-muted").text('Last update' + ' ' +timePassed + ' ' + 'minutes ago');
+		    $(".time")
+		    $(".text-muted").text('Last update' + ' ' +timePassed + ' ' + 'minutes ago')
 		}, 60000);
 	});
+
+	setInterval(updateTime, 1000);
+
+    function updateTime()
+    {
+        let modifiedTime = new Date();
+        let day = modifiedTime.toDateString()
+        let hour = modifiedTime.getHours()
+        let amPmHour = hour >= 12 ? 'PM' : 'AM'
+        let minutes = modifiedTime.getMinutes()
+       
+        $('#time').text('Current time: ' + day + ' - ' + hour + ':' + minutes + " " + amPmHour);
+    }
 
   	/**
   	 * [myFunction description]

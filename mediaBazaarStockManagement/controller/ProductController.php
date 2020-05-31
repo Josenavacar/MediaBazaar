@@ -23,7 +23,7 @@
         if (isset($_POST['add'])) 
         {
             $data = $_POST['add'];
-            var_dump($data);
+            addProduct($data);
         }
     }
 
@@ -38,7 +38,7 @@
         if (isset($_POST['edit'])) 
         {
             $data = $_POST['edit'];
-            var_dump($data);
+            editProduct($data);
         }
     }
 ?>

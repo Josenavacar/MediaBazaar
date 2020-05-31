@@ -47,7 +47,7 @@
 		                    <select id="categories" class="form-control" required="true">
 		                        <option hidden >Categories</option>
 			                        <?php foreach($categories as $category) { ?>
-			                            <option data-id="<?php echo $category['Name']; ?>" value="<?php echo $category['Name'] ?>" id="category"><?php echo $category["Name"] ?></option>
+			                            <option data-id="<?php echo $category['Id']; ?>" value="<?php echo $category['Name'] ?>" id="category"><?php echo $category["Name"] ?></option>
 			                        <?php } ?>
 		                    </select>
 	            		</div>
@@ -91,8 +91,10 @@
 	    $("#submit").click(function (event) 
 	    {
 	        event.preventDefault();
-	        let name = document.getElementById("categoryName").value;
+	        let name = document.getElementById("name").value;
+	        let price = document.getElementById("price").value;
 	        let description = document.getElementById("description").value;
+	        let category = $('#categories').find(':selected').attr('data-id');
 
 	        let data = 
 	        {
@@ -128,11 +130,14 @@
 		            },
 		            success: function (data) 
 		            {
-		                Swal.fire
-		                ({
-		                    icon: 'success',
-		                    title: 'New product is added',
-		                })
+		            	if(data == 'success')
+		            	{
+			                Swal.fire
+			                ({
+			                    icon: 'success',
+			                    title: 'New product is added',
+			                })
+		            	}
 		            },
 		            error: function (data) 
 		            {
