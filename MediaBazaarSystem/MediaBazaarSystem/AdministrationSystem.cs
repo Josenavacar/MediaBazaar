@@ -456,17 +456,21 @@ namespace MediaBazaarSystem
         {
             //Employees
             int indexEmp = lbEmployees.SelectedIndex;
+            int indexMan = lbManagers.SelectedIndex;
+            lbManagers.Items.Clear(); //Empties managers listbox
             lbEmployees.Items.Clear(); //Empties empoloyee listbox
-            List<Staff> listEmp = department.GetStaff(); 
-            foreach (Staff emp in listEmp) //Refills employee listbox
-            {
-                if(emp.Role == Position.Employee)
-                {
-                    String outpEmp = emp.LastName + ", " + emp.FirstName;
-                    lbEmployees.Items.Add(outpEmp);
-                }
-                
-            }
+
+            LoadStaff();
+            //List<Staff> listEmp = department.GetStaff(); 
+            //foreach (Staff emp in listEmp) //Refills employee listbox
+            //{
+            //    if(emp.Role == Position.Employee)
+            //    {
+            //        String outpEmp = emp.LastName + ", " + emp.FirstName;
+            //        lbEmployees.Items.Add(outpEmp);
+            //    }
+
+            //}
 
             try //Makes sure that the user does not notice this operation by reselecting the exact same item that he had selected.
             {
@@ -480,30 +484,31 @@ namespace MediaBazaarSystem
                 lbEmployees.SelectedItem = null;
             }
 
-            //Managers
-            int indexMan = lbManagers.SelectedIndex;
-            lbManagers.Items.Clear(); //Empties managers listbox
-            List<Staff> listMan = department.GetStaff();
-            foreach (Staff man in listMan) //Refills managers listbox
-            {
-                if(man.Role == Position.HRManager || man.Role == Position.StockManager)
-                {
-                    String outpMan = man.LastName + ", " + man.FirstName;
-                    lbManagers.Items.Add(outpMan);
-                }
-            }
-
             try //Makes sure that the user does not notice this operation by reselecting the exact same item that he had selected.
             {
-                if( lbManagers.Items.Count > 0 )
+                if (lbManagers.Items.Count > 0)
                 {
                     lbManagers.SelectedIndex = indexMan;
                 }
             }
-            catch(Exception) //If an element was deleted, this would lead to a crash, instead of that we will select nothing.
+            catch (Exception) //If an element was deleted, this would lead to a crash, instead of that we will select nothing.
             {
                 lbManagers.SelectedItem = null;
             }
+
+            //Managers
+
+            //List<Staff> listMan = department.GetStaff();
+            //foreach (Staff man in listMan) //Refills managers listbox
+            //{
+            //    if(man.Role == Position.HRManager || man.Role == Position.StockManager)
+            //    {
+            //        String outpMan = man.LastName + ", " + man.FirstName;
+            //        lbManagers.Items.Add(outpMan);
+            //    }
+            //}
+
+
         }
 
         /**
