@@ -6,10 +6,11 @@ using System.Threading.Tasks;
 
 namespace MediaBazaarSystem
 {
-    public enum Role
+    public enum Position
     {
         HRManager = 1,
         Employee = 2,
-        StockManager = 3
+        StockManager = 3,
+        Unknown = 4
     }
 }

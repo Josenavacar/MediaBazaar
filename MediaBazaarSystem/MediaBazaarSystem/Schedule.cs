@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MediaBazaarSystem
 {
-    public class Schedule : Staff
+    public class Schedule
     {
         private bool isAvailable;
 
