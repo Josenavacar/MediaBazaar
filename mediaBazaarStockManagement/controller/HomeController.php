@@ -4,6 +4,10 @@
 	require(ROOT . "model/CategoryModel.php");
 	require(ROOT . "model/ProductModel.php");
 
+	/**
+	 * Method to view the inventory
+	 * @return [type] [description]
+	 */
 	function index()
 	{
 		$units = getAllInventory();
@@ -46,7 +50,6 @@
 		curl_close($ch);
 		$data = json_decode($response);
 		$currentTime = time();
-		// var_dump($data);
 
 		render("home/index", array
 								(	
@@ -61,6 +64,10 @@
 								));	
 	}
 
+	/**
+	 * Method to request API call to get weather updates
+	 * @return [type] [description]
+	 */
 	function getWeatherAPI()
 	{
 		$apiKey = "4add09fa6e8b2b38cd61a35795d144c9";

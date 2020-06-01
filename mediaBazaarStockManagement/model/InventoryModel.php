@@ -43,8 +43,6 @@
 					$total_price = (double)$data['totalPrice'];
 					$depId = $department['Id'];
 
-					// var_dump($data['email']);
-
 					$db = openDatabaseConnection();
 					$sql = "INSERT INTO `order` (UserID, OrderDate, DepartmentID) VALUES (:userId, :orderDate, :depId)";
 					$query = $db->prepare($sql);

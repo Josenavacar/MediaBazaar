@@ -24,9 +24,9 @@
 					<tr>
                         <th scope="col">Product ID</th>
 						<th scope="col">Name</th>
-						<th scope="col">Price per unit</th>
+						<th scope="col" width="10%">Price per unit</th>
                         <th scope="col">Category</th>
-                        <th scope="col">Description</th>
+                        <th scope="col" width="45%">Description</th>
 					</tr>
 				</thead>
 				<tbody>

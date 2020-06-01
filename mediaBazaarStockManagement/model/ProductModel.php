@@ -59,6 +59,7 @@
         $price = (double)$data['price'];
         $category = getCategory($data['category']);
         $category_id = (int)$category['Id'];
+        $quantity = 0;
 
         $db = openDatabaseConnection();
         $sql = 'INSERT INTO product (Name, Description, Price, CategoryID) VALUES (:name, :description, :price, :category_id)';
@@ -68,6 +69,14 @@
         $query->bindValue(":price", $price);
         $query->bindValue(":category_id", $category_id);
         $query->execute();
+        $latest_id = $db->lastInsertId();
+
+        $sql2 = 'INSERT INTO inventory (UnitsInStock, ProductID) VALUES (:quantity, :last_insert_id)';
+        $query = $db->prepare($sql2);
+        $query->bindParam(":quantity", $quantity, PDO::PARAM_INT);
+        $query->bindValue(":last_insert_id", $latest_id);
+        $query->execute();
+
         $db = null;
 
         echo "success";

@@ -94,7 +94,7 @@
 						<tr>
                             <th scope="col">Product ID</th>
 							<th scope="col">Name</th>
-							<th scope="col">Price Per Unit</th>
+							<th scope="col" width="15%">Price Per Unit</th>
 							<th scope="col">Units In Stock</th>
 						</tr>
 					</thead>
@@ -264,38 +264,4 @@
 		let chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
 		chart.draw(data, options);
 	}
-
-    /**
-     * [drawHistoChart description]
-     * @return {[type]} [description]
-     */
-  	function drawHistoChart() 
-  	{
-        let data = google.visualization.arrayToDataTable
-        ([
-          ['Product', 'Units in stock'],
-      	 	<?php 
-		 		foreach ($units as $key) 
-		 		{
-		 			if($key['UnitsInStock'] < 200)
-		 			{
-		 				$stock = $key['UnitsInStock'];
-			 			$name = $key['Name'];
-		 				echo "['$name', $stock],";
-		 			}
-		 		}
-	 		?>
-      	]);
-
-        let options = 
-        {
-            legend: 
-            { 
-            	position: 'top' 
-            }
-        };
-
-        let chart = new google.visualization.Histogram(document.getElementById('histochart'));
-        chart.draw(data, options);
-  	}
 </script>
