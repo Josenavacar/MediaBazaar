@@ -30,9 +30,9 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AdministrationSystem));
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea4 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend4 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series4 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.tbControlAdmin = new System.Windows.Forms.TabControl();
             this.tbPageHome = new System.Windows.Forms.TabPage();
             this.cmboBoxFilter = new System.Windows.Forms.ComboBox();
@@ -365,17 +365,17 @@
             // 
             // hoursStatsChart
             // 
-            chartArea4.Name = "ChartArea1";
-            this.hoursStatsChart.ChartAreas.Add(chartArea4);
-            legend4.Name = "Legend1";
-            this.hoursStatsChart.Legends.Add(legend4);
+            chartArea1.Name = "ChartArea1";
+            this.hoursStatsChart.ChartAreas.Add(chartArea1);
+            legend1.Name = "Legend1";
+            this.hoursStatsChart.Legends.Add(legend1);
             this.hoursStatsChart.Location = new System.Drawing.Point(29, 318);
             this.hoursStatsChart.Name = "hoursStatsChart";
-            series4.ChartArea = "ChartArea1";
-            series4.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.StackedBar;
-            series4.Legend = "Legend1";
-            series4.Name = "Hours";
-            this.hoursStatsChart.Series.Add(series4);
+            series1.ChartArea = "ChartArea1";
+            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.StackedBar;
+            series1.Legend = "Legend1";
+            series1.Name = "Hours";
+            this.hoursStatsChart.Series.Add(series1);
             this.hoursStatsChart.Size = new System.Drawing.Size(401, 280);
             this.hoursStatsChart.TabIndex = 20;
             this.hoursStatsChart.Text = "hoursStatsChart";

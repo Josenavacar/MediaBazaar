@@ -403,7 +403,25 @@ namespace MediaBazaarSystem
             cmd.CommandText = "DELETE FROM person WHERE Id = @Id";
             cmd.Parameters.AddWithValue("@Id", ID);
             cmd.ExecuteNonQuery();
-        }   
+        }
+
+        public MySqlDataReader getSchedules()
+        {
+            // SQL Query
+            string sql = "SELECT FirstName, LastName, Name, StartTime, EndTime, WorkDate FROM Person " +
+                "INNER JOIN Role ON Person.RoleId = Role.Id " +
+                "INNER JOIN Schedule ON Person.Id = Schedule.PersonID";
+
+            // Start mysql objects
+            MySqlConnection connection = new MySqlConnection(connString);
+            MySqlCommand cmd = new MySqlCommand(sql, connection);
+
+            // Open connection
+            connection.Open();
+            MySqlDataReader reader = cmd.ExecuteReader();
+
+            return reader;
+        }
 
 
         //public void getWorkSchedule(String sql) 

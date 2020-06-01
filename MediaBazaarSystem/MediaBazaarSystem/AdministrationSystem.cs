@@ -524,19 +524,21 @@ namespace MediaBazaarSystem
             // Clear table
             this.dataAdminWorkSchedule.Rows.Clear();
             // Connect to DB
-            string connectionString = @"Server = studmysql01.fhict.local; Uid = dbi437493; Database = dbi437493; Pwd = dbgroup01;";
-            // SQL Query
-            string sql = "SELECT FirstName, LastName, Name, StartTime, EndTime, WorkDate FROM Person " +
-                "INNER JOIN Role ON Person.RoleId = Role.Id " +
-                "INNER JOIN Schedule ON Person.Id = Schedule.PersonID";
+            //string connectionString = @"Server = studmysql01.fhict.local; Uid = dbi437493; Database = dbi437493; Pwd = dbgroup01;";
+            //// SQL Query
+            //string sql = "SELECT FirstName, LastName, Name, StartTime, EndTime, WorkDate FROM Person " +
+            //    "INNER JOIN Role ON Person.RoleId = Role.Id " +
+            //    "INNER JOIN Schedule ON Person.Id = Schedule.PersonID";
 
-            // Start mysql objects
-            MySqlConnection connection = new MySqlConnection( connectionString );
-            MySqlCommand cmd = new MySqlCommand( sql, connection );
+            //// Start mysql objects
+            //MySqlConnection connection = new MySqlConnection( connectionString );
+            //MySqlCommand cmd = new MySqlCommand( sql, connection );
 
-            // Open connection
-            connection.Open();
-            MySqlDataReader reader = cmd.ExecuteReader();
+            //// Open connection
+            //connection.Open();
+            //MySqlDataReader reader = cmd.ExecuteReader();
+
+            MySqlDataReader reader = dataBase.getSchedules();
 
             // Add data to data grid view table
             while( reader.Read() )
