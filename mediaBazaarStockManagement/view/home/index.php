@@ -163,13 +163,14 @@
 
     function updateTime()
     {
+    	const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
         let modifiedTime = new Date();
-        let day = modifiedTime.toDateString()
+        let day = modifiedTime.toLocaleDateString(undefined, options)
         let hour = modifiedTime.getHours()
-        let amPmHour = hour >= 12 ? 'PM' : 'AM'
-        let minutes = modifiedTime.getMinutes()
+        let seconds = modifiedTime.getSeconds() < 10 ? '0' + modifiedTime.getSeconds() : modifiedTime.getSeconds();
+        let minutes = modifiedTime.getMinutes() < 10 ? '0' + modifiedTime.getMinutes() : modifiedTime.getMinutes();
        
-        $('#time').text('Current time: ' + day + ' - ' + hour + ':' + minutes + " " + amPmHour);
+        $('#time').text(day + ' - ' + hour + ':' + minutes + ':' + seconds);
     }
 
   	/**

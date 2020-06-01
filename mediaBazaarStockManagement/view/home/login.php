@@ -49,17 +49,20 @@
         event.preventDefault();
         let email = document.getElementById("email").value;
         let passcode = document.getElementById("passcode").value;
-
         let data = 
         {
             email: email,
             passcode: passcode
         };
+        let url = $(location).attr("href")
+        let parts = url.split("/")
+        let last_part = '/' + parts[parts.length-1]
+        url = url.replace(last_part, '/login/loginRequest');
 
         $.ajax
         ({
             type: "POST",
-            url: "http://localhost/mediabazaar/mediaBazaarStockManagement/login/loginRequest",
+            url: url,
             data: 
             {
                 data: data
@@ -97,9 +100,14 @@
                     {
                         if (isConfirm) 
                         {
+                            let url = $(location).attr("href")
+                            let parts = url.split("/")
+                            let last_part = '/' + parts[parts.length-1]
+                            url = url.replace(last_part, '/login/loginCodeRequest');
+
                             $.ajax
                             ({
-                                url: 'http://localhost/mediabazaar/mediaBazaarStockManagement/login/loginCodeRequest',
+                                url: url,
                                 type: 'POST',
                                 data: {data: isConfirm},
                             })

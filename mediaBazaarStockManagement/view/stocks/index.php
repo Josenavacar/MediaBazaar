@@ -1,6 +1,5 @@
 <div class="container-fluid">
     <div class="request-form">
-
         <div id="jsonResponse"></div>
 
         <form id="stockRequestForm">
@@ -103,6 +102,11 @@
             quantity: quantity
         };
 
+        let url = $(location).attr("href")
+        let parts = url.split("/")
+        let last_part = '/' + parts[parts.length-1]
+        url = url.replace(last_part, '/stock/stockRequest');
+
         if ((email === "") ||( quantity === "Quantity") || (product === "Products")) 
         {
             Swal.fire
@@ -117,7 +121,7 @@
             $.ajax
             ({
                 type: "POST",
-                url: "http://localhost/mediabazaar/mediaBazaarStockManagement/stock/stockrequest",
+                url: url,
                 data: 
                 {
                     data: data
@@ -150,6 +154,4 @@
             });
         }
     });
-
-
 </script>

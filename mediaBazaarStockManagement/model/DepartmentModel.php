@@ -1,4 +1,8 @@
 <?php
+	/**
+	 * Method to get all departments
+	 * @return [type] [description]
+	 */
 	function getAllDepartments()
 	{
 		$db = openDatabaseConnection();
@@ -9,6 +13,11 @@
 		return $query->fetchAll();
 	}
 
+	/**
+	 * Method to get department
+	 * @param  [type] $department [description]
+	 * @return [type]             [description]
+	 */
 	function getDepartment($department)
 	{
 		$db = openDatabaseConnection();
@@ -18,3 +27,4 @@
 		$db = null;
 		return $query->fetch();		
 	}
+?>

@@ -42,30 +42,27 @@
 <script type="text/javascript">
     document.getElementById("myInput").addEventListener("keyup", myFunction);
 
+  	/**
+  	 * [myFunction description]
+  	 * @return {[type]} [description]
+  	 */
 	function myFunction() 
 	{
-	  var input, filter, table, tr, td, i, txtValue;
-	  input = document.getElementById("myInput");
-	  filter = input.value.toUpperCase();
-	  table = document.getElementById("myTable");
-	  tr = table.getElementsByTagName("tr");
-
-	  for (i = 0; i < tr.length; i++) 
-	  {
-	    td = tr[i].getElementsByTagName("td")[0];
-	    if (td) 
-	    {
-	      txtValue = td.textContent || td.innerText;
-	      if (txtValue.toUpperCase().indexOf(filter) > -1) 
-	      {
-	        tr[i].style.display = "";
-	      } 
-	      else 
-	      {
-	        tr[i].style.display = "none";
-	      }
-	    }       
-	  }
+		// Write on keyup event of keyword input element
+        let searchText = $(this).val().toLowerCase();
+        // Show only matching TR, hide rest of them
+        $.each($("#myTable tbody tr"), function() 
+        {
+            if($(this).text().toLowerCase().indexOf(searchText) === -1)
+            {
+               // $('.notfound').show();
+               $(this).hide();
+            }
+            else
+            {
+                $(this).show();
+            }
+        });
 	}
 
 	$(document).ready(function() {

@@ -83,7 +83,5 @@
 
 		$d = array();
 		$d = $data;
-		// var_dump($d);
-		// var_dump($data->main->temp);
 	}
 ?>

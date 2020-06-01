@@ -9,7 +9,13 @@
 	/* SMTP class, needed if you want to use SMTP. */
 	require (ROOT . "model/PHPMailer/src/SMTP.php");
 
-	function sendEmail($adminEmail, $orderID)
+	/**
+	 * Method to send email when order is made
+	 * @param  [type] $adminEmail [description]
+	 * @param  [type] $orderID    [description]
+	 * @return [type]             [description]
+	 */
+	function sendEmail($orderID, $adminEmail)
 	{
 		$mail = new PHPMailer(TRUE);
 		
@@ -50,6 +56,12 @@
 		}
 	}
 
+	/**
+	 * Method to send login code in email when logging in
+	 * @param  [type] $adminEmail [description]
+	 * @param  [type] $sessionID  [description]
+	 * @return [type]             [description]
+	 */
 	function sendLoginCode($adminEmail, $sessionID)
 	{
 		$_SESSION['special_code'] = $sessionID;  
@@ -91,3 +103,4 @@
 		   	echo $e->getMessage();
 		}
 	}
+?>

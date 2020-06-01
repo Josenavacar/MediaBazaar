@@ -1,4 +1,8 @@
 <?php
+	/**
+	 * Method to get all orders
+	 * @return [type] [description]
+	 */
     function getAllOrders()
     {
         $db = openDatabaseConnection();
@@ -7,13 +11,18 @@
 				INNER JOIN product 
 				ON product_order.ProductID = product.Id
 				INNER JOIN `order`
-				ON product_order.OrderID = order.Id;";
+				ON product_order.OrderID = order.Id
+				GROUP BY order.Id;";
 		$query = $db->prepare($sql);
 		$query->execute();
         $db = null;
 		return $query->fetchAll();
     }
 
+    /**
+     * Method to get the top 5 best selling products based on orders 
+     * @return [type] [description]
+     */
     function getOrdersWithMultipleOccuringProducts()
     {
         $db = openDatabaseConnection();

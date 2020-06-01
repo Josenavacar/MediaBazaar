@@ -1,11 +1,19 @@
 <?php
 	require(ROOT . "model/UserModel.php");
 
+	/**
+	 * Method to view login page
+	 * @return [type] [description]
+	 */
 	function index()
 	{
 		render("home/login");	
 	}
 
+	/**
+	 * Method to send request to model to log user in
+	 * @return [type] [description]
+	 */
 	function loginRequest()
 	{
         if (isset($_POST['data'])) 
@@ -15,6 +23,10 @@
         }
 	}
 
+	/**
+	 * Method to 
+	 * @return [type] [description]
+	 */
 	function loginCodeRequest()
 	{
         if (isset($_POST['data'])) 

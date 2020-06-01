@@ -1,17 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="">
-  <meta name="author" content="">
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="description" content="">
+	<meta name="author" content="">
 
-  <title>Stock Management</title>
-  <!-- Bootstrap core CSS -->
-  <link href="../../bootstrap/css/bootstrap.min.css" type="text/css" rel="stylesheet">
-  <!-- Custom styles for this template -->
-  <link href="../../css/media_bazaar_css.css" type="text/css" rel="stylesheet">
-  <link rel="stylesheet" type="text/css" href="../../css/floating_css.css">
+	<title>Stock Management</title>
+	<!-- Bootstrap core CSS -->
+	<link href="../../bootstrap/css/bootstrap.min.css" type="text/css" rel="stylesheet">
+	<!-- Custom styles for this template -->
+	<link href="../../css/media_bazaar_css.css" type="text/css" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="../../css/floating_css.css">
 </head>
 
 <body>

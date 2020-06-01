@@ -1,5 +1,4 @@
 <?php 
-	// session_start();
 	if(isset($_SESSION['order_ID']))
 	{
 		$order_ID = $_SESSION['order_ID'];

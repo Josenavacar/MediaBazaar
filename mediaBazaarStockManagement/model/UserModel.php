@@ -1,6 +1,10 @@
 <?php
 	require_once(ROOT . "model/EmailModel.php");
 
+	/**
+	 * Method to generate a special login code for two step verification 
+	 * @return [type] [description]
+	 */
 	function generateLoginCode()
 	{
 		$length = 6;    
@@ -8,6 +12,10 @@
 		return $sessionID;
 	}
 
+	/**
+	 * Method to get all users
+	 * @return [type] [description]
+	 */
 	function getAllUsers()
 	{
 		$db = openDatabaseConnection();
@@ -20,7 +28,11 @@
 		return $query->fetchAll();
 	}
 
-
+	/**
+	 * Method to get user and log user in 
+	 * @param  [type] $data [description]
+	 * @return [type]       [description]
+	 */
 	function userLogin($data)
 	{
 		$db = openDatabaseConnection();
@@ -59,6 +71,11 @@
 		$db = null;
 	}
 
+	/**
+	 * Method to get user by email
+	 * @param  [type] $email [description]
+	 * @return [type]        [description]
+	 */
 	function getUserByEmail($email)
 	{
 		$db = openDatabaseConnection();
