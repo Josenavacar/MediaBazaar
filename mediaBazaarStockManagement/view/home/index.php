@@ -209,8 +209,8 @@
 		 		foreach ($units as $key) 
 		 		{
 		 			$price = $key['Price'];
-		 			$name = $key['Name'];
-		 			echo "['$name', $price, 'stroke-color: #C5A5CF; stroke-width: 4; fill-color: #703593'],";
+		 			$name = $key['Id'];
+		 			echo "['PR-ID $name', $price, 'stroke-color: #C5A5CF; stroke-width: 4; fill-color: #703593'],";
 		 		}
 		 	?>
         ]);
@@ -246,8 +246,8 @@
 					if($key['UnitsInStock'] < 200)
 					{
 						$stock = $key['UnitsInStock'];
-						$name = $key['Name'];
-						echo "['$name', $stock],";
+						$name = $key['Id'];
+						echo "['PR-ID $name', $stock],";
 					}
 				}
 			?>
