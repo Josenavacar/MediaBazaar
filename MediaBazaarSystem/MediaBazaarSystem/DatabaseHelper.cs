@@ -309,12 +309,18 @@ namespace MediaBazaarSystem
                 if(role == "Manager" || role == "StockManager")
                 {
                     Manager man = new Manager(ID, firstName, lastName, birthDate, address, salary, hoursavailable, email, contract);
-                    dep.AddStaffMember(man);
+                    if (dep.GetStaffMember(man.FirstName, man.LastName) == null)
+                    {
+                        dep.AddStaffMember(man);
+                    }
                 }
                 else if(role == "Employee")
                 {
                     Employee emp = new Employee(ID, firstName, lastName, birthDate, address, salary, hoursavailable, email, contract);
-                    dep.AddStaffMember(emp);
+                    if (dep.GetStaffMember(emp.FirstName, emp.LastName) == null)
+                    {
+                        dep.AddStaffMember(emp);
+                    }
                 }
             }
             reader.Close();
@@ -391,6 +397,24 @@ namespace MediaBazaarSystem
 
 
         //////////////////////////////////////////////////////////////////W.I.P.////////////////////////////////////////////////////////////////////////////////////
+        
+        public MySqlDataReader updateSchedules()
+        {
+            string sql = "SELECT Person.Id, Person.FirstName, Person.LastName, Role.Name, Schedule.StartTime, Schedule.EndTime, Schedule.WorkDate, Department.Name, Schedule.Id FROM Person " +
+                "INNER JOIN Role ON Person.RoleId = Role.Id " +
+                "INNER JOIN Schedule ON Person.Id = Schedule.PersonID " +
+                "INNER JOIN Department ON Person.DepartmentID = Department.Id";
+
+            // Start mysql objects
+            MySqlConnection connection = new MySqlConnection(connString);
+            MySqlCommand cmd = new MySqlCommand(sql, connection);
+
+            // Open connection
+            connection.Open();
+            MySqlDataReader reader = cmd.ExecuteReader();
+
+            return reader;
+        }
         public void deleteStaffMember(int ID)
         {
             MySqlConnection conn = new MySqlConnection(connString);

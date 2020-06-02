@@ -51,13 +51,13 @@ namespace MediaBazaarSystem
         /**
          * Method to get database info on work schedule
          */
-        private void GetWorkScheduleDB(String sql, MySqlConnection connection)
+        private void GetWorkScheduleDB(MySqlDataReader reader)
         {
             //this.connection = connection;
-            MySqlCommand cmd = new MySqlCommand( sql, connection );
+            //MySqlCommand cmd = new MySqlCommand( sql, connection );
             // Open connection
-            connection.Open();
-            MySqlDataReader reader = cmd.ExecuteReader();
+            //conn.Open();
+            //MySqlDataReader reader = cmd.ExecuteReader();
 
             if(reader.HasRows)
             {
@@ -101,6 +101,31 @@ namespace MediaBazaarSystem
             }
 
             reader.Close();
+        }
+
+        /**
+         * Method to update the schedule table
+         */
+        private void UpdateSchedule()
+        {
+            // Clear table
+            this.dataAdminWorkSchedule.Rows.Clear();
+            department.GetSchedules().Clear();
+            //// Connect to DB
+            //string connectionString = @"Server = studmysql01.fhict.local; Uid = dbi437493; Database = dbi437493; Pwd = dbgroup01;";
+            //// SQL Query
+            //string sql = "SELECT Person.Id, Person.FirstName, Person.LastName, Role.Name, Schedule.StartTime, Schedule.EndTime, Schedule.WorkDate, Department.Name, Schedule.Id FROM Person " +
+            //    "INNER JOIN Role ON Person.RoleId = Role.Id " +
+            //    "INNER JOIN Schedule ON Person.Id = Schedule.PersonID " +
+            //    "INNER JOIN Department ON Person.DepartmentID = Department.Id";
+
+            //// Start mysql objects
+            //MySqlConnection connection = new MySqlConnection(connectionString);
+            MySqlDataReader reader = dataBase.updateSchedules();
+            this.GetWorkScheduleDB(reader);
+
+            // Disable timer
+            updateTimer.Enabled = false;
         }
 
         /**
@@ -219,44 +244,21 @@ namespace MediaBazaarSystem
         private void LoadStaff()
         {
             List<Staff> staff = dataBase.getStaffFromDB(department);
-            foreach(Staff staffmember in staff)
+            foreach (Staff staffmember in staff)
             {
                 String staffname = staffmember.FirstName + " " + staffmember.LastName;
                 if (staffmember is Employee) //staffmember.Role == Position.Employee
                 {
-                    lbEmployees.Items.Add(staffmember);
+                    lbEmployees.Items.Add(staffname);
                 }
                 else if(staffmember is Manager) //staffmember.Role == Position.HRManager || staffmember.Role == Position.StockManager
                 {
-                    lbManagers.Items.Add(staffmember);
+                    lbManagers.Items.Add(staffname);
                 }
             }
         }
 
-        /**
-         * Method to update the schedule table
-         */
-        private void UpdateSchedule()
-        {
-            // Clear table
-            this.dataAdminWorkSchedule.Rows.Clear();
-            department.GetSchedules().Clear();
-            // Connect to DB
-            string connectionString = @"Server = studmysql01.fhict.local; Uid = dbi437493; Database = dbi437493; Pwd = dbgroup01;";
-            // SQL Query
-            string sql = "SELECT Person.Id, Person.FirstName, Person.LastName, Role.Name, Schedule.StartTime, Schedule.EndTime, Schedule.WorkDate, Department.Name, Schedule.Id FROM Person " +
-                "INNER JOIN Role ON Person.RoleId = Role.Id " +
-                "INNER JOIN Schedule ON Person.Id = Schedule.PersonID " +
-                "INNER JOIN Department ON Person.DepartmentID = Department.Id";
-
-            // Start mysql objects
-            MySqlConnection connection = new MySqlConnection( connectionString );
-            MySqlCommand cmd = new MySqlCommand( sql, connection );
-            this.GetWorkScheduleDB( sql, connection );
-
-            // Disable timer
-            updateTimer.Enabled = false;
-        }
+        
 
         /**
          * Method to update the employee management 
@@ -461,6 +463,7 @@ namespace MediaBazaarSystem
             lbEmployees.Items.Clear(); //Empties empoloyee listbox
 
             LoadStaff();
+
             //List<Staff> listEmp = department.GetStaff(); 
             //foreach (Staff emp in listEmp) //Refills employee listbox
             //{
