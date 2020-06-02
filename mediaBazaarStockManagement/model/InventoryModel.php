@@ -1,7 +1,11 @@
 <?php
-	require(ROOT . "model/UserModel.php");
-	require(ROOT . "model/EmailModel.php");
+	require_once(ROOT . "model/UserModel.php");
+	require_once(ROOT . "model/EmailModel.php");
 
+	/**
+	 * Method to get all products in inventory
+	 * @return [type] [description]
+	 */
 	function getAllInventory()
 	{
 		$db = openDatabaseConnection();
@@ -12,10 +16,18 @@
 		return $query->fetchAll();
 	}
 
+	/**
+	 * Method to make a new stock request
+	 * @param  [type] $data [description]
+	 * @return [type]       [description]
+	 */
 	function makeRequest($data)
 	{
-		foreach ($data as $key => $value) {
+		$emailOrderID = '';
+		$emailAddress = '';
 
+		foreach ($data as $key => $value) 
+		{
 			if($key == 'email')
 			{
 				$user = getUserByEmail($value);
@@ -26,6 +38,7 @@
 			    	$orderDate = date("Y-m-d H:i:s");
 					$department = getDepartment($data['department']);
 					$product = getProduct($data['product']);
+					$product_id = (int)$product['Id'];
 					$quantity = $data['quantity'];
 					$total_price = (double)$data['totalPrice'];
 					$depId = $department['Id'];
@@ -43,22 +56,24 @@
 					$query = $db->prepare($sql2);
 					$query->bindParam(":quantity", $quantity, PDO::PARAM_INT);
 					$query->bindValue(":total_price", $total_price);
-					$query->bindParam(":product", $product['Id'], PDO::PARAM_INT);
+					$query->bindValue(":product", $product_id);
 					$query->bindValue(":last_insert_id", $latest_id);
 					$query->execute();
 
 					$sql3 = 'UPDATE inventory SET UnitsInStock = UnitsInStock + :quantity WHERE ProductID = :product';
 					$query = $db->prepare($sql3);
 					$query->bindParam(":quantity", $quantity, PDO::PARAM_INT);
-					$query->bindParam(":product", $product['Id'], PDO::PARAM_INT);
+					$query->bindValue(":product", $product_id);
 					$query->execute();
 
-					sendEmail($data['email'], $latest_id);
+					$emailOrderID = $latest_id;
+					$emailAddress = $data['email'];
 
 					// session_start();
 					$_SESSION['order_ID'] = $latest_id;
 					echo $latest_id;
 					$db = null;
+					
 				}
 				else
 				{
@@ -66,4 +81,6 @@
 				}
 			}
 		}
+
+		sendEmail($emailOrderID, $emailAddress);
 	}

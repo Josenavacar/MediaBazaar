@@ -1,21 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="">
-  <meta name="author" content="">
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="description" content="">
+	<meta name="author" content="">
 
-  <title>Stock Management</title>
-  <!-- Bootstrap core CSS -->
-  <link href="../bootstrap/css/bootstrap.min.css" type="text/css" rel="stylesheet">
-  <!-- Custom styles for this template -->
-  <link href="../css/media_bazaar_css.css" type="text/css" rel="stylesheet">
-  <link rel="stylesheet" type="text/css" href="../css/floating_css.css">
-
+	<title>Stock Management</title>
+	<!-- Bootstrap core CSS -->
+	<link href="../bootstrap/css/bootstrap.min.css" type="text/css" rel="stylesheet">
+	<!-- Custom styles for this template -->
+	<link href="../css/media_bazaar_css.css" type="text/css" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="../css/floating_css.css">
 </head>
-
 <body>
     <div class="container-fluid">
         <h1 class="mt-4 text-center">Add a new category</h1>
@@ -41,10 +38,6 @@
             </div>  
 		</form>
     </div>
-</div>
-<!-- /#page-content-wrapper -->
-</div>
-  <!-- /#wrapper -->
 
 	<!-- Bootstrap core JavaScript -->
 	<script src="../jquery/jquery.min.js"></script>
@@ -63,6 +56,11 @@
 			$("#menu-toggle").hide();
 		});
 
+		/**
+		 * Ajax request to PHP to add a category to the DB
+		 * @param  {[type]} event) 	                {	        event.preventDefault();	        let name [description]
+		 * @return {[type]}        [description]
+		 */
 	    $("#submit").click(function (event) 
 	    {
 	        event.preventDefault();
@@ -74,6 +72,11 @@
 	            name: name,
 	            description: description
 	        };
+
+			let url = $(location).attr("href")
+			let parts = url.split("/")
+			let last_part = '/' + parts[parts.length-1]
+			url = url.replace(last_part, '/addRequest');
 
 	        if (name === "" || description === "") 
 	        {
@@ -89,10 +92,10 @@
 		        $.ajax
 		        ({
 		            type: "POST",
-		            url: "http://localhost/mediabazaar/mediaBazaarStockManagement/category/addRequest",
+		            url: url,
 		            data: 
 		            {
-		                data: data
+		                add: data
 		            },
 		            success: function (data) 
 		            {

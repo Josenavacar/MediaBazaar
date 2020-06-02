@@ -28,9 +28,9 @@
             <a href="home" class="list-group-item list-group-item-action bg-light">Inventory</a>
             <a href="order" class="list-group-item list-group-item-action bg-light">Orders</a>
             <a href="login" class="loginbutton list-group-item list-group-item-action bg-light">Login</a>
-            <!-- <a href="product" class="list-group-item list-group-item-action bg-light">Products</a> -->
-            <a href="category" class="list-group-item list-group-item-action bg-light">Categories</a>
-            <a href="stock" class="list-group-item list-group-item-action bg-light">Stock Request</a>
+            <a href="category" class="list-group-item list-group-item-action bg-light">Category Management</a>
+            <a href="product" class="list-group-item list-group-item-action bg-light">Product Management</a>
+            <a href="stock" class="list-group-item list-group-item-action bg-light">Request New Stock</a>
             <a href="login/logout" class="list-group-item list-group-item-action bg-light">Logout</a>
         </div>
     </div>
@@ -41,13 +41,7 @@
         <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
             <button class="btn btn-outline-primary" id="menu-toggle">Toggle Menu</button>
             <button class="btn btn-outline-dark" id="backButton">Back</button>
-
             <div class="custom-control custom-switch">
                 <input type="checkbox" class="custom-control-input" id="customSwitch1" data-toggle="toggle">
-                <!-- <label class="custom-control-label" for="customSwitch1">Dark mode</label> -->
             </div>
-            
-<!--             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-              <span class="navbar-toggler-icon"></span>
-            </button> -->
         </nav>
