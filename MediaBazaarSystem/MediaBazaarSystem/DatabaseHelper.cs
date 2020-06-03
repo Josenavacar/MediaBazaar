@@ -398,6 +398,23 @@ namespace MediaBazaarSystem
 
         //////////////////////////////////////////////////////////////////W.I.P.////////////////////////////////////////////////////////////////////////////////////
         
+        public MySqlDataReader getShift()
+        {
+            string sql = "SELECT Person.Id, Person.FirstName, Person.LastName, Role.Name, Schedule.StartTime, Schedule.EndTime, Schedule.WorkDate, Department.Name FROM Person " +
+                "INNER JOIN Role ON Person.RoleId = Role.Id " +
+                "INNER JOIN Schedule ON Person.Id = Schedule.PersonID " +
+                "INNER JOIN Department ON Person.DepartmentID = Department.Id";
+
+            MySqlConnection connection = new MySqlConnection(connString);
+            // Start mysql objects
+            MySqlCommand cmd = new MySqlCommand(sql, connection);
+
+            connection.Open();
+            MySqlDataReader reader = cmd.ExecuteReader();
+
+            return reader;
+        }
+
         public MySqlDataReader updateSchedules()
         {
             string sql = "SELECT Person.Id, Person.FirstName, Person.LastName, Role.Name, Schedule.StartTime, Schedule.EndTime, Schedule.WorkDate, Department.Name, Schedule.Id FROM Person " +
