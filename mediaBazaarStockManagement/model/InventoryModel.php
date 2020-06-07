@@ -37,7 +37,7 @@
 				    date_default_timezone_set('Europe/Amsterdam');
 			    	$orderDate = date("Y-m-d H:i:s");
 					$department = getDepartment($data['department']);
-					$product = getProduct($data['product']);
+					$product = getProductByName($data['product']);
 					$product_id = (int)$product['Id'];
 					$quantity = $data['quantity'];
 					$total_price = (double)$data['totalPrice'];
