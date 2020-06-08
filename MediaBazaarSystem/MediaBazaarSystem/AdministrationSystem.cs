@@ -64,6 +64,7 @@ namespace MediaBazaarSystem
                 // Get the data
                 while( reader.Read() )
                 {
+                    int staffID = (int)reader.GetValue( 0 );
                     String firstName = reader.GetValue( 1 ).ToString();
                     String lastName = reader.GetValue( 2 ).ToString();
                     String role = reader.GetValue( 3 ).ToString();
@@ -91,7 +92,7 @@ namespace MediaBazaarSystem
                         dataAdminWorkSchedule.Rows.Add( row );
                     }
                     
-                    schedule = new Schedule( scheduleID, firstName, lastName, role, workStartTime, workEndTime, convertedWorkDate, departmentName);
+                    schedule = new Schedule( scheduleID, firstName, lastName, role, workStartTime, workEndTime, convertedWorkDate, departmentName, staffID);
                     department.AddSchedule( schedule );
                 }
             }
@@ -611,6 +612,14 @@ namespace MediaBazaarSystem
                 {
                     if( ( s.FirstName + " " + s.LastName == employeeName ) && ( s.StartTime.ToString( "hh:mm tt" ) == employeeStartTime ) && ( s.EndTime.ToString( "hh:mm tt" ) == employeeEndTime ) )
                     {
+                        //MessageBox.Show(s.EmployeeID.ToString());
+                        //foreach(Staff staff in department.GetStaff())
+                        //{
+                        //    if(staff is Employee)
+                        //    {
+                        //        //MessageBox.Show( staff.dbID.ToString() );
+                        //    }
+                        //}
                         schedule = s;
                     }
                 }

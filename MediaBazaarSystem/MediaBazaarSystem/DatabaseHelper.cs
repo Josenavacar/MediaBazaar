@@ -395,9 +395,43 @@ namespace MediaBazaarSystem
             memberToChange.editStaffMember(FirstName, LastName, birthDate, address, email);
         }
 
+        public void AddEmployeeWorkDate( Staff employee, DateTime workDate )
+        {
+            if( employee != null )
+            {
+                MySqlConnection conn = new MySqlConnection( connString );
+                conn.Open();
+                MySqlCommand cmd = conn.CreateCommand();
+
+                cmd.CommandText = "INSERT INTO available_emp_shifts(Available_Date, PersonID) VALUES(@Available_Date, @EmployeeID)";
+                cmd.Parameters.AddWithValue( "@Available_Date", workDate );
+                cmd.Parameters.AddWithValue( "@EmployeeID", employee.dbID );
+                cmd.ExecuteNonQuery();
+
+                conn.Close();
+            }
+        }
+
+        public MySqlDataReader getEmpAvailableWorkDates(int employeeID)
+        {
+            string sql = 
+                "SELECT * " +
+                "FROM available_emp_shifts " +
+                "INNER JOIN person ON available_emp_shifts.PersonID = person.Id " +
+                "WHERE PersonID = @EmployeeID";
+
+            MySqlConnection connection = new MySqlConnection( connString );
+            connection.Open();
+
+            MySqlCommand cmd = new MySqlCommand( sql, connection );
+            cmd.Parameters.AddWithValue( "@EmployeeID", employeeID );
+            MySqlDataReader reader = cmd.ExecuteReader();
+
+            return reader;
+        }
 
         //////////////////////////////////////////////////////////////////W.I.P.////////////////////////////////////////////////////////////////////////////////////
-        
+
         public MySqlDataReader getShift()
         {
             string sql = "SELECT Person.Id, Person.FirstName, Person.LastName, Role.Name, Schedule.StartTime, Schedule.EndTime, Schedule.WorkDate, Department.Name FROM Person " +

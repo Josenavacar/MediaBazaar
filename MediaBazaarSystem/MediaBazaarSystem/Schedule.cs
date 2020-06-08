@@ -70,7 +70,13 @@ namespace MediaBazaarSystem
             set;
         }
 
-        public Schedule(int dbID, String firstName, String lastName, String role, DateTime startTime, DateTime endTime, DateTime workDate, String departmentName)
+        public int EmployeeID
+        {
+            get;
+            private set;
+        }
+
+        public Schedule(int dbID, String firstName, String lastName, String role, DateTime startTime, DateTime endTime, DateTime workDate, String departmentName, int employeeID)
         {
             this.dbID = dbID;
             this.FirstName = firstName;
@@ -81,6 +87,7 @@ namespace MediaBazaarSystem
             this.WorkDate = workDate;
             this.IsAvailable = true;
             this.DepartmentName = departmentName;
+            this.EmployeeID = employeeID;
         }
 
         public void UpdateSchedule( int dbID, String firstName, String lastName, String role, DateTime startTime, DateTime endTime, DateTime workDate, String departmentName )

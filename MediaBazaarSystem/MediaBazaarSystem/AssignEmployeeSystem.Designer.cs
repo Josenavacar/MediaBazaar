@@ -40,13 +40,15 @@
             this.dtpWorkDate = new System.Windows.Forms.DateTimePicker();
             this.lblWorkDate = new System.Windows.Forms.Label();
             this.txtBoxEmployeeName = new System.Windows.Forms.TextBox();
+            this.comBoxWorkDate = new System.Windows.Forms.ComboBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // btnDone
             // 
             this.btnDone.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.btnDone.Font = new System.Drawing.Font("Century Gothic", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnDone.Location = new System.Drawing.Point(28, 460);
+            this.btnDone.Location = new System.Drawing.Point(28, 539);
             this.btnDone.Name = "btnDone";
             this.btnDone.Size = new System.Drawing.Size(520, 46);
             this.btnDone.TabIndex = 0;
@@ -150,12 +152,35 @@
             this.txtBoxEmployeeName.Size = new System.Drawing.Size(349, 28);
             this.txtBoxEmployeeName.TabIndex = 10;
             // 
+            // comBoxWorkDate
+            // 
+            this.comBoxWorkDate.Font = new System.Drawing.Font("Century Gothic", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.comBoxWorkDate.FormattingEnabled = true;
+            this.comBoxWorkDate.Location = new System.Drawing.Point(174, 451);
+            this.comBoxWorkDate.Name = "comBoxWorkDate";
+            this.comBoxWorkDate.Size = new System.Drawing.Size(349, 29);
+            this.comBoxWorkDate.TabIndex = 11;
+            this.comBoxWorkDate.Text = "Select available dates";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Century Gothic", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.label1.Location = new System.Drawing.Point(54, 454);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(105, 21);
+            this.label1.TabIndex = 12;
+            this.label1.Text = "Work Date:";
+            // 
             // AssignEmployeeSystem
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.ClientSize = new System.Drawing.Size(584, 525);
+            this.ClientSize = new System.Drawing.Size(584, 609);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.comBoxWorkDate);
             this.Controls.Add(this.txtBoxEmployeeName);
             this.Controls.Add(this.lblWorkDate);
             this.Controls.Add(this.dtpWorkDate);
@@ -187,5 +212,7 @@
         private System.Windows.Forms.DateTimePicker dtpWorkDate;
         private System.Windows.Forms.Label lblWorkDate;
         private System.Windows.Forms.TextBox txtBoxEmployeeName;
+        private System.Windows.Forms.ComboBox comBoxWorkDate;
+        private System.Windows.Forms.Label label1;
     }
 }

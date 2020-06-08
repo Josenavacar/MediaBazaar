@@ -14,14 +14,20 @@ namespace MediaBazaarSystem
 {
     public partial class AssignEmployeeSystem : Form
     {
+        DatabaseHelper databaseHelper; 
         Schedule schedule;
         Department department;
 
         public AssignEmployeeSystem(Department department, Schedule schedule )
         {
             InitializeComponent();
+            this.databaseHelper = new DatabaseHelper();
             this.schedule = schedule;
             this.department = department;
+
+            
+            GetWorkDates();
+            //comBoxWorkDate.Items.Add( . );
 
             txtBoxEmployeeName.Text = this.schedule.FirstName + " " + this.schedule.LastName;
 
@@ -32,6 +38,31 @@ namespace MediaBazaarSystem
                 comBoxEndTime.Items.Add( _time.ToShortTimeString() );
             }
             this.UpdateSchedule();
+        }
+
+        private void GetWorkDates()
+        {
+            MySqlDataReader reader = databaseHelper.getEmpAvailableWorkDates( schedule.EmployeeID );
+
+            // Add data to data grid view table
+            while( reader.Read() )
+            {
+                int employee = ( int ) reader.GetValue( 2 );
+                DateTime workDate = Convert.ToDateTime( reader.GetValue( 1 ).ToString() );
+
+                if( employee == schedule.EmployeeID )
+                {
+                    comBoxWorkDate.Items.Add( workDate.ToString( "dddd, dd MMMM yyyy" ) );
+                    //MessageBox.Show( employee.ToString() );
+                }
+
+                //String theDate = dtpWorkSchedule.Value.ToString( "dddd, dd MMMM yyyy" );
+
+                // // Check if the date in the work schedule is equal to the date from the DB
+                //if( theDate == date.ToString( "dddd, dd MMMM yyyy" ) )
+                //{
+                //}
+            }
         }
 
         private void UpdateSchedule()
