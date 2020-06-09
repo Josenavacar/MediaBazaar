@@ -612,14 +612,6 @@ namespace MediaBazaarSystem
                 {
                     if( ( s.FirstName + " " + s.LastName == employeeName ) && ( s.StartTime.ToString( "hh:mm tt" ) == employeeStartTime ) && ( s.EndTime.ToString( "hh:mm tt" ) == employeeEndTime ) )
                     {
-                        //MessageBox.Show(s.EmployeeID.ToString());
-                        //foreach(Staff staff in department.GetStaff())
-                        //{
-                        //    if(staff is Employee)
-                        //    {
-                        //        //MessageBox.Show( staff.dbID.ToString() );
-                        //    }
-                        //}
                         schedule = s;
                     }
                 }

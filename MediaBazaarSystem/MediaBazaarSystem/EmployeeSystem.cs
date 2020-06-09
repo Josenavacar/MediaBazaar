@@ -32,6 +32,8 @@ namespace MediaBazaarSystem
             this.UpdateSchedule();
             lblEmployeeName.Text += " " + employee.FirstName + " " + employee.LastName;
             refreshProfile();
+            dtpAvailableWorkDates.MinDate = DateTime.Now;
+            dtpAvailableWorkDates.MaxDate = DateTime.Now.AddDays( 7 );
         }
 
         /**
@@ -644,10 +646,15 @@ namespace MediaBazaarSystem
                 int employeeID = employee.dbID;
                 DateTime workDate = dtpAvailableWorkDates.Value;
 
-                //lBoxWorkDates.Items.Clear();
-                lBoxWorkDates.Items.Add( employeeID.ToString() + " " + workDate.ToString( "dddd, dd MMMM yyyy" ) );
-
-                dataBase.AddEmployeeWorkDate( employee, workDate );
+                if(!lBoxWorkDates.Items.Contains( employeeID.ToString() + " " + workDate.ToString( "dddd, dd MMMM yyyy" ) ) )
+                {
+                    lBoxWorkDates.Items.Add( employeeID.ToString() + " " + workDate.ToString( "dddd, dd MMMM yyyy" ) );
+                    dataBase.AddEmployeeWorkDate( employee, workDate );
+                }
+                else
+                {
+                    MessageBox.Show( "This date is already chosen! Please choose another day." );
+                }
             }
             else
             {

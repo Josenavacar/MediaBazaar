@@ -18,16 +18,16 @@ namespace MediaBazaarSystem
         Schedule schedule;
         Department department;
 
+        /**
+         * Form constructor
+         */
         public AssignEmployeeSystem(Department department, Schedule schedule )
         {
             InitializeComponent();
             this.databaseHelper = new DatabaseHelper();
             this.schedule = schedule;
             this.department = department;
-
-            
             GetWorkDates();
-            //comBoxWorkDate.Items.Add( . );
 
             txtBoxEmployeeName.Text = this.schedule.FirstName + " " + this.schedule.LastName;
 
@@ -40,6 +40,9 @@ namespace MediaBazaarSystem
             this.UpdateSchedule();
         }
 
+        /**
+         * Method to get employee's work dates from DB
+         */
         private void GetWorkDates()
         {
             MySqlDataReader reader = databaseHelper.getEmpAvailableWorkDates( schedule.EmployeeID );
@@ -53,18 +56,13 @@ namespace MediaBazaarSystem
                 if( employee == schedule.EmployeeID )
                 {
                     comBoxWorkDate.Items.Add( workDate.ToString( "dddd, dd MMMM yyyy" ) );
-                    //MessageBox.Show( employee.ToString() );
                 }
-
-                //String theDate = dtpWorkSchedule.Value.ToString( "dddd, dd MMMM yyyy" );
-
-                // // Check if the date in the work schedule is equal to the date from the DB
-                //if( theDate == date.ToString( "dddd, dd MMMM yyyy" ) )
-                //{
-                //}
             }
         }
 
+        /**
+         * Method to update the listbox with data
+         */
         private void UpdateSchedule()
         {
             lBoxAssignEmployee.Items.Clear();
@@ -79,12 +77,15 @@ namespace MediaBazaarSystem
             updateTimer.Enabled = false;
         }
 
+        /**
+         * Method to assign employee to a schedule and save to DB
+         */
         private void btnDone_Click( object sender, EventArgs e )
         {
             updateTimer.Enabled = true;
             String startTime = comBoxStartTime.SelectedItem.ToString();
             String endTime = comBoxEndTime.SelectedItem.ToString();
-            String workDate = dtpWorkDate.Value.ToString();
+            String workDate = comBoxWorkDate.SelectedItem.ToString();
             DateTime updateStartTime = DateTime.Parse( startTime );
             DateTime updateEndTime = DateTime.Parse( endTime );
             DateTime updateWorkDate = DateTime.Parse( workDate );

@@ -412,6 +412,10 @@ namespace MediaBazaarSystem
             }
         }
 
+        /**
+         * Method to get all available work dates from an Employee
+         * This method is using the employee ID
+         */
         public MySqlDataReader getEmpAvailableWorkDates(int employeeID)
         {
             string sql = 
