@@ -17,7 +17,6 @@ namespace MediaBazaarSystem
     {
         DatabaseHelper dataBase;
         private AssignEmployeeSystem assignEmployeeForm;
-
         private Department department;
         private Manager manager;
         private Schedule schedule;
@@ -27,6 +26,7 @@ namespace MediaBazaarSystem
         private String employeeStartTime;
         private String employeeEndTime;
         private String employeeWorkDate;
+        private List<Staff> tempStaffs;
 
         /**
          * Constructor
@@ -43,6 +43,7 @@ namespace MediaBazaarSystem
             this.UpdateSchedule();
             this.LoadStaff();
             hoursStatsChart.Titles.Add( "Hours Available" );
+            this.LoadScheduleInformation();
 
             //Profile
             refreshProfile();
@@ -53,12 +54,6 @@ namespace MediaBazaarSystem
          */
         private void GetWorkScheduleDB(MySqlDataReader reader)
         {
-            //this.connection = connection;
-            //MySqlCommand cmd = new MySqlCommand( sql, connection );
-            // Open connection
-            //conn.Open();
-            //MySqlDataReader reader = cmd.ExecuteReader();
-
             if(reader.HasRows)
             {
                 // Get the data
@@ -109,138 +104,14 @@ namespace MediaBazaarSystem
          */
         private void UpdateSchedule()
         {
-            // Clear table
             this.dataAdminWorkSchedule.Rows.Clear();
             department.GetSchedules().Clear();
-            //// Connect to DB
-            //string connectionString = @"Server = studmysql01.fhict.local; Uid = dbi437493; Database = dbi437493; Pwd = dbgroup01;";
-            //// SQL Query
-            //string sql = "SELECT Person.Id, Person.FirstName, Person.LastName, Role.Name, Schedule.StartTime, Schedule.EndTime, Schedule.WorkDate, Department.Name, Schedule.Id FROM Person " +
-            //    "INNER JOIN Role ON Person.RoleId = Role.Id " +
-            //    "INNER JOIN Schedule ON Person.Id = Schedule.PersonID " +
-            //    "INNER JOIN Department ON Person.DepartmentID = Department.Id";
 
-            //// Start mysql objects
-            //MySqlConnection connection = new MySqlConnection(connectionString);
             MySqlDataReader reader = dataBase.updateSchedules();
             this.GetWorkScheduleDB(reader);
 
-            // Disable timer
             updateTimer.Enabled = false;
         }
-
-        /**
-         * Method to get database info on employees
-         */
-        //private void GetEmployeeManagementDB(String sql, MySqlConnection connection)
-        //{
-        //    this.lbEmployees.Items.Clear();
-        //    this.lbManagers.Items.Clear();
-
-        //    MySqlCommand cmd2 = new MySqlCommand( sql, connection );
-        //    connection.Open();
-        //    cmd2.Parameters.Add( "DepartmentID", MySqlDbType.VarChar ).Value = department.DepartmentID;
-        //    MySqlDataReader reader;
-        //    reader = cmd2.ExecuteReader();
-
-        //    while( reader.Read() )
-        //    {
-        //        int role = ( int ) reader.GetValue( 12 );
-        //        if( role == 1 )
-        //        {
-        //            int ID = ( int ) reader.GetValue( 0 );
-        //            String firstName = reader.GetString( 1 );
-        //            String lastName = reader.GetString( 2 );
-        //            DateTime birthDate = ( DateTime ) reader.GetValue( 3 );
-        //            String address = reader.GetString( 4 );
-        //            String email = reader.GetString( 5 );
-        //            String charge = "Manager";
-        //            double salary = reader.GetDouble( 7 );
-        //            int hoursavailable = ( int ) reader.GetValue( 9 );
-        //            int dbContract = ( int ) reader.GetValue( 13 );
-        //            Contract contract;
-
-        //            //Calculate age
-        //            int age = DateTime.Now.Year - birthDate.Year - 1;
-        //            if (birthDate.Month > DateTime.Now.Month)
-        //            {
-        //                age++;
-        //            }
-        //            else if (birthDate.Month == DateTime.Now.Month)
-        //            {
-        //                if (birthDate.Day >= DateTime.Now.Day)
-        //                {
-        //                    age++;
-        //                }
-        //            }
-
-        //            if ( dbContract == 1 )
-        //            {
-        //                contract = Contract.FullTime;
-        //            }
-        //            else
-        //            {
-        //                contract = Contract.PartTime;
-        //            }
-
-        //            Manager man = new Manager( ID, firstName, lastName, birthDate, address, salary, hoursavailable, email, contract );
-
-        //            if( department.GetStaffMember( firstName, lastName ) == null )
-        //            {
-        //                department.AddStaffMember( man );
-        //            }
-
-        //            idManage = ID;
-        //        }
-        //        else if( role == 2 )
-        //        {
-        //            int ID = ( int ) reader.GetValue( 0 );
-        //            String firstName = reader.GetString( 1 );
-        //            String lastName = reader.GetString( 2 );
-        //            DateTime birthDate = ( DateTime ) reader.GetValue( 3 );
-        //            String address = reader.GetString( 4 );
-        //            String email = reader.GetString( 5 );
-        //            String charge = "Employee";
-        //            double salary = reader.GetDouble( 7 );
-        //            int hoursavailable = ( int ) reader.GetValue( 9 );
-        //            int dbContract = ( int ) reader.GetValue( 13 );
-        //            Contract contract;
-
-        //            //Calculate age
-        //            int age = DateTime.Now.Year - birthDate.Year - 1;
-        //            if (birthDate.Month > DateTime.Now.Month)
-        //            {
-        //                age++;
-        //            }
-        //            else if (birthDate.Month == DateTime.Now.Month)
-        //            {
-        //                if (birthDate.Day >= DateTime.Now.Day)
-        //                {
-        //                    age++;
-        //                }
-        //            }
-
-        //            if ( dbContract == 1 )
-        //            {
-        //                contract = Contract.FullTime;
-        //            }
-        //            else
-        //            {
-        //                contract = Contract.PartTime;
-        //            }
-
-        //            emp = new Employee( ID, firstName, lastName, birthDate, address, salary, hoursavailable, email, contract );
-
-        //            if( department.GetStaffMember( firstName, lastName ) == null )
-        //            {
-        //                department.AddStaffMember( emp );
-        //            }
-
-        //            idManage = ID;
-        //        }
-        //    }
-        //    reader.Close();
-        //}
 
         private void LoadStaff()
         {
@@ -259,26 +130,6 @@ namespace MediaBazaarSystem
             }
         }
 
-        
-
-        /**
-         * Method to update the employee management 
-         */
-         // I believe its unnecessary
-        //private void UpdateEmployeeManagement()
-        //{
-        //    this.lbEmployees.Items.Clear();
-        //    this.lbManagers.Items.Clear();
-
-        //    string connectionString = @"Server = studmysql01.fhict.local; Uid = dbi437493; Database = dbi437493; Pwd = dbgroup01;";
-        //    MySqlConnection connection = new MySqlConnection( connectionString );
-        //    //Employee related
-        //    String sql2 = "SELECT * FROM person WHERE DepartmentID = @DepartmentID";
-        //    MySqlCommand cmd2 = new MySqlCommand( sql2, connection );
-        //    cmd2.Parameters.Add( "DepartmentID", MySqlDbType.VarChar ).Value = department.DepartmentID;
-        //    this.GetEmployeeManagementDB( sql2, connection );
-        //}
-
         /**
          * Method to get statistics
          */
@@ -287,14 +138,17 @@ namespace MediaBazaarSystem
             lBoxStatistics.Items.Clear();
             hoursStatsChart.Series[ "Hours" ].Points.Clear();
 
-            foreach( Employee employee in department.GetStaff() )
+            foreach( Staff staff in department.GetStaff() )
             {
-                hoursStatsChart.Series[ "Hours" ].IsValueShownAsLabel = true;
-                ChartArea chartArea = hoursStatsChart.ChartAreas[ 0 ];
-                // The axis range
-                chartArea.AxisX.Minimum = 0;
-                chartArea.AxisX.Maximum = 10;
-                hoursStatsChart.Series[ "Hours" ].Points.AddXY( employee.FirstName, employee.HoursAvailable );
+                if(staff is Employee)
+                {
+                    hoursStatsChart.Series[ "Hours" ].IsValueShownAsLabel = true;
+                    ChartArea chartArea = hoursStatsChart.ChartAreas[ 0 ];
+                    // The axis range
+                    chartArea.AxisX.Minimum = 0;
+                    chartArea.AxisX.Maximum = 10;
+                    hoursStatsChart.Series[ "Hours" ].Points.AddXY( staff.FirstName, staff.HoursAvailable );
+                }
             }
 
             foreach( Schedule schedule in department.GetSchedules() )
@@ -355,25 +209,6 @@ namespace MediaBazaarSystem
 
         }
 
-        /**
-         * Method that returns an employee selected on the listbox or null if it doesn't exist.
-         */
-        //private Employee SearchEmp()
-        //{
-        //    String auxEmp = lbEmployees.SelectedItem.ToString();
-        //    String[] name = auxEmp.Split(','); //Splits the string by the comma.
-        //    String firstName = name[1].Trim();
-        //    String lastName = name[0].Trim();
-        //    Employee emp = (Employee)department.GetStaffMember(firstName, lastName);
-
-        //    if (emp == null)
-        //    {
-        //        MessageBox.Show("Employee not found.");
-        //    }
-
-        //    return emp;
-        //}
-
         private Staff SearchSelectedStaff()
         {
             String auxName = null;
@@ -405,35 +240,10 @@ namespace MediaBazaarSystem
         }
 
         /**
-         * Method that returns a manager selected on the listbox or null if it doesn't exist.
-         */
-        //private Manager SearchMan()
-        //{
-        //    String auxMan = lbManagers.SelectedItem.ToString();
-        //    String[] name = auxMan.Split(','); //Splits the string by the comma.
-        //    String firstName = name[1].Trim();
-        //    String lastName = name[0].Trim();
-        //    Manager man = department.GetManager(firstName, lastName);
-
-        //    if (man == null)
-        //    {
-        //        MessageBox.Show("Employee not found.");
-        //    }
-
-        //    return man;
-        //}
-
-        /**
          * Method to delete employee from the database
          */
         private void btnFireEmployee_Click(object sender, EventArgs e)
         {
-            //string connString = @"Server = studmysql01.fhict.local; Uid = dbi437493; Database = dbi437493; Pwd = dbgroup01;";
-            //MySqlConnection conn = new MySqlConnection(connString);
-            //conn.Open();
-
-            //MySqlCommand cmd = conn.CreateCommand();
-
             if(lbEmployees.SelectedItem != null || lbManagers.SelectedItem != null)
             {
                 DeleteForm check = new DeleteForm(ensure);
@@ -465,17 +275,6 @@ namespace MediaBazaarSystem
 
             LoadStaff();
 
-            //List<Staff> listEmp = department.GetStaff(); 
-            //foreach (Staff emp in listEmp) //Refills employee listbox
-            //{
-            //    if(emp.Role == Position.Employee)
-            //    {
-            //        String outpEmp = emp.LastName + ", " + emp.FirstName;
-            //        lbEmployees.Items.Add(outpEmp);
-            //    }
-
-            //}
-
             try //Makes sure that the user does not notice this operation by reselecting the exact same item that he had selected.
             {
                 if( lbEmployees.Items.Count > 0 )
@@ -499,20 +298,6 @@ namespace MediaBazaarSystem
             {
                 lbManagers.SelectedItem = null;
             }
-
-            //Managers
-
-            //List<Staff> listMan = department.GetStaff();
-            //foreach (Staff man in listMan) //Refills managers listbox
-            //{
-            //    if(man.Role == Position.HRManager || man.Role == Position.StockManager)
-            //    {
-            //        String outpMan = man.LastName + ", " + man.FirstName;
-            //        lbManagers.Items.Add(outpMan);
-            //    }
-            //}
-
-
         }
 
         /**
@@ -532,20 +317,6 @@ namespace MediaBazaarSystem
         {
             // Clear table
             this.dataAdminWorkSchedule.Rows.Clear();
-            // Connect to DB
-            //string connectionString = @"Server = studmysql01.fhict.local; Uid = dbi437493; Database = dbi437493; Pwd = dbgroup01;";
-            //// SQL Query
-            //string sql = "SELECT FirstName, LastName, Name, StartTime, EndTime, WorkDate FROM Person " +
-            //    "INNER JOIN Role ON Person.RoleId = Role.Id " +
-            //    "INNER JOIN Schedule ON Person.Id = Schedule.PersonID";
-
-            //// Start mysql objects
-            //MySqlConnection connection = new MySqlConnection( connectionString );
-            //MySqlCommand cmd = new MySqlCommand( sql, connection );
-
-            //// Open connection
-            //connection.Open();
-            //MySqlDataReader reader = cmd.ExecuteReader();
 
             MySqlDataReader reader = dataBase.getSchedules();
 
@@ -602,7 +373,7 @@ namespace MediaBazaarSystem
             employeeEndTime = selectedRow.Cells[ 3 ].Value.ToString();
             employeeWorkDate = selectedRow.Cells[ 4 ].Value.ToString();
 
-            if( employeeRole == "Manager" )
+            if( employeeRole == "Manager" || employeeRole == "Stock Manager" )
             {
                 MessageBox.Show( "You can't assign a top ranking manager to a shift! Please contact your administrator." );
             }
@@ -674,23 +445,44 @@ namespace MediaBazaarSystem
             lBoxDepartmentStats.Items.Clear();
             
             int length = department.GetStaff().Count;
-            lBoxDepartmentStats.Items.Add( "Number of employees that are employed: " + length );
+            lBoxDepartmentStats.Items.Add( "# of employees and managers that are employed: " + length + "  " );
 
-            int fTime = 0;
-            int pTime = 0;
-            foreach(Staff employee in department.GetStaff())
+            int empfullTime = 0;
+            int empPartTime = 0;
+            int manfullTime = 0;
+            int manPartTime = 0;
+            int managers = 0;
+
+            foreach(Staff staff in department.GetStaff())
             {
-                if( employee.Contract == Contract.FullTime )
+                if(staff is Employee)
                 {
-                    fTime++;
+                    if( staff.Contract == Contract.FullTime )
+                    {
+                        empfullTime++;
+                    }
+                    else if( staff.Contract == Contract.PartTime )
+                    {
+                        empPartTime++;
+                    }
                 }
-                else if( employee.Contract == Contract.PartTime )
+                else if( staff is Manager )
                 {
-                    pTime++;
+                    managers++;
+
+                    if( staff.Contract == Contract.FullTime )
+                    {
+                        manfullTime++;
+                    }
+                    else if( staff.Contract == Contract.PartTime )
+                    {
+                        manPartTime++;
+                    }
                 }
             }
-            lBoxDepartmentStats.Items.Add( fTime + " Fulltime workers." );
-            lBoxDepartmentStats.Items.Add( pTime + " Parttime workers." );
+
+            lBoxDepartmentStats.Items.Add( manfullTime + empfullTime + " Fulltime workers." );
+            lBoxDepartmentStats.Items.Add( manPartTime + empPartTime + " Parttime workers." );
 
             int dep = 0;
             for(int i = 0; i < department.GetSchedules().Count; i++ )
@@ -700,10 +492,14 @@ namespace MediaBazaarSystem
                     dep++;
                 }
             }
-            lBoxDepartmentStats.Items.Add( "Number of schedules related to this department: " + dep );
+            lBoxDepartmentStats.Items.Add( "# of schedules related to this department: " + dep );
 
-            int managers = department.GetStaff().Count;
-            lBoxDepartmentStats.Items.Add( "Number of managers: " + managers );
+            //int managers = department.GetStaff().Count;
+            //if(department.GetStaff() is Manager)
+            //{
+
+            //}
+            lBoxDepartmentStats.Items.Add( "# of managers: " + managers );
         }
 
         /**
@@ -713,11 +509,14 @@ namespace MediaBazaarSystem
         {
             lBoxEmpStats.Items.Clear();
 
-            foreach(Employee employee in department.GetStaff())
+            foreach(Staff staff in department.GetStaff())
             {
-                if( (!lBoxEmpStats.Items.Contains( employee.FirstName )) && (employee.Role == Position.Employee) )
+                if(staff is Employee)
                 {
-                    lBoxEmpStats.Items.Add( employee.FirstName + " " + employee.LastName );
+                    if( ( !lBoxEmpStats.Items.Contains( staff.FirstName ) ) && ( staff.Role == Position.Employee ) )
+                    {
+                        lBoxEmpStats.Items.Add( staff.FirstName + " " + staff.LastName );
+                    }
                 }
             }
         }
@@ -734,17 +533,20 @@ namespace MediaBazaarSystem
 
             try
             {
-                foreach( Employee employee in department.GetStaff() )
+                foreach( Staff staff in department.GetStaff() )
                 {
-                    if( searchedValue.Contains( employee.FirstName.ToLower() ) && employee.Role == Position.Employee )
+                    if(staff is Employee)
                     {
-                        lBoxEmpStats.Items.Add(
-                            employee.dbID + " - " +
-                            "Name: " + employee.FirstName + " - " +
-                            employee.LastName + " - " +
-                            "Role: " + employee.Role + " - " +
-                            "Age: " + employee.Age
-                        );
+                        if( searchedValue.Contains( staff.FirstName.ToLower() ) && staff.Role == Position.Employee )
+                        {
+                            lBoxEmpStats.Items.Add(
+                                staff.dbID + " - " +
+                                "Name: " + staff.FirstName + " - " +
+                                staff.LastName + " - " +
+                                "Role: " + staff.Role + " - " +
+                                "Age: " + staff.Age
+                            );
+                        }
                     }
                 }
             }
@@ -861,24 +663,24 @@ namespace MediaBazaarSystem
         {
             lBoxEmpStats.Items.Clear();
 
-            foreach( Employee employee in department.GetStaff() )
+            foreach( Staff staff in department.GetStaff() )
             {
-                if( (cmboBoxStatsFilter.SelectedItem.ToString() == "FullTime") && (employee.Contract == Contract.FullTime) && employee.Role == Position.Employee )
+                if( (cmboBoxStatsFilter.SelectedItem.ToString() == "FullTime") && (staff.Contract == Contract.FullTime) && staff.Role == Position.Employee )
                 {
                     lBoxEmpStats.Items.Add(
-                        "Name: " + employee.FirstName + " " +
-                        employee.LastName + " --- " +
-                        "Role: " + employee.Role + " --- " +
-                        "Salary: " + employee.Salary
+                        "Name: " + staff.FirstName + " " +
+                        staff.LastName + " --- " +
+                        "Role: " + staff.Role + " --- " +
+                        "Salary: " + staff.Salary
                     );
                 }
-                else if( ( cmboBoxStatsFilter.SelectedItem.ToString() == "PartTime" ) && ( employee.Contract == Contract.PartTime ) && employee.Role == Position.Employee )
+                else if( ( cmboBoxStatsFilter.SelectedItem.ToString() == "PartTime" ) && ( staff.Contract == Contract.PartTime ) && staff.Role == Position.Employee )
                 {
                     lBoxEmpStats.Items.Add(
-                        "Name: " + employee.FirstName + " " +
-                        employee.LastName + " --- " +
-                        "Role: " + employee.Role + " --- " +
-                        "Salary: " + employee.Salary
+                        "Name: " + staff.FirstName + " " +
+                        staff.LastName + " --- " +
+                        "Role: " + staff.Role + " --- " +
+                        "Salary: " + staff.Salary
                     );
                 }
             }
@@ -962,6 +764,53 @@ namespace MediaBazaarSystem
         private void txtBoxStatsSearch_Click(object sender, EventArgs e)
         {
             txtBoxStatsSearch.Text = "";
+        }
+
+        private void LoadScheduleInformation()
+        {
+            DateTime time = DateTime.Today;
+            for( DateTime _time = time.AddHours( 08 ); _time < time.AddHours( 24 ); _time = _time.AddMinutes( 60 ) ) //from 16h to 18h hours
+            {
+                comBoxStartTime.Items.Add( _time.ToShortTimeString() );
+                comBoxEndTime.Items.Add( _time.ToShortTimeString() );
+            }
+
+            foreach( Staff staff in department.GetStaff() )
+            {
+                if( staff is Employee )
+                {
+                    comBoxEmployees.Items.Add( staff.FirstName + " " + staff.LastName );
+                }
+            }
+        }
+
+        private void btnDone_Click( object sender, EventArgs e )
+        {
+            comBoxWorkDate.Items.Clear();
+
+            foreach( Staff staff in department.GetStaff() )
+            {
+                if( staff is Employee )
+                {
+                    if(comBoxEmployees.SelectedItem.ToString() == staff.FirstName + " " + staff.LastName)
+                    {
+                        
+                        MySqlDataReader reader = dataBase.getEmpAvailableWorkDates( staff.dbID );
+
+                        // Add data to data grid view table
+                        while( reader.Read() )
+                        {
+                            int employee = ( int ) reader.GetValue( 2 );
+                            DateTime workDate = Convert.ToDateTime( reader.GetValue( 1 ).ToString() );
+
+                            if( employee == staff.dbID )
+                            {
+                                comBoxWorkDate.Items.Add( workDate.ToString( "dddd, dd MMMM yyyy" ) );
+                            }
+                        }
+                    }
+                }
+            }
         }
     }
 }

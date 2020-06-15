@@ -51,22 +51,6 @@ namespace MediaBazaarSystem
          */
         private void dtpWorkSchedule_ValueChanged( object sender, EventArgs e )
         {
-            //// Clear table
-            //this.dataEmpWorkSchedule.Rows.Clear();
-            //// Connect to DB
-            //string connectionString = @"Server = studmysql01.fhict.local; Uid = dbi437493; Database = dbi437493; Pwd = dbgroup01;";
-            //// SQL Query
-            //string sql = "SELECT FirstName, LastName, Name, StartTime, EndTime, WorkDate FROM Person " +
-            //    "INNER JOIN Role ON Person.RoleId = Role.Id " +
-            //    "INNER JOIN Schedule ON Person.Id = Schedule.PersonID";
-
-            //// Start mysql objects
-            //MySqlConnection connection = new MySqlConnection( connectionString );
-            //MySqlCommand cmd = new MySqlCommand( sql, connection );
-
-            //// Open connection
-            //connection.Open();
-            //MySqlDataReader reader = cmd.ExecuteReader();
             MySqlDataReader reader = dataBase.getSchedules();
 
             // Add data to data grid view table
@@ -106,17 +90,6 @@ namespace MediaBazaarSystem
             lBoxEmpHistory.Items.Clear();
             this.dataEmpWorkSchedule.Rows.Clear();
             department.GetSchedules().Clear();
-            //// Connect to DB
-            //string connectionString = @"Server = studmysql01.fhict.local; Uid = dbi437493; Database = dbi437493; Pwd = dbgroup01;";
-            //// SQL Query
-            //string sql = "SELECT Person.Id, Person.FirstName, Person.LastName, Role.Name, Schedule.StartTime, Schedule.EndTime, Schedule.WorkDate, Department.Name, Schedule.Id FROM Person " +
-            //    "INNER JOIN Role ON Person.RoleId = Role.Id " +
-            //    "INNER JOIN Schedule ON Person.Id = Schedule.PersonID " +
-            //    "INNER JOIN Department ON Person.DepartmentID = Department.Id";
-
-            //// Start mysql objects
-            //MySqlConnection connection = new MySqlConnection( connectionString );
-            //MySqlCommand cmd = new MySqlCommand( sql, connection );
 
             MySqlDataReader reader = dataBase.updateSchedules();
             this.GetWorkScheduleDB( reader );
@@ -130,12 +103,6 @@ namespace MediaBazaarSystem
          */
         private void GetWorkScheduleDB( MySqlDataReader reader )
         {
-            ////this.connection = connection;
-            //MySqlCommand cmd = new MySqlCommand( sql, connection );
-            //// Open connection
-            //connection.Open();
-            //MySqlDataReader reader = cmd.ExecuteReader();
-
             if( reader.HasRows )
             {
                 // Get the data
@@ -304,43 +271,6 @@ namespace MediaBazaarSystem
          */
         private void btnUpdateProfile_Click(object sender, EventArgs e)
         {
-            //if (checkProfileChange())
-            //{
-            //    String firstName = txtBoxFirstName.Text;
-            //    String lastName = txtBoxLastName.Text;
-            //    DateTime birthDate = Convert.ToDateTime( txtBoxAge.Text );
-            //    String address = txtBoxEmail.Text;
-            //    String email = txtBoxEmail.Text;
-
-            //    //Updates employee in database.
-            //    string connString = @"Server = studmysql01.fhict.local; Uid = dbi437493; Database = dbi437493; Pwd = dbgroup01;";
-            //    MySqlConnection conn = new MySqlConnection(connString);
-            //    conn.Open();
-            //    MySqlCommand cmd = conn.CreateCommand();
-            //    cmd.CommandText = "UPDATE person SET Firstname = @Firstname, Lastname = @Lastname, Age = @Age, Address = @Address, Email = @Email WHERE Id = @Id";
-            //    cmd.Parameters.AddWithValue("@Firstname", firstName);
-            //    cmd.Parameters.AddWithValue("@Lastname", lastName );
-            //    cmd.Parameters.AddWithValue("@Age", birthDate );
-            //    cmd.Parameters.AddWithValue("@Address", address );
-            //    cmd.Parameters.AddWithValue("@Email", email );
-            //    cmd.Parameters.AddWithValue("@Id", employee.dbID);
-
-            //    cmd.ExecuteNonQuery();
-
-            //    //Updates employee in list.
-            //    employee.EditEmployee( firstName, lastName, birthDate, address, employee.Role, employee.Salary, employee.HoursAvailable, email, employee.Contract);
-
-            //    //Updates profile.
-            //    lbEmployeeInfo.Items.Clear();
-            //    refreshProfile();
-
-            //    MessageBox.Show("Profile Updated Successfully");
-            //}
-            //else
-            //{
-            //    MessageBox.Show("No changes made");
-            //}
-
             if (checkProfileChange())
             {
                 dataBase.updateProfile(employee, txtBoxFirstName.Text, txtBoxLastName.Text, Convert.ToDateTime(txtBoxAge.Text), txtBoxAddress.Text, txtBoxEmail.Text);
@@ -451,23 +381,6 @@ namespace MediaBazaarSystem
             lblWorkHistory.Text = "Your work history: morning shifts";
             lBoxEmpHistory.Items.Clear();
 
-            //// Connect to DB
-            //string connectionString = @"Server = studmysql01.fhict.local; Uid = dbi437493; Database = dbi437493; Pwd = dbgroup01;";
-            //// SQL Query
-            //string sql = "SELECT Person.Id, Person.FirstName, Person.LastName, Role.Name, Schedule.StartTime, Schedule.EndTime, Schedule.WorkDate, Department.Name FROM Person " +
-            //    "INNER JOIN Role ON Person.RoleId = Role.Id " +
-            //    "INNER JOIN Schedule ON Person.Id = Schedule.PersonID " +
-            //    "INNER JOIN Department ON Person.DepartmentID = Department.Id";
-
-            //// Start mysql objects
-            //MySqlConnection connection = new MySqlConnection( connectionString );
-            //// Start mysql objects
-            //MySqlCommand cmd = new MySqlCommand( sql, connection );
-
-            //// Open connection
-            //connection.Open();
-            //MySqlDataReader reader = cmd.ExecuteReader();
-
             MySqlDataReader reader = dataBase.getShift();
 
             if ( reader.HasRows )
@@ -513,22 +426,6 @@ namespace MediaBazaarSystem
             lblWorkHistory.Text = null;
             lblWorkHistory.Text = "Your work history: afternoon shifts";
             lBoxEmpHistory.Items.Clear();
-            //// Connect to DB
-            //string connectionString = @"Server = studmysql01.fhict.local; Uid = dbi437493; Database = dbi437493; Pwd = dbgroup01;";
-            //// SQL Query
-            //string sql = "SELECT Person.Id, Person.FirstName, Person.LastName, Role.Name, Schedule.StartTime, Schedule.EndTime, Schedule.WorkDate, Department.Name FROM Person " +
-            //    "INNER JOIN Role ON Person.RoleId = Role.Id " +
-            //    "INNER JOIN Schedule ON Person.Id = Schedule.PersonID " +
-            //    "INNER JOIN Department ON Person.DepartmentID = Department.Id";
-
-            //// Start mysql objects
-            //MySqlConnection connection = new MySqlConnection( connectionString );
-            //// Start mysql objects
-            //MySqlCommand cmd = new MySqlCommand( sql, connection );
-
-            //// Open connection
-            //connection.Open();
-            //MySqlDataReader reader = cmd.ExecuteReader();
 
             MySqlDataReader reader = dataBase.getShift();
 
@@ -575,22 +472,6 @@ namespace MediaBazaarSystem
             lblWorkHistory.Text = null;
             lblWorkHistory.Text = "Your work history: evening shifts";
             lBoxEmpHistory.Items.Clear();
-            //// Connect to DB
-            //string connectionString = @"Server = studmysql01.fhict.local; Uid = dbi437493; Database = dbi437493; Pwd = dbgroup01;";
-            //// SQL Query
-            //string sql = "SELECT Person.Id, Person.FirstName, Person.LastName, Role.Name, Schedule.StartTime, Schedule.EndTime, Schedule.WorkDate, Department.Name FROM Person " +
-            //    "INNER JOIN Role ON Person.RoleId = Role.Id " +
-            //    "INNER JOIN Schedule ON Person.Id = Schedule.PersonID " +
-            //    "INNER JOIN Department ON Person.DepartmentID = Department.Id";
-
-            //// Start mysql objects
-            //MySqlConnection connection = new MySqlConnection( connectionString );
-            //// Start mysql objects
-            //MySqlCommand cmd = new MySqlCommand( sql, connection );
-
-            //// Open connection
-            //connection.Open();
-            //MySqlDataReader reader = cmd.ExecuteReader();
 
             MySqlDataReader reader = dataBase.getShift();
 
