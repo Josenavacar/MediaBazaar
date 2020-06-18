@@ -26,7 +26,7 @@ namespace MediaBazaarSystem
         private String employeeStartTime;
         private String employeeEndTime;
         private String employeeWorkDate;
-        private List<Staff> tempStaffs;
+        private List<Schedule> schedules;
 
         /**
          * Constructor
@@ -136,18 +136,21 @@ namespace MediaBazaarSystem
         private void GetStatistics()
         {
             lBoxStatistics.Items.Clear();
-            hoursStatsChart.Series[ "Hours" ].Points.Clear();
+            hoursStatsChart.Series[ "Hours Available per employee" ].Points.Clear();
 
             foreach( Staff staff in department.GetStaff() )
             {
                 if(staff is Employee)
                 {
-                    hoursStatsChart.Series[ "Hours" ].IsValueShownAsLabel = true;
+                    //MessageBox.Show( department.GetSchedule( staff.dbID ).ToString() );
+                   
+
+                    hoursStatsChart.Series[ "Hours Available per employee" ].IsValueShownAsLabel = true;
                     ChartArea chartArea = hoursStatsChart.ChartAreas[ 0 ];
                     // The axis range
                     chartArea.AxisX.Minimum = 0;
                     chartArea.AxisX.Maximum = 10;
-                    hoursStatsChart.Series[ "Hours" ].Points.AddXY( staff.FirstName, staff.HoursAvailable );
+                    hoursStatsChart.Series[ "Hours Available per employee" ].Points.AddXY( staff.FirstName, staff.HoursAvailable );
                 }
             }
 
@@ -165,9 +168,9 @@ namespace MediaBazaarSystem
          */
         private void btnAddEmployee_Click(object sender, EventArgs e)
         {
-            UpdateOrAdd form = new UpdateOrAdd(department);
-            form.StartPosition = FormStartPosition.CenterParent;
-            form.ShowDialog(this);
+            UpdateOrAdd updateOrAddForm = new UpdateOrAdd(department);
+            updateOrAddForm.StartPosition = FormStartPosition.CenterParent;
+            updateOrAddForm.ShowDialog(this);
         }
 
         /**
@@ -181,8 +184,8 @@ namespace MediaBazaarSystem
 
                 if(staff != null)
                 {
-                    ViewEmployee form1 = new ViewEmployee(staff);
-                    form1.Show();
+                    ViewEmployee viewEmployeeForm = new ViewEmployee(staff);
+                    viewEmployeeForm.Show();
                 }
             }
         }
@@ -204,7 +207,7 @@ namespace MediaBazaarSystem
             }
             else
             {
-                MessageBox.Show("Action could not be performed, noone selected.");
+                MessageBox.Show("Action could not be performed, Please select a staff member.");
             }
 
         }
@@ -220,7 +223,7 @@ namespace MediaBazaarSystem
             }
             else if(lbManagers.SelectedItem != null)
             {
-                auxName = lbEmployees.SelectedItem.ToString();
+                auxName = lbManagers.SelectedItem.ToString();
             }
             
             if(!String.IsNullOrEmpty(auxName))
@@ -400,6 +403,8 @@ namespace MediaBazaarSystem
         {
             this.UpdateSchedule();
             this.GetStatistics();
+            this.UpdateScheduleEmployee();
+            
         }
 
         /**
@@ -494,11 +499,6 @@ namespace MediaBazaarSystem
             }
             lBoxDepartmentStats.Items.Add( "# of schedules related to this department: " + dep );
 
-            //int managers = department.GetStaff().Count;
-            //if(department.GetStaff() is Manager)
-            //{
-
-            //}
             lBoxDepartmentStats.Items.Add( "# of managers: " + managers );
         }
 
@@ -785,32 +785,130 @@ namespace MediaBazaarSystem
         }
 
         private void btnDone_Click( object sender, EventArgs e )
+        {            
+            Staff staff = department.GetStaffMember( comBoxEmployees.SelectedItem.ToString() );
+            String startTime = comBoxStartTime.SelectedItem.ToString();
+            String endTime = comBoxEndTime.SelectedItem.ToString();
+            String workDate = comBoxWorkDate.SelectedItem.ToString();
+            DateTime updateStartTime = DateTime.Parse( startTime );
+            DateTime updateEndTime = DateTime.Parse( endTime );
+            DateTime updateWorkDate = DateTime.Parse( workDate );
+            schedules = new List<Schedule>();
+
+            foreach(Schedule schedule in department.GetSchedules())
+            {
+                if(schedule.WorkDate == updateWorkDate)
+                {
+                    schedules.Add( schedule );
+                    if( schedules.Count >= 5 )
+                    {
+                        MessageBox.Show( "Sorry, you have reached your limit of 5 employees per day! Please schedule this person for another day." );
+                    }
+                    else
+                    {
+                        ////dataBase.AddSchedule( staff, startTime, endTime, workDate );
+                        //lBoxSchedulingEmployee.Items.Add
+                        //(
+                        //    "Employee: " + staff.FirstName + " " + staff.LastName + 
+                        //    " Start time: " + startTime + 
+                        //    " End time: " + endTime + 
+                        //    " Work date: " + workDate
+                        //);
+                        //schedule.UpdateSchedule( staff.dbID, staff.FirstName, staff.LastName, staff.Role.ToString(), updateStartTime, updateEndTime, updateWorkDate, this.department.Name );
+                    }
+                }
+            }
+        }
+
+        /**
+         * Method to update the listbox with data
+         */
+        private void UpdateScheduleEmployee()
+        {
+            lBoxSchedulingEmployee.Items.Clear();
+
+            lBoxSchedulingEmployee.Items.Add(
+                schedule.FirstName + " " + schedule.LastName + " --- " +
+                schedule.StartTime.ToString( "hh:mm tt" ) + " --- " +
+                schedule.EndTime.ToString( "hh:mm tt" ) + " --- " +
+                schedule.WorkDate.ToString( "dddd, dd MMMM yyyy" )
+            );
+
+            updateTimer.Enabled = false;
+        }
+
+        private void comBoxEmployees_SelectedIndexChanged( object sender, EventArgs e )
         {
             comBoxWorkDate.Items.Clear();
+            DateTime selectedWorkDate = Convert.ToDateTime( comBoxWorkDate.SelectedItem );
 
             foreach( Staff staff in department.GetStaff() )
             {
                 if( staff is Employee )
                 {
-                    if(comBoxEmployees.SelectedItem.ToString() == staff.FirstName + " " + staff.LastName)
+                    if( comBoxEmployees.SelectedItem.ToString() == staff.FirstName + " " + staff.LastName )
                     {
-                        
+
                         MySqlDataReader reader = dataBase.getEmpAvailableWorkDates( staff.dbID );
 
                         // Add data to data grid view table
                         while( reader.Read() )
                         {
-                            int employee = ( int ) reader.GetValue( 2 );
+                            int employee = ( int ) reader.GetValue( 4 );
+                            DateTime startTime = Convert.ToDateTime( reader.GetValue( 2 ).ToString() );
+                            DateTime endTime = Convert.ToDateTime( reader.GetValue( 3 ).ToString() );
                             DateTime workDate = Convert.ToDateTime( reader.GetValue( 1 ).ToString() );
-
+                            //MessageBox.Show( selectedWorkDate.ToString() );
                             if( employee == staff.dbID )
                             {
-                                comBoxWorkDate.Items.Add( workDate.ToString( "dddd, dd MMMM yyyy" ) );
+                                if( !comBoxWorkDate.Items.Contains( workDate.ToString( "dddd, dd MMMM yyyy" ) ) )
+                                {
+                                    comBoxWorkDate.Items.Add( workDate.ToString( "dddd, dd MMMM yyyy" ) );
+
+                                    if( comBoxWorkDate.SelectedIndex >= 0 )
+                                    {
+                                        MessageBox.Show( department.GetSchedule( employee, selectedWorkDate ).ToString() );
+                                        scheduleTimer.Enabled = false;
+                                    }
+                                }
+
+
                             }
                         }
                     }
                 }
             }
+        }
+
+        private void CheckSchedules()
+        {
+            //DateTime startTime = Convert.ToDateTime( comBoxStartTime.SelectedItem );
+            //DateTime endTime = Convert.ToDateTime( comBoxEndTime.SelectedItem );
+            DateTime selectedWorkDate = Convert.ToDateTime( comBoxWorkDate.SelectedItem );
+            //MessageBox.Show(workDate.ToString());
+            //foreach( Schedule schedule in department.GetSchedules() )
+            //{
+            //    if( schedule.WorkDate.ToString( "dddd, dd MMMM yyyy" ) != workDate.ToString( "dddd, dd MMMM yyyy" ) && schedule.StartTime.ToString( "hh:mm tt" ) != startTime.ToString( "hh:mm tt" ) && schedule.EndTime.ToString( "hh:mm tt" ) != endTime.ToString( "hh:mm tt" ) )
+            //    {
+            //        if( comBoxStartTime.SelectedIndex >= 0 && comBoxEndTime.SelectedIndex >= 0 && comBoxWorkDate.SelectedIndex >= 0)
+            //        {
+
+            //            comBoxStartTime.Items.Remove( comBoxStartTime.SelectedItem );
+            //            comBoxEndTime.Items.Remove( comBoxEndTime.SelectedItem );
+            //            comBoxWorkDate.Items.Remove( comBoxWorkDate.SelectedItem );
+            //        }
+            //    }
+            //}
+        }
+
+        private void comBoxWorkDate_SelectedIndexChanged( object sender, EventArgs e )
+        {
+
+        }
+
+        private void scheduleTimer_Tick( object sender, EventArgs e )
+        {
+            this.CheckSchedules();
         }
     }
 }

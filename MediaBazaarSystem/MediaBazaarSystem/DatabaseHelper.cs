@@ -17,9 +17,9 @@ namespace MediaBazaarSystem
     {
         private String connString = @"Server = studmysql01.fhict.local; Uid = dbi437493; Database = dbi437493; Pwd = dbgroup01;";
 
-        public void StaffLogin(String email, String password)
+        public MySqlDataReader StaffLogin(String email, String password)
         {
-            Contract contract;
+            //Contract contract;
 
             String sql = "SELECT person.Id, person.Firstname, person.Lastname, person.Age, person.Address, person.Email, person.Password, person.Salary, " +
                             "person.HoursWorked, person.HoursAvailable, person.IsAvailable, person.RoleID, department.Name, person.DepartmentID, person.ContractID " +
@@ -32,88 +32,88 @@ namespace MediaBazaarSystem
             conn.Open();
             MySqlDataReader reader = cmd.ExecuteReader();
 
-            try
-            {
-                if (reader.Read())
-                {
-                    // Variables 
-                    int ID = (int)reader.GetValue(0);
-                    String firstName = reader.GetString(1);
-                    String lastName = reader.GetString(2);
-                    DateTime birthDateWithTime = (DateTime)reader.GetValue(3);
-                    DateTime birthDate = birthDateWithTime.Date;
-                    String address = reader.GetString(4);
-                    String toDecryptPassword = reader.GetString(6);
-                    double salary = reader.GetDouble(7);
-                    int hoursavailable = (int)reader.GetValue(9);
-                    int role = (int)reader.GetValue(11);
+            return reader;
 
-                    //Calculate age
-                    int age = DateTime.Now.Year - birthDate.Year - 1;
+            //try
+            //{
+            //    if (reader.Read())
+            //    {
+            //        // Variables 
+            //        int ID = (int)reader.GetValue(0);
+            //        String firstName = reader.GetString(1);
+            //        String lastName = reader.GetString(2);
+            //        DateTime birthDateWithTime = (DateTime)reader.GetValue(3);
+            //        DateTime birthDate = birthDateWithTime.Date;
+            //        String address = reader.GetString(4);
+            //        String toDecryptPassword = reader.GetString(6);
+            //        double salary = reader.GetDouble(7);
+            //        int hoursavailable = (int)reader.GetValue(9);
+            //        int role = (int)reader.GetValue(11);
 
-                    if (birthDate.Month > DateTime.Now.Month)
-                    {
-                        age++;
-                    }
-                    else if (birthDate.Month == DateTime.Now.Month)
-                    {
-                        if (birthDate.Day >= DateTime.Now.Day)
-                        {
-                            age++;
-                        }
-                    }
+            //        //Calculate age
+            //        int age = DateTime.Now.Year - birthDate.Year - 1;
 
-                    //Department
-                    String depName = reader.GetString(12);
-                    int depID = (int)reader.GetValue(13);
-                    Department department = new Department(depName, depID);
+            //        if (birthDate.Month > DateTime.Now.Month)
+            //        {
+            //            age++;
+            //        }
+            //        else if (birthDate.Month == DateTime.Now.Month)
+            //        {
+            //            if (birthDate.Day >= DateTime.Now.Day)
+            //            {
+            //                age++;
+            //            }
+            //        }
 
-                    // Get the contract
-                    int dbContract = (int)reader.GetValue(14);
-                    if (dbContract == 1)
-                    {
-                        contract = Contract.FullTime;
-                    }
-                    else
-                    {
-                        contract = Contract.PartTime;
-                    }
+            //        //Department
+            //        String depName = reader.GetString(12);
+            //        int depID = (int)reader.GetValue(13);
+            //        Department department = new Department(depName, depID);
 
-                    // Decrypt password and check if password is equal to the password user filled in
-                    if (Cryptography.Decrypt(toDecryptPassword) == password)
-                    {
-                        if (role == 1) // Manager
-                        {
-                            Manager manager = new Manager(ID, firstName, lastName, birthDate, address, salary, hoursavailable, email, contract);
-                            AdministrationSystem administrationSystem = new AdministrationSystem(department, manager);
-                            administrationSystem.Show();
-                        }
-                        else if (role == 2) // Employee
-                        {
-                            Employee employee = new Employee(ID, firstName, lastName, birthDate, address, salary, hoursavailable, email, contract);
-                            EmployeeSystem employeeSystem = new EmployeeSystem(department, employee);
-                            employeeSystem.Show();
-                        }
-                    }
-                    else if ((Cryptography.Decrypt(toDecryptPassword) != password) || (password == null))
-                    {
-                        //throw new ArgumentException( "Email or password is incorrect. Please try again." );
-                    }
-                }
-                else
-                {
-                    //throw new ArgumentException( "Unable to connect to the database. Please contact your administrator." );
-                }
-            }
-            finally
-            {
-                conn.Close();
-            }
+            //        // Get the contract
+            //        int dbContract = (int)reader.GetValue(14);
+            //        if (dbContract == 1)
+            //        {
+            //            contract = Contract.FullTime;
+            //        }
+            //        else
+            //        {
+            //            contract = Contract.PartTime;
+            //        }
+
+            //        // Decrypt password and check if password is equal to the password user filled in
+            //        if (Cryptography.Decrypt(toDecryptPassword) == password)
+            //        {
+            //            if (role == 1) // Manager
+            //            {
+            //                Manager manager = new Manager(ID, firstName, lastName, birthDate, address, salary, hoursavailable, email, contract);
+            //                AdministrationSystem administrationSystem = new AdministrationSystem(department, manager);
+            //                administrationSystem.Show();
+            //            }
+            //            else if (role == 2) // Employee
+            //            {
+            //                Employee employee = new Employee(ID, firstName, lastName, birthDate, address, salary, hoursavailable, email, contract);
+            //                EmployeeSystem employeeSystem = new EmployeeSystem(department, employee);
+            //                employeeSystem.Show();
+            //            }
+            //        }
+            //        else if ((Cryptography.Decrypt(toDecryptPassword) != password) || (password == null))
+            //        {
+            //            //throw new ArgumentException( "Email or password is incorrect. Please try again." );
+            //        }
+            //    }
+            //    else
+            //    {
+            //        //throw new ArgumentException( "Unable to connect to the database. Please contact your administrator." );
+            //    }
+            //}
+            //finally
+            //{
+            //    conn.Close();
+            //}
         }
-    
 
-
-    public void addStaffToDB( Staff staff, int departmentID )
+        public void addStaffToDB( Staff staff, int departmentID )
         {
             if(staff != null)
             {
@@ -137,23 +137,46 @@ namespace MediaBazaarSystem
                 conn.Open();
                 MySqlCommand cmd = conn.CreateCommand();
 
-                cmd.CommandText = "INSERT INTO person(Firstname, Lastname, Age, Address, Email, Password, Salary, HoursWorked, HoursAvailable, IsAvailable, RoleID, DepartmentID, ContractID) " +
-                    "VALUES(@FirstN, @LastN, @Age, @Address, @Email, @Password, @Salary, @HoursWorked, @HoursAvailable, @IsAvailable, @RoleID, @DepartmentID, @ContractID) ";
+                if(roleID == 1 || roleID == 2)
+                {
+                    cmd.CommandText = "INSERT INTO person(Firstname, Lastname, Age, Address, Email, Password, Salary, HoursWorked, HoursAvailable, IsAvailable, RoleID, DepartmentID, ContractID) " +
+                                        "VALUES(@FirstN, @LastN, @Age, @Address, @Email, @Password, @Salary, @HoursWorked, @HoursAvailable, @IsAvailable, @RoleID, @DepartmentID, @ContractID) ";
 
-                cmd.Parameters.AddWithValue("@FirstN", staff.FirstName);
-                cmd.Parameters.AddWithValue("@LastN", staff.LastName);
-                cmd.Parameters.AddWithValue("@Age", staff.dateOfBirth);
-                cmd.Parameters.AddWithValue("@Address", staff.Address);
-                cmd.Parameters.AddWithValue("@Email", staff.Email);
-                cmd.Parameters.AddWithValue("@Password", password);
-                cmd.Parameters.AddWithValue("@Salary", staff.Salary);
-                cmd.Parameters.AddWithValue("@HoursWorked", 0);
-                cmd.Parameters.AddWithValue("@HoursAvailable", staff.HoursAvailable);
-                cmd.Parameters.AddWithValue("@IsAvailable", "Yes");
-                cmd.Parameters.AddWithValue("@RoleID", roleID);
-                cmd.Parameters.AddWithValue("@DepartmentID", departmentID);
-                cmd.Parameters.AddWithValue("@ContractID", staff.Contract);
-                cmd.ExecuteNonQuery(); //Inserted into database.
+                    cmd.Parameters.AddWithValue( "@FirstN", staff.FirstName );
+                    cmd.Parameters.AddWithValue( "@LastN", staff.LastName );
+                    cmd.Parameters.AddWithValue( "@Age", staff.dateOfBirth );
+                    cmd.Parameters.AddWithValue( "@Address", staff.Address );
+                    cmd.Parameters.AddWithValue( "@Email", staff.Email );
+                    cmd.Parameters.AddWithValue( "@Password", password );
+                    cmd.Parameters.AddWithValue( "@Salary", staff.Salary );
+                    cmd.Parameters.AddWithValue( "@HoursWorked", 0 );
+                    cmd.Parameters.AddWithValue( "@HoursAvailable", staff.HoursAvailable );
+                    cmd.Parameters.AddWithValue( "@IsAvailable", "Yes" );
+                    cmd.Parameters.AddWithValue( "@RoleID", roleID );
+                    cmd.Parameters.AddWithValue( "@DepartmentID", departmentID );
+                    cmd.Parameters.AddWithValue( "@ContractID", staff.Contract );
+                    cmd.ExecuteNonQuery(); //Inserted into database.
+                }else if(roleID == 3)
+                {
+                    cmd.CommandText = "INSERT INTO person(Firstname, Lastname, Age, Address, Email, Password, Salary, HoursWorked, HoursAvailable, IsAvailable, PassCode RoleID, DepartmentID, ContractID) " +
+                                        "VALUES(@FirstN, @LastN, @Age, @Address, @Email, @Password, @Salary, @HoursWorked, @HoursAvailable, @IsAvailable, @PassCode, @RoleID, @DepartmentID, @ContractID) ";
+
+                    cmd.Parameters.AddWithValue( "@FirstN", staff.FirstName );
+                    cmd.Parameters.AddWithValue( "@LastN", staff.LastName );
+                    cmd.Parameters.AddWithValue( "@Age", staff.dateOfBirth );
+                    cmd.Parameters.AddWithValue( "@Address", staff.Address );
+                    cmd.Parameters.AddWithValue( "@Email", staff.Email );
+                    cmd.Parameters.AddWithValue( "@Password", password );
+                    cmd.Parameters.AddWithValue( "@Salary", staff.Salary );
+                    cmd.Parameters.AddWithValue( "@HoursWorked", 0 );
+                    cmd.Parameters.AddWithValue( "@HoursAvailable", staff.HoursAvailable );
+                    cmd.Parameters.AddWithValue( "@IsAvailable", "Yes" );
+                    cmd.Parameters.AddWithValue( "@RoleID", roleID );
+                    cmd.Parameters.AddWithValue( "@DepartmentID", departmentID );
+                    cmd.Parameters.AddWithValue( "@ContractID", staff.Contract );
+                    cmd.Parameters.AddWithValue( "@PassCode", staff.PassCode );
+                    cmd.ExecuteNonQuery(); //Inserted into database.
+                }
 
                 MySqlCommand scheduleCmd = conn.CreateCommand();
 
@@ -306,16 +329,21 @@ namespace MediaBazaarSystem
             memberToChange.editStaffMember(FirstName, LastName, birthDate, address, email);
         }
 
-        public void AddEmployeeWorkDate( Staff employee, DateTime workDate )
+        public void AddEmployeeWorkDate( Staff employee, DateTime workDate, String startTime, String endTime )
         {
+            DateTime updateStartTime = DateTime.Parse( startTime );
+            DateTime updateEndTime = DateTime.Parse( endTime );
+
             if( employee != null )
             {
                 MySqlConnection conn = new MySqlConnection( connString );
                 conn.Open();
                 MySqlCommand cmd = conn.CreateCommand();
 
-                cmd.CommandText = "INSERT INTO available_emp_shifts(Available_Date, PersonID) VALUES(@Available_Date, @EmployeeID)";
+                cmd.CommandText = "INSERT INTO available_emp_shifts(Available_Date, StartTime, EndTime, PersonID) VALUES(@Available_Date, @StartTime, @EndTime, @EmployeeID)";
                 cmd.Parameters.AddWithValue( "@Available_Date", workDate );
+                cmd.Parameters.AddWithValue( "@StartTime", updateStartTime );
+                cmd.Parameters.AddWithValue( "@EndTime", updateEndTime );
                 cmd.Parameters.AddWithValue( "@EmployeeID", employee.dbID );
                 cmd.ExecuteNonQuery();
 
@@ -343,6 +371,26 @@ namespace MediaBazaarSystem
             MySqlDataReader reader = cmd.ExecuteReader();
 
             return reader;
+        }
+
+        public void AddSchedule(Staff staff, String startTime, String endTime, String workDate )
+        {
+            int personID = staff.dbID;
+            DateTime updateStartTime = DateTime.Parse( startTime );
+            DateTime updateEndTime = DateTime.Parse( endTime );
+            DateTime updateWorkDate = DateTime.Parse( workDate );
+
+            MySqlConnection connection = new MySqlConnection( connString );
+            connection.Open();
+            MySqlCommand cmd = connection.CreateCommand();
+
+            cmd.CommandText = "INSERT INTO Schedule (StartTime, EndTime, WorkDate, PersonID) VALUES(@startTime, @endTime, @workDate, @personID)";
+            cmd.Parameters.AddWithValue( "@startTime", updateStartTime );
+            cmd.Parameters.AddWithValue( "@endTime", updateEndTime );
+            cmd.Parameters.AddWithValue( "@workDate", updateWorkDate );
+            cmd.Parameters.AddWithValue( "@personID", personID );
+            cmd.ExecuteNonQuery();
+            connection.Close();
         }
 
         public MySqlDataReader getShift()
@@ -379,6 +427,7 @@ namespace MediaBazaarSystem
 
             return reader;
         }
+
         public void deleteStaffMember(int ID)
         {
             MySqlConnection conn = new MySqlConnection(connString);

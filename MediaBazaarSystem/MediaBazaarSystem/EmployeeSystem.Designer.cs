@@ -55,6 +55,10 @@
             this.btnSearch = new System.Windows.Forms.Button();
             this.txtBoxSearch = new System.Windows.Forms.TextBox();
             this.tbPageShiftManagement = new System.Windows.Forms.TabPage();
+            this.lblEndTime = new System.Windows.Forms.Label();
+            this.lblStartTime = new System.Windows.Forms.Label();
+            this.comBoxStartTime = new System.Windows.Forms.ComboBox();
+            this.comBoxEndTime = new System.Windows.Forms.ComboBox();
             this.lBoxWorkDates = new System.Windows.Forms.ListBox();
             this.btnAddWorkDate = new System.Windows.Forms.Button();
             this.dtpAvailableWorkDates = new System.Windows.Forms.DateTimePicker();
@@ -76,10 +80,6 @@
             this.btnUpdateProfile = new System.Windows.Forms.Button();
             this.lbEmployeeInfo = new System.Windows.Forms.ListBox();
             this.updateTimer = new System.Windows.Forms.Timer(this.components);
-            this.lblEndTime = new System.Windows.Forms.Label();
-            this.lblStartTime = new System.Windows.Forms.Label();
-            this.comBoxStartTime = new System.Windows.Forms.ComboBox();
-            this.comBoxEndTime = new System.Windows.Forms.ComboBox();
             this.tbControlEmp.SuspendLayout();
             this.tbPageHome.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picBoxLogout)).BeginInit();
@@ -373,9 +373,52 @@
             this.tbPageShiftManagement.Text = "Shift Management";
             this.tbPageShiftManagement.UseVisualStyleBackColor = true;
             // 
+            // lblEndTime
+            // 
+            this.lblEndTime.AutoSize = true;
+            this.lblEndTime.Font = new System.Drawing.Font("Century Gothic", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblEndTime.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.lblEndTime.Location = new System.Drawing.Point(470, 135);
+            this.lblEndTime.Name = "lblEndTime";
+            this.lblEndTime.Size = new System.Drawing.Size(88, 21);
+            this.lblEndTime.TabIndex = 20;
+            this.lblEndTime.Text = "End Time:";
+            // 
+            // lblStartTime
+            // 
+            this.lblStartTime.AutoSize = true;
+            this.lblStartTime.Font = new System.Drawing.Font("Century Gothic", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblStartTime.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.lblStartTime.Location = new System.Drawing.Point(462, 80);
+            this.lblStartTime.Name = "lblStartTime";
+            this.lblStartTime.Size = new System.Drawing.Size(96, 21);
+            this.lblStartTime.TabIndex = 19;
+            this.lblStartTime.Text = "Start Time:";
+            // 
+            // comBoxStartTime
+            // 
+            this.comBoxStartTime.Font = new System.Drawing.Font("Century Gothic", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.comBoxStartTime.FormattingEnabled = true;
+            this.comBoxStartTime.Location = new System.Drawing.Point(573, 77);
+            this.comBoxStartTime.Name = "comBoxStartTime";
+            this.comBoxStartTime.Size = new System.Drawing.Size(273, 29);
+            this.comBoxStartTime.TabIndex = 18;
+            this.comBoxStartTime.Text = "Select start time";
+            // 
+            // comBoxEndTime
+            // 
+            this.comBoxEndTime.Font = new System.Drawing.Font("Century Gothic", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.comBoxEndTime.FormattingEnabled = true;
+            this.comBoxEndTime.Location = new System.Drawing.Point(573, 132);
+            this.comBoxEndTime.Name = "comBoxEndTime";
+            this.comBoxEndTime.Size = new System.Drawing.Size(273, 29);
+            this.comBoxEndTime.TabIndex = 17;
+            this.comBoxEndTime.Text = "Select end time";
+            // 
             // lBoxWorkDates
             // 
             this.lBoxWorkDates.FormattingEnabled = true;
+            this.lBoxWorkDates.HorizontalScrollbar = true;
             this.lBoxWorkDates.ItemHeight = 21;
             this.lBoxWorkDates.Location = new System.Drawing.Point(23, 77);
             this.lBoxWorkDates.Name = "lBoxWorkDates";
@@ -570,48 +613,6 @@
             this.lbEmployeeInfo.Name = "lbEmployeeInfo";
             this.lbEmployeeInfo.Size = new System.Drawing.Size(330, 487);
             this.lbEmployeeInfo.TabIndex = 0;
-            // 
-            // lblEndTime
-            // 
-            this.lblEndTime.AutoSize = true;
-            this.lblEndTime.Font = new System.Drawing.Font("Century Gothic", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblEndTime.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.lblEndTime.Location = new System.Drawing.Point(470, 135);
-            this.lblEndTime.Name = "lblEndTime";
-            this.lblEndTime.Size = new System.Drawing.Size(88, 21);
-            this.lblEndTime.TabIndex = 20;
-            this.lblEndTime.Text = "End Time:";
-            // 
-            // lblStartTime
-            // 
-            this.lblStartTime.AutoSize = true;
-            this.lblStartTime.Font = new System.Drawing.Font("Century Gothic", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblStartTime.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.lblStartTime.Location = new System.Drawing.Point(462, 80);
-            this.lblStartTime.Name = "lblStartTime";
-            this.lblStartTime.Size = new System.Drawing.Size(96, 21);
-            this.lblStartTime.TabIndex = 19;
-            this.lblStartTime.Text = "Start Time:";
-            // 
-            // comBoxStartTime
-            // 
-            this.comBoxStartTime.Font = new System.Drawing.Font("Century Gothic", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.comBoxStartTime.FormattingEnabled = true;
-            this.comBoxStartTime.Location = new System.Drawing.Point(573, 77);
-            this.comBoxStartTime.Name = "comBoxStartTime";
-            this.comBoxStartTime.Size = new System.Drawing.Size(273, 29);
-            this.comBoxStartTime.TabIndex = 18;
-            this.comBoxStartTime.Text = "Select start time";
-            // 
-            // comBoxEndTime
-            // 
-            this.comBoxEndTime.Font = new System.Drawing.Font("Century Gothic", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.comBoxEndTime.FormattingEnabled = true;
-            this.comBoxEndTime.Location = new System.Drawing.Point(573, 132);
-            this.comBoxEndTime.Name = "comBoxEndTime";
-            this.comBoxEndTime.Size = new System.Drawing.Size(273, 29);
-            this.comBoxEndTime.TabIndex = 17;
-            this.comBoxEndTime.Text = "Select end time";
             // 
             // EmployeeSystem
             // 

@@ -30,9 +30,9 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AdministrationSystem));
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea3 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend3 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series3 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.tbControlAdmin = new System.Windows.Forms.TabControl();
             this.tbPageHome = new System.Windows.Forms.TabPage();
             this.cmboBoxFilter = new System.Windows.Forms.ComboBox();
@@ -104,6 +104,7 @@
             this.lbManagers = new System.Windows.Forms.ListBox();
             this.Refresh = new System.Windows.Forms.Timer(this.components);
             this.updateTimer = new System.Windows.Forms.Timer(this.components);
+            this.scheduleTimer = new System.Windows.Forms.Timer(this.components);
             this.tbControlAdmin.SuspendLayout();
             this.tbPageHome.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picBoxLogout)).BeginInit();
@@ -327,7 +328,7 @@
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Century Gothic", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label7.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.label7.Location = new System.Drawing.Point(251, 25);
+            this.label7.Location = new System.Drawing.Point(238, 25);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(380, 31);
             this.label7.TabIndex = 24;
@@ -342,6 +343,7 @@
             this.comBoxEmployees.Size = new System.Drawing.Size(349, 29);
             this.comBoxEmployees.TabIndex = 23;
             this.comBoxEmployees.Text = "Select employee";
+            this.comBoxEmployees.SelectedIndexChanged += new System.EventHandler(this.comBoxEmployees_SelectedIndexChanged);
             // 
             // label5
             // 
@@ -363,6 +365,7 @@
             this.comBoxWorkDate.Size = new System.Drawing.Size(349, 29);
             this.comBoxWorkDate.TabIndex = 21;
             this.comBoxWorkDate.Text = "Select available date";
+            this.comBoxWorkDate.SelectedIndexChanged += new System.EventHandler(this.comBoxWorkDate_SelectedIndexChanged);
             // 
             // lblEndTime
             // 
@@ -422,6 +425,7 @@
             this.lBoxSchedulingEmployee.BackColor = System.Drawing.Color.WhiteSmoke;
             this.lBoxSchedulingEmployee.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lBoxSchedulingEmployee.FormattingEnabled = true;
+            this.lBoxSchedulingEmployee.HorizontalScrollbar = true;
             this.lBoxSchedulingEmployee.ItemHeight = 23;
             this.lBoxSchedulingEmployee.Location = new System.Drawing.Point(173, 90);
             this.lBoxSchedulingEmployee.Name = "lBoxSchedulingEmployee";
@@ -436,7 +440,7 @@
             this.btnDone.Name = "btnDone";
             this.btnDone.Size = new System.Drawing.Size(520, 46);
             this.btnDone.TabIndex = 13;
-            this.btnDone.Text = "Done";
+            this.btnDone.Text = "Submit Schedule";
             this.btnDone.UseVisualStyleBackColor = false;
             this.btnDone.Click += new System.EventHandler(this.btnDone_Click);
             // 
@@ -519,17 +523,17 @@
             // 
             // hoursStatsChart
             // 
-            chartArea3.Name = "ChartArea1";
-            this.hoursStatsChart.ChartAreas.Add(chartArea3);
-            legend3.Name = "Legend1";
-            this.hoursStatsChart.Legends.Add(legend3);
+            chartArea1.Name = "ChartArea1";
+            this.hoursStatsChart.ChartAreas.Add(chartArea1);
+            legend1.Name = "Legend1";
+            this.hoursStatsChart.Legends.Add(legend1);
             this.hoursStatsChart.Location = new System.Drawing.Point(29, 318);
             this.hoursStatsChart.Name = "hoursStatsChart";
-            series3.ChartArea = "ChartArea1";
-            series3.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.StackedBar;
-            series3.Legend = "Legend1";
-            series3.Name = "Hours";
-            this.hoursStatsChart.Series.Add(series3);
+            series1.ChartArea = "ChartArea1";
+            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.StackedBar;
+            series1.Legend = "Legend1";
+            series1.Name = "Hours Available per employee";
+            this.hoursStatsChart.Series.Add(series1);
             this.hoursStatsChart.Size = new System.Drawing.Size(401, 280);
             this.hoursStatsChart.TabIndex = 20;
             this.hoursStatsChart.Text = "hoursStatsChart";
@@ -894,6 +898,12 @@
             this.updateTimer.Interval = 500;
             this.updateTimer.Tick += new System.EventHandler(this.updateTimer_Tick);
             // 
+            // scheduleTimer
+            // 
+            this.scheduleTimer.Enabled = true;
+            this.scheduleTimer.Interval = 1000;
+            this.scheduleTimer.Tick += new System.EventHandler(this.scheduleTimer_Tick);
+            // 
             // AdministrationSystem
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 17F);
@@ -999,5 +1009,6 @@
         private System.Windows.Forms.ComboBox comBoxEndTime;
         private System.Windows.Forms.ListBox lBoxSchedulingEmployee;
         private System.Windows.Forms.Button btnDone;
+        private System.Windows.Forms.Timer scheduleTimer;
     }
 }

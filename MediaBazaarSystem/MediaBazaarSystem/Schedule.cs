@@ -105,7 +105,7 @@ namespace MediaBazaarSystem
 
         public override string ToString()
         {
-            return this.FirstName + " " + this.Role + " " + this.StartTime + " " + this.EndTime + " " + this.WorkDate + " " + this.IsAvailable + " " + this.DepartmentName;
+            return this.FirstName + " " + this.Role + " " + this.StartTime.ToString( "hh:mm tt" ) + " " + this.EndTime.ToString( "hh:mm tt" ) + " " + this.WorkDate.ToString( "dddd, dd MMMM yyyy" ) + " " + this.IsAvailable + " " + this.DepartmentName;
         }
     }
 }

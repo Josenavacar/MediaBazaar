@@ -5,7 +5,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace MediaBazaarUnitTest
 {
     [TestClass]
-    public class UnitTest1
+    public class MediaBazaarTest
     {
         [TestMethod]
         public void TestToStringMan()
@@ -17,7 +17,7 @@ namespace MediaBazaarUnitTest
             String Role = "Manager";
             int Salary = 2000;
             int HoursAvailable = 40;
-            Manager man = new Manager(1, FirstName, LastName, Age, DateTime.Now.Date, Address, Role, Salary, HoursAvailable, "doe@gmail.com", Contract.PartTime);
+            Manager man = new Manager(1, FirstName, LastName, DateTime.Now.Date, Address, Salary, HoursAvailable, "doe@gmail.com", Contract.PartTime);
 
 
             String expectedToString = "First name: " + FirstName + " Last name: " + LastName + " Age: " + Age + " Address: " + Address + " Role: " + Role + " Salary: " + Salary + " Hours Available: " + HoursAvailable;
@@ -37,7 +37,7 @@ namespace MediaBazaarUnitTest
             String Role = "Employee";
             int Salary = 2000;
             int HoursAvailable = 40;
-            Employee man = new Employee(1, FirstName, LastName, Age, DateTime.Now.Date, Address, Role, Salary, HoursAvailable, "doe@gmail.com", Contract.PartTime);
+            Employee man = new Employee( 1, FirstName, LastName, DateTime.Now.Date, Address, Salary, HoursAvailable, "doe@gmail.com", Contract.PartTime );
 
 
             String expectedToString = "First name: " + FirstName + " Last name: " + LastName + " Age: " + Age + " Address: " + Address + " Role: " + Role + " Salary: " + Salary + " Hours Available: " + HoursAvailable;

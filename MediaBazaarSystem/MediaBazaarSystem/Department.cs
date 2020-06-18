@@ -58,6 +58,31 @@ namespace MediaBazaarSystem
             return null;
         }
 
+        public Staff GetStaffMember( String name )
+        {
+            foreach( Staff person in staff )
+            {
+                if( person.FirstName + " " + person.LastName == name )
+                {
+                    return person;
+                }
+            }
+            return null;
+        }
+
+        public Schedule GetSchedule(int employeeID, DateTime workDate )
+        {
+            foreach(Schedule schedule in schedules)
+            {
+                if(schedule.EmployeeID == employeeID && schedule.WorkDate == workDate)
+                {
+                    return schedule;
+                }
+            }
+
+            return null;
+        }
+
         public List<Staff> GetStaff()
         {
             return this.staff;

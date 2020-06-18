@@ -34,6 +34,7 @@ namespace MediaBazaarSystem
             refreshProfile();
             dtpAvailableWorkDates.MinDate = DateTime.Now;
             dtpAvailableWorkDates.MaxDate = DateTime.Now.AddDays( 7 );
+            LoadScheduleInformation();
         }
 
         /**
@@ -520,17 +521,39 @@ namespace MediaBazaarSystem
             txtBoxHomeSearch.Text = "";
         }
 
+        private void LoadScheduleInformation()
+        {
+            DateTime time = DateTime.Today;
+            for( DateTime _time = time.AddHours( 08 ); _time < time.AddHours( 24 ); _time = _time.AddMinutes( 60 ) ) //from 16h to 18h hours
+            {
+                comBoxStartTime.Items.Add( _time.ToShortTimeString() );
+                comBoxEndTime.Items.Add( _time.ToShortTimeString() );
+            }
+
+            //foreach( Staff staff in department.GetStaff() )
+            //{
+            //    if( staff is Employee )
+            //    {
+            //        comBoxEmployees.Items.Add( staff.FirstName + " " + staff.LastName );
+            //    }
+            //}
+        }
+
         private void btnAddWorkDate_Click( object sender, EventArgs e )
         {
+            String startTime = comBoxStartTime.SelectedItem.ToString();
+            String endTime = comBoxEndTime.SelectedItem.ToString();
+
             if(employee != null)
             {
                 int employeeID = employee.dbID;
                 DateTime workDate = dtpAvailableWorkDates.Value;
+                
 
-                if(!lBoxWorkDates.Items.Contains( employeeID.ToString() + " " + workDate.ToString( "dddd, dd MMMM yyyy" ) ) )
+                if(!lBoxWorkDates.Items.Contains( "Employee's ID: " + employeeID.ToString() + " Work date: " + workDate.ToString( "dddd, dd MMMM yyyy" ) + " Start time: " + startTime + " End time: " + endTime ) )
                 {
-                    lBoxWorkDates.Items.Add( employeeID.ToString() + " " + workDate.ToString( "dddd, dd MMMM yyyy" ) );
-                    dataBase.AddEmployeeWorkDate( employee, workDate );
+                    lBoxWorkDates.Items.Add("Employee's ID: " + employeeID.ToString() + " Work date: " + workDate.ToString( "dddd, dd MMMM yyyy" ) + " Start time: " + startTime + " End time: " + endTime );
+                    dataBase.AddEmployeeWorkDate( employee, workDate, startTime, endTime );
                 }
                 else
                 {
