@@ -32,6 +32,8 @@ namespace MediaBazaarSystem
             this.UpdateSchedule();
             lblEmployeeName.Text += " " + employee.FirstName + " " + employee.LastName;
             refreshProfile();
+            dtpAvailableWorkDates.MinDate = DateTime.Now;
+            dtpAvailableWorkDates.MaxDate = DateTime.Now.AddDays( 7 );
         }
 
         /**
@@ -167,7 +169,7 @@ namespace MediaBazaarSystem
                         dataEmpWorkSchedule.Rows.Add( row );
                     }
 
-                    schedule = new Schedule(scheduleID, firstName, lastName, role, workStartTime, workEndTime, convertedWorkDate, departmentName );
+                    schedule = new Schedule(scheduleID, firstName, lastName, role, workStartTime, workEndTime, convertedWorkDate, departmentName, employeeID );
                     department.AddSchedule( schedule );
 
                     if( employeeID == employee.dbID )
@@ -635,6 +637,29 @@ namespace MediaBazaarSystem
         private void txtBoxHomeSearch_Click(object sender, EventArgs e)
         {
             txtBoxHomeSearch.Text = "";
+        }
+
+        private void btnAddWorkDate_Click( object sender, EventArgs e )
+        {
+            if(employee != null)
+            {
+                int employeeID = employee.dbID;
+                DateTime workDate = dtpAvailableWorkDates.Value;
+
+                if(!lBoxWorkDates.Items.Contains( employeeID.ToString() + " " + workDate.ToString( "dddd, dd MMMM yyyy" ) ) )
+                {
+                    lBoxWorkDates.Items.Add( employeeID.ToString() + " " + workDate.ToString( "dddd, dd MMMM yyyy" ) );
+                    dataBase.AddEmployeeWorkDate( employee, workDate );
+                }
+                else
+                {
+                    MessageBox.Show( "This date is already chosen! Please choose another day." );
+                }
+            }
+            else
+            {
+                MessageBox.Show( "You're not authorized to make this request." );
+            }
         }
     }
 }

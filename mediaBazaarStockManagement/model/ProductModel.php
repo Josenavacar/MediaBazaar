@@ -19,16 +19,32 @@
 	 * @param  [type] $product_id [description]
 	 * @return [type]             [description]
 	 */
-	function getProduct($product_name)
+	function getProduct($product_id)
 	{
 		$db = openDatabaseConnection();
-		$sql = "SELECT * FROM product WHERE Name = :product_name";
+		$sql = "SELECT * FROM product WHERE Id = :product_id";
 		$query = $db->prepare($sql);
-		$query->execute(array(":product_name" => $product_name));
+		$query->execute(array(":product_id" => $product_id));
 
 		$db = null;
 		return $query->fetch();
 	}
+
+    /**
+     * Method to get product by Name
+     * @param  [type] $product_name [description]
+     * @return [type]             [description]
+     */
+    function getProductByName($product_name)
+    {
+        $db = openDatabaseConnection();
+        $sql = "SELECT * FROM product WHERE Name = :product_name";
+        $query = $db->prepare($sql);
+        $query->execute(array(":product_name" => $product_name));
+
+        $db = null;
+        return $query->fetch();
+    }
 
 	/**
 	 * Method to get detailed product information by ID 
