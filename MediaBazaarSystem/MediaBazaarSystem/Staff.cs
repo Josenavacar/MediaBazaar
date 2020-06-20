@@ -116,6 +116,21 @@ namespace MediaBazaarSystem
             this.dateOfBirth = birthDate;
             this.Address = address;
             this.Email = email;
+
+            //Calculate age
+            int age = DateTime.Now.Year - birthDate.Year - 1;
+            if (birthDate.Month > DateTime.Now.Month)
+            {
+                age++;
+            }
+            else if (birthDate.Month == DateTime.Now.Month)
+            {
+                if (birthDate.Day >= DateTime.Now.Day)
+                {
+                    age++;
+                }
+            }
+            Age = age;
         }
 
         public void editStaffMember(String firstName, String lastName, DateTime birthDate, String address, String email, double salary, int hoursAvailable, Position role, Contract contract)

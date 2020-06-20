@@ -286,7 +286,7 @@ namespace MediaBazaarSystem
             lBoxStatistics.Items.Clear();
             hoursStatsChart.Series[ "Hours" ].Points.Clear();
 
-            foreach( Employee employee in department.GetStaff() )
+            foreach( Staff employee in department.GetStaff() )
             {
                 hoursStatsChart.Series[ "Hours" ].IsValueShownAsLabel = true;
                 ChartArea chartArea = hoursStatsChart.ChartAreas[ 0 ];
@@ -384,14 +384,14 @@ namespace MediaBazaarSystem
             }
             else if(lbManagers.SelectedItem != null)
             {
-                auxName = lbEmployees.SelectedItem.ToString();
+                auxName = lbManagers.SelectedItem.ToString();
             }
             
             if(!String.IsNullOrEmpty(auxName))
             {
-                String[] name = auxName.Split(','); //Splits the string by the comma.
-                String firstName = name[1].Trim();
-                String lastName = name[0].Trim();
+                String[] name = auxName.Split(' '); //Splits the string by the comma.
+                String firstName = name[0].Trim();
+                String lastName = name[1].Trim();
                 searching = department.GetStaffMember(firstName, lastName);
 
                 if (searching == null)

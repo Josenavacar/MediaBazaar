@@ -73,6 +73,9 @@ namespace MediaBazaarSystem
             txtBoxSalary.Text = staffMember.Salary.ToString();
             txtBoxHoursAvailable.Text = staffMember.HoursAvailable.ToString();
             txtBoxEmail.Text = staffMember.Email.ToString();
+            comBoxRole.SelectedIndex = (int)staffMember.Role - 1;
+            cmboBoxDepartment.SelectedIndex = this.department.DepartmentID - 1;
+            cmboBoxContract.SelectedIndex = (int)staffMember.Contract - 1;
         }
 
         ///**
