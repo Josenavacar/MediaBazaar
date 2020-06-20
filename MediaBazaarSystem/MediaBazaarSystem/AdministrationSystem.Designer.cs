@@ -62,13 +62,15 @@
             this.lBoxSchedulingEmployee = new System.Windows.Forms.ListBox();
             this.btnDone = new System.Windows.Forms.Button();
             this.tbPageStatistics = new System.Windows.Forms.TabPage();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.comboBoxMonth = new System.Windows.Forms.ComboBox();
+            this.hoursStatsChart = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.lBoxDepartmentStats = new System.Windows.Forms.ListBox();
             this.lBoxEmpStats = new System.Windows.Forms.ListBox();
             this.lblStaffIsAvilable = new System.Windows.Forms.Label();
             this.lBoxStatistics = new System.Windows.Forms.ListBox();
-            this.hoursStatsChart = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.cmboBoxStatsFilter = new System.Windows.Forms.ComboBox();
             this.btnViewDepartmentInfo = new System.Windows.Forms.Button();
             this.btnSearch = new System.Windows.Forms.Button();
@@ -104,13 +106,13 @@
             this.lbManagers = new System.Windows.Forms.ListBox();
             this.Refresh = new System.Windows.Forms.Timer(this.components);
             this.updateTimer = new System.Windows.Forms.Timer(this.components);
-            this.scheduleTimer = new System.Windows.Forms.Timer(this.components);
             this.tbControlAdmin.SuspendLayout();
             this.tbPageHome.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picBoxLogout)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataAdminWorkSchedule)).BeginInit();
             this.tbPageSchedManagement.SuspendLayout();
             this.tbPageStatistics.SuspendLayout();
+            this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.hoursStatsChart)).BeginInit();
             this.tbPageProfile.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxAdminPhoto)).BeginInit();
@@ -365,7 +367,6 @@
             this.comBoxWorkDate.Size = new System.Drawing.Size(349, 29);
             this.comBoxWorkDate.TabIndex = 21;
             this.comBoxWorkDate.Text = "Select available date";
-            this.comBoxWorkDate.SelectedIndexChanged += new System.EventHandler(this.comBoxWorkDate_SelectedIndexChanged);
             // 
             // lblEndTime
             // 
@@ -447,13 +448,13 @@
             // tbPageStatistics
             // 
             this.tbPageStatistics.BackColor = System.Drawing.SystemColors.Menu;
+            this.tbPageStatistics.Controls.Add(this.groupBox2);
             this.tbPageStatistics.Controls.Add(this.label4);
             this.tbPageStatistics.Controls.Add(this.label3);
             this.tbPageStatistics.Controls.Add(this.lBoxDepartmentStats);
             this.tbPageStatistics.Controls.Add(this.lBoxEmpStats);
             this.tbPageStatistics.Controls.Add(this.lblStaffIsAvilable);
             this.tbPageStatistics.Controls.Add(this.lBoxStatistics);
-            this.tbPageStatistics.Controls.Add(this.hoursStatsChart);
             this.tbPageStatistics.Controls.Add(this.cmboBoxStatsFilter);
             this.tbPageStatistics.Controls.Add(this.btnViewDepartmentInfo);
             this.tbPageStatistics.Controls.Add(this.btnSearch);
@@ -464,6 +465,56 @@
             this.tbPageStatistics.Size = new System.Drawing.Size(870, 673);
             this.tbPageStatistics.TabIndex = 2;
             this.tbPageStatistics.Text = "Statistics";
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.comboBoxMonth);
+            this.groupBox2.Controls.Add(this.hoursStatsChart);
+            this.groupBox2.Location = new System.Drawing.Point(29, 318);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(438, 346);
+            this.groupBox2.TabIndex = 28;
+            this.groupBox2.TabStop = false;
+            // 
+            // comboBoxMonth
+            // 
+            this.comboBoxMonth.FormattingEnabled = true;
+            this.comboBoxMonth.Items.AddRange(new object[] {
+            "January",
+            "February",
+            "March",
+            "April",
+            "May",
+            "June",
+            "July",
+            "August",
+            "September",
+            "October",
+            "November",
+            "December"});
+            this.comboBoxMonth.Location = new System.Drawing.Point(6, 27);
+            this.comboBoxMonth.Name = "comboBoxMonth";
+            this.comboBoxMonth.Size = new System.Drawing.Size(281, 29);
+            this.comboBoxMonth.TabIndex = 27;
+            this.comboBoxMonth.Text = "Select month";
+            this.comboBoxMonth.SelectedIndexChanged += new System.EventHandler(this.comboBoxMonth_SelectedIndexChanged);
+            // 
+            // hoursStatsChart
+            // 
+            chartArea1.Name = "ChartArea1";
+            this.hoursStatsChart.ChartAreas.Add(chartArea1);
+            legend1.Name = "Legend1";
+            this.hoursStatsChart.Legends.Add(legend1);
+            this.hoursStatsChart.Location = new System.Drawing.Point(6, 62);
+            this.hoursStatsChart.Name = "hoursStatsChart";
+            series1.ChartArea = "ChartArea1";
+            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.StackedBar;
+            series1.Legend = "Legend1";
+            series1.Name = "Employee\'s hours per month";
+            this.hoursStatsChart.Series.Add(series1);
+            this.hoursStatsChart.Size = new System.Drawing.Size(426, 278);
+            this.hoursStatsChart.TabIndex = 20;
+            this.hoursStatsChart.Text = "hoursStatsChart";
             // 
             // label4
             // 
@@ -506,7 +557,7 @@
             // lblStaffIsAvilable
             // 
             this.lblStaffIsAvilable.AutoSize = true;
-            this.lblStaffIsAvilable.Location = new System.Drawing.Point(469, 318);
+            this.lblStaffIsAvilable.Location = new System.Drawing.Point(491, 363);
             this.lblStaffIsAvilable.Name = "lblStaffIsAvilable";
             this.lblStaffIsAvilable.Size = new System.Drawing.Size(330, 21);
             this.lblStaffIsAvilable.TabIndex = 22;
@@ -515,28 +566,12 @@
             // lBoxStatistics
             // 
             this.lBoxStatistics.FormattingEnabled = true;
+            this.lBoxStatistics.HorizontalScrollbar = true;
             this.lBoxStatistics.ItemHeight = 21;
-            this.lBoxStatistics.Location = new System.Drawing.Point(436, 342);
+            this.lBoxStatistics.Location = new System.Drawing.Point(473, 387);
             this.lBoxStatistics.Name = "lBoxStatistics";
-            this.lBoxStatistics.Size = new System.Drawing.Size(400, 235);
+            this.lBoxStatistics.Size = new System.Drawing.Size(363, 277);
             this.lBoxStatistics.TabIndex = 21;
-            // 
-            // hoursStatsChart
-            // 
-            chartArea1.Name = "ChartArea1";
-            this.hoursStatsChart.ChartAreas.Add(chartArea1);
-            legend1.Name = "Legend1";
-            this.hoursStatsChart.Legends.Add(legend1);
-            this.hoursStatsChart.Location = new System.Drawing.Point(29, 318);
-            this.hoursStatsChart.Name = "hoursStatsChart";
-            series1.ChartArea = "ChartArea1";
-            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.StackedBar;
-            series1.Legend = "Legend1";
-            series1.Name = "Hours Available per employee";
-            this.hoursStatsChart.Series.Add(series1);
-            this.hoursStatsChart.Size = new System.Drawing.Size(401, 280);
-            this.hoursStatsChart.TabIndex = 20;
-            this.hoursStatsChart.Text = "hoursStatsChart";
             // 
             // cmboBoxStatsFilter
             // 
@@ -555,7 +590,7 @@
             // btnViewDepartmentInfo
             // 
             this.btnViewDepartmentInfo.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.btnViewDepartmentInfo.Location = new System.Drawing.Point(29, 616);
+            this.btnViewDepartmentInfo.Location = new System.Drawing.Point(29, 270);
             this.btnViewDepartmentInfo.Name = "btnViewDepartmentInfo";
             this.btnViewDepartmentInfo.Size = new System.Drawing.Size(401, 42);
             this.btnViewDepartmentInfo.TabIndex = 16;
@@ -587,7 +622,7 @@
             // btnViewAllEmployees
             // 
             this.btnViewAllEmployees.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.btnViewAllEmployees.Location = new System.Drawing.Point(436, 616);
+            this.btnViewAllEmployees.Location = new System.Drawing.Point(436, 270);
             this.btnViewAllEmployees.Name = "btnViewAllEmployees";
             this.btnViewAllEmployees.Size = new System.Drawing.Size(400, 42);
             this.btnViewAllEmployees.TabIndex = 11;
@@ -898,12 +933,6 @@
             this.updateTimer.Interval = 500;
             this.updateTimer.Tick += new System.EventHandler(this.updateTimer_Tick);
             // 
-            // scheduleTimer
-            // 
-            this.scheduleTimer.Enabled = true;
-            this.scheduleTimer.Interval = 1000;
-            this.scheduleTimer.Tick += new System.EventHandler(this.scheduleTimer_Tick);
-            // 
             // AdministrationSystem
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 17F);
@@ -923,6 +952,7 @@
             this.tbPageSchedManagement.PerformLayout();
             this.tbPageStatistics.ResumeLayout(false);
             this.tbPageStatistics.PerformLayout();
+            this.groupBox2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.hoursStatsChart)).EndInit();
             this.tbPageProfile.ResumeLayout(false);
             this.tbPageProfile.PerformLayout();
@@ -1009,6 +1039,7 @@
         private System.Windows.Forms.ComboBox comBoxEndTime;
         private System.Windows.Forms.ListBox lBoxSchedulingEmployee;
         private System.Windows.Forms.Button btnDone;
-        private System.Windows.Forms.Timer scheduleTimer;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.ComboBox comboBoxMonth;
     }
 }
