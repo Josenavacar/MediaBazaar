@@ -294,3 +294,10 @@ D:\xampp\htdocs\mediabazaar\MediaBazaarSystem\MediaBazaarSystem\bin\Debug\System
 D:\xampp\htdocs\mediabazaar\MediaBazaarSystem\MediaBazaarSystem\bin\Debug\System.Numerics.Vectors.xml
 D:\xampp\htdocs\mediabazaar\MediaBazaarSystem\MediaBazaarSystem\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
 D:\xampp\htdocs\mediabazaar\MediaBazaarSystem\MediaBazaarSystem\obj\Debug\MediaBazaarSystem.csproj.CopyComplete
+C:\wamp64\www\mediabazaar\MediaBazaarSystem\MediaBazaarSystem\bin\Debug\K4os.Compression.LZ4.dll
+C:\wamp64\www\mediabazaar\MediaBazaarSystem\MediaBazaarSystem\bin\Debug\K4os.Compression.LZ4.Streams.dll
+C:\wamp64\www\mediabazaar\MediaBazaarSystem\MediaBazaarSystem\bin\Debug\K4os.Hash.xxHash.dll
+C:\wamp64\www\mediabazaar\MediaBazaarSystem\MediaBazaarSystem\bin\Debug\Zstandard.Net.dll
+C:\wamp64\www\mediabazaar\MediaBazaarSystem\MediaBazaarSystem\bin\Debug\K4os.Compression.LZ4.xml
+C:\wamp64\www\mediabazaar\MediaBazaarSystem\MediaBazaarSystem\bin\Debug\K4os.Compression.LZ4.Streams.xml
+C:\wamp64\www\mediabazaar\MediaBazaarSystem\MediaBazaarSystem\bin\Debug\K4os.Hash.xxHash.xml

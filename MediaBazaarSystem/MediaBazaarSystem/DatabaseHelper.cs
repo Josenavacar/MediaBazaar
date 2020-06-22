@@ -380,6 +380,7 @@ namespace MediaBazaarSystem
             DateTime updateEndTime = DateTime.Parse( endTime );
             DateTime updateWorkDate = DateTime.Parse( workDate );
 
+            MessageBox.Show( personID.ToString() );
             MySqlConnection connection = new MySqlConnection( connString );
             connection.Open();
             MySqlCommand cmd = connection.CreateCommand();

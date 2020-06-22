@@ -550,9 +550,9 @@ namespace MediaBazaarSystem
                 DateTime workDate = dtpAvailableWorkDates.Value;
                 
 
-                if(!lBoxWorkDates.Items.Contains( "Employee's ID: " + employeeID.ToString() + " Work date: " + workDate.ToString( "dddd, dd MMMM yyyy" ) + " Start time: " + startTime + " End time: " + endTime ) )
+                if(!lBoxWorkDates.Items.Contains("Work date: " + workDate.ToString( "dddd, dd MMMM yyyy" ) + " Start time: " + startTime + " End time: " + endTime ) )
                 {
-                    lBoxWorkDates.Items.Add("Employee's ID: " + employeeID.ToString() + " Work date: " + workDate.ToString( "dddd, dd MMMM yyyy" ) + " Start time: " + startTime + " End time: " + endTime );
+                    lBoxWorkDates.Items.Add("Work date: " + workDate.ToString( "dddd, dd MMMM yyyy" ) + " Start time: " + startTime + " End time: " + endTime );
                     dataBase.AddEmployeeWorkDate( employee, workDate, startTime, endTime );
                 }
                 else

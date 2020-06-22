@@ -50,7 +50,8 @@ namespace MediaBazaarSystem
             // Add data to data grid view table
             while( reader.Read() )
             {
-                int employee = ( int ) reader.GetValue( 2 );
+
+                int employee = ( int ) reader.GetValue( 4 );
                 DateTime workDate = Convert.ToDateTime( reader.GetValue( 1 ).ToString() );
 
                 if( employee == schedule.EmployeeID )

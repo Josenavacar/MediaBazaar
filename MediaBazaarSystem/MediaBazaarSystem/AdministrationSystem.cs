@@ -10,6 +10,10 @@ using System.Windows.Forms;
 using MySql.Data.MySqlClient;
 using System.Data.SqlClient;
 using System.Windows.Forms.DataVisualization.Charting;
+//using LiveCharts;
+//using LiveCharts.Wpf;
+//using Axis = LiveCharts.Wpf.Axis;
+//using SeriesCollection = LiveCharts.SeriesCollection;
 
 namespace MediaBazaarSystem
 {
@@ -43,7 +47,7 @@ namespace MediaBazaarSystem
             updateTimer.Enabled = true;
             this.UpdateSchedule();
             this.LoadStaff();
-            hoursStatsChart.Titles.Add( "Hours Available" );
+            hoursStatsChart.Titles.Add( "Monthly Hours Worked" );
             this.LoadScheduleInformation();
             schedules = new List<Schedule>();
             alreadyScheduled = new List<Schedule>();
@@ -803,29 +807,30 @@ namespace MediaBazaarSystem
             DateTime updateStartTime = DateTime.Parse( startTime );
             DateTime updateEndTime = DateTime.Parse( endTime );
             DateTime updateWorkDate = DateTime.Parse( workDate );
-
+            
             foreach( Schedule schedule in department.GetSchedules() )
             {
                 if( schedule.WorkDate.ToString( "dddd, dd MMMM yyyy" ) == updateWorkDate.ToString( "dddd, dd MMMM yyyy" ) )
                 {
                     schedules.Add( schedule );
+                    
                     if( schedules.Count >= 5 )
                     {
                         comBoxWorkDate.Items.Remove( comBoxWorkDate.SelectedItem );
                         MessageBox.Show( "Sorry, you have reached your limit of 5 employees per day! Please schedule this person for another day." );
                     }
-                    else
-                    {
-                        ////dataBase.AddSchedule( staff, startTime, endTime, workDate );
-                        //lBoxSchedulingEmployee.Items.Add
-                        //(
-                        //    "Employee: " + staff.FirstName + " " + staff.LastName +
-                        //    " Start time: " + startTime +
-                        //    " End time: " + endTime +
-                        //    " Work date: " + workDate
-                        //);
-                        //schedule.UpdateSchedule( staff.dbID, staff.FirstName, staff.LastName, staff.Role.ToString(), updateStartTime, updateEndTime, updateWorkDate, this.department.Name );
-                    }
+                }
+                else
+                {
+                    dataBase.AddSchedule( staff, startTime, endTime, workDate );
+                    lBoxSchedulingEmployee.Items.Add
+                    (
+                        "Employee: " + staff.FirstName + " " + staff.LastName +
+                        " Start time: " + startTime +
+                        " End time: " + endTime +
+                        " Work date: " + workDate
+                    );
+                    schedule.UpdateSchedule( staff.dbID, staff.FirstName, staff.LastName, staff.Role.ToString(), updateStartTime, updateEndTime, updateWorkDate, this.department.Name );
                 }
             }
         }
@@ -902,32 +907,52 @@ namespace MediaBazaarSystem
         {
             hoursStatsChart.Series[ "Employee's hours per month" ].Points.Clear();
             int totalHours = 0;
+            int hours = 0;
+            List<int> list = new List<int>();
 
-            foreach( Staff staff in department.GetStaff() )
+            for( int q = 0; q < department.GetStaff().Count; q++ )
             {
-                if( staff is Employee )
+                if( department.GetStaff()[ q ] is Employee )
                 {
-                    foreach( Schedule schedule in department.GetSchedules() )
+                    for( int i = 0; i < department.GetSchedules().Count; i++ )
                     {
-                        if( staff.dbID == schedule.EmployeeID )
+                        if( department.GetStaff()[ q ].dbID == department.GetSchedules()[ i ].EmployeeID )
                         {
-                            int hours = ( int ) schedule.EndTime.Subtract( schedule.StartTime ).TotalHours;
-                            totalHours += hours;
+                            if( comboBoxMonth.SelectedItem.ToString() == department.GetSchedules()[ i ].WorkDate.ToString( "MMMM" ) )
+                            {
+                                hours = ( int ) department.GetSchedules()[ i ].EndTime.Subtract( department.GetSchedules()[ i ].StartTime ).TotalHours;
+                                list.Add( department.GetSchedules()[ i ].EmployeeID );
+                                HashSet<int> hashSet = new HashSet<int>();
+                                IEnumerable<int> duplicates = list.Where( r => !hashSet.Add( r ) );
+                                //var duplicates = list.Where( item => !hashSet.Add( item ) ).Distinct().ToList();
+
+                                hoursStatsChart.Series[ "Employee's hours per month" ].IsValueShownAsLabel = true;
+                                ChartArea chartArea = hoursStatsChart.ChartAreas[ 0 ];
+                                // The axis range
+                                chartArea.AxisX.Minimum = 0;
+                                chartArea.AxisX.Maximum = 10;
+                                hoursStatsChart.Series[ "Employee's hours per month" ].XValueMember = department.GetStaff()[ q ].FirstName + " " + department.GetStaff()[ q ].LastName;
+                                hoursStatsChart.Series[ "Employee's hours per month" ].XValueType = ChartValueType.String;
+                                hoursStatsChart.Series[ "Employee's hours per month" ].IsXValueIndexed = true;
+
+                                if( duplicates.Contains( department.GetSchedules()[ i ].EmployeeID ) )
+                                {
+                                    totalHours += hours;
+                                    //hoursStatsChart.Series[ "Employee's hours per month" ].Points.ElementAt( department.GetSchedules()[ i ].EmployeeID ).SetValueY( totalHours );
+                                    hoursStatsChart.Series[ "Employee's hours per month" ].Points.AddY( totalHours );
+                                }
+                                else
+                                {
+                                    hoursStatsChart.Series[ "Employee's hours per month" ].Points.AddXY( department.GetStaff()[ q ].FirstName + " " + department.GetStaff()[ q ].LastName, hours );
+                                }
+                            }
                         }
                     }
-
-                    if( comboBoxMonth.SelectedItem.ToString() == schedule.WorkDate.ToString( "MMMM" ) )
-                    {
-                        hoursStatsChart.Series[ "Employee's hours per month" ].IsValueShownAsLabel = true;
-                        ChartArea chartArea = hoursStatsChart.ChartAreas[ 0 ];
-                        // The axis range
-                        chartArea.AxisX.Minimum = 0;
-                        chartArea.AxisX.Maximum = 10;
-                        hoursStatsChart.Series[ "Employee's hours per month" ].Points.AddXY( staff.FirstName, totalHours );
-                    }
-
                 }
             }
+
+            //foreach( DataPoint point in hoursStatsChart.Series[ "Employee's hours per month" ].Points )
+            //    MessageBox.Show( point.ToString() );
         }
     }
 }
