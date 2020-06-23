@@ -14,6 +14,8 @@ namespace MediaBazaarSystem
 {
     public partial class LoginForm : Form
     {
+        DatabaseHelper dataBase;
+
         /**
          * Constructor
          */
@@ -31,7 +33,7 @@ namespace MediaBazaarSystem
             String email = txtBoxEmail.Text;
             String password = txtBoxPassword.Text;
 
-            DatabaseHelper dataBase = new DatabaseHelper();
+            dataBase = new DatabaseHelper();
             dataBase.StaffLogin( email, password );
             this.Hide();
         }

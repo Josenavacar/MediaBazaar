@@ -22,11 +22,7 @@ namespace MediaBazaarSystem
         private Manager manager;
         private Schedule schedule;
         public static bool ensure; //Used for double checking when deleting from the database.
-        private String employeeName;
-        private String employeeRole;
-        private String employeeStartTime;
-        private String employeeEndTime;
-        private String employeeWorkDate;
+        private String employeeName, employeeRole, employeeStartTime, employeeEndTime, employeeWorkDate;
 
         /**
          * Constructor

@@ -14,9 +14,9 @@ namespace MediaBazaarSystem
 {
     public partial class AssignEmployeeSystem : Form
     {
-        DatabaseHelper databaseHelper; 
-        Schedule schedule;
-        Department department;
+        private DatabaseHelper databaseHelper;
+        private Schedule schedule;
+        private Department department;
 
         /**
          * Form constructor

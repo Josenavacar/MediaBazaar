@@ -14,10 +14,10 @@ namespace MediaBazaarSystem
 {
     public partial class ChangePassword : Form
     {
-        Manager man;
-        Employee emp;
+        private Manager man;
+        private Employee emp;
 
-        String active = "";
+        private String active = "";
 
         public ChangePassword(Manager man, Employee emp)
         {

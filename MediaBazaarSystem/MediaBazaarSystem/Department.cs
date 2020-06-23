@@ -124,19 +124,19 @@ namespace MediaBazaarSystem
         //    return man;
         //}
 
-        public override string ToString()
+        public void AddSchedule(Schedule schedule)
         {
-            return this.Name;
-        }
-
-        public void AddSchedule( Schedule schedule )
-        {
-            schedules.Add( schedule );
+            schedules.Add(schedule);
         }
 
         public List<Schedule> GetSchedules()
         {
             return this.schedules;
+        }
+
+        public override string ToString()
+        {
+            return this.Name;
         }
     }
 }
