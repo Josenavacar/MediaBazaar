@@ -10,10 +10,11 @@ using System.Windows.Forms;
 using MySql.Data.MySqlClient;
 using System.Data.SqlClient;
 using System.Windows.Forms.DataVisualization.Charting;
-//using LiveCharts;
-//using LiveCharts.Wpf;
-//using Axis = LiveCharts.Wpf.Axis;
-//using SeriesCollection = LiveCharts.SeriesCollection;
+using LiveCharts;
+using LiveCharts.Wpf;
+using SeriesCollection = LiveCharts.SeriesCollection;
+using LiveCharts.Defaults;
+using Axis = LiveCharts.Wpf.Axis;
 
 namespace MediaBazaarSystem
 {
@@ -47,7 +48,7 @@ namespace MediaBazaarSystem
             updateTimer.Enabled = true;
             this.UpdateSchedule();
             this.LoadStaff();
-            hoursStatsChart.Titles.Add( "Monthly Hours Worked" );
+            //hoursStatsChart.Titles.Add( "Monthly Hours Worked" );
             this.LoadScheduleInformation();
             schedules = new List<Schedule>();
             alreadyScheduled = new List<Schedule>();
@@ -142,31 +143,6 @@ namespace MediaBazaarSystem
         private void GetStatistics()
         {
             lBoxStatistics.Items.Clear();
-            //hoursStatsChart.Series[ "Employee's hours per month" ].Points.Clear();
-            //int totalHours = 0;
-
-            //foreach( Staff staff in department.GetStaff() )
-            //{
-            //    if(staff is Employee)
-            //    {
-            //        foreach( Schedule schedule in department.GetSchedules() )
-            //        {
-            //            if( staff.dbID == schedule.EmployeeID )
-            //            {
-            //                int hours = ( int ) schedule.EndTime.Subtract( schedule.StartTime ).TotalHours;
-            //                totalHours += hours;
-            //            }
-            //        }
-
-
-            //        hoursStatsChart.Series[ "Employee's hours per month" ].IsValueShownAsLabel = true;
-            //        ChartArea chartArea = hoursStatsChart.ChartAreas[ 0 ];
-            //        // The axis range
-            //        chartArea.AxisX.Minimum = 0;
-            //        chartArea.AxisX.Maximum = 10;
-            //        hoursStatsChart.Series[ "Employee's hours per month" ].Points.AddXY( staff.FirstName, totalHours );
-            //    }
-            //}
 
             foreach( Schedule schedule in department.GetSchedules() )
             {
@@ -798,6 +774,9 @@ namespace MediaBazaarSystem
             }
         }
 
+        /**
+         * Method to add a new schedule to the system
+         */
         private void btnDone_Click( object sender, EventArgs e )
         {
             Staff staff = department.GetStaffMember( comBoxEmployees.SelectedItem.ToString() );
@@ -852,6 +831,17 @@ namespace MediaBazaarSystem
             updateTimer.Enabled = false;
         }
 
+        /**
+         * Method to run when user select an employee
+         * 
+         * It will check if the selected employee exists
+         * Then it will get all of the employee's available dates 
+         * Then it will check if those dates had been already scheduled.
+         * If so, it will not display those dates. 
+         * If not, then it will display the dates that are not yet scheduled
+         * 
+         * Also, if there more than 5 schedules made in a day, then it will not be scheduled
+         */
         private void comBoxEmployees_SelectedIndexChanged( object sender, EventArgs e )
         {
             comBoxWorkDate.Items.Clear();
@@ -903,9 +893,20 @@ namespace MediaBazaarSystem
             }
         }
 
+
+        /**
+         * Method to run when user selects a month from the combobox
+         * In this method there will be checks and looping
+         * 
+         * It will loop over staff and schedules
+         * Then will check if the month is equal to the months in schedule
+         * Then will check for duplicated staff id (in the same month) 
+         * Then assign the calculated hours per month to a new value
+         * Then display
+         */
         private void comboBoxMonth_SelectedIndexChanged( object sender, EventArgs e )
         {
-            hoursStatsChart.Series[ "Employee's hours per month" ].Points.Clear();
+            lBoxScheduleStats.Items.Clear();
             int totalHours = 0;
             int hours = 0;
             List<int> list = new List<int>();
@@ -921,38 +922,32 @@ namespace MediaBazaarSystem
                             if( comboBoxMonth.SelectedItem.ToString() == department.GetSchedules()[ i ].WorkDate.ToString( "MMMM" ) )
                             {
                                 hours = ( int ) department.GetSchedules()[ i ].EndTime.Subtract( department.GetSchedules()[ i ].StartTime ).TotalHours;
-                                list.Add( department.GetSchedules()[ i ].EmployeeID );
+                                list.Add( department.GetSchedules()[ i ].EmployeeID ); //department.GetSchedules()[ i ].EmployeeID
                                 HashSet<int> hashSet = new HashSet<int>();
                                 IEnumerable<int> duplicates = list.Where( r => !hashSet.Add( r ) );
                                 //var duplicates = list.Where( item => !hashSet.Add( item ) ).Distinct().ToList();
 
-                                hoursStatsChart.Series[ "Employee's hours per month" ].IsValueShownAsLabel = true;
-                                ChartArea chartArea = hoursStatsChart.ChartAreas[ 0 ];
-                                // The axis range
-                                chartArea.AxisX.Minimum = 0;
-                                chartArea.AxisX.Maximum = 10;
-                                hoursStatsChart.Series[ "Employee's hours per month" ].XValueMember = department.GetStaff()[ q ].FirstName + " " + department.GetStaff()[ q ].LastName;
-                                hoursStatsChart.Series[ "Employee's hours per month" ].XValueType = ChartValueType.String;
-                                hoursStatsChart.Series[ "Employee's hours per month" ].IsXValueIndexed = true;
+                                lBoxScheduleStats.Items.Add( department.GetSchedules()[ i ].FirstName + " " + department.GetSchedules()[ i ].LastName + " " + hours );
+
 
                                 if( duplicates.Contains( department.GetSchedules()[ i ].EmployeeID ) )
                                 {
-                                    totalHours += hours;
-                                    //hoursStatsChart.Series[ "Employee's hours per month" ].Points.ElementAt( department.GetSchedules()[ i ].EmployeeID ).SetValueY( totalHours );
-                                    hoursStatsChart.Series[ "Employee's hours per month" ].Points.AddY( totalHours );
-                                }
-                                else
-                                {
-                                    hoursStatsChart.Series[ "Employee's hours per month" ].Points.AddXY( department.GetStaff()[ q ].FirstName + " " + department.GetStaff()[ q ].LastName, hours );
+
+                                    for( int x = 0; x < lBoxScheduleStats.Items.Count; x++ )
+                                    {
+                                        if( lBoxScheduleStats.Items[ x ].ToString() == department.GetSchedules()[ i ].FirstName + " " + department.GetSchedules()[ i ].LastName + " " + hours )
+                                        {
+                                            totalHours += hours;
+                                            lBoxScheduleStats.Items[ x ] = department.GetSchedules()[ i ].FirstName + " " + department.GetSchedules()[ i ].LastName + " " + totalHours;
+                                            //lBoxScheduleStats.Items.Add( department.GetSchedules()[ i ].FirstName + " " + department.GetSchedules()[ i ].LastName + " " + totalHours );
+                                        }
+                                    }
                                 }
                             }
                         }
                     }
                 }
             }
-
-            //foreach( DataPoint point in hoursStatsChart.Series[ "Employee's hours per month" ].Points )
-            //    MessageBox.Show( point.ToString() );
         }
     }
 }

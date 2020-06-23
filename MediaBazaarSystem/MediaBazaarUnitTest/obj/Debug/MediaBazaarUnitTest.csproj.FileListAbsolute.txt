@@ -63,3 +63,9 @@ C:\wamp64\www\mediabazaar\MediaBazaarSystem\MediaBazaarUnitTest\bin\Debug\K4os.C
 C:\wamp64\www\mediabazaar\MediaBazaarSystem\MediaBazaarUnitTest\bin\Debug\K4os.Hash.xxHash.xml
 C:\wamp64\www\mediabazaar\MediaBazaarSystem\MediaBazaarUnitTest\bin\Debug\System.Numerics.Vectors.xml
 C:\wamp64\www\mediabazaar\MediaBazaarSystem\MediaBazaarUnitTest\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
+C:\wamp64\www\mediabazaar\MediaBazaarSystem\MediaBazaarUnitTest\bin\Debug\LiveCharts.dll
+C:\wamp64\www\mediabazaar\MediaBazaarSystem\MediaBazaarUnitTest\bin\Debug\LiveCharts.Wpf.dll
+C:\wamp64\www\mediabazaar\MediaBazaarSystem\MediaBazaarUnitTest\bin\Debug\LiveCharts.pdb
+C:\wamp64\www\mediabazaar\MediaBazaarSystem\MediaBazaarUnitTest\bin\Debug\LiveCharts.xml
+C:\wamp64\www\mediabazaar\MediaBazaarSystem\MediaBazaarUnitTest\bin\Debug\LiveCharts.Wpf.pdb
+C:\wamp64\www\mediabazaar\MediaBazaarSystem\MediaBazaarUnitTest\bin\Debug\LiveCharts.Wpf.xml
