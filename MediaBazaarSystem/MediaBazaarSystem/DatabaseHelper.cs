@@ -15,102 +15,11 @@ namespace MediaBazaarSystem
 {
     public class DatabaseHelper
     {
-        private string connString = @"Server = studmysql01.fhict.local; Uid = dbi437493; Database = dbi437493; Pwd = dbgroup01;";
+        private String connString = @"Server = studmysql01.fhict.local; Uid = dbi437493; Database = dbi437493; Pwd = dbgroup01;";
 
-
-        //public void addWorker(String query, String FirstName, String LastName, DateTime birthDate, String address, String email, String password, double salary, 
-        //    int hoursAvailable, int roleID, Contract contract, Department department)
-        //{
-        //    MySqlConnection con = new MySqlConnection(connString);
-        //    con.Open();
-        //    MySqlCommand cmd = con.CreateCommand();
-
-        //    cmd.CommandText = "INSERT INTO person(Firstname, Lastname, Age, Address, Email, Password, Salary, HoursWorked, HoursAvailable, IsAvailable, RoleID, DepartmentID, ContractID) " +
-        //        "VALUES(@FirstN, @LastN, @Age, @Address, @Email, @Password, @Salary, @HoursWorked, @HoursAvailable, @IsAvailable, @RoleID, @DepartmentID, @ContractID) ";
-
-        //    cmd.Parameters.AddWithValue("@FirstN", FirstName);
-        //    cmd.Parameters.AddWithValue("@LastN", LastName);
-        //    cmd.Parameters.AddWithValue("@Age", birthDate);
-        //    cmd.Parameters.AddWithValue("@Address", address);
-        //    cmd.Parameters.AddWithValue("@Email", email);
-        //    cmd.Parameters.AddWithValue("@Password", password);
-        //    cmd.Parameters.AddWithValue("@Salary", salary);
-        //    cmd.Parameters.AddWithValue("@HoursWorked", 0);
-        //    cmd.Parameters.AddWithValue("@HoursAvailable", hoursAvailable);
-        //    cmd.Parameters.AddWithValue("@IsAvailable", "Yes");
-        //    cmd.Parameters.AddWithValue("@RoleID", roleID);
-        //    cmd.Parameters.AddWithValue("@DepartmentID", department.DepartmentID);
-        //    cmd.Parameters.AddWithValue("@ContractID", contract);
-        //    cmd.ExecuteNonQuery(); //Inserted into database.
-
-
-        //    MySqlCommand scheduleCmd = con.CreateCommand();
-
-        //    scheduleCmd.CommandText = "INSERT INTO schedule(StartTime, EndTime, WorkDate, PersonID) " +
-        //        "VALUES(@StartTime, @EndTime, @WorkDate, LAST_INSERT_ID()) ";
-
-        //    scheduleCmd.Parameters.AddWithValue("@StartTime", DateTime.Today.TimeOfDay);
-        //    scheduleCmd.Parameters.AddWithValue("@EndTime", DateTime.Today.TimeOfDay);
-        //    scheduleCmd.Parameters.AddWithValue("@WorkDate", DateTime.Today);
-        //    scheduleCmd.ExecuteNonQuery(); //Inserted into database.
-        //    con.Close();
-
-        //    int age = birthDate.Year - DateTime.Now.Year - 1;
-        //    if (birthDate.Month > DateTime.Now.Month)
-        //    {
-        //        age++;
-        //    }
-        //    else if (birthDate.Month == DateTime.Now.Month)
-        //    {
-        //        if (birthDate.Day >= DateTime.Now.Day)
-        //        {
-        //            age++;
-        //        }
-        //    }
-
-
-        //    //Checks for role (1 = Manager, 2 = Employee)
-        //    if (roleID == 1)
-        //    {
-        //        con.Open();
-        //        MySqlCommand cmd2 = con.CreateCommand();
-        //        cmd2.CommandText = "SELECT Id FROM person ORDER BY Id DESC LIMIT 1"; //Extracts the Id assigned from the database.
-        //        MySqlDataReader reader = cmd2.ExecuteReader();
-        //        int ID = 0;
-        //        while (reader.Read())
-        //        {
-        //            ID = (int)reader.GetValue(0);
-        //        }
-        //        reader.Close();
-        //        con.Close();
-
-        //        Manager newManager = new Manager(ID, FirstName, LastName, age, birthDate, address, role, salary, hoursAvailable, email, contract); //Adds the manager to the list.
-        //        department.AddManager(newManager);
-        //        MessageBox.Show("Manager successfully added.");
-        //    }
-        //    else if (roleID == 2)
-        //    {
-        //        con.Open();
-        //        MySqlCommand cmd2 = con.CreateCommand();
-        //        cmd2.CommandText = "SELECT Id FROM person ORDER BY Id DESC LIMIT 1"; //Extracts the Id assigned from the database.
-        //        MySqlDataReader reader = cmd2.ExecuteReader();
-        //        int ID = 0;
-        //        while (reader.Read())
-        //        {
-        //            ID = (int)reader.GetValue(0);
-        //        }
-        //        reader.Close();
-        //        con.Close();
-
-        //        Employee newEmployee = new Employee(ID, FirstName, LastName, age, birthDate, address, role, salary, hoursAvailable, email, contract); //Adds employee to the list.
-        //        department.AddEmployee(newEmployee);
-        //        MessageBox.Show("Employee successfully added.");
-        //    }
-        //}
-
-        public void StaffLogin(String email, String password)
+        public MySqlDataReader StaffLogin(String email, String password)
         {
-            Contract contract;
+            //Contract contract;
 
             String sql = "SELECT person.Id, person.Firstname, person.Lastname, person.Age, person.Address, person.Email, person.Password, person.Salary, " +
                             "person.HoursWorked, person.HoursAvailable, person.IsAvailable, person.RoleID, department.Name, person.DepartmentID, person.ContractID " +
@@ -123,129 +32,151 @@ namespace MediaBazaarSystem
             conn.Open();
             MySqlDataReader reader = cmd.ExecuteReader();
 
-            try
-            {
-                if (reader.Read())
-                {
-                    // Variables 
-                    int ID = (int)reader.GetValue(0);
-                    String firstName = reader.GetString(1);
-                    String lastName = reader.GetString(2);
-                    DateTime birthDateWithTime = (DateTime)reader.GetValue(3);
-                    DateTime birthDate = birthDateWithTime.Date;
-                    String address = reader.GetString(4);
-                    String toDecryptPassword = reader.GetString(6);
-                    double salary = reader.GetDouble(7);
-                    int hoursavailable = (int)reader.GetValue(9);
-                    int role = (int)reader.GetValue(11);
+            return reader;
 
-                    //Calculate age
-                    int age = DateTime.Now.Year - birthDate.Year - 1;
+            //try
+            //{
+            //    if (reader.Read())
+            //    {
+            //        // Variables 
+            //        int ID = (int)reader.GetValue(0);
+            //        String firstName = reader.GetString(1);
+            //        String lastName = reader.GetString(2);
+            //        DateTime birthDateWithTime = (DateTime)reader.GetValue(3);
+            //        DateTime birthDate = birthDateWithTime.Date;
+            //        String address = reader.GetString(4);
+            //        String toDecryptPassword = reader.GetString(6);
+            //        double salary = reader.GetDouble(7);
+            //        int hoursavailable = (int)reader.GetValue(9);
+            //        int role = (int)reader.GetValue(11);
 
-                    if (birthDate.Month > DateTime.Now.Month)
-                    {
-                        age++;
-                    }
-                    else if (birthDate.Month == DateTime.Now.Month)
-                    {
-                        if (birthDate.Day >= DateTime.Now.Day)
-                        {
-                            age++;
-                        }
-                    }
+            //        //Calculate age
+            //        int age = DateTime.Now.Year - birthDate.Year - 1;
 
-                    //Department
-                    String depName = reader.GetString(12);
-                    int depID = (int)reader.GetValue(13);
-                    Department department = new Department(depName, depID);
+            //        if (birthDate.Month > DateTime.Now.Month)
+            //        {
+            //            age++;
+            //        }
+            //        else if (birthDate.Month == DateTime.Now.Month)
+            //        {
+            //            if (birthDate.Day >= DateTime.Now.Day)
+            //            {
+            //                age++;
+            //            }
+            //        }
 
-                    // Get the contract
-                    int dbContract = (int)reader.GetValue(14);
-                    if (dbContract == 1)
-                    {
-                        contract = Contract.FullTime;
-                    }
-                    else
-                    {
-                        contract = Contract.PartTime;
-                    }
+            //        //Department
+            //        String depName = reader.GetString(12);
+            //        int depID = (int)reader.GetValue(13);
+            //        Department department = new Department(depName, depID);
 
-                    // Decrypt password and check if password is equal to the password user filled in
-                    if (Cryptography.Decrypt(toDecryptPassword) == password)
-                    {
-                        if (role == 1) // Manager
-                        {
-                            Manager manager = new Manager(ID, firstName, lastName, birthDate, address, salary, hoursavailable, email, contract);
-                            AdministrationSystem administrationSystem = new AdministrationSystem(department, manager);
-                            administrationSystem.Show();
-                        }
-                        else if (role == 2) // Employee
-                        {
-                            Employee employee = new Employee(ID, firstName, lastName, birthDate, address, salary, hoursavailable, email, contract);
-                            EmployeeSystem employeeSystem = new EmployeeSystem(department, employee);
-                            employeeSystem.Show();
-                        }
-                    }
-                    else if ((Cryptography.Decrypt(toDecryptPassword) != password) || (password == null))
-                    {
-                        //throw new ArgumentException( "Email or password is incorrect. Please try again." );
-                    }
-                }
-                else
-                {
-                    //throw new ArgumentException( "Unable to connect to the database. Please contact your administrator." );
-                }
-            }
-            finally
-            {
-                conn.Close();
-            }
+            //        // Get the contract
+            //        int dbContract = (int)reader.GetValue(14);
+            //        if (dbContract == 1)
+            //        {
+            //            contract = Contract.FullTime;
+            //        }
+            //        else
+            //        {
+            //            contract = Contract.PartTime;
+            //        }
+
+            //        // Decrypt password and check if password is equal to the password user filled in
+            //        if (Cryptography.Decrypt(toDecryptPassword) == password)
+            //        {
+            //            if (role == 1) // Manager
+            //            {
+            //                Manager manager = new Manager(ID, firstName, lastName, birthDate, address, salary, hoursavailable, email, contract);
+            //                AdministrationSystem administrationSystem = new AdministrationSystem(department, manager);
+            //                administrationSystem.Show();
+            //            }
+            //            else if (role == 2) // Employee
+            //            {
+            //                Employee employee = new Employee(ID, firstName, lastName, birthDate, address, salary, hoursavailable, email, contract);
+            //                EmployeeSystem employeeSystem = new EmployeeSystem(department, employee);
+            //                employeeSystem.Show();
+            //            }
+            //        }
+            //        else if ((Cryptography.Decrypt(toDecryptPassword) != password) || (password == null))
+            //        {
+            //            //throw new ArgumentException( "Email or password is incorrect. Please try again." );
+            //        }
+            //    }
+            //    else
+            //    {
+            //        //throw new ArgumentException( "Unable to connect to the database. Please contact your administrator." );
+            //    }
+            //}
+            //finally
+            //{
+            //    conn.Close();
+            //}
         }
-    
 
-
-    public void addStaffToDB( Staff man, int departmentID )
+        public void addStaffToDB( Staff staff, int departmentID )
         {
-            if(man != null)
+            if(staff != null)
             {
                 MySqlConnection conn = new MySqlConnection(connString);
 
-                int age = man.dateOfBirth.Year - DateTime.Now.Year - 1;
-                if (man.dateOfBirth.Month > DateTime.Now.Month)
+                int age = staff.dateOfBirth.Year - DateTime.Now.Year - 1;
+                if (staff.dateOfBirth.Month > DateTime.Now.Month)
                 {
                     age++;
                 }
-                else if (man.dateOfBirth.Month == DateTime.Now.Month)
+                else if (staff.dateOfBirth.Month == DateTime.Now.Month)
                 {
-                    if (man.dateOfBirth.Day >= DateTime.Now.Day)
+                    if (staff.dateOfBirth.Day >= DateTime.Now.Day)
                     {
                         age++;
                     }
                 }
-                int roleID = (int)man.Role;
+                int roleID = (int)staff.Role;
 
                 String password = Cryptography.Encrypt("temp");
                 conn.Open();
                 MySqlCommand cmd = conn.CreateCommand();
 
-                cmd.CommandText = "INSERT INTO person(Firstname, Lastname, Age, Address, Email, Password, Salary, HoursWorked, HoursAvailable, IsAvailable, RoleID, DepartmentID, ContractID) " +
-                    "VALUES(@FirstN, @LastN, @Age, @Address, @Email, @Password, @Salary, @HoursWorked, @HoursAvailable, @IsAvailable, @RoleID, @DepartmentID, @ContractID) ";
+                if(roleID == 1 || roleID == 2)
+                {
+                    cmd.CommandText = "INSERT INTO person(Firstname, Lastname, Age, Address, Email, Password, Salary, HoursWorked, HoursAvailable, IsAvailable, RoleID, DepartmentID, ContractID) " +
+                                        "VALUES(@FirstN, @LastN, @Age, @Address, @Email, @Password, @Salary, @HoursWorked, @HoursAvailable, @IsAvailable, @RoleID, @DepartmentID, @ContractID) ";
 
-                cmd.Parameters.AddWithValue("@FirstN", man.FirstName);
-                cmd.Parameters.AddWithValue("@LastN", man.LastName);
-                cmd.Parameters.AddWithValue("@Age", man.dateOfBirth);
-                cmd.Parameters.AddWithValue("@Address", man.Address);
-                cmd.Parameters.AddWithValue("@Email", man.Email);
-                cmd.Parameters.AddWithValue("@Password", password);
-                cmd.Parameters.AddWithValue("@Salary", man.Salary);
-                cmd.Parameters.AddWithValue("@HoursWorked", 0);
-                cmd.Parameters.AddWithValue("@HoursAvailable", man.HoursAvailable);
-                cmd.Parameters.AddWithValue("@IsAvailable", "Yes");
-                cmd.Parameters.AddWithValue("@RoleID", roleID);
-                cmd.Parameters.AddWithValue("@DepartmentID", departmentID);
-                cmd.Parameters.AddWithValue("@ContractID", man.Contract);
-                cmd.ExecuteNonQuery(); //Inserted into database.
+                    cmd.Parameters.AddWithValue( "@FirstN", staff.FirstName );
+                    cmd.Parameters.AddWithValue( "@LastN", staff.LastName );
+                    cmd.Parameters.AddWithValue( "@Age", staff.dateOfBirth );
+                    cmd.Parameters.AddWithValue( "@Address", staff.Address );
+                    cmd.Parameters.AddWithValue( "@Email", staff.Email );
+                    cmd.Parameters.AddWithValue( "@Password", password );
+                    cmd.Parameters.AddWithValue( "@Salary", staff.Salary );
+                    cmd.Parameters.AddWithValue( "@HoursWorked", 0 );
+                    cmd.Parameters.AddWithValue( "@HoursAvailable", staff.HoursAvailable );
+                    cmd.Parameters.AddWithValue( "@IsAvailable", "Yes" );
+                    cmd.Parameters.AddWithValue( "@RoleID", roleID );
+                    cmd.Parameters.AddWithValue( "@DepartmentID", departmentID );
+                    cmd.Parameters.AddWithValue( "@ContractID", staff.Contract );
+                    cmd.ExecuteNonQuery(); //Inserted into database.
+                }else if(roleID == 3)
+                {
+                    cmd.CommandText = "INSERT INTO person(Firstname, Lastname, Age, Address, Email, Password, Salary, HoursWorked, HoursAvailable, IsAvailable, PassCode RoleID, DepartmentID, ContractID) " +
+                                        "VALUES(@FirstN, @LastN, @Age, @Address, @Email, @Password, @Salary, @HoursWorked, @HoursAvailable, @IsAvailable, @PassCode, @RoleID, @DepartmentID, @ContractID) ";
 
+                    cmd.Parameters.AddWithValue( "@FirstN", staff.FirstName );
+                    cmd.Parameters.AddWithValue( "@LastN", staff.LastName );
+                    cmd.Parameters.AddWithValue( "@Age", staff.dateOfBirth );
+                    cmd.Parameters.AddWithValue( "@Address", staff.Address );
+                    cmd.Parameters.AddWithValue( "@Email", staff.Email );
+                    cmd.Parameters.AddWithValue( "@Password", password );
+                    cmd.Parameters.AddWithValue( "@Salary", staff.Salary );
+                    cmd.Parameters.AddWithValue( "@HoursWorked", 0 );
+                    cmd.Parameters.AddWithValue( "@HoursAvailable", staff.HoursAvailable );
+                    cmd.Parameters.AddWithValue( "@IsAvailable", "Yes" );
+                    cmd.Parameters.AddWithValue( "@RoleID", roleID );
+                    cmd.Parameters.AddWithValue( "@DepartmentID", departmentID );
+                    cmd.Parameters.AddWithValue( "@ContractID", staff.Contract );
+                    cmd.Parameters.AddWithValue( "@PassCode", staff.PassCode );
+                    cmd.ExecuteNonQuery(); //Inserted into database.
+                }
 
                 MySqlCommand scheduleCmd = conn.CreateCommand();
 
@@ -268,7 +199,7 @@ namespace MediaBazaarSystem
                 reader.Close();
                 conn.Close();
 
-                man.dbID = ID;
+                staff.dbID = ID;
             }
         }
 
@@ -282,7 +213,7 @@ namespace MediaBazaarSystem
             cmd.Parameters.AddWithValue("@DepartmentID", dep.DepartmentID);
             MySqlDataReader reader = cmd.ExecuteReader();
 
-            List<Staff> result = new List<Staff>();
+            //List<Staff> result = new List<Staff>();
             while(reader.Read())
             {
                 int ID = (int)reader.GetValue(0);
@@ -293,8 +224,8 @@ namespace MediaBazaarSystem
                 String email = reader.GetString(5);
                 double salary = reader.GetDouble(7);
                 int hoursavailable = (int)reader.GetValue(9);
-                int dbContract = (int)reader.GetValue(13);
-                String role = reader.GetString(16);
+                int dbContract = (int)reader.GetValue(14); //13
+                String role = reader.GetString(16); //16
 
                 Contract contract;
                 if (dbContract == 1)
@@ -306,7 +237,7 @@ namespace MediaBazaarSystem
                     contract = Contract.PartTime;
                 }
 
-                if(role == "Manager" || role == "StockManager")
+                if(role == "Manager" || role == "Stock Manager")
                 {
                     Manager man = new Manager(ID, firstName, lastName, birthDate, address, salary, hoursavailable, email, contract);
                     if (dep.GetStaffMember(man.FirstName, man.LastName) == null)
@@ -346,6 +277,9 @@ namespace MediaBazaarSystem
             return ID;
         }
 
+        /**
+         * Method to user update profile
+         */
         public void updateProfile(Staff memberToChange, String FirstName, String LastName, DateTime birthDate, String address, String email)
         {
             MySqlConnection conn = new MySqlConnection(connString);
@@ -395,16 +329,21 @@ namespace MediaBazaarSystem
             memberToChange.editStaffMember(FirstName, LastName, birthDate, address, email);
         }
 
-        public void AddEmployeeWorkDate( Staff employee, DateTime workDate )
+        public void AddEmployeeWorkDate( Staff employee, DateTime workDate, String startTime, String endTime )
         {
+            DateTime updateStartTime = DateTime.Parse( startTime );
+            DateTime updateEndTime = DateTime.Parse( endTime );
+
             if( employee != null )
             {
                 MySqlConnection conn = new MySqlConnection( connString );
                 conn.Open();
                 MySqlCommand cmd = conn.CreateCommand();
 
-                cmd.CommandText = "INSERT INTO available_emp_shifts(Available_Date, PersonID) VALUES(@Available_Date, @EmployeeID)";
+                cmd.CommandText = "INSERT INTO available_emp_shifts(Available_Date, StartTime, EndTime, PersonID) VALUES(@Available_Date, @StartTime, @EndTime, @EmployeeID)";
                 cmd.Parameters.AddWithValue( "@Available_Date", workDate );
+                cmd.Parameters.AddWithValue( "@StartTime", updateStartTime );
+                cmd.Parameters.AddWithValue( "@EndTime", updateEndTime );
                 cmd.Parameters.AddWithValue( "@EmployeeID", employee.dbID );
                 cmd.ExecuteNonQuery();
 
@@ -434,7 +373,26 @@ namespace MediaBazaarSystem
             return reader;
         }
 
-        //////////////////////////////////////////////////////////////////W.I.P.////////////////////////////////////////////////////////////////////////////////////
+        public void AddSchedule(Staff staff, String startTime, String endTime, String workDate )
+        {
+            int personID = staff.dbID;
+            DateTime updateStartTime = DateTime.Parse( startTime );
+            DateTime updateEndTime = DateTime.Parse( endTime );
+            DateTime updateWorkDate = DateTime.Parse( workDate );
+
+            MessageBox.Show( personID.ToString() );
+            MySqlConnection connection = new MySqlConnection( connString );
+            connection.Open();
+            MySqlCommand cmd = connection.CreateCommand();
+
+            cmd.CommandText = "INSERT INTO Schedule (StartTime, EndTime, WorkDate, PersonID) VALUES(@startTime, @endTime, @workDate, @personID)";
+            cmd.Parameters.AddWithValue( "@startTime", updateStartTime );
+            cmd.Parameters.AddWithValue( "@endTime", updateEndTime );
+            cmd.Parameters.AddWithValue( "@workDate", updateWorkDate );
+            cmd.Parameters.AddWithValue( "@personID", personID );
+            cmd.ExecuteNonQuery();
+            connection.Close();
+        }
 
         public MySqlDataReader getShift()
         {
@@ -470,6 +428,7 @@ namespace MediaBazaarSystem
 
             return reader;
         }
+
         public void deleteStaffMember(int ID)
         {
             MySqlConnection conn = new MySqlConnection(connString);
@@ -501,61 +460,5 @@ namespace MediaBazaarSystem
 
             return reader;
         }
-
-
-        //public void getWorkSchedule(String sql) 
-        //{
-        //    MySqlConnection conn = new MySqlConnection(connString);
-
-        //    MySqlCommand cmd = new MySqlCommand(sql, conn);
-        //    // Open connection
-        //    conn.Open();
-        //    MySqlDataReader reader = cmd.ExecuteReader();
-
-        //    if (reader.HasRows)
-        //    {
-        //        // Get the data
-        //        while (reader.Read())
-        //        {
-        //            String firstName = reader.GetValue(1).ToString();
-        //            String lastName = reader.GetValue(2).ToString();
-        //            String role = reader.GetValue(3).ToString();
-        //            String startTime = reader.GetValue(4).ToString();
-        //            String endTime = reader.GetValue(5).ToString();
-        //            String workDate = reader.GetValue(6).ToString();
-        //            DateTime workStartTime = Convert.ToDateTime(startTime);
-        //            DateTime workEndTime = Convert.ToDateTime(endTime);
-        //            DateTime convertedWorkDate = Convert.ToDateTime(workDate);
-        //            String departmentName = reader.GetValue(7).ToString();
-        //            int scheduleID = (int)reader.GetValue(8);
-
-        //            if ((dtpWorkSchedule.Value.Date == convertedWorkDate.Date) && (department.Name == departmentName))
-        //            {
-        //                // Add data to data grid view table
-        //                DataGridViewRow row = (DataGridViewRow)dataAdminWorkSchedule.Rows[0].Clone();
-        //                dataAdminWorkSchedule.Columns["clmnWorkDate"].DefaultCellStyle.BackColor = Color.LightSteelBlue;
-        //                dataAdminWorkSchedule.Columns["clmnStartTime"].DefaultCellStyle.BackColor = Color.PaleGreen;
-        //                dataAdminWorkSchedule.Columns["clmnEndTime"].DefaultCellStyle.BackColor = Color.PaleVioletRed;
-        //                row.Cells[0].Value = firstName + " " + lastName; // First Name
-        //                row.Cells[1].Value = role; // Name (Role)
-        //                row.Cells[2].Value = workStartTime.ToString("hh:mm tt");// Start Time
-        //                row.Cells[3].Value = workEndTime.ToString("hh:mm tt"); // End Time
-        //                row.Cells[4].Value = convertedWorkDate.ToString("dddd, dd MMMM yyyy"); // Work Date
-        //                dataAdminWorkSchedule.Rows.Add(row);
-        //            }
-
-        //            schedule = new Schedule(scheduleID, firstName, lastName, role, workStartTime, workEndTime, convertedWorkDate, departmentName);
-        //            department.AddSchedule(schedule);
-        //        }
-        //    }
-        //    else
-        //    {
-        //        MessageBox.Show("Sorry there's no data. Contact your administrator for more information.");
-        //    }
-
-        //    reader.Close();
-        //    conn.Close();
-        //}
-
     }
 }

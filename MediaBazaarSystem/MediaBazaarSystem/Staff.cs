@@ -80,6 +80,12 @@ namespace MediaBazaarSystem
             set { this.contract = value; }
         }
 
+        public int PassCode
+        {
+            get;
+            private set;
+        }
+
         public Staff(int ID, String firstName, String lastName, DateTime birthDate, String address, double salary, int hoursAvailable, String email, Contract contract)
         {
             dbID = ID;
@@ -109,15 +115,45 @@ namespace MediaBazaarSystem
             Age = age;
         }
 
-        /**
-         * Method for the schedules
-         */
-        public Staff( int ID, String firstName, String lastName)
+        public Staff( int ID, String firstName, String lastName, DateTime birthDate, String address, double salary, int hoursAvailable, String email, Contract contract, int passCode )
         {
             dbID = ID;
             FirstName = firstName;
             LastName = lastName;
+            dateOfBirth = birthDate.Date;
+            Address = address;
+            Role = Position.Unknown;
+            Salary = salary;
+            HoursAvailable = hoursAvailable;
+            Email = email;
+            Contract = contract;
+            PassCode = passCode;
+
+            //Calculate age
+            int age = DateTime.Now.Year - birthDate.Year - 1;
+            if( birthDate.Month > DateTime.Now.Month )
+            {
+                age++;
+            }
+            else if( birthDate.Month == DateTime.Now.Month )
+            {
+                if( birthDate.Day >= DateTime.Now.Day )
+                {
+                    age++;
+                }
+            }
+            Age = age;
         }
+
+        ///**
+        // * Method for the schedules
+        // */
+        //public Staff( int ID, String firstName, String lastName)
+        //{
+        //    dbID = ID;
+        //    FirstName = firstName;
+        //    LastName = lastName;
+        //}
 
         public void editStaffMember(String firstName, String lastName, DateTime birthDate, String address, String email)
         {
@@ -155,34 +191,6 @@ namespace MediaBazaarSystem
             this.Role = role;
             this.Contract = contract;
         }
-
-        //public void EditMStaff(String firstName, String lastName, DateTime birthDate, String address, String role, double salary, int hoursAvailable, String email, Contract contract)
-        //{
-        //    FirstName = firstName;
-        //    LastName = lastName;
-        //    dateOfBirth = birthDate.Date;
-        //    Address = address;
-        //    Role = role;
-        //    Salary = salary;
-        //    HoursAvailable = hoursAvailable;
-        //    Email = email;
-        //    Contract = contract;
-
-        //    //Calculate age
-        //    int age = DateTime.Now.Year - birthDate.Year - 1;
-        //    if (birthDate.Month > DateTime.Now.Month)
-        //    {
-        //        age++;
-        //    }
-        //    else if (birthDate.Month == DateTime.Now.Month)
-        //    {
-        //        if (birthDate.Day >= DateTime.Now.Day)
-        //        {
-        //            age++;
-        //        }
-        //    }
-        //    Age = age;
-        //}
 
         public override string ToString()
         {
