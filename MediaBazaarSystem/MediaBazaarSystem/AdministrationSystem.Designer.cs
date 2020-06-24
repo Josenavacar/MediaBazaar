@@ -103,7 +103,6 @@
             this.lbManagers = new System.Windows.Forms.ListBox();
             this.Refresh = new System.Windows.Forms.Timer(this.components);
             this.updateTimer = new System.Windows.Forms.Timer(this.components);
-            this.lbDebug = new System.Windows.Forms.ListBox();
             this.tbControlAdmin.SuspendLayout();
             this.tbPageHome.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picBoxLogout)).BeginInit();
@@ -923,23 +922,12 @@
             this.updateTimer.Interval = 500;
             this.updateTimer.Tick += new System.EventHandler(this.updateTimer_Tick);
             // 
-            // lbDebug
-            // 
-            this.lbDebug.FormattingEnabled = true;
-            this.lbDebug.HorizontalScrollbar = true;
-            this.lbDebug.ItemHeight = 15;
-            this.lbDebug.Location = new System.Drawing.Point(940, 40);
-            this.lbDebug.Name = "lbDebug";
-            this.lbDebug.Size = new System.Drawing.Size(426, 259);
-            this.lbDebug.TabIndex = 32;
-            // 
             // AdministrationSystem
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.WindowFrame;
-            this.ClientSize = new System.Drawing.Size(1488, 733);
-            this.Controls.Add(this.lbDebug);
+            this.ClientSize = new System.Drawing.Size(897, 733);
             this.Controls.Add(this.tbControlAdmin);
             this.Font = new System.Drawing.Font("Century Gothic", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Name = "AdministrationSystem";
@@ -1041,6 +1029,5 @@
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.ComboBox comboBoxMonth;
         private System.Windows.Forms.ListBox lBoxScheduleStats;
-        private System.Windows.Forms.ListBox lbDebug;
     }
 }

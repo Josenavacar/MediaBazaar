@@ -963,7 +963,7 @@ namespace MediaBazaarSystem
                     {
                         if(comboBoxMonth.SelectedItem.ToString() == schedule.WorkDate.ToString("MMMM"))
                         {
-                            if (currentID == schedule.dbID)
+                            if (currentID == schedule.EmployeeID)
                             {
                                 hoursWorked += (int)(schedule.EndTime - schedule.StartTime).TotalHours;
                             }
