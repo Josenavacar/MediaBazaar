@@ -21,7 +21,7 @@ namespace MediaBazaarSystem
                 MimeMessage message = new MimeMessage();
                 message.From.Add( new MailboxAddress( "HR manager", from ) );
                 message.To.Add( new MailboxAddress( "Employee ", "440569@student.fontys.nl" ) ); //to
-                message.Subject = "Daily StudentHousing BV";
+                message.Subject = "Shift information";
 
                 message.Body = new TextPart( "plain" )
                 {
