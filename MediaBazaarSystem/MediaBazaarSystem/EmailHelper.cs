@@ -11,6 +11,9 @@ namespace MediaBazaarSystem
 {
     public class EmailHelper
     {
+        /**
+         * Method to send staff an email
+         */
         public void SendScheduleEmail( String body, String to )
         {
             String from = "media_bazaar_nl@hotmail.com";

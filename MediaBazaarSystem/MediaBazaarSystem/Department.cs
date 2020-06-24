@@ -13,7 +13,6 @@ namespace MediaBazaarSystem
         private int ID;
         private String name;
         private List<Schedule> schedules;
-
         private List<Staff> staff;
 
         public int DepartmentID
@@ -28,6 +27,9 @@ namespace MediaBazaarSystem
             private set { this.name = value; }
         }
 
+        /**
+         * Constructor
+         */
         public Department(String name, int ID)
         {
             this.Name = name;
@@ -36,16 +38,25 @@ namespace MediaBazaarSystem
             schedules = new List<Schedule>();
         }
 
+        /**
+         * Method to add staff 
+         */
         public void AddStaffMember(Staff employed)
         {
             staff.Add(employed);
         }
 
+        /**
+         * Method to delete staff
+         */
         public void DeleteStaffMember(Staff unemployed)
         {
             staff.Remove(unemployed);
         }
 
+        /**
+         * Method to get staff 
+         */
         public Staff GetStaffMember(String firstname, String lastname)
         {
             foreach(Staff person in staff)
@@ -58,6 +69,9 @@ namespace MediaBazaarSystem
             return null;
         }
 
+        /**
+         * Overload method to get staff
+         */
         public Staff GetStaffMember( String name )
         {
             foreach( Staff person in staff )
@@ -70,6 +84,9 @@ namespace MediaBazaarSystem
             return null;
         }
 
+        /**
+         * Method to get schedule
+         */
         public Schedule GetSchedule(int employeeID, DateTime workDate )
         {
             foreach(Schedule schedule in schedules)
@@ -83,16 +100,25 @@ namespace MediaBazaarSystem
             return null;
         }
 
+        /**
+         * Method to return all staff members
+         */
         public List<Staff> GetStaff()
         {
             return this.staff;
         }
 
+        /**
+         * Method to add schedule
+         */
         public void AddSchedule(Schedule schedule)
         {
             schedules.Add(schedule);
         }
 
+        /**
+         * Method to return schedules
+         */
         public List<Schedule> GetSchedules()
         {
             return this.schedules;

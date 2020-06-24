@@ -54,7 +54,7 @@
             this.lBoxEmpHistory = new System.Windows.Forms.ListBox();
             this.btnSearch = new System.Windows.Forms.Button();
             this.txtBoxSearch = new System.Windows.Forms.TextBox();
-            this.tbPageShiftManagement = new System.Windows.Forms.TabPage();
+            this.tbPageScheduleManagement = new System.Windows.Forms.TabPage();
             this.picBoxInformationIcon = new System.Windows.Forms.PictureBox();
             this.lblScheduleInformation = new System.Windows.Forms.Label();
             this.lblEndTime = new System.Windows.Forms.Label();
@@ -87,7 +87,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.picBoxLogout)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataEmpWorkSchedule)).BeginInit();
             this.tbPageHistory.SuspendLayout();
-            this.tbPageShiftManagement.SuspendLayout();
+            this.tbPageScheduleManagement.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picBoxInformationIcon)).BeginInit();
             this.tbPageProfile.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxEmployeePhoto)).BeginInit();
@@ -97,7 +97,7 @@
             // 
             this.tbControlEmp.Controls.Add(this.tbPageHome);
             this.tbControlEmp.Controls.Add(this.tbPageHistory);
-            this.tbControlEmp.Controls.Add(this.tbPageShiftManagement);
+            this.tbControlEmp.Controls.Add(this.tbPageScheduleManagement);
             this.tbControlEmp.Controls.Add(this.tbPageProfile);
             this.tbControlEmp.Font = new System.Drawing.Font("Century Gothic", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tbControlEmp.Location = new System.Drawing.Point(12, 12);
@@ -359,24 +359,24 @@
             this.txtBoxSearch.Text = "Search by date...";
             this.txtBoxSearch.Click += new System.EventHandler(this.txtBoxSearch_Click);
             // 
-            // tbPageShiftManagement
+            // tbPageScheduleManagement
             // 
-            this.tbPageShiftManagement.Controls.Add(this.picBoxInformationIcon);
-            this.tbPageShiftManagement.Controls.Add(this.lblScheduleInformation);
-            this.tbPageShiftManagement.Controls.Add(this.lblEndTime);
-            this.tbPageShiftManagement.Controls.Add(this.lblStartTime);
-            this.tbPageShiftManagement.Controls.Add(this.comBoxStartTime);
-            this.tbPageShiftManagement.Controls.Add(this.comBoxEndTime);
-            this.tbPageShiftManagement.Controls.Add(this.lBoxWorkDates);
-            this.tbPageShiftManagement.Controls.Add(this.btnAddWorkDate);
-            this.tbPageShiftManagement.Controls.Add(this.dtpAvailableWorkDates);
-            this.tbPageShiftManagement.Location = new System.Drawing.Point(4, 30);
-            this.tbPageShiftManagement.Name = "tbPageShiftManagement";
-            this.tbPageShiftManagement.Padding = new System.Windows.Forms.Padding(3);
-            this.tbPageShiftManagement.Size = new System.Drawing.Size(870, 675);
-            this.tbPageShiftManagement.TabIndex = 3;
-            this.tbPageShiftManagement.Text = "Shift Management";
-            this.tbPageShiftManagement.UseVisualStyleBackColor = true;
+            this.tbPageScheduleManagement.Controls.Add(this.picBoxInformationIcon);
+            this.tbPageScheduleManagement.Controls.Add(this.lblScheduleInformation);
+            this.tbPageScheduleManagement.Controls.Add(this.lblEndTime);
+            this.tbPageScheduleManagement.Controls.Add(this.lblStartTime);
+            this.tbPageScheduleManagement.Controls.Add(this.comBoxStartTime);
+            this.tbPageScheduleManagement.Controls.Add(this.comBoxEndTime);
+            this.tbPageScheduleManagement.Controls.Add(this.lBoxWorkDates);
+            this.tbPageScheduleManagement.Controls.Add(this.btnAddWorkDate);
+            this.tbPageScheduleManagement.Controls.Add(this.dtpAvailableWorkDates);
+            this.tbPageScheduleManagement.Location = new System.Drawing.Point(4, 30);
+            this.tbPageScheduleManagement.Name = "tbPageScheduleManagement";
+            this.tbPageScheduleManagement.Padding = new System.Windows.Forms.Padding(3);
+            this.tbPageScheduleManagement.Size = new System.Drawing.Size(870, 675);
+            this.tbPageScheduleManagement.TabIndex = 3;
+            this.tbPageScheduleManagement.Text = "Schedule Management";
+            this.tbPageScheduleManagement.UseVisualStyleBackColor = true;
             // 
             // picBoxInformationIcon
             // 
@@ -458,7 +458,7 @@
             this.btnAddWorkDate.Name = "btnAddWorkDate";
             this.btnAddWorkDate.Size = new System.Drawing.Size(385, 42);
             this.btnAddWorkDate.TabIndex = 15;
-            this.btnAddWorkDate.Text = "Add Work Date";
+            this.btnAddWorkDate.Text = "Submit Preferred Schedule";
             this.btnAddWorkDate.UseVisualStyleBackColor = false;
             this.btnAddWorkDate.Click += new System.EventHandler(this.btnAddWorkDate_Click);
             // 
@@ -536,7 +536,7 @@
             // lblEmail
             // 
             this.lblEmail.AutoSize = true;
-            this.lblEmail.Location = new System.Drawing.Point(444, 509);
+            this.lblEmail.Location = new System.Drawing.Point(454, 509);
             this.lblEmail.Name = "lblEmail";
             this.lblEmail.Size = new System.Drawing.Size(57, 21);
             this.lblEmail.TabIndex = 11;
@@ -562,7 +562,7 @@
             // lblAge
             // 
             this.lblAge.AutoSize = true;
-            this.lblAge.Location = new System.Drawing.Point(397, 415);
+            this.lblAge.Location = new System.Drawing.Point(395, 415);
             this.lblAge.Name = "lblAge";
             this.lblAge.Size = new System.Drawing.Size(119, 21);
             this.lblAge.TabIndex = 8;
@@ -571,7 +571,7 @@
             // lblLastName
             // 
             this.lblLastName.AutoSize = true;
-            this.lblLastName.Location = new System.Drawing.Point(409, 364);
+            this.lblLastName.Location = new System.Drawing.Point(406, 364);
             this.lblLastName.Name = "lblLastName";
             this.lblLastName.Size = new System.Drawing.Size(105, 21);
             this.lblLastName.TabIndex = 7;
@@ -580,7 +580,7 @@
             // lblFirstName
             // 
             this.lblFirstName.AutoSize = true;
-            this.lblFirstName.Location = new System.Drawing.Point(411, 312);
+            this.lblFirstName.Location = new System.Drawing.Point(410, 312);
             this.lblFirstName.Name = "lblFirstName";
             this.lblFirstName.Size = new System.Drawing.Size(101, 21);
             this.lblFirstName.TabIndex = 6;
@@ -658,8 +658,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataEmpWorkSchedule)).EndInit();
             this.tbPageHistory.ResumeLayout(false);
             this.tbPageHistory.PerformLayout();
-            this.tbPageShiftManagement.ResumeLayout(false);
-            this.tbPageShiftManagement.PerformLayout();
+            this.tbPageScheduleManagement.ResumeLayout(false);
+            this.tbPageScheduleManagement.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picBoxInformationIcon)).EndInit();
             this.tbPageProfile.ResumeLayout(false);
             this.tbPageProfile.PerformLayout();
@@ -712,7 +712,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn clmnWorkDate;
         private System.Windows.Forms.Button btnViewWorkHistory;
         private System.Windows.Forms.Button btnMorningShift;
-        private System.Windows.Forms.TabPage tbPageShiftManagement;
+        private System.Windows.Forms.TabPage tbPageScheduleManagement;
         private System.Windows.Forms.ListBox lBoxWorkDates;
         private System.Windows.Forms.Button btnAddWorkDate;
         private System.Windows.Forms.DateTimePicker dtpAvailableWorkDates;

@@ -16,9 +16,11 @@ namespace MediaBazaarSystem
     {
         private Manager man;
         private Employee emp;
-
         private String active = "";
 
+        /**
+         * Constructor
+         */
         public ChangePassword(Manager man, Employee emp)
         {
             InitializeComponent();
@@ -39,6 +41,9 @@ namespace MediaBazaarSystem
             }
         }
 
+        /**
+         * Method to update password
+         */
         private void btnConfirm_Click(object sender, EventArgs e)
         {
             String toDecryptPassword = "";
@@ -96,6 +101,9 @@ namespace MediaBazaarSystem
             conn.Close();
         }
 
+        /**
+         * Method to cancel and close form
+         */
         private void btnCancel_Click(object sender, EventArgs e)
         {
             MessageBox.Show("Operation canceled");

@@ -42,7 +42,7 @@
             // 
             this.tbCurrentPwd.Font = new System.Drawing.Font("Century Gothic", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tbCurrentPwd.Location = new System.Drawing.Point(203, 64);
-            this.tbCurrentPwd.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tbCurrentPwd.Margin = new System.Windows.Forms.Padding(4);
             this.tbCurrentPwd.Name = "tbCurrentPwd";
             this.tbCurrentPwd.Size = new System.Drawing.Size(232, 28);
             this.tbCurrentPwd.TabIndex = 0;
@@ -50,8 +50,9 @@
             // btnConfirm
             // 
             this.btnConfirm.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.btnConfirm.Font = new System.Drawing.Font("Century Gothic", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnConfirm.Location = new System.Drawing.Point(75, 305);
-            this.btnConfirm.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnConfirm.Margin = new System.Windows.Forms.Padding(4);
             this.btnConfirm.Name = "btnConfirm";
             this.btnConfirm.Size = new System.Drawing.Size(147, 39);
             this.btnConfirm.TabIndex = 1;
@@ -62,8 +63,9 @@
             // btnCancel
             // 
             this.btnCancel.BackColor = System.Drawing.Color.LightCoral;
+            this.btnCancel.Font = new System.Drawing.Font("Century Gothic", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnCancel.Location = new System.Drawing.Point(300, 305);
-            this.btnCancel.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnCancel.Margin = new System.Windows.Forms.Padding(4);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(157, 39);
             this.btnCancel.TabIndex = 2;
@@ -74,20 +76,22 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(51, 71);
+            this.label1.Font = new System.Drawing.Font("Century Gothic", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(35, 67);
             this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(131, 19);
+            this.label1.Size = new System.Drawing.Size(160, 21);
             this.label1.TabIndex = 3;
             this.label1.Text = "Current Password:";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(71, 150);
+            this.label2.Font = new System.Drawing.Font("Century Gothic", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(59, 146);
             this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(111, 19);
+            this.label2.Size = new System.Drawing.Size(136, 21);
             this.label2.TabIndex = 5;
             this.label2.Text = "New Password:";
             // 
@@ -95,7 +99,7 @@
             // 
             this.tbNewPwd.Font = new System.Drawing.Font("Century Gothic", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tbNewPwd.Location = new System.Drawing.Point(203, 143);
-            this.tbNewPwd.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tbNewPwd.Margin = new System.Windows.Forms.Padding(4);
             this.tbNewPwd.Name = "tbNewPwd";
             this.tbNewPwd.Size = new System.Drawing.Size(232, 28);
             this.tbNewPwd.TabIndex = 4;
@@ -103,10 +107,11 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(49, 235);
+            this.label3.Font = new System.Drawing.Font("Century Gothic", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Location = new System.Drawing.Point(34, 231);
             this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(133, 19);
+            this.label3.Size = new System.Drawing.Size(161, 21);
             this.label3.TabIndex = 7;
             this.label3.Text = "Confirm Password:";
             // 
@@ -114,7 +119,7 @@
             // 
             this.tbConfirmPwd.Font = new System.Drawing.Font("Century Gothic", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tbConfirmPwd.Location = new System.Drawing.Point(203, 228);
-            this.tbConfirmPwd.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tbConfirmPwd.Margin = new System.Windows.Forms.Padding(4);
             this.tbConfirmPwd.Name = "tbConfirmPwd";
             this.tbConfirmPwd.Size = new System.Drawing.Size(232, 28);
             this.tbConfirmPwd.TabIndex = 6;
@@ -133,8 +138,9 @@
             this.Controls.Add(this.btnConfirm);
             this.Controls.Add(this.tbCurrentPwd);
             this.Font = new System.Drawing.Font("Century Gothic", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "ChangePassword";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "ChangePassword";
             this.ResumeLayout(false);
             this.PerformLayout();

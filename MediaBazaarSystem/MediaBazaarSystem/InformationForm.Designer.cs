@@ -49,7 +49,8 @@
             this.Controls.Add(this.txtBoxInformation);
             this.Font = new System.Drawing.Font("Century Gothic", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Name = "InformationForm";
-            this.Text = "InformationForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "System\'s Information ";
             this.ResumeLayout(false);
             this.PerformLayout();
 

@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace MediaBazaarSystem
 {
+    /**
+     * Enum for roles
+     */
     public enum Position
     {
         HRManager = 1,

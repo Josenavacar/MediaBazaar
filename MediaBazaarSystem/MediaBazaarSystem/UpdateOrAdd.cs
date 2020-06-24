@@ -17,7 +17,6 @@ namespace MediaBazaarSystem
         DatabaseHelper dataBase;
         Department department;
         Staff staffMember;
-
         String FirstName, LastName, address, email;
         DateTime birthDate;
         double salary;
@@ -42,6 +41,9 @@ namespace MediaBazaarSystem
             dataBase = new DatabaseHelper();
         }
 
+        /**
+         * Method to check if Stock manager role is selected, if so..make passcode input writable, if not...keep it readable only
+         */
         private void passcodeCheckerTimer_Tick( object sender, EventArgs e )
         {
             if( comBoxRole.SelectedItem.ToString() != "StockManager" )
@@ -69,6 +71,9 @@ namespace MediaBazaarSystem
             dataBase = new DatabaseHelper();
         }
 
+        /**
+         * Method to fill form inputs with data
+         */
         private void SetUpForm()
         {
             txtBoxFirstName.Text = staffMember.FirstName;
@@ -84,11 +89,17 @@ namespace MediaBazaarSystem
             cmboBoxContract.SelectedIndex = (int)staffMember.Contract - 1;
         }
 
+        /**
+         * Method to focus out birthday
+         */
         private void tbBirthDate_Click(object sender, EventArgs e)
         {
             tbBirthDate.Text = "";
         }
 
+        /**
+         * Method to edit staff meber
+         */
         private void btnEditStaff_Click(object sender, EventArgs e)
         {
             ReadInfoFromForm();
@@ -101,6 +112,9 @@ namespace MediaBazaarSystem
             this.Close();
         }
 
+        /**
+         * Method to add staff member
+         */
         private void btnAddStaff_Click(object sender, EventArgs e)
         {
             ReadInfoFromForm();
@@ -134,6 +148,9 @@ namespace MediaBazaarSystem
             this.Close();
         }
 
+        /**
+         * Method to get data frm the form inputs
+         */
         private void ReadInfoFromForm()
         {
             this.FirstName = txtBoxFirstName.Text.ToString(); //First name

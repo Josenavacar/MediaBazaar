@@ -20,6 +20,7 @@ namespace MediaBazaarSystem
             get { return this.personID; }
             set { this.personID = value; }
         }
+
         public String Email
         {
             get { return this.email; }
@@ -86,6 +87,9 @@ namespace MediaBazaarSystem
             private set;
         }
 
+        /**
+         * Constructor for HR manager and employee
+         */
         public Staff(int ID, String firstName, String lastName, DateTime birthDate, String address, double salary, int hoursAvailable, String email, Contract contract)
         {
             dbID = ID;
@@ -115,6 +119,9 @@ namespace MediaBazaarSystem
             Age = age;
         }
 
+        /**
+         * Constructor for Stock Manager
+         */
         public Staff( int ID, String firstName, String lastName, DateTime birthDate, String address, double salary, int hoursAvailable, String email, Contract contract, int passCode )
         {
             dbID = ID;
@@ -145,6 +152,9 @@ namespace MediaBazaarSystem
             Age = age;
         }
 
+        /**
+         * Method to update staff member (STAFF'S PROFILE)
+         */
         public void editStaffMember(String firstName, String lastName, DateTime birthDate, String address, String email)
         {
             this.FirstName = firstName;
@@ -169,6 +179,9 @@ namespace MediaBazaarSystem
             Age = age;
         }
 
+        /**
+         * Method to update staff member
+         */
         public void editStaffMember(String firstName, String lastName, DateTime birthDate, String address, String email, double salary, int hoursAvailable, Position role, Contract contract)
         {
             this.FirstName = firstName;

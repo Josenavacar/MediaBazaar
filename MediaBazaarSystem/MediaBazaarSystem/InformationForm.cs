@@ -12,6 +12,9 @@ namespace MediaBazaarSystem
 {
     public partial class InformationForm : Form
     {
+        /**
+         * Constructor
+         */
         public InformationForm(String info)
         {
             InitializeComponent();

@@ -8,6 +8,9 @@ namespace MediaBazaarSystem
 {
     public class Employee : Staff
     {
+        /**
+         * Constructor
+         */
         public Employee(int ID, String firstName, String lastName, DateTime birthDate, String address, double salary, int hoursAvailable, String email, Contract contract) : base(ID, firstName, lastName, birthDate, address, salary, hoursAvailable, email, contract)
         {
             Role = Position.Employee;

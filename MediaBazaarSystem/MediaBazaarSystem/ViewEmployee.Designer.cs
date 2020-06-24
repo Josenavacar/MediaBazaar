@@ -41,7 +41,7 @@
             // 
             this.lbSalary.AutoSize = true;
             this.lbSalary.Font = new System.Drawing.Font("Century Gothic", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbSalary.Location = new System.Drawing.Point(128, 206);
+            this.lbSalary.Location = new System.Drawing.Point(133, 205);
             this.lbSalary.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lbSalary.Name = "lbSalary";
             this.lbSalary.Size = new System.Drawing.Size(63, 21);
@@ -52,7 +52,7 @@
             // 
             this.lbHoursAvailable.AutoSize = true;
             this.lbHoursAvailable.Font = new System.Drawing.Font("Century Gothic", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbHoursAvailable.Location = new System.Drawing.Point(64, 238);
+            this.lbHoursAvailable.Location = new System.Drawing.Point(51, 235);
             this.lbHoursAvailable.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lbHoursAvailable.Name = "lbHoursAvailable";
             this.lbHoursAvailable.Size = new System.Drawing.Size(145, 21);
@@ -74,7 +74,7 @@
             // 
             this.lblAddress.AutoSize = true;
             this.lblAddress.Font = new System.Drawing.Font("Century Gothic", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblAddress.Location = new System.Drawing.Point(118, 135);
+            this.lblAddress.Location = new System.Drawing.Point(114, 136);
             this.lblAddress.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblAddress.Name = "lblAddress";
             this.lblAddress.Size = new System.Drawing.Size(82, 21);
@@ -85,7 +85,7 @@
             // 
             this.lblAge.AutoSize = true;
             this.lblAge.Font = new System.Drawing.Font("Century Gothic", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblAge.Location = new System.Drawing.Point(143, 102);
+            this.lblAge.Location = new System.Drawing.Point(146, 102);
             this.lblAge.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblAge.Name = "lblAge";
             this.lblAge.Size = new System.Drawing.Size(50, 21);
@@ -96,7 +96,7 @@
             // 
             this.lblLastName.AutoSize = true;
             this.lblLastName.Font = new System.Drawing.Font("Century Gothic", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblLastName.Location = new System.Drawing.Point(99, 66);
+            this.lblLastName.Location = new System.Drawing.Point(94, 64);
             this.lblLastName.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblLastName.Name = "lblLastName";
             this.lblLastName.Size = new System.Drawing.Size(102, 21);
@@ -107,7 +107,7 @@
             // 
             this.lblFirstName.AutoSize = true;
             this.lblFirstName.Font = new System.Drawing.Font("Century Gothic", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblFirstName.Location = new System.Drawing.Point(101, 31);
+            this.lblFirstName.Location = new System.Drawing.Point(98, 29);
             this.lblFirstName.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblFirstName.Name = "lblFirstName";
             this.lblFirstName.Size = new System.Drawing.Size(98, 21);
@@ -130,6 +130,7 @@
             this.Font = new System.Drawing.Font("Century Gothic", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "ViewEmployee";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Employee Details";
             this.ResumeLayout(false);
             this.PerformLayout();

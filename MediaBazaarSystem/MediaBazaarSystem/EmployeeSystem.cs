@@ -34,7 +34,7 @@ namespace MediaBazaarSystem
             refreshProfile();
             dtpAvailableWorkDates.MinDate = DateTime.Now;
             dtpAvailableWorkDates.MaxDate = DateTime.Now.AddDays( 7 );
-            LoadScheduleInformation();
+            LoadDateInformation();
         }
 
         /**
@@ -93,12 +93,8 @@ namespace MediaBazaarSystem
             lBoxEmpHistory.Items.Clear();
             this.dataEmpWorkSchedule.Rows.Clear();
             department.GetSchedules().Clear();
-
             MySqlDataReader reader = dataBase.updateSchedules();
             this.GetWorkScheduleDB( reader );
-            //this.GetShifts( sql, connection );
-            // Disable 
-
             updateTimer.Enabled = false;
         }
 
@@ -526,8 +522,10 @@ namespace MediaBazaarSystem
             txtBoxHomeSearch.Text = "";
         }
 
-
-        private void LoadScheduleInformation()
+        /**
+         * Method to load date information for the schedule management
+         */
+        private void LoadDateInformation()
         {
             DateTime time = DateTime.Today;
             for( DateTime _time = time.AddHours( 08 ); _time < time.AddHours( 24 ); _time = _time.AddMinutes( 60 ) ) //from 16h to 18h hours
@@ -537,6 +535,9 @@ namespace MediaBazaarSystem
             }
         }
 
+        /**
+         * Method to add work dates
+         */
         private void btnAddWorkDate_Click( object sender, EventArgs e )
         {
             String startTime = comBoxStartTime.SelectedItem.ToString();
@@ -547,11 +548,18 @@ namespace MediaBazaarSystem
                 int employeeID = employee.dbID;
                 DateTime workDate = dtpAvailableWorkDates.Value;
                 
-
                 if(!lBoxWorkDates.Items.Contains("Work date: " + workDate.ToString( "dddd, dd MMMM yyyy" ) + " Start time: " + startTime + " End time: " + endTime ) )
                 {
-                    lBoxWorkDates.Items.Add("Work date: " + workDate.ToString( "dddd, dd MMMM yyyy" ) + " Start time: " + startTime + " End time: " + endTime );
-                    dataBase.AddEmployeeWorkDate( employee, workDate, startTime, endTime );
+                    try
+                    {
+                        dataBase.AddEmployeeWorkDate( employee, workDate, startTime, endTime );
+                        lBoxWorkDates.Items.Add( "Work date: " + workDate.ToString( "dddd, dd MMMM yyyy" ) + " Start time: " + startTime + " End time: " + endTime );
+                        MessageBox.Show( "Request was successful" );
+                    }
+                    catch(Exception ex)
+                    {
+                        MessageBox.Show( "Sorry the request failed." );
+                    }
                 }
                 else
                 {
@@ -564,6 +572,9 @@ namespace MediaBazaarSystem
             }
         }
 
+        /**
+         * Method to show information (SCHEDULE MANAHEMENT TAB)
+         */
         private void picBoxInformationIcon_Click( object sender, EventArgs e )
         {
             String info = "You can enter your preferred working days and hours. " +

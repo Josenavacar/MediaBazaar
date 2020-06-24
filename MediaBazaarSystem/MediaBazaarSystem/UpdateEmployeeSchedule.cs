@@ -91,9 +91,12 @@ namespace MediaBazaarSystem
             }
         }
 
+        /**
+         * Method to refresh listbox
+         */
         private void updateTimer_Tick( object sender, EventArgs e )
         {
-            updateTimer.Interval = 1000;
+            updateTimer.Interval = 1500;
             this.UpdateSchedule();
         }
     }

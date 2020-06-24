@@ -6,10 +6,10 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-//using System.Windows.Forms;
+using System.Windows.Forms;
 using MySql.Data.MySqlClient;
 using System.Data.SqlClient;
-//using System.Windows.Forms.DataVisualization.Charting;
+using System.Windows.Forms.DataVisualization.Charting;
 
 namespace MediaBazaarSystem
 {
@@ -17,6 +17,9 @@ namespace MediaBazaarSystem
     {
         private String connString = @"Server = studmysql01.fhict.local; Uid = dbi437493; Database = dbi437493; Pwd = dbgroup01;";
 
+        /**
+         * Method to log user in
+         */
         public MySqlDataReader StaffLogin(String email, String password)
         {
             String sql = "SELECT person.Id, person.Firstname, person.Lastname, person.Age, person.Address, person.Email, person.Password, person.Salary, " +
@@ -33,6 +36,9 @@ namespace MediaBazaarSystem
             return reader;
         }
 
+        /**
+         * Method to add a new staff member
+         */
         public void addStaffToDB( Staff staff, int departmentID )
         {
             if(staff != null)
@@ -123,6 +129,9 @@ namespace MediaBazaarSystem
             }
         }
 
+        /**
+         * Method to get staff 
+         */
         public List<Staff> getStaffFromDB(Department dep)
         {
             MySqlConnection conn = new MySqlConnection(connString);
@@ -180,6 +189,9 @@ namespace MediaBazaarSystem
             return dep.GetStaff();
         }
 
+        /**
+         * Method to get staffs ID
+         */
         public int getStaffID()
         {
             MySqlConnection conn = new MySqlConnection(connString);
@@ -220,6 +232,9 @@ namespace MediaBazaarSystem
             memberToChange.editStaffMember(FirstName, LastName, birthDate , address, email);
         }
 
+        /**
+         * Method to update managers profile
+         */
         public void managerUpdateProfile(Staff memberToChange, String FirstName, String LastName, DateTime birthDate, String address, String email, double salary, int hoursAvailable, int roleID, int DepartmentID, Contract contract)
         {
             MySqlConnection conn = new MySqlConnection(connString);
@@ -249,6 +264,9 @@ namespace MediaBazaarSystem
             memberToChange.editStaffMember(FirstName, LastName, birthDate, address, email);
         }
 
+        /**
+         * Method add employee preferred work date
+         */
         public void AddEmployeeWorkDate( Staff employee, DateTime workDate, String startTime, String endTime )
         {
             DateTime updateStartTime = DateTime.Parse( startTime );
@@ -294,6 +312,9 @@ namespace MediaBazaarSystem
             return reader;
         }
 
+        /**
+         * Method for HR manager to add schedule
+         */
         public void AddSchedule(Staff staff, String startTime, String endTime, String workDate )
         {
             int personID = staff.dbID;
@@ -314,6 +335,9 @@ namespace MediaBazaarSystem
             connection.Close();
         }
 
+        /**
+         * Method to update employee's schedule
+         */
         public void UpdateEmployeeSchedule( Schedule schedule, String startTime, String endTime, String workDate)
         {
             DateTime updateStartTime = DateTime.Parse( startTime );
@@ -339,6 +363,9 @@ namespace MediaBazaarSystem
             connection.Close();
         }
 
+        /**
+         * Method to get staffs shift
+         */
         public MySqlDataReader getShift()
         {
             string sql = "SELECT Person.Id, Person.FirstName, Person.LastName, Role.Name, Schedule.StartTime, Schedule.EndTime, Schedule.WorkDate, Department.Name FROM Person " +
@@ -356,6 +383,9 @@ namespace MediaBazaarSystem
             return reader;
         }
 
+        /**
+         * Method to refresh department's schedules 
+         */
         public MySqlDataReader updateSchedules()
         {
             string sql = "SELECT Person.Id, Person.FirstName, Person.LastName, Role.Name, Schedule.StartTime, Schedule.EndTime, Schedule.WorkDate, Department.Name, Schedule.Id FROM Person " +
@@ -374,6 +404,9 @@ namespace MediaBazaarSystem
             return reader;
         }
 
+        /**
+         * Method to delete staff member
+         */
         public void deleteStaffMember(int ID)
         {
             MySqlConnection conn = new MySqlConnection(connString);
@@ -388,6 +421,9 @@ namespace MediaBazaarSystem
             cmd.ExecuteNonQuery();
         }
 
+        /**
+         * Method to get schedules from DB
+         */
         public MySqlDataReader getSchedules()
         {
             // SQL Query

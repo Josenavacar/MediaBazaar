@@ -27,11 +27,11 @@ namespace MediaBazaarSystem
         private Department department;
         private Manager manager;
         private Schedule schedule;
-        public static bool ensure; //Used for double checking when deleting from the database.
-        private String employeeName, employeeRole, employeeStartTime, employeeEndTime, employeeWorkDate;
         private List<Schedule> schedules;
         private List<Schedule> alreadyScheduled;
-        
+        private String employeeName, employeeRole, employeeStartTime, employeeEndTime, employeeWorkDate;
+        public static bool ensure; //Used for double checking when deleting from the database.
+
 
         /**
          * Constructor
@@ -810,7 +810,7 @@ namespace MediaBazaarSystem
                     try
                     {
                         String body = 
-                                    "This is your newly added shift. " + " Start time: " + startTime + " End time: " + endTime + " Work date: " + workDate + ". " +
+                                    "This is your newly added shift. " + " Start time: " + startTime + " End time: " + endTime + " Work date: " + updateWorkDate.ToString( "dddd, dd MMMM yyyy" ) + ". " +
                                     "If you are not content with your schedule. " +
                                     "Please contact your manager or make personal agreements with your colleages. " +
                                     "However, if you switch your shift with a colleage please do not forget to notify your manager. " +
