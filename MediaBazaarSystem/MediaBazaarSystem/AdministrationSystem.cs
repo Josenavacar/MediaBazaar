@@ -15,6 +15,7 @@ using LiveCharts.Wpf;
 using SeriesCollection = LiveCharts.SeriesCollection;
 using LiveCharts.Defaults;
 using Axis = LiveCharts.Wpf.Axis;
+using System.Security.Policy;
 
 namespace MediaBazaarSystem
 {
@@ -903,48 +904,76 @@ namespace MediaBazaarSystem
          */
         private void comboBoxMonth_SelectedIndexChanged( object sender, EventArgs e )
         {
+            //int totalHours = 0;
+            //int hours = 0;
+            //List<int> list = new List<int>();
+
+            ////for( int q = 0; q < department.GetStaff().Count; q++ )
+            ////{
+            ////    if( department.GetStaff()[ q ] is Employee )
+            ////    {
+            ////        for( int i = 0; i < department.GetSchedules().Count; i++ )
+            ////        {
+            ////            if( department.GetStaff()[ q ].dbID == department.GetSchedules()[ i ].EmployeeID )
+            ////            {
+            ////                if( comboBoxMonth.SelectedItem.ToString() == department.GetSchedules()[ i ].WorkDate.ToString( "MMMM" ) )
+            ////                {
+            ////                    hours = ( int ) department.GetSchedules()[ i ].EndTime.Subtract( department.GetSchedules()[ i ].StartTime ).TotalHours;
+            ////                    list.Add( department.GetSchedules()[ i ].EmployeeID ); //department.GetSchedules()[ i ].EmployeeID
+            ////                    HashSet<int> hashSet = new HashSet<int>();
+            ////                    IEnumerable<int> duplicates = list.Where( r => !hashSet.Add( r ) );
+            ////                    //var duplicates = list.Where( item => !hashSet.Add( item ) ).Distinct().ToList();
+
+            ////                    lBoxScheduleStats.Items.Add( department.GetSchedules()[ i ].FirstName + " " + department.GetSchedules()[ i ].LastName + " " + hours );
+
+
+            ////                    if( duplicates.Contains( department.GetSchedules()[ i ].EmployeeID ) )
+            ////                    {
+
+            ////                        for( int x = 0; x < lBoxScheduleStats.Items.Count; x++ )
+            ////                        {
+            ////                            if( lBoxScheduleStats.Items[ x ].ToString() == department.GetSchedules()[ i ].FirstName + " " + department.GetSchedules()[ i ].LastName + " " + hours )
+            ////                            {
+            ////                                totalHours += hours;
+            ////                                lBoxScheduleStats.Items[ x ] = department.GetSchedules()[ i ].FirstName + " " + department.GetSchedules()[ i ].LastName + " " + totalHours;
+            ////                                //lBoxScheduleStats.Items.Add( department.GetSchedules()[ i ].FirstName + " " + department.GetSchedules()[ i ].LastName + " " + totalHours );
+            ////                            }
+            ////                        }
+            ////                    }
+            ////                }
+            ////            }
+            ////        }
+            ////    }
+            ////}
+            
             lBoxScheduleStats.Items.Clear();
-            int totalHours = 0;
-            int hours = 0;
-            List<int> list = new List<int>();
 
-            for( int q = 0; q < department.GetStaff().Count; q++ )
+            List<Schedule> schedules = department.GetSchedules();
+            List<Staff> staff = department.GetStaff();
+
+            int currentID;
+
+            for(int i = 0; i < staff.Count; i++)
             {
-                if( department.GetStaff()[ q ] is Employee )
+                if(staff[i] is Employee)
                 {
-                    for( int i = 0; i < department.GetSchedules().Count; i++ )
+                    currentID = staff[i].dbID;
+                    int hoursWorked = 0;
+                    foreach (Schedule schedule in schedules)
                     {
-                        if( department.GetStaff()[ q ].dbID == department.GetSchedules()[ i ].EmployeeID )
+                        if(comboBoxMonth.SelectedItem.ToString() == schedule.WorkDate.ToString("MMMM"))
                         {
-                            if( comboBoxMonth.SelectedItem.ToString() == department.GetSchedules()[ i ].WorkDate.ToString( "MMMM" ) )
+                            if (currentID == schedule.EmployeeID)
                             {
-                                hours = ( int ) department.GetSchedules()[ i ].EndTime.Subtract( department.GetSchedules()[ i ].StartTime ).TotalHours;
-                                list.Add( department.GetSchedules()[ i ].EmployeeID ); //department.GetSchedules()[ i ].EmployeeID
-                                HashSet<int> hashSet = new HashSet<int>();
-                                IEnumerable<int> duplicates = list.Where( r => !hashSet.Add( r ) );
-                                //var duplicates = list.Where( item => !hashSet.Add( item ) ).Distinct().ToList();
-
-                                lBoxScheduleStats.Items.Add( department.GetSchedules()[ i ].FirstName + " " + department.GetSchedules()[ i ].LastName + " " + hours );
-
-
-                                if( duplicates.Contains( department.GetSchedules()[ i ].EmployeeID ) )
-                                {
-
-                                    for( int x = 0; x < lBoxScheduleStats.Items.Count; x++ )
-                                    {
-                                        if( lBoxScheduleStats.Items[ x ].ToString() == department.GetSchedules()[ i ].FirstName + " " + department.GetSchedules()[ i ].LastName + " " + hours )
-                                        {
-                                            totalHours += hours;
-                                            lBoxScheduleStats.Items[ x ] = department.GetSchedules()[ i ].FirstName + " " + department.GetSchedules()[ i ].LastName + " " + totalHours;
-                                            //lBoxScheduleStats.Items.Add( department.GetSchedules()[ i ].FirstName + " " + department.GetSchedules()[ i ].LastName + " " + totalHours );
-                                        }
-                                    }
-                                }
+                                hoursWorked += (int)(schedule.EndTime - schedule.StartTime).TotalHours;
                             }
                         }
                     }
+                    String toShow = staff[i].FirstName + " " + staff[i].LastName + " " + hoursWorked;
+                    lBoxScheduleStats.Items.Add(toShow);
                 }
             }
+
         }
     }
 }

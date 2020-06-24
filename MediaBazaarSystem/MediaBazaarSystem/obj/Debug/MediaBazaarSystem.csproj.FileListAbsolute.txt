@@ -301,3 +301,10 @@ C:\wamp64\www\mediabazaar\MediaBazaarSystem\MediaBazaarSystem\bin\Debug\Zstandar
 C:\wamp64\www\mediabazaar\MediaBazaarSystem\MediaBazaarSystem\bin\Debug\K4os.Compression.LZ4.xml
 C:\wamp64\www\mediabazaar\MediaBazaarSystem\MediaBazaarSystem\bin\Debug\K4os.Compression.LZ4.Streams.xml
 C:\wamp64\www\mediabazaar\MediaBazaarSystem\MediaBazaarSystem\bin\Debug\K4os.Hash.xxHash.xml
+D:\xampp\htdocs\mediabazaar\MediaBazaarSystem\MediaBazaarSystem\bin\Debug\K4os.Compression.LZ4.dll
+D:\xampp\htdocs\mediabazaar\MediaBazaarSystem\MediaBazaarSystem\bin\Debug\K4os.Compression.LZ4.Streams.dll
+D:\xampp\htdocs\mediabazaar\MediaBazaarSystem\MediaBazaarSystem\bin\Debug\K4os.Hash.xxHash.dll
+D:\xampp\htdocs\mediabazaar\MediaBazaarSystem\MediaBazaarSystem\bin\Debug\Zstandard.Net.dll
+D:\xampp\htdocs\mediabazaar\MediaBazaarSystem\MediaBazaarSystem\bin\Debug\K4os.Compression.LZ4.xml
+D:\xampp\htdocs\mediabazaar\MediaBazaarSystem\MediaBazaarSystem\bin\Debug\K4os.Compression.LZ4.Streams.xml
+D:\xampp\htdocs\mediabazaar\MediaBazaarSystem\MediaBazaarSystem\bin\Debug\K4os.Hash.xxHash.xml
