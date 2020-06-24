@@ -51,7 +51,7 @@ namespace MediaBazaarSystem
             this.LoadScheduleInformation();
             this.refreshProfile();
             lblAdminName.Text += " " + manager.FirstName + " " + manager.LastName;
-            //updateTimer.Enabled = true;
+            comBoxWorkDate.Visible = true;
         }
 
         /**
@@ -851,7 +851,7 @@ namespace MediaBazaarSystem
          */
         private void comBoxEmployees_SelectedIndexChanged( object sender, EventArgs e )
         {
-            comBoxWorkDate.Items.Clear();
+            comBoxWorkDate.DataSource = null;
             Staff staff = department.GetStaffMember( comBoxEmployees.SelectedItem.ToString() );
             MySqlDataReader reader = dataBase.getEmpAvailableWorkDates( staff.dbID );
 
@@ -885,7 +885,17 @@ namespace MediaBazaarSystem
             }
             else
             {
-                comBoxWorkDate.Items.Add( "No date" );
+                List<DateTime> dates = new List<DateTime>();
+
+                DateTime thisMonth = new DateTime( DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day );
+
+                for( int i = 0; i < 7; i++ )
+                {
+                    dates.Add( thisMonth.AddDays( i ) );
+                }
+
+                comBoxWorkDate.DataSource = dates;
+                comBoxWorkDate.FormatString = "dddd, dd MMMM yyyy";
             }
         }
 

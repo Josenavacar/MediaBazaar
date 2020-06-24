@@ -337,7 +337,7 @@
             // 
             this.comBoxEmployees.Font = new System.Drawing.Font("Century Gothic", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.comBoxEmployees.FormattingEnabled = true;
-            this.comBoxEmployees.Location = new System.Drawing.Point(319, 356);
+            this.comBoxEmployees.Location = new System.Drawing.Point(319, 358);
             this.comBoxEmployees.Name = "comBoxEmployees";
             this.comBoxEmployees.Size = new System.Drawing.Size(349, 29);
             this.comBoxEmployees.TabIndex = 23;
@@ -392,7 +392,7 @@
             this.lblEmployeeName.AutoSize = true;
             this.lblEmployeeName.Font = new System.Drawing.Font("Century Gothic", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblEmployeeName.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.lblEmployeeName.Location = new System.Drawing.Point(209, 359);
+            this.lblEmployeeName.Location = new System.Drawing.Point(209, 361);
             this.lblEmployeeName.Name = "lblEmployeeName";
             this.lblEmployeeName.Size = new System.Drawing.Size(95, 21);
             this.lblEmployeeName.TabIndex = 17;
@@ -427,7 +427,7 @@
             this.lBoxSchedulingEmployee.ItemHeight = 23;
             this.lBoxSchedulingEmployee.Location = new System.Drawing.Point(173, 90);
             this.lBoxSchedulingEmployee.Name = "lBoxSchedulingEmployee";
-            this.lBoxSchedulingEmployee.Size = new System.Drawing.Size(520, 211);
+            this.lBoxSchedulingEmployee.Size = new System.Drawing.Size(520, 234);
             this.lBoxSchedulingEmployee.TabIndex = 14;
             // 
             // btnDone
