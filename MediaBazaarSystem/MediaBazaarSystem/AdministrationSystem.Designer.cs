@@ -60,6 +60,7 @@
             this.btnDone = new System.Windows.Forms.Button();
             this.tbPageStatistics = new System.Windows.Forms.TabPage();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.lBoxScheduleStats = new System.Windows.Forms.ListBox();
             this.comboBoxMonth = new System.Windows.Forms.ComboBox();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -102,7 +103,7 @@
             this.lbManagers = new System.Windows.Forms.ListBox();
             this.Refresh = new System.Windows.Forms.Timer(this.components);
             this.updateTimer = new System.Windows.Forms.Timer(this.components);
-            this.lBoxScheduleStats = new System.Windows.Forms.ListBox();
+            this.lbDebug = new System.Windows.Forms.ListBox();
             this.tbControlAdmin.SuspendLayout();
             this.tbPageHome.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picBoxLogout)).BeginInit();
@@ -144,10 +145,10 @@
             this.tbPageHome.Controls.Add(this.picBoxLogout);
             this.tbPageHome.Controls.Add(this.dataAdminWorkSchedule);
             this.tbPageHome.Controls.Add(this.dtpWorkSchedule);
-            this.tbPageHome.Location = new System.Drawing.Point(4, 30);
+            this.tbPageHome.Location = new System.Drawing.Point(4, 28);
             this.tbPageHome.Name = "tbPageHome";
             this.tbPageHome.Padding = new System.Windows.Forms.Padding(3);
-            this.tbPageHome.Size = new System.Drawing.Size(866, 673);
+            this.tbPageHome.Size = new System.Drawing.Size(868, 675);
             this.tbPageHome.TabIndex = 0;
             this.tbPageHome.Text = "Home";
             // 
@@ -161,7 +162,7 @@
             "Employee"});
             this.cmboBoxFilter.Location = new System.Drawing.Point(28, 16);
             this.cmboBoxFilter.Name = "cmboBoxFilter";
-            this.cmboBoxFilter.Size = new System.Drawing.Size(178, 29);
+            this.cmboBoxFilter.Size = new System.Drawing.Size(178, 27);
             this.cmboBoxFilter.TabIndex = 18;
             this.cmboBoxFilter.Text = "Role Filter";
             this.cmboBoxFilter.SelectedIndexChanged += new System.EventHandler(this.cmboBoxFilter_SelectedIndexChanged);
@@ -182,7 +183,7 @@
             this.txtBoxHomeSearch.Font = new System.Drawing.Font("Century Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtBoxHomeSearch.Location = new System.Drawing.Point(212, 16);
             this.txtBoxHomeSearch.Name = "txtBoxHomeSearch";
-            this.txtBoxHomeSearch.Size = new System.Drawing.Size(347, 30);
+            this.txtBoxHomeSearch.Size = new System.Drawing.Size(347, 25);
             this.txtBoxHomeSearch.TabIndex = 16;
             this.txtBoxHomeSearch.Text = "Search by first name...";
             this.txtBoxHomeSearch.Click += new System.EventHandler(this.txtBoxHomeSearch_Click);
@@ -215,7 +216,7 @@
             this.lblAssignEmployee.Font = new System.Drawing.Font("Century Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblAssignEmployee.Location = new System.Drawing.Point(24, 88);
             this.lblAssignEmployee.Name = "lblAssignEmployee";
-            this.lblAssignEmployee.Size = new System.Drawing.Size(538, 22);
+            this.lblAssignEmployee.Size = new System.Drawing.Size(430, 20);
             this.lblAssignEmployee.TabIndex = 8;
             this.lblAssignEmployee.Text = "Double click on employee\'s name to assign them to a task";
             // 
@@ -297,7 +298,7 @@
             // 
             this.dtpWorkSchedule.Location = new System.Drawing.Point(240, 563);
             this.dtpWorkSchedule.Name = "dtpWorkSchedule";
-            this.dtpWorkSchedule.Size = new System.Drawing.Size(385, 28);
+            this.dtpWorkSchedule.Size = new System.Drawing.Size(385, 24);
             this.dtpWorkSchedule.TabIndex = 3;
             this.dtpWorkSchedule.ValueChanged += new System.EventHandler(this.dtpWorkSchedule_ValueChanged);
             // 
@@ -315,9 +316,9 @@
             this.tbPageSchedManagement.Controls.Add(this.comBoxEndTime);
             this.tbPageSchedManagement.Controls.Add(this.lBoxSchedulingEmployee);
             this.tbPageSchedManagement.Controls.Add(this.btnDone);
-            this.tbPageSchedManagement.Location = new System.Drawing.Point(4, 30);
+            this.tbPageSchedManagement.Location = new System.Drawing.Point(4, 28);
             this.tbPageSchedManagement.Name = "tbPageSchedManagement";
-            this.tbPageSchedManagement.Size = new System.Drawing.Size(868, 673);
+            this.tbPageSchedManagement.Size = new System.Drawing.Size(868, 675);
             this.tbPageSchedManagement.TabIndex = 4;
             this.tbPageSchedManagement.Text = "Schedule Management";
             // 
@@ -328,7 +329,7 @@
             this.label7.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.label7.Location = new System.Drawing.Point(238, 25);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(380, 31);
+            this.label7.Size = new System.Drawing.Size(305, 23);
             this.label7.TabIndex = 24;
             this.label7.Text = "Make a new weekly schedule";
             // 
@@ -338,7 +339,7 @@
             this.comBoxEmployees.FormattingEnabled = true;
             this.comBoxEmployees.Location = new System.Drawing.Point(319, 356);
             this.comBoxEmployees.Name = "comBoxEmployees";
-            this.comBoxEmployees.Size = new System.Drawing.Size(349, 29);
+            this.comBoxEmployees.Size = new System.Drawing.Size(349, 27);
             this.comBoxEmployees.TabIndex = 23;
             this.comBoxEmployees.Text = "Select employee";
             this.comBoxEmployees.SelectedIndexChanged += new System.EventHandler(this.comBoxEmployees_SelectedIndexChanged);
@@ -350,7 +351,7 @@
             this.label5.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.label5.Location = new System.Drawing.Point(199, 505);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(105, 21);
+            this.label5.Size = new System.Drawing.Size(86, 19);
             this.label5.TabIndex = 22;
             this.label5.Text = "Work Date:";
             // 
@@ -360,7 +361,7 @@
             this.comBoxWorkDate.FormattingEnabled = true;
             this.comBoxWorkDate.Location = new System.Drawing.Point(319, 502);
             this.comBoxWorkDate.Name = "comBoxWorkDate";
-            this.comBoxWorkDate.Size = new System.Drawing.Size(349, 29);
+            this.comBoxWorkDate.Size = new System.Drawing.Size(349, 27);
             this.comBoxWorkDate.TabIndex = 21;
             this.comBoxWorkDate.Text = "Select available date";
             // 
@@ -371,7 +372,7 @@
             this.lblEndTime.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.lblEndTime.Location = new System.Drawing.Point(216, 458);
             this.lblEndTime.Name = "lblEndTime";
-            this.lblEndTime.Size = new System.Drawing.Size(88, 21);
+            this.lblEndTime.Size = new System.Drawing.Size(74, 19);
             this.lblEndTime.TabIndex = 19;
             this.lblEndTime.Text = "End Time:";
             // 
@@ -382,7 +383,7 @@
             this.lblStartTime.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.lblStartTime.Location = new System.Drawing.Point(208, 405);
             this.lblStartTime.Name = "lblStartTime";
-            this.lblStartTime.Size = new System.Drawing.Size(96, 21);
+            this.lblStartTime.Size = new System.Drawing.Size(78, 19);
             this.lblStartTime.TabIndex = 18;
             this.lblStartTime.Text = "Start Time:";
             // 
@@ -393,7 +394,7 @@
             this.lblEmployeeName.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.lblEmployeeName.Location = new System.Drawing.Point(209, 359);
             this.lblEmployeeName.Name = "lblEmployeeName";
-            this.lblEmployeeName.Size = new System.Drawing.Size(95, 21);
+            this.lblEmployeeName.Size = new System.Drawing.Size(82, 19);
             this.lblEmployeeName.TabIndex = 17;
             this.lblEmployeeName.Text = "Employee:";
             // 
@@ -403,7 +404,7 @@
             this.comBoxStartTime.FormattingEnabled = true;
             this.comBoxStartTime.Location = new System.Drawing.Point(319, 402);
             this.comBoxStartTime.Name = "comBoxStartTime";
-            this.comBoxStartTime.Size = new System.Drawing.Size(349, 29);
+            this.comBoxStartTime.Size = new System.Drawing.Size(349, 27);
             this.comBoxStartTime.TabIndex = 16;
             this.comBoxStartTime.Text = "Select start time";
             // 
@@ -413,7 +414,7 @@
             this.comBoxEndTime.FormattingEnabled = true;
             this.comBoxEndTime.Location = new System.Drawing.Point(319, 455);
             this.comBoxEndTime.Name = "comBoxEndTime";
-            this.comBoxEndTime.Size = new System.Drawing.Size(349, 29);
+            this.comBoxEndTime.Size = new System.Drawing.Size(349, 27);
             this.comBoxEndTime.TabIndex = 15;
             this.comBoxEndTime.Text = "Select end time";
             // 
@@ -423,10 +424,10 @@
             this.lBoxSchedulingEmployee.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lBoxSchedulingEmployee.FormattingEnabled = true;
             this.lBoxSchedulingEmployee.HorizontalScrollbar = true;
-            this.lBoxSchedulingEmployee.ItemHeight = 23;
+            this.lBoxSchedulingEmployee.ItemHeight = 21;
             this.lBoxSchedulingEmployee.Location = new System.Drawing.Point(173, 90);
             this.lBoxSchedulingEmployee.Name = "lBoxSchedulingEmployee";
-            this.lBoxSchedulingEmployee.Size = new System.Drawing.Size(520, 234);
+            this.lBoxSchedulingEmployee.Size = new System.Drawing.Size(520, 214);
             this.lBoxSchedulingEmployee.TabIndex = 14;
             // 
             // btnDone
@@ -456,9 +457,9 @@
             this.tbPageStatistics.Controls.Add(this.btnSearch);
             this.tbPageStatistics.Controls.Add(this.txtBoxStatsSearch);
             this.tbPageStatistics.Controls.Add(this.btnViewAllEmployees);
-            this.tbPageStatistics.Location = new System.Drawing.Point(4, 30);
+            this.tbPageStatistics.Location = new System.Drawing.Point(4, 28);
             this.tbPageStatistics.Name = "tbPageStatistics";
-            this.tbPageStatistics.Size = new System.Drawing.Size(868, 673);
+            this.tbPageStatistics.Size = new System.Drawing.Size(868, 675);
             this.tbPageStatistics.TabIndex = 2;
             this.tbPageStatistics.Text = "Statistics";
             // 
@@ -471,6 +472,16 @@
             this.groupBox2.Size = new System.Drawing.Size(438, 346);
             this.groupBox2.TabIndex = 28;
             this.groupBox2.TabStop = false;
+            // 
+            // lBoxScheduleStats
+            // 
+            this.lBoxScheduleStats.FormattingEnabled = true;
+            this.lBoxScheduleStats.HorizontalScrollbar = true;
+            this.lBoxScheduleStats.ItemHeight = 19;
+            this.lBoxScheduleStats.Location = new System.Drawing.Point(6, 62);
+            this.lBoxScheduleStats.Name = "lBoxScheduleStats";
+            this.lBoxScheduleStats.Size = new System.Drawing.Size(426, 270);
+            this.lBoxScheduleStats.TabIndex = 31;
             // 
             // comboBoxMonth
             // 
@@ -490,7 +501,7 @@
             "December"});
             this.comboBoxMonth.Location = new System.Drawing.Point(6, 27);
             this.comboBoxMonth.Name = "comboBoxMonth";
-            this.comboBoxMonth.Size = new System.Drawing.Size(281, 29);
+            this.comboBoxMonth.Size = new System.Drawing.Size(281, 27);
             this.comboBoxMonth.TabIndex = 27;
             this.comboBoxMonth.Text = "Select month";
             this.comboBoxMonth.SelectedIndexChanged += new System.EventHandler(this.comboBoxMonth_SelectedIndexChanged);
@@ -500,7 +511,7 @@
             this.label4.AutoSize = true;
             this.label4.Location = new System.Drawing.Point(432, 64);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(97, 21);
+            this.label4.Size = new System.Drawing.Size(83, 19);
             this.label4.TabIndex = 26;
             this.label4.Text = "Employees";
             // 
@@ -509,7 +520,7 @@
             this.label3.AutoSize = true;
             this.label3.Location = new System.Drawing.Point(25, 64);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(113, 21);
+            this.label3.Size = new System.Drawing.Size(93, 19);
             this.label3.TabIndex = 25;
             this.label3.Text = "Department";
             // 
@@ -517,20 +528,20 @@
             // 
             this.lBoxDepartmentStats.FormattingEnabled = true;
             this.lBoxDepartmentStats.HorizontalScrollbar = true;
-            this.lBoxDepartmentStats.ItemHeight = 21;
+            this.lBoxDepartmentStats.ItemHeight = 19;
             this.lBoxDepartmentStats.Location = new System.Drawing.Point(29, 88);
             this.lBoxDepartmentStats.Name = "lBoxDepartmentStats";
-            this.lBoxDepartmentStats.Size = new System.Drawing.Size(401, 172);
+            this.lBoxDepartmentStats.Size = new System.Drawing.Size(401, 156);
             this.lBoxDepartmentStats.TabIndex = 24;
             // 
             // lBoxEmpStats
             // 
             this.lBoxEmpStats.FormattingEnabled = true;
             this.lBoxEmpStats.HorizontalScrollbar = true;
-            this.lBoxEmpStats.ItemHeight = 21;
+            this.lBoxEmpStats.ItemHeight = 19;
             this.lBoxEmpStats.Location = new System.Drawing.Point(436, 88);
             this.lBoxEmpStats.Name = "lBoxEmpStats";
-            this.lBoxEmpStats.Size = new System.Drawing.Size(400, 172);
+            this.lBoxEmpStats.Size = new System.Drawing.Size(400, 156);
             this.lBoxEmpStats.TabIndex = 23;
             // 
             // lblStaffIsAvilable
@@ -538,7 +549,7 @@
             this.lblStaffIsAvilable.AutoSize = true;
             this.lblStaffIsAvilable.Location = new System.Drawing.Point(491, 363);
             this.lblStaffIsAvilable.Name = "lblStaffIsAvilable";
-            this.lblStaffIsAvilable.Size = new System.Drawing.Size(330, 21);
+            this.lblStaffIsAvilable.Size = new System.Drawing.Size(274, 19);
             this.lblStaffIsAvilable.TabIndex = 22;
             this.lblStaffIsAvilable.Text = "Employees that are available for work:";
             // 
@@ -546,10 +557,10 @@
             // 
             this.lBoxStatistics.FormattingEnabled = true;
             this.lBoxStatistics.HorizontalScrollbar = true;
-            this.lBoxStatistics.ItemHeight = 21;
+            this.lBoxStatistics.ItemHeight = 19;
             this.lBoxStatistics.Location = new System.Drawing.Point(473, 387);
             this.lBoxStatistics.Name = "lBoxStatistics";
-            this.lBoxStatistics.Size = new System.Drawing.Size(363, 277);
+            this.lBoxStatistics.Size = new System.Drawing.Size(363, 270);
             this.lBoxStatistics.TabIndex = 21;
             // 
             // cmboBoxStatsFilter
@@ -561,7 +572,7 @@
             "PartTime"});
             this.cmboBoxStatsFilter.Location = new System.Drawing.Point(29, 18);
             this.cmboBoxStatsFilter.Name = "cmboBoxStatsFilter";
-            this.cmboBoxStatsFilter.Size = new System.Drawing.Size(178, 29);
+            this.cmboBoxStatsFilter.Size = new System.Drawing.Size(178, 27);
             this.cmboBoxStatsFilter.TabIndex = 19;
             this.cmboBoxStatsFilter.Text = "Contract Filter";
             this.cmboBoxStatsFilter.SelectedIndexChanged += new System.EventHandler(this.cmboBoxStatsFilter_SelectedIndexChanged);
@@ -593,7 +604,7 @@
             this.txtBoxStatsSearch.Font = new System.Drawing.Font("Century Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtBoxStatsSearch.Location = new System.Drawing.Point(213, 20);
             this.txtBoxStatsSearch.Name = "txtBoxStatsSearch";
-            this.txtBoxStatsSearch.Size = new System.Drawing.Size(427, 30);
+            this.txtBoxStatsSearch.Size = new System.Drawing.Size(427, 25);
             this.txtBoxStatsSearch.TabIndex = 13;
             this.txtBoxStatsSearch.Text = "Search by first name...";
             this.txtBoxStatsSearch.Click += new System.EventHandler(this.txtBoxStatsSearch_Click);
@@ -628,10 +639,10 @@
             this.tbPageProfile.Controls.Add(this.txtBoxFirstName);
             this.tbPageProfile.Controls.Add(this.btnUpdateProfile);
             this.tbPageProfile.Controls.Add(this.lbEmployeeInfo);
-            this.tbPageProfile.Location = new System.Drawing.Point(4, 30);
+            this.tbPageProfile.Location = new System.Drawing.Point(4, 28);
             this.tbPageProfile.Name = "tbPageProfile";
             this.tbPageProfile.Padding = new System.Windows.Forms.Padding(3);
-            this.tbPageProfile.Size = new System.Drawing.Size(868, 673);
+            this.tbPageProfile.Size = new System.Drawing.Size(868, 675);
             this.tbPageProfile.TabIndex = 1;
             this.tbPageProfile.Text = "Profile";
             // 
@@ -652,7 +663,7 @@
             this.lblAdminName.Font = new System.Drawing.Font("Century Gothic", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblAdminName.Location = new System.Drawing.Point(15, 23);
             this.lblAdminName.Name = "lblAdminName";
-            this.lblAdminName.Size = new System.Drawing.Size(55, 21);
+            this.lblAdminName.Size = new System.Drawing.Size(47, 19);
             this.lblAdminName.TabIndex = 15;
             this.lblAdminName.Text = "Hello,";
             // 
@@ -678,7 +689,7 @@
             this.lblEmail.AutoSize = true;
             this.lblEmail.Location = new System.Drawing.Point(438, 509);
             this.lblEmail.Name = "lblEmail";
-            this.lblEmail.Size = new System.Drawing.Size(57, 21);
+            this.lblEmail.Size = new System.Drawing.Size(50, 19);
             this.lblEmail.TabIndex = 11;
             this.lblEmail.Text = "Email:";
             // 
@@ -687,7 +698,7 @@
             this.txtBoxEmail.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtBoxEmail.Location = new System.Drawing.Point(526, 504);
             this.txtBoxEmail.Name = "txtBoxEmail";
-            this.txtBoxEmail.Size = new System.Drawing.Size(297, 32);
+            this.txtBoxEmail.Size = new System.Drawing.Size(297, 27);
             this.txtBoxEmail.TabIndex = 10;
             // 
             // lblAddress
@@ -695,7 +706,7 @@
             this.lblAddress.AutoSize = true;
             this.lblAddress.Location = new System.Drawing.Point(429, 465);
             this.lblAddress.Name = "lblAddress";
-            this.lblAddress.Size = new System.Drawing.Size(82, 21);
+            this.lblAddress.Size = new System.Drawing.Size(65, 19);
             this.lblAddress.TabIndex = 9;
             this.lblAddress.Text = "Address:";
             // 
@@ -704,7 +715,7 @@
             this.lblAge.AutoSize = true;
             this.lblAge.Location = new System.Drawing.Point(388, 415);
             this.lblAge.Name = "lblAge";
-            this.lblAge.Size = new System.Drawing.Size(123, 21);
+            this.lblAge.Size = new System.Drawing.Size(100, 19);
             this.lblAge.TabIndex = 8;
             this.lblAge.Text = "Date Of Birth:";
             // 
@@ -713,7 +724,7 @@
             this.lblLastName.AutoSize = true;
             this.lblLastName.Location = new System.Drawing.Point(403, 364);
             this.lblLastName.Name = "lblLastName";
-            this.lblLastName.Size = new System.Drawing.Size(105, 21);
+            this.lblLastName.Size = new System.Drawing.Size(85, 19);
             this.lblLastName.TabIndex = 7;
             this.lblLastName.Text = "Last Name:";
             // 
@@ -722,7 +733,7 @@
             this.lblFirstName.AutoSize = true;
             this.lblFirstName.Location = new System.Drawing.Point(405, 312);
             this.lblFirstName.Name = "lblFirstName";
-            this.lblFirstName.Size = new System.Drawing.Size(101, 21);
+            this.lblFirstName.Size = new System.Drawing.Size(83, 19);
             this.lblFirstName.TabIndex = 6;
             this.lblFirstName.Text = "First Name:";
             // 
@@ -731,7 +742,7 @@
             this.txtBoxAddress.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtBoxAddress.Location = new System.Drawing.Point(526, 460);
             this.txtBoxAddress.Name = "txtBoxAddress";
-            this.txtBoxAddress.Size = new System.Drawing.Size(297, 32);
+            this.txtBoxAddress.Size = new System.Drawing.Size(297, 27);
             this.txtBoxAddress.TabIndex = 5;
             // 
             // txtBoxLastName
@@ -739,7 +750,7 @@
             this.txtBoxLastName.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtBoxLastName.Location = new System.Drawing.Point(526, 359);
             this.txtBoxLastName.Name = "txtBoxLastName";
-            this.txtBoxLastName.Size = new System.Drawing.Size(297, 32);
+            this.txtBoxLastName.Size = new System.Drawing.Size(297, 27);
             this.txtBoxLastName.TabIndex = 4;
             // 
             // txtBoxAge
@@ -747,7 +758,7 @@
             this.txtBoxAge.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtBoxAge.Location = new System.Drawing.Point(526, 410);
             this.txtBoxAge.Name = "txtBoxAge";
-            this.txtBoxAge.Size = new System.Drawing.Size(297, 32);
+            this.txtBoxAge.Size = new System.Drawing.Size(297, 27);
             this.txtBoxAge.TabIndex = 3;
             // 
             // txtBoxFirstName
@@ -755,7 +766,7 @@
             this.txtBoxFirstName.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtBoxFirstName.Location = new System.Drawing.Point(526, 307);
             this.txtBoxFirstName.Name = "txtBoxFirstName";
-            this.txtBoxFirstName.Size = new System.Drawing.Size(297, 32);
+            this.txtBoxFirstName.Size = new System.Drawing.Size(297, 27);
             this.txtBoxFirstName.TabIndex = 2;
             // 
             // btnUpdateProfile
@@ -774,7 +785,7 @@
             this.lbEmployeeInfo.BackColor = System.Drawing.Color.WhiteSmoke;
             this.lbEmployeeInfo.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbEmployeeInfo.FormattingEnabled = true;
-            this.lbEmployeeInfo.ItemHeight = 23;
+            this.lbEmployeeInfo.ItemHeight = 21;
             this.lbEmployeeInfo.Location = new System.Drawing.Point(19, 65);
             this.lbEmployeeInfo.Name = "lbEmployeeInfo";
             this.lbEmployeeInfo.Size = new System.Drawing.Size(330, 487);
@@ -789,9 +800,9 @@
             this.tbPageEmpManagement.Controls.Add(this.btnUpdateEmployee);
             this.tbPageEmpManagement.Controls.Add(this.btnFireEmployee);
             this.tbPageEmpManagement.Controls.Add(this.grpBoxManagers);
-            this.tbPageEmpManagement.Location = new System.Drawing.Point(4, 30);
+            this.tbPageEmpManagement.Location = new System.Drawing.Point(4, 28);
             this.tbPageEmpManagement.Name = "tbPageEmpManagement";
-            this.tbPageEmpManagement.Size = new System.Drawing.Size(868, 673);
+            this.tbPageEmpManagement.Size = new System.Drawing.Size(868, 675);
             this.tbPageEmpManagement.TabIndex = 3;
             this.tbPageEmpManagement.Text = "Employee Management";
             // 
@@ -810,10 +821,10 @@
             this.lbEmployees.BackColor = System.Drawing.Color.WhiteSmoke;
             this.lbEmployees.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbEmployees.FormattingEnabled = true;
-            this.lbEmployees.ItemHeight = 23;
+            this.lbEmployees.ItemHeight = 21;
             this.lbEmployees.Location = new System.Drawing.Point(16, 63);
             this.lbEmployees.Name = "lbEmployees";
-            this.lbEmployees.Size = new System.Drawing.Size(403, 441);
+            this.lbEmployees.Size = new System.Drawing.Size(403, 424);
             this.lbEmployees.TabIndex = 4;
             this.lbEmployees.Click += new System.EventHandler(this.lbEmployees_Click);
             // 
@@ -822,7 +833,7 @@
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(12, 24);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(97, 21);
+            this.label1.Size = new System.Drawing.Size(83, 19);
             this.label1.TabIndex = 9;
             this.label1.Text = "Employees";
             // 
@@ -885,7 +896,7 @@
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(8, 24);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(95, 21);
+            this.label2.Size = new System.Drawing.Size(78, 19);
             this.label2.TabIndex = 10;
             this.label2.Text = "Managers";
             // 
@@ -894,10 +905,10 @@
             this.lbManagers.BackColor = System.Drawing.Color.WhiteSmoke;
             this.lbManagers.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbManagers.FormattingEnabled = true;
-            this.lbManagers.ItemHeight = 23;
+            this.lbManagers.ItemHeight = 21;
             this.lbManagers.Location = new System.Drawing.Point(12, 63);
             this.lbManagers.Name = "lbManagers";
-            this.lbManagers.Size = new System.Drawing.Size(403, 441);
+            this.lbManagers.Size = new System.Drawing.Size(403, 424);
             this.lbManagers.TabIndex = 8;
             this.lbManagers.Click += new System.EventHandler(this.lbManagers_Click);
             // 
@@ -912,22 +923,23 @@
             this.updateTimer.Interval = 500;
             this.updateTimer.Tick += new System.EventHandler(this.updateTimer_Tick);
             // 
-            // lBoxScheduleStats
+            // lbDebug
             // 
-            this.lBoxScheduleStats.FormattingEnabled = true;
-            this.lBoxScheduleStats.HorizontalScrollbar = true;
-            this.lBoxScheduleStats.ItemHeight = 21;
-            this.lBoxScheduleStats.Location = new System.Drawing.Point(6, 62);
-            this.lBoxScheduleStats.Name = "lBoxScheduleStats";
-            this.lBoxScheduleStats.Size = new System.Drawing.Size(426, 277);
-            this.lBoxScheduleStats.TabIndex = 31;
+            this.lbDebug.FormattingEnabled = true;
+            this.lbDebug.HorizontalScrollbar = true;
+            this.lbDebug.ItemHeight = 15;
+            this.lbDebug.Location = new System.Drawing.Point(940, 40);
+            this.lbDebug.Name = "lbDebug";
+            this.lbDebug.Size = new System.Drawing.Size(426, 259);
+            this.lbDebug.TabIndex = 32;
             // 
             // AdministrationSystem
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 17F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.WindowFrame;
-            this.ClientSize = new System.Drawing.Size(900, 733);
+            this.ClientSize = new System.Drawing.Size(1488, 733);
+            this.Controls.Add(this.lbDebug);
             this.Controls.Add(this.tbControlAdmin);
             this.Font = new System.Drawing.Font("Century Gothic", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Name = "AdministrationSystem";
@@ -1029,5 +1041,6 @@
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.ComboBox comboBoxMonth;
         private System.Windows.Forms.ListBox lBoxScheduleStats;
+        private System.Windows.Forms.ListBox lbDebug;
     }
 }
