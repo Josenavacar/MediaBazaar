@@ -104,6 +104,7 @@
             this.lbManagers = new System.Windows.Forms.ListBox();
             this.Refresh = new System.Windows.Forms.Timer(this.components);
             this.updateTimer = new System.Windows.Forms.Timer(this.components);
+            this.picBoxInformationIcon = new System.Windows.Forms.PictureBox();
             this.tbControlAdmin.SuspendLayout();
             this.tbPageHome.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picBoxLogout)).BeginInit();
@@ -116,6 +117,7 @@
             this.tbPageEmpManagement.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.grpBoxManagers.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picBoxInformationIcon)).BeginInit();
             this.SuspendLayout();
             // 
             // tbControlAdmin
@@ -305,6 +307,7 @@
             // tbPageSchedManagement
             // 
             this.tbPageSchedManagement.BackColor = System.Drawing.SystemColors.Menu;
+            this.tbPageSchedManagement.Controls.Add(this.picBoxInformationIcon);
             this.tbPageSchedManagement.Controls.Add(this.label7);
             this.tbPageSchedManagement.Controls.Add(this.comBoxEmployees);
             this.tbPageSchedManagement.Controls.Add(this.label5);
@@ -934,6 +937,17 @@
             this.updateTimer.Interval = 1500;
             this.updateTimer.Tick += new System.EventHandler(this.updateTimer_Tick);
             // 
+            // picBoxInformationIcon
+            // 
+            this.picBoxInformationIcon.Image = ((System.Drawing.Image)(resources.GetObject("picBoxInformationIcon.Image")));
+            this.picBoxInformationIcon.Location = new System.Drawing.Point(3, 639);
+            this.picBoxInformationIcon.Name = "picBoxInformationIcon";
+            this.picBoxInformationIcon.Size = new System.Drawing.Size(36, 31);
+            this.picBoxInformationIcon.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.picBoxInformationIcon.TabIndex = 25;
+            this.picBoxInformationIcon.TabStop = false;
+            this.picBoxInformationIcon.Click += new System.EventHandler(this.picBoxInformationIcon_Click);
+            // 
             // AdministrationSystem
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 17F);
@@ -964,6 +978,7 @@
             this.groupBox1.PerformLayout();
             this.grpBoxManagers.ResumeLayout(false);
             this.grpBoxManagers.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picBoxInformationIcon)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -1044,5 +1059,6 @@
         private System.Windows.Forms.ComboBox comboBoxMonth;
         private System.Windows.Forms.ListBox lBoxScheduleStats;
         private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.PictureBox picBoxInformationIcon;
     }
 }

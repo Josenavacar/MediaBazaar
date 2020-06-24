@@ -767,6 +767,20 @@ namespace MediaBazaarSystem
         }
 
         /**
+          * Method to show information (SCHEDULE MANAHEMENT TAB)
+          */
+        private void picBoxInformationIcon_Click( object sender, EventArgs e )
+        {
+            String info = "As HR manager you have to the ability to make schedules based on the employee's submitted preferred shifts " +
+                "or you can make a schedule if they are no preferred shifts by an employee. " +
+                "There can only be 5 schedule made PER day and ONE employee per shift. " +
+                "After submitting the schedule, the employee will receive a email with schedule information.";
+
+            InformationForm informationForm = new InformationForm( info );
+            informationForm.Show();
+        }
+
+        /**
          * Method to load schedule information when form is loaded
          */
         private void LoadScheduleInformation()

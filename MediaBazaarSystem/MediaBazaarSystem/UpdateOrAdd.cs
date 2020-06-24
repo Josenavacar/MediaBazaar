@@ -46,13 +46,16 @@ namespace MediaBazaarSystem
          */
         private void passcodeCheckerTimer_Tick( object sender, EventArgs e )
         {
-            if( comBoxRole.SelectedItem.ToString() != "StockManager" )
+            if( comBoxRole.SelectedIndex >= 0 )
             {
-                txtBoxPasscode.ReadOnly = true;
-            }
-            else
-            {
-                txtBoxPasscode.ReadOnly = false;
+                if( comBoxRole.SelectedItem.ToString() != "StockManager" )
+                {
+                    txtBoxPasscode.ReadOnly = true;
+                }
+                else
+                {
+                    txtBoxPasscode.ReadOnly = false;
+                }
             }
         }
 

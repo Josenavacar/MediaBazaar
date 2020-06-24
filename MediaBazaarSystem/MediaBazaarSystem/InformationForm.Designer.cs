@@ -34,6 +34,7 @@
             // txtBoxInformation
             // 
             this.txtBoxInformation.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.txtBoxInformation.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtBoxInformation.Location = new System.Drawing.Point(13, 13);
             this.txtBoxInformation.Multiline = true;
             this.txtBoxInformation.Name = "txtBoxInformation";
