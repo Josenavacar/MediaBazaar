@@ -49,9 +49,9 @@ namespace MediaBazaarSystem
             this.UpdateSchedule();
             this.LoadStaff();
             this.LoadScheduleInformation();
+            this.refreshProfile();
             lblAdminName.Text += " " + manager.FirstName + " " + manager.LastName;
-            updateTimer.Enabled = true;
-            refreshProfile();
+            //updateTimer.Enabled = true;
         }
 
         /**
@@ -734,26 +734,41 @@ namespace MediaBazaarSystem
             }
         }
 
+        /**
+         * Focus out selection
+         */
         private void lbManagers_Click(object sender, EventArgs e)
         {
             lbEmployees.SelectedItem = null;
         }
 
+        /**
+         * Focus out selection
+         */
         private void lbEmployees_Click(object sender, EventArgs e)
         {
             lbManagers.SelectedItem = null;
         }
 
+        /**
+         * Remove placeholder
+         */
         private void txtBoxHomeSearch_Click(object sender, EventArgs e)
         {
             txtBoxHomeSearch.Text = "";
         }
 
+        /**
+         * Remove placeholder
+         */
         private void txtBoxStatsSearch_Click(object sender, EventArgs e)
         {
             txtBoxStatsSearch.Text = "";
         }
 
+        /**
+         * Method to load schedule information when form is loaded
+         */
         private void LoadScheduleInformation()
         {
             DateTime time = DateTime.Today;
@@ -788,49 +803,36 @@ namespace MediaBazaarSystem
                         
             foreach( Schedule schedule in department.GetSchedules() )
             {
-                updateTimer.Enabled = false;
+                //updateTimer.Enabled = false;
 
-                if( schedule.WorkDate.ToString( "dddd, dd MMMM yyyy" ) == updateWorkDate.ToString( "dddd, dd MMMM yyyy" ) )
+                if( !lBoxSchedulingEmployee.Items.Contains( "Employee: " + staff.FirstName + " " + staff.LastName + " Start time: " + startTime + " End time: " + endTime + " Work date: " + workDate ) )
                 {
-                    schedules.Add( schedule );
-                    
-                    if( schedules.Count >= 5 )
+                    try
                     {
-                        comBoxWorkDate.Items.Remove( comBoxWorkDate.SelectedItem );
-                        MessageBox.Show( "Sorry, you have reached your limit of 5 employees per day! Please schedule this person for another day.", MessageBoxIcon.Error.ToString() );
+                        String body = 
+                                    "This is your newly added shift. " + " Start time: " + startTime + " End time: " + endTime + " Work date: " + workDate + ". " +
+                                    "If you are not content with your schedule. " +
+                                    "Please contact your manager or make personal agreements with your colleages. " +
+                                    "However, if you switch your shift with a colleage please do not forget to notify your manager. " +
+                                    "They will need to update your schedule.";
+
+                        lBoxSchedulingEmployee.Items.Add
+                        (
+                            "Employee: " + staff.FirstName + " " + staff.LastName +
+                            " Start time: " + startTime +
+                            " End time: " + endTime +
+                            " Work date: " + workDate
+                        );
+                        schedule.UpdateSchedule( staff.dbID, staff.FirstName, staff.LastName, staff.Role.ToString(), updateStartTime, updateEndTime, updateWorkDate, this.department.Name );
+
+                        dataBase.AddSchedule( staff, startTime, endTime, workDate );
+                        emailHelper.SendScheduleEmail( body, staff.Email );
+
+                        MessageBox.Show( "Schedule successfully added!" );
                     }
-                }
-                else
-                {
-                    if( !lBoxSchedulingEmployee.Items.Contains( "Employee: " + staff.FirstName + " " + staff.LastName + " Start time: " + startTime + " End time: " + endTime + " Work date: " + workDate ) )
+                    catch(Exception ex)
                     {
-                        try
-                        {
-                            String body = 
-                                        "This is your newly added shift. " + " Start time: " + startTime + " End time: " + endTime + " Work date: " + workDate + ". " +
-                                        "If you are not content with your schedule. " +
-                                        "Please contact your manager or make personal agreements with your colleages. " +
-                                        "However, if you switch your shift with a colleage please do not forget to notify your manager. " +
-                                        "They will need to update your schedule.";
-
-                            lBoxSchedulingEmployee.Items.Add
-                            (
-                                "Employee: " + staff.FirstName + " " + staff.LastName +
-                                " Start time: " + startTime +
-                                " End time: " + endTime +
-                                " Work date: " + workDate
-                            );
-                            schedule.UpdateSchedule( staff.dbID, staff.FirstName, staff.LastName, staff.Role.ToString(), updateStartTime, updateEndTime, updateWorkDate, this.department.Name );
-
-                            dataBase.AddSchedule( staff, startTime, endTime, workDate );
-                            emailHelper.SendScheduleEmail( body, staff.Email );
-
-                            MessageBox.Show( "Schedule successfully added!" );
-                        }
-                        catch(Exception ex)
-                        {
-                            MessageBox.Show( "Sorry request failed." ) ;
-                        }
+                        MessageBox.Show( "Sorry request failed." ) ;
                     }
                 }
             }
@@ -851,16 +853,15 @@ namespace MediaBazaarSystem
         {
             comBoxWorkDate.Items.Clear();
             Staff staff = department.GetStaffMember( comBoxEmployees.SelectedItem.ToString() );
+            MySqlDataReader reader = dataBase.getEmpAvailableWorkDates( staff.dbID );
 
-            if( comBoxEmployees.SelectedItem.ToString() == staff.FirstName + " " + staff.LastName )
+            if( reader.HasRows )
             {
-                MySqlDataReader reader = dataBase.getEmpAvailableWorkDates( staff.dbID );
-
                 // Add data to data grid view table
                 while( reader.Read() )
                 {
                     int employee = ( int ) reader.GetValue( 4 );
-                    DateTime workDate = Convert.ToDateTime( reader.GetValue( 1 ).ToString());
+                    DateTime workDate = Convert.ToDateTime( reader.GetValue( 1 ).ToString() );
 
                     if( employee == staff.dbID )
                     {
@@ -868,22 +869,11 @@ namespace MediaBazaarSystem
 
                         foreach( Schedule schedule in department.GetSchedules() )
                         {
-                            if( workDate.ToString( "dddd, dd MMMM yyyy" ) == schedule.WorkDate.ToString( "dddd, dd MMMM yyyy" ) )
+                            if( employee == schedule.EmployeeID && workDate != null )
                             {
-                                if(employee == schedule.EmployeeID)
+                                for( int i = 0; i < comBoxWorkDate.Items.Count; i++ )
                                 {
-                                    alreadyScheduled.Add( schedule );   
-                                }
-                            }
-                        }
-
-                        foreach( Schedule schedule1 in alreadyScheduled )
-                        {
-                            if( comBoxWorkDate.Items.Contains( schedule1.WorkDate.ToString( "dddd, dd MMMM yyyy" ) ) )
-                            {
-                                for(int i = 0; i < comBoxWorkDate.Items.Count; i++ )
-                                { 
-                                    if( comBoxWorkDate.Items[ i ].ToString() == schedule1.WorkDate.ToString( "dddd, dd MMMM yyyy" ) )
+                                    if( comBoxWorkDate.Items[ i ].ToString() == schedule.WorkDate.ToString( "dddd, dd MMMM yyyy" ) )
                                     {
                                         comBoxWorkDate.Items.Remove( comBoxWorkDate.Items[ i ].ToString() );
                                     }
@@ -892,6 +882,10 @@ namespace MediaBazaarSystem
                         }
                     }
                 }
+            }
+            else
+            {
+                comBoxWorkDate.Items.Add( "No date" );
             }
         }
 

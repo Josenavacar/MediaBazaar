@@ -60,6 +60,7 @@
             this.btnDone = new System.Windows.Forms.Button();
             this.tbPageStatistics = new System.Windows.Forms.TabPage();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.label8 = new System.Windows.Forms.Label();
             this.lBoxScheduleStats = new System.Windows.Forms.ListBox();
             this.comboBoxMonth = new System.Windows.Forms.ComboBox();
             this.label4 = new System.Windows.Forms.Label();
@@ -103,7 +104,6 @@
             this.lbManagers = new System.Windows.Forms.ListBox();
             this.Refresh = new System.Windows.Forms.Timer(this.components);
             this.updateTimer = new System.Windows.Forms.Timer(this.components);
-            this.label8 = new System.Windows.Forms.Label();
             this.tbControlAdmin.SuspendLayout();
             this.tbPageHome.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picBoxLogout)).BeginInit();
@@ -474,6 +474,15 @@
             this.groupBox2.TabIndex = 28;
             this.groupBox2.TabStop = false;
             // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(2, 24);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(220, 21);
+            this.label8.TabIndex = 29;
+            this.label8.Text = "Hours per staff per month";
+            // 
             // lBoxScheduleStats
             // 
             this.lBoxScheduleStats.FormattingEnabled = true;
@@ -643,7 +652,7 @@
             this.tbPageProfile.Location = new System.Drawing.Point(4, 30);
             this.tbPageProfile.Name = "tbPageProfile";
             this.tbPageProfile.Padding = new System.Windows.Forms.Padding(3);
-            this.tbPageProfile.Size = new System.Drawing.Size(868, 673);
+            this.tbPageProfile.Size = new System.Drawing.Size(866, 673);
             this.tbPageProfile.TabIndex = 1;
             this.tbPageProfile.Text = "Profile";
             // 
@@ -921,17 +930,9 @@
             // 
             // updateTimer
             // 
-            this.updateTimer.Interval = 500;
+            this.updateTimer.Enabled = true;
+            this.updateTimer.Interval = 1500;
             this.updateTimer.Tick += new System.EventHandler(this.updateTimer_Tick);
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(2, 24);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(220, 21);
-            this.label8.TabIndex = 29;
-            this.label8.Text = "Hours per staff per month";
             // 
             // AdministrationSystem
             // 

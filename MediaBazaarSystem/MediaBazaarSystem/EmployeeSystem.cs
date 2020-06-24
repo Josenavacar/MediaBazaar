@@ -97,7 +97,8 @@ namespace MediaBazaarSystem
             MySqlDataReader reader = dataBase.updateSchedules();
             this.GetWorkScheduleDB( reader );
             //this.GetShifts( sql, connection );
-            // Disable timer
+            // Disable 
+
             updateTimer.Enabled = false;
         }
 

@@ -69,3 +69,10 @@ C:\wamp64\www\mediabazaar\MediaBazaarSystem\MediaBazaarUnitTest\bin\Debug\LiveCh
 C:\wamp64\www\mediabazaar\MediaBazaarSystem\MediaBazaarUnitTest\bin\Debug\LiveCharts.xml
 C:\wamp64\www\mediabazaar\MediaBazaarSystem\MediaBazaarUnitTest\bin\Debug\LiveCharts.Wpf.pdb
 C:\wamp64\www\mediabazaar\MediaBazaarSystem\MediaBazaarUnitTest\bin\Debug\LiveCharts.Wpf.xml
+C:\wamp64\www\mediabazaar\MediaBazaarSystem\MediaBazaarUnitTest\bin\Debug\MailKit.dll
+C:\wamp64\www\mediabazaar\MediaBazaarSystem\MediaBazaarUnitTest\bin\Debug\MimeKit.dll
+C:\wamp64\www\mediabazaar\MediaBazaarSystem\MediaBazaarUnitTest\bin\Debug\BouncyCastle.Crypto.xml
+C:\wamp64\www\mediabazaar\MediaBazaarSystem\MediaBazaarUnitTest\bin\Debug\MailKit.pdb
+C:\wamp64\www\mediabazaar\MediaBazaarSystem\MediaBazaarUnitTest\bin\Debug\MailKit.xml
+C:\wamp64\www\mediabazaar\MediaBazaarSystem\MediaBazaarUnitTest\bin\Debug\MimeKit.pdb
+C:\wamp64\www\mediabazaar\MediaBazaarSystem\MediaBazaarUnitTest\bin\Debug\MimeKit.xml

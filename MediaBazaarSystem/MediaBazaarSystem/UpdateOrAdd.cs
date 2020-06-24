@@ -16,14 +16,12 @@ namespace MediaBazaarSystem
     {
         DatabaseHelper dataBase;
         Department department;
-        //Employee employee;
-        //Manager manager;
         Staff staffMember;
 
         String FirstName, LastName, address, email;
         DateTime birthDate;
         double salary;
-        int hoursAvailable, roleID, DepartmentID;
+        int hoursAvailable, roleID, DepartmentID, passcode;
         Position role;
         Contract contract;
 
@@ -37,29 +35,37 @@ namespace MediaBazaarSystem
         public UpdateOrAdd(Department dep)
         {
             InitializeComponent();
-
             btnEditStaff.Enabled = false;
             btnEditStaff.Visible = false;
             this.Text = "Add new person";
-
             this.department = dep;
-
             dataBase = new DatabaseHelper();
         }
 
+        private void passcodeCheckerTimer_Tick( object sender, EventArgs e )
+        {
+            if( comBoxRole.SelectedItem.ToString() != "StockManager" )
+            {
+                txtBoxPasscode.ReadOnly = true;
+            }
+            else
+            {
+                txtBoxPasscode.ReadOnly = false;
+            }
+        }
+
+        /**
+         * Jose? 
+         */
         public UpdateOrAdd(Department dep, Staff staffMember)
         {
             InitializeComponent();
-
             btnAddStaff.Enabled = false;
             btnAddStaff.Visible = false;
             this.Text = "Update " + staffMember.FirstName + " " + staffMember.LastName;
-
             this.department = dep;
             this.staffMember = staffMember;
-
             SetUpForm();
-
             dataBase = new DatabaseHelper();
         }
 
@@ -99,7 +105,7 @@ namespace MediaBazaarSystem
         {
             ReadInfoFromForm();
             int tempID = -1;
-            int passcode = Convert.ToInt32( txtBoxPasscode.Text );
+
 
             Staff newStaffMember = null;
 
@@ -141,6 +147,7 @@ namespace MediaBazaarSystem
             this.role = (Position)roleID; //Role (as a string instead of an ID for ease of use and clarity in a list of C#)
             this.DepartmentID = cmboBoxDepartment.SelectedIndex + 1;
             this.contract = (Contract)Enum.Parse(typeof(Contract), cmboBoxContract.SelectedItem.ToString());
+            this.passcode = Convert.ToInt32( txtBoxPasscode.Text );
         }
     }
 }
