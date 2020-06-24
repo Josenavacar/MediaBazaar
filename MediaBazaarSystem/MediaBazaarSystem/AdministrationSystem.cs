@@ -21,8 +21,9 @@ namespace MediaBazaarSystem
 {
     public partial class AdministrationSystem : Form
     {
-        DatabaseHelper dataBase;
-        private AssignEmployeeSystem assignEmployeeForm;
+        private DatabaseHelper dataBase;
+        private EmailHelper emailHelper;
+        private UpdateEmployeeSchedule assignEmployeeForm;
         private Department department;
         private Manager manager;
         private Schedule schedule;
@@ -39,18 +40,17 @@ namespace MediaBazaarSystem
         {
             InitializeComponent();
             dataBase = new DatabaseHelper();
+            emailHelper = new EmailHelper();
+            schedules = new List<Schedule>();
+            alreadyScheduled = new List<Schedule>();
             this.dataAdminWorkSchedule.Rows.Clear();
             this.department = department;
             this.manager = manager;
-            lblAdminName.Text += " " + manager.FirstName + " " + manager.LastName;
-            updateTimer.Enabled = true;
             this.UpdateSchedule();
             this.LoadStaff();
-            //hoursStatsChart.Titles.Add( "Monthly Hours Worked" );
             this.LoadScheduleInformation();
-            schedules = new List<Schedule>();
-            alreadyScheduled = new List<Schedule>();
-            //Profile
+            lblAdminName.Text += " " + manager.FirstName + " " + manager.LastName;
+            updateTimer.Enabled = true;
             refreshProfile();
         }
 
@@ -117,6 +117,7 @@ namespace MediaBazaarSystem
 
             updateTimer.Enabled = false;
         }
+
 
         private void LoadStaff()
         {
@@ -199,6 +200,7 @@ namespace MediaBazaarSystem
             }
 
         }
+
 
         private Staff SearchSelectedStaff()
         {
@@ -379,7 +381,7 @@ namespace MediaBazaarSystem
                 }
 
                 // Open the assign employee form
-                assignEmployeeForm = new AssignEmployeeSystem( department, schedule );
+                assignEmployeeForm = new UpdateEmployeeSchedule( department, schedule );
                 assignEmployeeForm.Show();
             }
         }
@@ -391,8 +393,6 @@ namespace MediaBazaarSystem
         {
             this.UpdateSchedule();
             this.GetStatistics();
-            this.UpdateScheduleEmployee();
-            
         }
 
         /**
@@ -777,6 +777,7 @@ namespace MediaBazaarSystem
          */
         private void btnDone_Click( object sender, EventArgs e )
         {
+            lBoxSchedulingEmployee.Items.Clear();
             Staff staff = department.GetStaffMember( comBoxEmployees.SelectedItem.ToString() );
             String startTime = comBoxStartTime.SelectedItem.ToString();
             String endTime = comBoxEndTime.SelectedItem.ToString();
@@ -784,9 +785,11 @@ namespace MediaBazaarSystem
             DateTime updateStartTime = DateTime.Parse( startTime );
             DateTime updateEndTime = DateTime.Parse( endTime );
             DateTime updateWorkDate = DateTime.Parse( workDate );
-            
+                        
             foreach( Schedule schedule in department.GetSchedules() )
             {
+                updateTimer.Enabled = false;
+
                 if( schedule.WorkDate.ToString( "dddd, dd MMMM yyyy" ) == updateWorkDate.ToString( "dddd, dd MMMM yyyy" ) )
                 {
                     schedules.Add( schedule );
@@ -794,39 +797,47 @@ namespace MediaBazaarSystem
                     if( schedules.Count >= 5 )
                     {
                         comBoxWorkDate.Items.Remove( comBoxWorkDate.SelectedItem );
-                        MessageBox.Show( "Sorry, you have reached your limit of 5 employees per day! Please schedule this person for another day." );
+                        MessageBox.Show( "Sorry, you have reached your limit of 5 employees per day! Please schedule this person for another day.", MessageBoxIcon.Error.ToString() );
                     }
                 }
                 else
                 {
-                    dataBase.AddSchedule( staff, startTime, endTime, workDate );
-                    lBoxSchedulingEmployee.Items.Add
-                    (
-                        "Employee: " + staff.FirstName + " " + staff.LastName +
-                        " Start time: " + startTime +
-                        " End time: " + endTime +
-                        " Work date: " + workDate
-                    );
-                    schedule.UpdateSchedule( staff.dbID, staff.FirstName, staff.LastName, staff.Role.ToString(), updateStartTime, updateEndTime, updateWorkDate, this.department.Name );
+                    if( !lBoxSchedulingEmployee.Items.Contains( "Employee: " + staff.FirstName + " " + staff.LastName + " Start time: " + startTime + " End time: " + endTime + " Work date: " + workDate ) )
+                    {
+                        try
+                        {
+                            String body = 
+                                        "This is your newly added shift. " + " Start time: " + startTime + " End time: " + endTime + " Work date: " + workDate + ". " +
+                                        "If you are not content with your schedule. " +
+                                        "Please contact your manager or make personal agreements with your colleages. " +
+                                        "However, if you switch your shift with a colleage please do not forget to notify your manager. " +
+                                        "They will need to update your schedule.";
+
+                            String from = "media_bazaar_nl@hotmail.com";
+                            String password = "mediaBazaarNL";
+                            String to = "440569@student.fontys.nl";
+
+                            lBoxSchedulingEmployee.Items.Add
+                            (
+                                "Employee: " + staff.FirstName + " " + staff.LastName +
+                                " Start time: " + startTime +
+                                " End time: " + endTime +
+                                " Work date: " + workDate
+                            );
+                            schedule.UpdateSchedule( staff.dbID, staff.FirstName, staff.LastName, staff.Role.ToString(), updateStartTime, updateEndTime, updateWorkDate, this.department.Name );
+
+                            dataBase.AddSchedule( staff, startTime, endTime, workDate );
+                            emailHelper.SendScheduleEmail( body, from, password, to );
+
+                            MessageBox.Show( "Schedule successfully added!" );
+                        }
+                        catch(Exception ex)
+                        {
+                            MessageBox.Show( "Sorry request failed." ) ;
+                        }
+                    }
                 }
             }
-        }
-
-        /**
-         * Method to update the listbox with data
-         */
-        private void UpdateScheduleEmployee()
-        {
-            lBoxSchedulingEmployee.Items.Clear();
-
-            lBoxSchedulingEmployee.Items.Add(
-                schedule.FirstName + " " + schedule.LastName + " --- " +
-                schedule.StartTime.ToString( "hh:mm tt" ) + " --- " +
-                schedule.EndTime.ToString( "hh:mm tt" ) + " --- " +
-                schedule.WorkDate.ToString( "dddd, dd MMMM yyyy" )
-            );
-
-            updateTimer.Enabled = false;
         }
 
         /**
@@ -843,7 +854,6 @@ namespace MediaBazaarSystem
         private void comBoxEmployees_SelectedIndexChanged( object sender, EventArgs e )
         {
             comBoxWorkDate.Items.Clear();
-            DateTime selectedWorkDate = Convert.ToDateTime( comBoxWorkDate.SelectedItem );
             Staff staff = department.GetStaffMember( comBoxEmployees.SelectedItem.ToString() );
 
             if( comBoxEmployees.SelectedItem.ToString() == staff.FirstName + " " + staff.LastName )
@@ -854,8 +864,6 @@ namespace MediaBazaarSystem
                 while( reader.Read() )
                 {
                     int employee = ( int ) reader.GetValue( 4 );
-                    DateTime startTime = Convert.ToDateTime( reader.GetValue( 2 ).ToString() );
-                    DateTime endTime = Convert.ToDateTime( reader.GetValue( 3 ).ToString() );
                     DateTime workDate = Convert.ToDateTime( reader.GetValue( 1 ).ToString());
 
                     if( employee == staff.dbID )
@@ -903,49 +911,7 @@ namespace MediaBazaarSystem
          * Then display
          */
         private void comboBoxMonth_SelectedIndexChanged( object sender, EventArgs e )
-        {
-            //int totalHours = 0;
-            //int hours = 0;
-            //List<int> list = new List<int>();
-
-            ////for( int q = 0; q < department.GetStaff().Count; q++ )
-            ////{
-            ////    if( department.GetStaff()[ q ] is Employee )
-            ////    {
-            ////        for( int i = 0; i < department.GetSchedules().Count; i++ )
-            ////        {
-            ////            if( department.GetStaff()[ q ].dbID == department.GetSchedules()[ i ].EmployeeID )
-            ////            {
-            ////                if( comboBoxMonth.SelectedItem.ToString() == department.GetSchedules()[ i ].WorkDate.ToString( "MMMM" ) )
-            ////                {
-            ////                    hours = ( int ) department.GetSchedules()[ i ].EndTime.Subtract( department.GetSchedules()[ i ].StartTime ).TotalHours;
-            ////                    list.Add( department.GetSchedules()[ i ].EmployeeID ); //department.GetSchedules()[ i ].EmployeeID
-            ////                    HashSet<int> hashSet = new HashSet<int>();
-            ////                    IEnumerable<int> duplicates = list.Where( r => !hashSet.Add( r ) );
-            ////                    //var duplicates = list.Where( item => !hashSet.Add( item ) ).Distinct().ToList();
-
-            ////                    lBoxScheduleStats.Items.Add( department.GetSchedules()[ i ].FirstName + " " + department.GetSchedules()[ i ].LastName + " " + hours );
-
-
-            ////                    if( duplicates.Contains( department.GetSchedules()[ i ].EmployeeID ) )
-            ////                    {
-
-            ////                        for( int x = 0; x < lBoxScheduleStats.Items.Count; x++ )
-            ////                        {
-            ////                            if( lBoxScheduleStats.Items[ x ].ToString() == department.GetSchedules()[ i ].FirstName + " " + department.GetSchedules()[ i ].LastName + " " + hours )
-            ////                            {
-            ////                                totalHours += hours;
-            ////                                lBoxScheduleStats.Items[ x ] = department.GetSchedules()[ i ].FirstName + " " + department.GetSchedules()[ i ].LastName + " " + totalHours;
-            ////                                //lBoxScheduleStats.Items.Add( department.GetSchedules()[ i ].FirstName + " " + department.GetSchedules()[ i ].LastName + " " + totalHours );
-            ////                            }
-            ////                        }
-            ////                    }
-            ////                }
-            ////            }
-            ////        }
-            ////    }
-            ////}
-            
+        {   
             lBoxScheduleStats.Items.Clear();
 
             List<Schedule> schedules = department.GetSchedules();
@@ -961,19 +927,28 @@ namespace MediaBazaarSystem
                     int hoursWorked = 0;
                     foreach (Schedule schedule in schedules)
                     {
-                        if(comboBoxMonth.SelectedItem.ToString() == schedule.WorkDate.ToString("MMMM"))
+                        if( comboBoxMonth.SelectedItem.ToString() == schedule.WorkDate.ToString( "MMMM" ) )
                         {
-                            if (currentID == schedule.EmployeeID)
+                            if( currentID == schedule.EmployeeID )
                             {
-                                hoursWorked += (int)(schedule.EndTime - schedule.StartTime).TotalHours;
+                                hoursWorked += ( int ) ( schedule.EndTime - schedule.StartTime ).TotalHours;
+
                             }
                         }
                     }
-                    String toShow = staff[i].FirstName + " " + staff[i].LastName + " " + hoursWorked;
-                    lBoxScheduleStats.Items.Add(toShow);
+                    
+                    if(hoursWorked == 0)
+                    {
+                        String toShow = staff[ i ].FirstName + " " + staff[ i ].LastName + " : " + "No available hours recorded this month";
+                        lBoxScheduleStats.Items.Add( toShow );
+                    }
+                    else
+                    {
+                        String toShow = staff[ i ].FirstName + " " + staff[ i ].LastName + " : " + hoursWorked + " hours";
+                        lBoxScheduleStats.Items.Add( toShow );
+                    }
                 }
             }
-
         }
     }
 }

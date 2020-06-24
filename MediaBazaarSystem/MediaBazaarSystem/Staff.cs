@@ -145,16 +145,6 @@ namespace MediaBazaarSystem
             Age = age;
         }
 
-        ///**
-        // * Method for the schedules
-        // */
-        //public Staff( int ID, String firstName, String lastName)
-        //{
-        //    dbID = ID;
-        //    FirstName = firstName;
-        //    LastName = lastName;
-        //}
-
         public void editStaffMember(String firstName, String lastName, DateTime birthDate, String address, String email)
         {
             this.FirstName = firstName;

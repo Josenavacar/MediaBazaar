@@ -1,6 +1,6 @@
 ﻿namespace MediaBazaarSystem
 {
-    partial class AssignEmployeeSystem
+    partial class UpdateEmployeeSchedule
     {
         /// <summary>
         /// Required designer variable.
@@ -38,8 +38,8 @@
             this.comBoxStartTime = new System.Windows.Forms.ComboBox();
             this.updateTimer = new System.Windows.Forms.Timer(this.components);
             this.txtBoxEmployeeName = new System.Windows.Forms.TextBox();
-            this.comBoxWorkDate = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.dtpWorkDates = new System.Windows.Forms.DateTimePicker();
             this.SuspendLayout();
             // 
             // btnDone
@@ -131,16 +131,6 @@
             this.txtBoxEmployeeName.Size = new System.Drawing.Size(349, 28);
             this.txtBoxEmployeeName.TabIndex = 10;
             // 
-            // comBoxWorkDate
-            // 
-            this.comBoxWorkDate.Font = new System.Drawing.Font("Century Gothic", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.comBoxWorkDate.FormattingEnabled = true;
-            this.comBoxWorkDate.Location = new System.Drawing.Point(174, 398);
-            this.comBoxWorkDate.Name = "comBoxWorkDate";
-            this.comBoxWorkDate.Size = new System.Drawing.Size(349, 29);
-            this.comBoxWorkDate.TabIndex = 11;
-            this.comBoxWorkDate.Text = "Select available date";
-            // 
             // label1
             // 
             this.label1.AutoSize = true;
@@ -152,14 +142,23 @@
             this.label1.TabIndex = 12;
             this.label1.Text = "Work Date:";
             // 
-            // AssignEmployeeSystem
+            // dtpWorkDates
+            // 
+            this.dtpWorkDates.CalendarFont = new System.Drawing.Font("Century Gothic", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dtpWorkDates.Font = new System.Drawing.Font("Century Gothic", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dtpWorkDates.Location = new System.Drawing.Point(174, 400);
+            this.dtpWorkDates.Name = "dtpWorkDates";
+            this.dtpWorkDates.Size = new System.Drawing.Size(349, 28);
+            this.dtpWorkDates.TabIndex = 13;
+            // 
+            // UpdateEmployeeSchedule
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlLight;
             this.ClientSize = new System.Drawing.Size(584, 548);
+            this.Controls.Add(this.dtpWorkDates);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.comBoxWorkDate);
             this.Controls.Add(this.txtBoxEmployeeName);
             this.Controls.Add(this.lblEndTime);
             this.Controls.Add(this.lblStartTime);
@@ -169,7 +168,7 @@
             this.Controls.Add(this.lBoxAssignEmployee);
             this.Controls.Add(this.btnDone);
             this.Font = new System.Drawing.Font("Century Gothic", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Name = "AssignEmployeeSystem";
+            this.Name = "UpdateEmployeeSchedule";
             this.Text = "AssignEmployeeSystem";
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -187,7 +186,7 @@
         private System.Windows.Forms.ComboBox comBoxStartTime;
         private System.Windows.Forms.Timer updateTimer;
         private System.Windows.Forms.TextBox txtBoxEmployeeName;
-        private System.Windows.Forms.ComboBox comBoxWorkDate;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.DateTimePicker dtpWorkDates;
     }
 }

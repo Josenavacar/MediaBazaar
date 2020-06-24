@@ -34,7 +34,7 @@ namespace MediaBazaarSystem
             String email = txtBoxEmail.Text;
             String password = txtBoxPassword.Text;
 
-            DatabaseHelper dataBase = new DatabaseHelper();
+            dataBase = new DatabaseHelper();
             
             MySqlDataReader reader = dataBase.StaffLogin( email, password );
             try

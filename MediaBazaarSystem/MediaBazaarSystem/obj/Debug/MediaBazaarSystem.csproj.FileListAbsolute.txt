@@ -237,7 +237,6 @@ C:\wamp64\www\mediabazaar\MediaBazaarSystem\MediaBazaarSystem\bin\Debug\System.R
 C:\wamp64\www\mediabazaar\MediaBazaarSystem\MediaBazaarSystem\obj\Debug\MediaBazaarSystem.csprojAssemblyReference.cache
 C:\wamp64\www\mediabazaar\MediaBazaarSystem\MediaBazaarSystem\obj\Debug\MediaBazaarSystem.UpdateOrAdd.resources
 C:\wamp64\www\mediabazaar\MediaBazaarSystem\MediaBazaarSystem\obj\Debug\MediaBazaarSystem.AdministrationSystem.resources
-C:\wamp64\www\mediabazaar\MediaBazaarSystem\MediaBazaarSystem\obj\Debug\MediaBazaarSystem.AssignEmployeeSystem.resources
 C:\wamp64\www\mediabazaar\MediaBazaarSystem\MediaBazaarSystem\obj\Debug\MediaBazaarSystem.ChangePassword.resources
 C:\wamp64\www\mediabazaar\MediaBazaarSystem\MediaBazaarSystem\obj\Debug\MediaBazaarSystem.DeleteForm.resources
 C:\wamp64\www\mediabazaar\MediaBazaarSystem\MediaBazaarSystem\obj\Debug\MediaBazaarSystem.EmployeeSystem.resources
@@ -308,3 +307,12 @@ D:\xampp\htdocs\mediabazaar\MediaBazaarSystem\MediaBazaarSystem\bin\Debug\Zstand
 D:\xampp\htdocs\mediabazaar\MediaBazaarSystem\MediaBazaarSystem\bin\Debug\K4os.Compression.LZ4.xml
 D:\xampp\htdocs\mediabazaar\MediaBazaarSystem\MediaBazaarSystem\bin\Debug\K4os.Compression.LZ4.Streams.xml
 D:\xampp\htdocs\mediabazaar\MediaBazaarSystem\MediaBazaarSystem\bin\Debug\K4os.Hash.xxHash.xml
+C:\wamp64\www\mediabazaar\MediaBazaarSystem\MediaBazaarSystem\obj\Debug\MediaBazaarSystem.InformationForm.resources
+C:\wamp64\www\mediabazaar\MediaBazaarSystem\MediaBazaarSystem\bin\Debug\MailKit.dll
+C:\wamp64\www\mediabazaar\MediaBazaarSystem\MediaBazaarSystem\bin\Debug\MimeKit.dll
+C:\wamp64\www\mediabazaar\MediaBazaarSystem\MediaBazaarSystem\bin\Debug\BouncyCastle.Crypto.xml
+C:\wamp64\www\mediabazaar\MediaBazaarSystem\MediaBazaarSystem\bin\Debug\MailKit.pdb
+C:\wamp64\www\mediabazaar\MediaBazaarSystem\MediaBazaarSystem\bin\Debug\MailKit.xml
+C:\wamp64\www\mediabazaar\MediaBazaarSystem\MediaBazaarSystem\bin\Debug\MimeKit.pdb
+C:\wamp64\www\mediabazaar\MediaBazaarSystem\MediaBazaarSystem\bin\Debug\MimeKit.xml
+C:\wamp64\www\mediabazaar\MediaBazaarSystem\MediaBazaarSystem\obj\Debug\MediaBazaarSystem.UpdateEmployeeSchedule.resources

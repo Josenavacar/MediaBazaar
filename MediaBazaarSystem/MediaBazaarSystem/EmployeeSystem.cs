@@ -52,6 +52,8 @@ namespace MediaBazaarSystem
          */
         private void dtpWorkSchedule_ValueChanged( object sender, EventArgs e )
         {
+            this.dataEmpWorkSchedule.Rows.Clear();
+
             MySqlDataReader reader = dataBase.getSchedules();
 
             // Add data to data grid view table
@@ -511,15 +513,18 @@ namespace MediaBazaarSystem
             //connection.Close();
         }
 
+
         private void txtBoxSearch_Click(object sender, EventArgs e)
         {
             txtBoxSearch.Text = "";
         }
 
+
         private void txtBoxHomeSearch_Click(object sender, EventArgs e)
         {
             txtBoxHomeSearch.Text = "";
         }
+
 
         private void LoadScheduleInformation()
         {
@@ -529,14 +534,6 @@ namespace MediaBazaarSystem
                 comBoxStartTime.Items.Add( _time.ToShortTimeString() );
                 comBoxEndTime.Items.Add( _time.ToShortTimeString() );
             }
-
-            //foreach( Staff staff in department.GetStaff() )
-            //{
-            //    if( staff is Employee )
-            //    {
-            //        comBoxEmployees.Items.Add( staff.FirstName + " " + staff.LastName );
-            //    }
-            //}
         }
 
         private void btnAddWorkDate_Click( object sender, EventArgs e )
@@ -564,6 +561,17 @@ namespace MediaBazaarSystem
             {
                 MessageBox.Show( "You're not authorized to make this request." );
             }
+        }
+
+        private void picBoxInformationIcon_Click( object sender, EventArgs e )
+        {
+            String info = "You can enter your preferred working days and hours. " +
+                          "When submitted your manager will see your preferred working shifts. " +
+                          "However, your manager has the ability to change your preferred hours. " +
+                          "When a schedule is made, you will be notified by email.";
+
+            InformationForm informationForm = new InformationForm( info );
+            informationForm.Show();
         }
     }
 }

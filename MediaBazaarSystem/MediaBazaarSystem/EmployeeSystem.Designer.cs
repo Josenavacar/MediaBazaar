@@ -55,6 +55,8 @@
             this.btnSearch = new System.Windows.Forms.Button();
             this.txtBoxSearch = new System.Windows.Forms.TextBox();
             this.tbPageShiftManagement = new System.Windows.Forms.TabPage();
+            this.picBoxInformationIcon = new System.Windows.Forms.PictureBox();
+            this.lblScheduleInformation = new System.Windows.Forms.Label();
             this.lblEndTime = new System.Windows.Forms.Label();
             this.lblStartTime = new System.Windows.Forms.Label();
             this.comBoxStartTime = new System.Windows.Forms.ComboBox();
@@ -86,6 +88,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataEmpWorkSchedule)).BeginInit();
             this.tbPageHistory.SuspendLayout();
             this.tbPageShiftManagement.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picBoxInformationIcon)).BeginInit();
             this.tbPageProfile.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxEmployeePhoto)).BeginInit();
             this.SuspendLayout();
@@ -358,6 +361,8 @@
             // 
             // tbPageShiftManagement
             // 
+            this.tbPageShiftManagement.Controls.Add(this.picBoxInformationIcon);
+            this.tbPageShiftManagement.Controls.Add(this.lblScheduleInformation);
             this.tbPageShiftManagement.Controls.Add(this.lblEndTime);
             this.tbPageShiftManagement.Controls.Add(this.lblStartTime);
             this.tbPageShiftManagement.Controls.Add(this.comBoxStartTime);
@@ -373,12 +378,33 @@
             this.tbPageShiftManagement.Text = "Shift Management";
             this.tbPageShiftManagement.UseVisualStyleBackColor = true;
             // 
+            // picBoxInformationIcon
+            // 
+            this.picBoxInformationIcon.Image = ((System.Drawing.Image)(resources.GetObject("picBoxInformationIcon.Image")));
+            this.picBoxInformationIcon.Location = new System.Drawing.Point(6, 641);
+            this.picBoxInformationIcon.Name = "picBoxInformationIcon";
+            this.picBoxInformationIcon.Size = new System.Drawing.Size(36, 31);
+            this.picBoxInformationIcon.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.picBoxInformationIcon.TabIndex = 22;
+            this.picBoxInformationIcon.TabStop = false;
+            this.picBoxInformationIcon.Click += new System.EventHandler(this.picBoxInformationIcon_Click);
+            // 
+            // lblScheduleInformation
+            // 
+            this.lblScheduleInformation.AutoSize = true;
+            this.lblScheduleInformation.Font = new System.Drawing.Font("Century Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblScheduleInformation.Location = new System.Drawing.Point(218, 42);
+            this.lblScheduleInformation.Name = "lblScheduleInformation";
+            this.lblScheduleInformation.Size = new System.Drawing.Size(424, 22);
+            this.lblScheduleInformation.TabIndex = 21;
+            this.lblScheduleInformation.Text = "Enter your preferred schedule date and time ";
+            // 
             // lblEndTime
             // 
             this.lblEndTime.AutoSize = true;
             this.lblEndTime.Font = new System.Drawing.Font("Century Gothic", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblEndTime.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.lblEndTime.Location = new System.Drawing.Point(470, 135);
+            this.lblEndTime.Location = new System.Drawing.Point(257, 448);
             this.lblEndTime.Name = "lblEndTime";
             this.lblEndTime.Size = new System.Drawing.Size(88, 21);
             this.lblEndTime.TabIndex = 20;
@@ -389,7 +415,7 @@
             this.lblStartTime.AutoSize = true;
             this.lblStartTime.Font = new System.Drawing.Font("Century Gothic", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblStartTime.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.lblStartTime.Location = new System.Drawing.Point(462, 80);
+            this.lblStartTime.Location = new System.Drawing.Point(249, 393);
             this.lblStartTime.Name = "lblStartTime";
             this.lblStartTime.Size = new System.Drawing.Size(96, 21);
             this.lblStartTime.TabIndex = 19;
@@ -399,7 +425,7 @@
             // 
             this.comBoxStartTime.Font = new System.Drawing.Font("Century Gothic", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.comBoxStartTime.FormattingEnabled = true;
-            this.comBoxStartTime.Location = new System.Drawing.Point(573, 77);
+            this.comBoxStartTime.Location = new System.Drawing.Point(360, 390);
             this.comBoxStartTime.Name = "comBoxStartTime";
             this.comBoxStartTime.Size = new System.Drawing.Size(273, 29);
             this.comBoxStartTime.TabIndex = 18;
@@ -409,7 +435,7 @@
             // 
             this.comBoxEndTime.Font = new System.Drawing.Font("Century Gothic", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.comBoxEndTime.FormattingEnabled = true;
-            this.comBoxEndTime.Location = new System.Drawing.Point(573, 132);
+            this.comBoxEndTime.Location = new System.Drawing.Point(360, 445);
             this.comBoxEndTime.Name = "comBoxEndTime";
             this.comBoxEndTime.Size = new System.Drawing.Size(273, 29);
             this.comBoxEndTime.TabIndex = 17;
@@ -420,15 +446,15 @@
             this.lBoxWorkDates.FormattingEnabled = true;
             this.lBoxWorkDates.HorizontalScrollbar = true;
             this.lBoxWorkDates.ItemHeight = 21;
-            this.lBoxWorkDates.Location = new System.Drawing.Point(23, 77);
+            this.lBoxWorkDates.Location = new System.Drawing.Point(105, 81);
             this.lBoxWorkDates.Name = "lBoxWorkDates";
-            this.lBoxWorkDates.Size = new System.Drawing.Size(409, 487);
+            this.lBoxWorkDates.Size = new System.Drawing.Size(637, 277);
             this.lBoxWorkDates.TabIndex = 16;
             // 
             // btnAddWorkDate
             // 
             this.btnAddWorkDate.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.btnAddWorkDate.Location = new System.Drawing.Point(461, 253);
+            this.btnAddWorkDate.Location = new System.Drawing.Point(248, 566);
             this.btnAddWorkDate.Name = "btnAddWorkDate";
             this.btnAddWorkDate.Size = new System.Drawing.Size(385, 42);
             this.btnAddWorkDate.TabIndex = 15;
@@ -438,7 +464,7 @@
             // 
             // dtpAvailableWorkDates
             // 
-            this.dtpAvailableWorkDates.Location = new System.Drawing.Point(461, 187);
+            this.dtpAvailableWorkDates.Location = new System.Drawing.Point(248, 500);
             this.dtpAvailableWorkDates.Name = "dtpAvailableWorkDates";
             this.dtpAvailableWorkDates.Size = new System.Drawing.Size(385, 28);
             this.dtpAvailableWorkDates.TabIndex = 4;
@@ -623,6 +649,7 @@
             this.Controls.Add(this.tbControlEmp);
             this.Font = new System.Drawing.Font("Century Gothic", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Name = "EmployeeSystem";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "EmployeeSystem";
             this.tbControlEmp.ResumeLayout(false);
             this.tbPageHome.ResumeLayout(false);
@@ -633,6 +660,7 @@
             this.tbPageHistory.PerformLayout();
             this.tbPageShiftManagement.ResumeLayout(false);
             this.tbPageShiftManagement.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picBoxInformationIcon)).EndInit();
             this.tbPageProfile.ResumeLayout(false);
             this.tbPageProfile.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxEmployeePhoto)).EndInit();
@@ -692,5 +720,7 @@
         private System.Windows.Forms.Label lblStartTime;
         private System.Windows.Forms.ComboBox comBoxStartTime;
         private System.Windows.Forms.ComboBox comBoxEndTime;
+        private System.Windows.Forms.PictureBox picBoxInformationIcon;
+        private System.Windows.Forms.Label lblScheduleInformation;
     }
 }
