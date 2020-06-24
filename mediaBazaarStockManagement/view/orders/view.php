@@ -12,7 +12,7 @@
     <h1 class="mt-4">Orders</h1>
 	<div class="table-responsive">
 		<div class="input-group mb-3">
-			<input type="text" class="form-control" id="myInput" placeholder="Search by order ID..">
+			<input type="text" class="form-control" id="myInput" placeholder="Search order here..">
             <span class="input-group-append">
                 <span class="btn btn-secondary">
                     <i class="fa fa-search"></i>

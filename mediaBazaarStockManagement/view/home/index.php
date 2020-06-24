@@ -145,8 +145,6 @@
 
 	$(document).ready(function() 
 	{
-
-
 		let timePassed = 1
 		$(".text-muted").text('Last update' + ' ' +timePassed + ' ' + 'minute ago')
 
