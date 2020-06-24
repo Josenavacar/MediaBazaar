@@ -11,13 +11,16 @@ namespace MediaBazaarSystem
 {
     public class EmailHelper
     {
-        public void SendScheduleEmail( String body, String from, String password, String to )
+        public void SendScheduleEmail( String body, String to )
         {
+            String from = "media_bazaar_nl@hotmail.com";
+            String password = "mediaBazaarNL";
+
             if( !string.IsNullOrWhiteSpace( body ) )
             {
                 MimeMessage message = new MimeMessage();
                 message.From.Add( new MailboxAddress( "HR manager", from ) );
-                message.To.Add( new MailboxAddress( "Employee ", to ) );
+                message.To.Add( new MailboxAddress( "Employee ", "440569@student.fontys.nl" ) ); //to
                 message.Subject = "Daily StudentHousing BV";
 
                 message.Body = new TextPart( "plain" )

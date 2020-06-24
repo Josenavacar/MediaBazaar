@@ -68,6 +68,7 @@ namespace MediaBazaarSystem
         {
             updateTimer.Enabled = true;
             lBoxAssignEmployee.Items.Clear();
+            Staff staff = department.GetStaffMember( txtBoxEmployeeName.Text );
             String startTime = comBoxStartTime.SelectedItem.ToString();
             String endTime = comBoxEndTime.SelectedItem.ToString();
             String workDate = dtpWorkDates.Value.ToString();
@@ -75,14 +76,11 @@ namespace MediaBazaarSystem
             DateTime updateEndTime = DateTime.Parse( endTime );
             DateTime updateWorkDate = DateTime.Parse( workDate );
             String body = "Your shift has been updated. This is your new shift start time: " + startTime + " end time: " + endTime + " work date: " + workDate;
-            String from = "media_bazaar_nl@hotmail.com";
-            String password = "mediaBazaarNL";
-            String to = "440569@student.fontys.nl";
 
             try
             {
                 databaseHelper.UpdateEmployeeSchedule( schedule, startTime, endTime, workDate );
-                emailHelper.SendScheduleEmail( body, from, password, to );
+                emailHelper.SendScheduleEmail( body, staff.Email );
                 schedule.UpdateSchedule( schedule.dbID, schedule.FirstName, schedule.LastName, schedule.Role, updateStartTime, updateEndTime, updateWorkDate, this.department.Name );
                 this.Hide();
                 MessageBox.Show( "Schedule successfully added!" );

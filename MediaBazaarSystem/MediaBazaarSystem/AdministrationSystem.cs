@@ -813,10 +813,6 @@ namespace MediaBazaarSystem
                                         "However, if you switch your shift with a colleage please do not forget to notify your manager. " +
                                         "They will need to update your schedule.";
 
-                            String from = "media_bazaar_nl@hotmail.com";
-                            String password = "mediaBazaarNL";
-                            String to = "440569@student.fontys.nl";
-
                             lBoxSchedulingEmployee.Items.Add
                             (
                                 "Employee: " + staff.FirstName + " " + staff.LastName +
@@ -827,7 +823,7 @@ namespace MediaBazaarSystem
                             schedule.UpdateSchedule( staff.dbID, staff.FirstName, staff.LastName, staff.Role.ToString(), updateStartTime, updateEndTime, updateWorkDate, this.department.Name );
 
                             dataBase.AddSchedule( staff, startTime, endTime, workDate );
-                            emailHelper.SendScheduleEmail( body, from, password, to );
+                            emailHelper.SendScheduleEmail( body, staff.Email );
 
                             MessageBox.Show( "Schedule successfully added!" );
                         }
