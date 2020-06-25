@@ -1,19 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-		<meta name="description" content="">
-		<meta name="author" content="">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="description" content="">
+	<meta name="author" content="">
 
-		<title>Stock Management</title>
-		<!-- Bootstrap core CSS -->
-		<link href="../../bootstrap/css/bootstrap.min.css" type="text/css" rel="stylesheet">
-		<!-- Custom styles for this template -->
-		<link href="../../css/media_bazaar_css.css" type="text/css" rel="stylesheet">
-		<link rel="stylesheet" type="text/css" href="../../css/floating_css.css">
-	</head>
-
+	<title>Stock Management</title>
+	<!-- Bootstrap core CSS -->
+	<link href="../../bootstrap/css/bootstrap.min.css" type="text/css" rel="stylesheet">
+	<!-- Custom styles for this template -->
+	<link href="../../css/media_bazaar_css.css" type="text/css" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="../../css/floating_css.css">
+</head>
 <body>
     <div class="container-fluid">
         <h1 class="mt-4 text-center">Edit <?php echo $category['Name']; ?></h1>
@@ -39,10 +38,7 @@
             </div>  
 		</form>
     </div>
-</div>
-<!-- /#page-content-wrapper -->
-</div>
-  <!-- /#wrapper -->
+
 	<script src="https://code.jquery.com/jquery-3.5.0.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
 	<script type="text/javascript" src="../../js/media_bazaar_js.js"></script>
@@ -73,14 +69,18 @@
 	            name: name,
 	            description: description
 	        };
+			let url = $(location).attr("href")
+			let parts = url.split("/")
+			let last_part = '/' + parts[parts.length-3] + '/' + parts[parts.length-2] + '/' + parts[parts.length-1]
+			url = url.replace(last_part, '/category/editRequest');
 
 	        $.ajax
 	        ({
 	            type: "POST",
-	            url: "http://localhost/mediabazaar/mediaBazaarStockManagement/category/editRequest",
+	            url: url,
 	            data: 
 	            {
-	                data: data
+	                edit: data
 	            },
 	            success: function (data) 
 	            {

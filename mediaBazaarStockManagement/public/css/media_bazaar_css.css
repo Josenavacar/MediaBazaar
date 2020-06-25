@@ -8,6 +8,11 @@ body
   overflow-x: hidden;
 }
 
+.card
+{
+  border-width: 2px;
+}
+
 #clock
 {
   color: #E67E22;

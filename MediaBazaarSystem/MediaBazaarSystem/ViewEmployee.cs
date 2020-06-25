@@ -12,33 +12,17 @@ namespace MediaBazaarSystem
 {
     public partial class ViewEmployee : Form
     {
-        Employee employee;
-        Manager manager;
-        public ViewEmployee(Employee employee, Manager manager)
+        public ViewEmployee(Staff staffMember)
         {
             InitializeComponent();
-            if(employee != null)
-            {
-                this.employee = employee;
-                lblFirstName.Text += " " + employee.FirstName;
-                lblLastName.Text += " " + employee.LastName;
-                lblAddress.Text += " " + employee.Address;
-                lbSalary.Text += " " + employee.Salary;
-                lblAge.Text += " " + employee.Age;
-                lbHoursAvailable.Text += " " + employee.HoursAvailable;
-                lbPosition.Text += " " + employee.Role;
-            }
-            else if(manager != null)
-            {
-                this.manager = manager;
-                lblFirstName.Text += " " + manager.FirstName;
-                lblLastName.Text += " " + manager.LastName;
-                lblAddress.Text += " " + manager.Address;
-                lbSalary.Text += " " + manager.Salary;
-                lblAge.Text += " " + manager.Age;
-                lbHoursAvailable.Text += " " + manager.HoursAvailable;
-                lbPosition.Text += " " + manager.Role;
-            }
+
+            lblFirstName.Text += " " + staffMember.FirstName;
+            lblLastName.Text += " " + staffMember.LastName;
+            lblAddress.Text += " " + staffMember.Address;
+            lbSalary.Text += " " + staffMember.Salary;
+            lblAge.Text += " " + staffMember.Age;
+            lbHoursAvailable.Text += " " + staffMember.HoursAvailable;
+            lbPosition.Text += " " + staffMember.Role;
         }
     }
 }

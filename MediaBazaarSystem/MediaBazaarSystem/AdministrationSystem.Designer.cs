@@ -30,9 +30,6 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AdministrationSystem));
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea4 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend4 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series4 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.tbControlAdmin = new System.Windows.Forms.TabControl();
             this.tbPageHome = new System.Windows.Forms.TabPage();
             this.cmboBoxFilter = new System.Windows.Forms.ComboBox();
@@ -49,14 +46,30 @@
             this.clmnEndTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.clmnWorkDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dtpWorkSchedule = new System.Windows.Forms.DateTimePicker();
+            this.tbPageSchedManagement = new System.Windows.Forms.TabPage();
+            this.picBoxInformationIcon = new System.Windows.Forms.PictureBox();
+            this.label7 = new System.Windows.Forms.Label();
+            this.comBoxEmployees = new System.Windows.Forms.ComboBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.comBoxWorkDate = new System.Windows.Forms.ComboBox();
+            this.lblEndTime = new System.Windows.Forms.Label();
+            this.lblStartTime = new System.Windows.Forms.Label();
+            this.lblEmployeeName = new System.Windows.Forms.Label();
+            this.comBoxStartTime = new System.Windows.Forms.ComboBox();
+            this.comBoxEndTime = new System.Windows.Forms.ComboBox();
+            this.lBoxSchedulingEmployee = new System.Windows.Forms.ListBox();
+            this.btnDone = new System.Windows.Forms.Button();
             this.tbPageStatistics = new System.Windows.Forms.TabPage();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.label8 = new System.Windows.Forms.Label();
+            this.lBoxScheduleStats = new System.Windows.Forms.ListBox();
+            this.comboBoxMonth = new System.Windows.Forms.ComboBox();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.lBoxDepartmentStats = new System.Windows.Forms.ListBox();
             this.lBoxEmpStats = new System.Windows.Forms.ListBox();
             this.lblStaffIsAvilable = new System.Windows.Forms.Label();
             this.lBoxStatistics = new System.Windows.Forms.ListBox();
-            this.hoursStatsChart = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.cmboBoxStatsFilter = new System.Windows.Forms.ComboBox();
             this.btnViewDepartmentInfo = new System.Windows.Forms.Button();
             this.btnSearch = new System.Windows.Forms.Button();
@@ -96,8 +109,10 @@
             this.tbPageHome.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picBoxLogout)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataAdminWorkSchedule)).BeginInit();
+            this.tbPageSchedManagement.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picBoxInformationIcon)).BeginInit();
             this.tbPageStatistics.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.hoursStatsChart)).BeginInit();
+            this.groupBox2.SuspendLayout();
             this.tbPageProfile.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxAdminPhoto)).BeginInit();
             this.tbPageEmpManagement.SuspendLayout();
@@ -108,6 +123,7 @@
             // tbControlAdmin
             // 
             this.tbControlAdmin.Controls.Add(this.tbPageHome);
+            this.tbControlAdmin.Controls.Add(this.tbPageSchedManagement);
             this.tbControlAdmin.Controls.Add(this.tbPageStatistics);
             this.tbControlAdmin.Controls.Add(this.tbPageProfile);
             this.tbControlAdmin.Controls.Add(this.tbPageEmpManagement);
@@ -115,7 +131,7 @@
             this.tbControlAdmin.Location = new System.Drawing.Point(12, 12);
             this.tbControlAdmin.Name = "tbControlAdmin";
             this.tbControlAdmin.SelectedIndex = 0;
-            this.tbControlAdmin.Size = new System.Drawing.Size(878, 707);
+            this.tbControlAdmin.Size = new System.Drawing.Size(874, 707);
             this.tbControlAdmin.TabIndex = 2;
             this.tbControlAdmin.SelectedIndexChanged += new System.EventHandler(this.tbControlAdmin_SelectedIndexChanged);
             // 
@@ -134,7 +150,7 @@
             this.tbPageHome.Location = new System.Drawing.Point(4, 28);
             this.tbPageHome.Name = "tbPageHome";
             this.tbPageHome.Padding = new System.Windows.Forms.Padding(3);
-            this.tbPageHome.Size = new System.Drawing.Size(870, 675);
+            this.tbPageHome.Size = new System.Drawing.Size(866, 675);
             this.tbPageHome.TabIndex = 0;
             this.tbPageHome.Text = "Home";
             // 
@@ -288,16 +304,168 @@
             this.dtpWorkSchedule.TabIndex = 3;
             this.dtpWorkSchedule.ValueChanged += new System.EventHandler(this.dtpWorkSchedule_ValueChanged);
             // 
+            // tbPageSchedManagement
+            // 
+            this.tbPageSchedManagement.BackColor = System.Drawing.SystemColors.Menu;
+            this.tbPageSchedManagement.Controls.Add(this.picBoxInformationIcon);
+            this.tbPageSchedManagement.Controls.Add(this.label7);
+            this.tbPageSchedManagement.Controls.Add(this.comBoxEmployees);
+            this.tbPageSchedManagement.Controls.Add(this.label5);
+            this.tbPageSchedManagement.Controls.Add(this.comBoxWorkDate);
+            this.tbPageSchedManagement.Controls.Add(this.lblEndTime);
+            this.tbPageSchedManagement.Controls.Add(this.lblStartTime);
+            this.tbPageSchedManagement.Controls.Add(this.lblEmployeeName);
+            this.tbPageSchedManagement.Controls.Add(this.comBoxStartTime);
+            this.tbPageSchedManagement.Controls.Add(this.comBoxEndTime);
+            this.tbPageSchedManagement.Controls.Add(this.lBoxSchedulingEmployee);
+            this.tbPageSchedManagement.Controls.Add(this.btnDone);
+            this.tbPageSchedManagement.Location = new System.Drawing.Point(4, 28);
+            this.tbPageSchedManagement.Name = "tbPageSchedManagement";
+            this.tbPageSchedManagement.Size = new System.Drawing.Size(866, 675);
+            this.tbPageSchedManagement.TabIndex = 4;
+            this.tbPageSchedManagement.Text = "Schedule Management";
+            // 
+            // picBoxInformationIcon
+            // 
+            this.picBoxInformationIcon.Image = ((System.Drawing.Image)(resources.GetObject("picBoxInformationIcon.Image")));
+            this.picBoxInformationIcon.Location = new System.Drawing.Point(3, 639);
+            this.picBoxInformationIcon.Name = "picBoxInformationIcon";
+            this.picBoxInformationIcon.Size = new System.Drawing.Size(36, 31);
+            this.picBoxInformationIcon.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.picBoxInformationIcon.TabIndex = 25;
+            this.picBoxInformationIcon.TabStop = false;
+            this.picBoxInformationIcon.Click += new System.EventHandler(this.picBoxInformationIcon_Click);
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("Century Gothic", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.label7.Location = new System.Drawing.Point(264, 25);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(305, 23);
+            this.label7.TabIndex = 24;
+            this.label7.Text = "Make a new weekly schedule";
+            // 
+            // comBoxEmployees
+            // 
+            this.comBoxEmployees.Font = new System.Drawing.Font("Century Gothic", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.comBoxEmployees.FormattingEnabled = true;
+            this.comBoxEmployees.Location = new System.Drawing.Point(319, 358);
+            this.comBoxEmployees.Name = "comBoxEmployees";
+            this.comBoxEmployees.Size = new System.Drawing.Size(349, 27);
+            this.comBoxEmployees.TabIndex = 23;
+            this.comBoxEmployees.Text = "Select employee";
+            this.comBoxEmployees.SelectedIndexChanged += new System.EventHandler(this.comBoxEmployees_SelectedIndexChanged);
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Century Gothic", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.label5.Location = new System.Drawing.Point(199, 409);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(86, 19);
+            this.label5.TabIndex = 22;
+            this.label5.Text = "Work Date:";
+            // 
+            // comBoxWorkDate
+            // 
+            this.comBoxWorkDate.Font = new System.Drawing.Font("Century Gothic", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.comBoxWorkDate.FormattingEnabled = true;
+            this.comBoxWorkDate.Location = new System.Drawing.Point(319, 406);
+            this.comBoxWorkDate.Name = "comBoxWorkDate";
+            this.comBoxWorkDate.Size = new System.Drawing.Size(349, 27);
+            this.comBoxWorkDate.TabIndex = 21;
+            this.comBoxWorkDate.Text = "Select available date";
+            // 
+            // lblEndTime
+            // 
+            this.lblEndTime.AutoSize = true;
+            this.lblEndTime.Font = new System.Drawing.Font("Century Gothic", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblEndTime.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.lblEndTime.Location = new System.Drawing.Point(216, 511);
+            this.lblEndTime.Name = "lblEndTime";
+            this.lblEndTime.Size = new System.Drawing.Size(74, 19);
+            this.lblEndTime.TabIndex = 19;
+            this.lblEndTime.Text = "End Time:";
+            // 
+            // lblStartTime
+            // 
+            this.lblStartTime.AutoSize = true;
+            this.lblStartTime.Font = new System.Drawing.Font("Century Gothic", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblStartTime.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.lblStartTime.Location = new System.Drawing.Point(208, 458);
+            this.lblStartTime.Name = "lblStartTime";
+            this.lblStartTime.Size = new System.Drawing.Size(78, 19);
+            this.lblStartTime.TabIndex = 18;
+            this.lblStartTime.Text = "Start Time:";
+            // 
+            // lblEmployeeName
+            // 
+            this.lblEmployeeName.AutoSize = true;
+            this.lblEmployeeName.Font = new System.Drawing.Font("Century Gothic", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblEmployeeName.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.lblEmployeeName.Location = new System.Drawing.Point(209, 361);
+            this.lblEmployeeName.Name = "lblEmployeeName";
+            this.lblEmployeeName.Size = new System.Drawing.Size(82, 19);
+            this.lblEmployeeName.TabIndex = 17;
+            this.lblEmployeeName.Text = "Employee:";
+            // 
+            // comBoxStartTime
+            // 
+            this.comBoxStartTime.Font = new System.Drawing.Font("Century Gothic", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.comBoxStartTime.FormattingEnabled = true;
+            this.comBoxStartTime.Location = new System.Drawing.Point(319, 455);
+            this.comBoxStartTime.Name = "comBoxStartTime";
+            this.comBoxStartTime.Size = new System.Drawing.Size(349, 27);
+            this.comBoxStartTime.TabIndex = 16;
+            this.comBoxStartTime.Text = "Select start time";
+            // 
+            // comBoxEndTime
+            // 
+            this.comBoxEndTime.Font = new System.Drawing.Font("Century Gothic", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.comBoxEndTime.FormattingEnabled = true;
+            this.comBoxEndTime.Location = new System.Drawing.Point(319, 508);
+            this.comBoxEndTime.Name = "comBoxEndTime";
+            this.comBoxEndTime.Size = new System.Drawing.Size(349, 27);
+            this.comBoxEndTime.TabIndex = 15;
+            this.comBoxEndTime.Text = "Select end time";
+            // 
+            // lBoxSchedulingEmployee
+            // 
+            this.lBoxSchedulingEmployee.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.lBoxSchedulingEmployee.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lBoxSchedulingEmployee.FormattingEnabled = true;
+            this.lBoxSchedulingEmployee.HorizontalScrollbar = true;
+            this.lBoxSchedulingEmployee.ItemHeight = 21;
+            this.lBoxSchedulingEmployee.Location = new System.Drawing.Point(173, 90);
+            this.lBoxSchedulingEmployee.Name = "lBoxSchedulingEmployee";
+            this.lBoxSchedulingEmployee.Size = new System.Drawing.Size(520, 214);
+            this.lBoxSchedulingEmployee.TabIndex = 14;
+            // 
+            // btnDone
+            // 
+            this.btnDone.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.btnDone.Font = new System.Drawing.Font("Century Gothic", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnDone.Location = new System.Drawing.Point(173, 588);
+            this.btnDone.Name = "btnDone";
+            this.btnDone.Size = new System.Drawing.Size(520, 46);
+            this.btnDone.TabIndex = 13;
+            this.btnDone.Text = "Submit Schedule";
+            this.btnDone.UseVisualStyleBackColor = false;
+            this.btnDone.Click += new System.EventHandler(this.btnDone_Click);
+            // 
             // tbPageStatistics
             // 
             this.tbPageStatistics.BackColor = System.Drawing.SystemColors.Menu;
+            this.tbPageStatistics.Controls.Add(this.groupBox2);
             this.tbPageStatistics.Controls.Add(this.label4);
             this.tbPageStatistics.Controls.Add(this.label3);
             this.tbPageStatistics.Controls.Add(this.lBoxDepartmentStats);
             this.tbPageStatistics.Controls.Add(this.lBoxEmpStats);
             this.tbPageStatistics.Controls.Add(this.lblStaffIsAvilable);
             this.tbPageStatistics.Controls.Add(this.lBoxStatistics);
-            this.tbPageStatistics.Controls.Add(this.hoursStatsChart);
             this.tbPageStatistics.Controls.Add(this.cmboBoxStatsFilter);
             this.tbPageStatistics.Controls.Add(this.btnViewDepartmentInfo);
             this.tbPageStatistics.Controls.Add(this.btnSearch);
@@ -305,9 +473,62 @@
             this.tbPageStatistics.Controls.Add(this.btnViewAllEmployees);
             this.tbPageStatistics.Location = new System.Drawing.Point(4, 28);
             this.tbPageStatistics.Name = "tbPageStatistics";
-            this.tbPageStatistics.Size = new System.Drawing.Size(870, 675);
+            this.tbPageStatistics.Size = new System.Drawing.Size(866, 675);
             this.tbPageStatistics.TabIndex = 2;
             this.tbPageStatistics.Text = "Statistics";
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.label8);
+            this.groupBox2.Controls.Add(this.lBoxScheduleStats);
+            this.groupBox2.Controls.Add(this.comboBoxMonth);
+            this.groupBox2.Location = new System.Drawing.Point(29, 356);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(438, 308);
+            this.groupBox2.TabIndex = 28;
+            this.groupBox2.TabStop = false;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(2, 24);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(216, 19);
+            this.label8.TabIndex = 29;
+            this.label8.Text = "Total hours per staff per month";
+            // 
+            // lBoxScheduleStats
+            // 
+            this.lBoxScheduleStats.FormattingEnabled = true;
+            this.lBoxScheduleStats.HorizontalScrollbar = true;
+            this.lBoxScheduleStats.ItemHeight = 19;
+            this.lBoxScheduleStats.Location = new System.Drawing.Point(6, 104);
+            this.lBoxScheduleStats.Name = "lBoxScheduleStats";
+            this.lBoxScheduleStats.Size = new System.Drawing.Size(426, 175);
+            this.lBoxScheduleStats.TabIndex = 31;
+            // 
+            // comboBoxMonth
+            // 
+            this.comboBoxMonth.FormattingEnabled = true;
+            this.comboBoxMonth.Items.AddRange(new object[] {
+            "January",
+            "February",
+            "March",
+            "April",
+            "May",
+            "June",
+            "July",
+            "August",
+            "September",
+            "October",
+            "November",
+            "December"});
+            this.comboBoxMonth.Location = new System.Drawing.Point(6, 52);
+            this.comboBoxMonth.Name = "comboBoxMonth";
+            this.comboBoxMonth.Size = new System.Drawing.Size(426, 27);
+            this.comboBoxMonth.TabIndex = 27;
+            this.comboBoxMonth.Text = "Select month";
+            this.comboBoxMonth.SelectedIndexChanged += new System.EventHandler(this.comboBoxMonth_SelectedIndexChanged);
             // 
             // label4
             // 
@@ -330,6 +551,7 @@
             // lBoxDepartmentStats
             // 
             this.lBoxDepartmentStats.FormattingEnabled = true;
+            this.lBoxDepartmentStats.HorizontalScrollbar = true;
             this.lBoxDepartmentStats.ItemHeight = 19;
             this.lBoxDepartmentStats.Location = new System.Drawing.Point(29, 88);
             this.lBoxDepartmentStats.Name = "lBoxDepartmentStats";
@@ -339,6 +561,7 @@
             // lBoxEmpStats
             // 
             this.lBoxEmpStats.FormattingEnabled = true;
+            this.lBoxEmpStats.HorizontalScrollbar = true;
             this.lBoxEmpStats.ItemHeight = 19;
             this.lBoxEmpStats.Location = new System.Drawing.Point(436, 88);
             this.lBoxEmpStats.Name = "lBoxEmpStats";
@@ -348,7 +571,7 @@
             // lblStaffIsAvilable
             // 
             this.lblStaffIsAvilable.AutoSize = true;
-            this.lblStaffIsAvilable.Location = new System.Drawing.Point(469, 318);
+            this.lblStaffIsAvilable.Location = new System.Drawing.Point(473, 380);
             this.lblStaffIsAvilable.Name = "lblStaffIsAvilable";
             this.lblStaffIsAvilable.Size = new System.Drawing.Size(274, 19);
             this.lblStaffIsAvilable.TabIndex = 22;
@@ -357,28 +580,12 @@
             // lBoxStatistics
             // 
             this.lBoxStatistics.FormattingEnabled = true;
+            this.lBoxStatistics.HorizontalScrollbar = true;
             this.lBoxStatistics.ItemHeight = 19;
-            this.lBoxStatistics.Location = new System.Drawing.Point(436, 342);
+            this.lBoxStatistics.Location = new System.Drawing.Point(473, 408);
             this.lBoxStatistics.Name = "lBoxStatistics";
-            this.lBoxStatistics.Size = new System.Drawing.Size(400, 251);
+            this.lBoxStatistics.Size = new System.Drawing.Size(363, 251);
             this.lBoxStatistics.TabIndex = 21;
-            // 
-            // hoursStatsChart
-            // 
-            chartArea4.Name = "ChartArea1";
-            this.hoursStatsChart.ChartAreas.Add(chartArea4);
-            legend4.Name = "Legend1";
-            this.hoursStatsChart.Legends.Add(legend4);
-            this.hoursStatsChart.Location = new System.Drawing.Point(29, 318);
-            this.hoursStatsChart.Name = "hoursStatsChart";
-            series4.ChartArea = "ChartArea1";
-            series4.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.StackedBar;
-            series4.Legend = "Legend1";
-            series4.Name = "Hours";
-            this.hoursStatsChart.Series.Add(series4);
-            this.hoursStatsChart.Size = new System.Drawing.Size(401, 280);
-            this.hoursStatsChart.TabIndex = 20;
-            this.hoursStatsChart.Text = "hoursStatsChart";
             // 
             // cmboBoxStatsFilter
             // 
@@ -387,7 +594,7 @@
             this.cmboBoxStatsFilter.Items.AddRange(new object[] {
             "FullTime",
             "PartTime"});
-            this.cmboBoxStatsFilter.Location = new System.Drawing.Point(29, 18);
+            this.cmboBoxStatsFilter.Location = new System.Drawing.Point(29, 21);
             this.cmboBoxStatsFilter.Name = "cmboBoxStatsFilter";
             this.cmboBoxStatsFilter.Size = new System.Drawing.Size(178, 27);
             this.cmboBoxStatsFilter.TabIndex = 19;
@@ -397,7 +604,7 @@
             // btnViewDepartmentInfo
             // 
             this.btnViewDepartmentInfo.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.btnViewDepartmentInfo.Location = new System.Drawing.Point(29, 616);
+            this.btnViewDepartmentInfo.Location = new System.Drawing.Point(29, 292);
             this.btnViewDepartmentInfo.Name = "btnViewDepartmentInfo";
             this.btnViewDepartmentInfo.Size = new System.Drawing.Size(401, 42);
             this.btnViewDepartmentInfo.TabIndex = 16;
@@ -429,7 +636,7 @@
             // btnViewAllEmployees
             // 
             this.btnViewAllEmployees.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.btnViewAllEmployees.Location = new System.Drawing.Point(436, 616);
+            this.btnViewAllEmployees.Location = new System.Drawing.Point(436, 292);
             this.btnViewAllEmployees.Name = "btnViewAllEmployees";
             this.btnViewAllEmployees.Size = new System.Drawing.Size(400, 42);
             this.btnViewAllEmployees.TabIndex = 11;
@@ -459,7 +666,7 @@
             this.tbPageProfile.Location = new System.Drawing.Point(4, 28);
             this.tbPageProfile.Name = "tbPageProfile";
             this.tbPageProfile.Padding = new System.Windows.Forms.Padding(3);
-            this.tbPageProfile.Size = new System.Drawing.Size(870, 675);
+            this.tbPageProfile.Size = new System.Drawing.Size(866, 675);
             this.tbPageProfile.TabIndex = 1;
             this.tbPageProfile.Text = "Profile";
             // 
@@ -504,7 +711,7 @@
             // lblEmail
             // 
             this.lblEmail.AutoSize = true;
-            this.lblEmail.Location = new System.Drawing.Point(438, 509);
+            this.lblEmail.Location = new System.Drawing.Point(454, 509);
             this.lblEmail.Name = "lblEmail";
             this.lblEmail.Size = new System.Drawing.Size(50, 19);
             this.lblEmail.TabIndex = 11;
@@ -539,7 +746,7 @@
             // lblLastName
             // 
             this.lblLastName.AutoSize = true;
-            this.lblLastName.Location = new System.Drawing.Point(403, 364);
+            this.lblLastName.Location = new System.Drawing.Point(406, 364);
             this.lblLastName.Name = "lblLastName";
             this.lblLastName.Size = new System.Drawing.Size(85, 19);
             this.lblLastName.TabIndex = 7;
@@ -548,7 +755,7 @@
             // lblFirstName
             // 
             this.lblFirstName.AutoSize = true;
-            this.lblFirstName.Location = new System.Drawing.Point(405, 312);
+            this.lblFirstName.Location = new System.Drawing.Point(410, 312);
             this.lblFirstName.Name = "lblFirstName";
             this.lblFirstName.Size = new System.Drawing.Size(83, 19);
             this.lblFirstName.TabIndex = 6;
@@ -605,7 +812,7 @@
             this.lbEmployeeInfo.ItemHeight = 21;
             this.lbEmployeeInfo.Location = new System.Drawing.Point(19, 65);
             this.lbEmployeeInfo.Name = "lbEmployeeInfo";
-            this.lbEmployeeInfo.Size = new System.Drawing.Size(330, 508);
+            this.lbEmployeeInfo.Size = new System.Drawing.Size(330, 487);
             this.lbEmployeeInfo.TabIndex = 0;
             // 
             // tbPageEmpManagement
@@ -619,7 +826,7 @@
             this.tbPageEmpManagement.Controls.Add(this.grpBoxManagers);
             this.tbPageEmpManagement.Location = new System.Drawing.Point(4, 28);
             this.tbPageEmpManagement.Name = "tbPageEmpManagement";
-            this.tbPageEmpManagement.Size = new System.Drawing.Size(870, 675);
+            this.tbPageEmpManagement.Size = new System.Drawing.Size(866, 675);
             this.tbPageEmpManagement.TabIndex = 3;
             this.tbPageEmpManagement.Text = "Employee Management";
             // 
@@ -641,7 +848,7 @@
             this.lbEmployees.ItemHeight = 21;
             this.lbEmployees.Location = new System.Drawing.Point(16, 63);
             this.lbEmployees.Name = "lbEmployees";
-            this.lbEmployees.Size = new System.Drawing.Size(403, 445);
+            this.lbEmployees.Size = new System.Drawing.Size(403, 403);
             this.lbEmployees.TabIndex = 4;
             this.lbEmployees.Click += new System.EventHandler(this.lbEmployees_Click);
             // 
@@ -725,7 +932,7 @@
             this.lbManagers.ItemHeight = 21;
             this.lbManagers.Location = new System.Drawing.Point(12, 63);
             this.lbManagers.Name = "lbManagers";
-            this.lbManagers.Size = new System.Drawing.Size(403, 445);
+            this.lbManagers.Size = new System.Drawing.Size(403, 403);
             this.lbManagers.TabIndex = 8;
             this.lbManagers.Click += new System.EventHandler(this.lbManagers_Click);
             // 
@@ -737,7 +944,8 @@
             // 
             // updateTimer
             // 
-            this.updateTimer.Interval = 500;
+            this.updateTimer.Enabled = true;
+            this.updateTimer.Interval = 1500;
             this.updateTimer.Tick += new System.EventHandler(this.updateTimer_Tick);
             // 
             // AdministrationSystem
@@ -745,19 +953,24 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.WindowFrame;
-            this.ClientSize = new System.Drawing.Size(902, 733);
+            this.ClientSize = new System.Drawing.Size(899, 733);
             this.Controls.Add(this.tbControlAdmin);
             this.Font = new System.Drawing.Font("Century Gothic", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Name = "AdministrationSystem";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "AdministrationSystem";
             this.tbControlAdmin.ResumeLayout(false);
             this.tbPageHome.ResumeLayout(false);
             this.tbPageHome.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picBoxLogout)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataAdminWorkSchedule)).EndInit();
+            this.tbPageSchedManagement.ResumeLayout(false);
+            this.tbPageSchedManagement.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picBoxInformationIcon)).EndInit();
             this.tbPageStatistics.ResumeLayout(false);
             this.tbPageStatistics.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.hoursStatsChart)).EndInit();
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
             this.tbPageProfile.ResumeLayout(false);
             this.tbPageProfile.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxAdminPhoto)).EndInit();
@@ -818,7 +1031,6 @@
         private System.Windows.Forms.GroupBox grpBoxManagers;
         private System.Windows.Forms.ComboBox cmboBoxFilter;
         private System.Windows.Forms.ComboBox cmboBoxStatsFilter;
-        private System.Windows.Forms.DataVisualization.Charting.Chart hoursStatsChart;
         private System.Windows.Forms.ListBox lBoxStatistics;
         private System.Windows.Forms.Label lblStaffIsAvilable;
         private System.Windows.Forms.ListBox lBoxEmpStats;
@@ -831,5 +1043,22 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.ListBox lBoxDepartmentStats;
+        private System.Windows.Forms.TabPage tbPageSchedManagement;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.ComboBox comBoxEmployees;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.ComboBox comBoxWorkDate;
+        private System.Windows.Forms.Label lblEndTime;
+        private System.Windows.Forms.Label lblStartTime;
+        private System.Windows.Forms.Label lblEmployeeName;
+        private System.Windows.Forms.ComboBox comBoxStartTime;
+        private System.Windows.Forms.ComboBox comBoxEndTime;
+        private System.Windows.Forms.ListBox lBoxSchedulingEmployee;
+        private System.Windows.Forms.Button btnDone;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.ComboBox comboBoxMonth;
+        private System.Windows.Forms.ListBox lBoxScheduleStats;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.PictureBox picBoxInformationIcon;
     }
 }

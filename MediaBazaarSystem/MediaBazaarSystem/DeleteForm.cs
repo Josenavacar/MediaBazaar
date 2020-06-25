@@ -12,18 +12,22 @@ namespace MediaBazaarSystem
 {
     public partial class DeleteForm : Form
     {
+        /**
+         * Constructor
+         */
         public DeleteForm(bool ensure)
         {
             InitializeComponent();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+
+        private void btnYes_Click(object sender, EventArgs e)
         {
             AdministrationSystem.ensure = true;
             this.Hide();
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void btnNo_Click(object sender, EventArgs e)
         {
             AdministrationSystem.ensure = false;
             this.Hide();

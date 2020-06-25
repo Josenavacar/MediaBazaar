@@ -12,12 +12,14 @@ using System.Data.SqlClient;
 
 namespace MediaBazaarSystem
 {
-    public partial class formLogin : Form
+    public partial class LoginForm : Form
     {
+        DatabaseHelper dataBase;
+
         /**
          * Constructor
          */
-        public formLogin()
+        public LoginForm()
         {
             InitializeComponent();
             txtBoxPassword.PasswordChar = Convert.ToChar("*");
@@ -28,141 +30,92 @@ namespace MediaBazaarSystem
          */
         private void btnLogin_Click( object sender, EventArgs e )
         {
+            Contract contract;
             String email = txtBoxEmail.Text;
             String password = txtBoxPassword.Text;
-            String toDecryptPassword = "";
-            String depName;
-            int depID;
-            int role;
-            int dbContract;
-            Contract contract;
 
-            using( MySqlConnection connection = new MySqlConnection( @"Server = studmysql01.fhict.local; Uid = dbi437493; Database = dbi437493; Pwd = dbgroup01;" ) )
+            dataBase = new DatabaseHelper();
+            
+            MySqlDataReader reader = dataBase.StaffLogin( email, password );
+            try
             {
-                // SQL query to get the user based on login credentials
-                MySqlCommand cmd = new MySqlCommand("SELECT person.Id, person.Firstname, person.Lastname, person.Age, person.Address, person.Email, person.Password, person.Salary, " +
-                    "person.HoursWorked, person.HoursAvailable, person.IsAvailable, person.RoleID, department.Name, person.DepartmentID, person.ContractID FROM person JOIN department ON Person.DepartmentID = Department.id " +
-                    "WHERE email = @email", connection ); 
-                cmd.Parameters.Add("email", MySqlDbType.VarChar).Value = email;
-
-                // Open connection
-                connection.Open();
-
-                MySqlDataReader reader = cmd.ExecuteReader( CommandBehavior.CloseConnection );
-
-                try
+                if( reader.Read() )
                 {
-                    // If the data is available then log user in and open navigation form
-                    // else show error message
-                    if( reader.Read() )
+                    // Variables 
+                    int ID = ( int ) reader.GetValue( 0 );
+                    String firstName = reader.GetString( 1 );
+                    String lastName = reader.GetString( 2 );
+                    DateTime birthDateWithTime = ( DateTime ) reader.GetValue( 3 );
+                    DateTime birthDate = birthDateWithTime.Date;
+                    String address = reader.GetString( 4 );
+                    String toDecryptPassword = reader.GetString( 6 );
+                    double salary = reader.GetDouble( 7 );
+                    int hoursavailable = ( int ) reader.GetValue( 9 );
+                    int role = ( int ) reader.GetValue( 11 );
+
+                    //Calculate age
+                    int age = DateTime.Now.Year - birthDate.Year - 1;
+
+                    if( birthDate.Month > DateTime.Now.Month )
                     {
-                        // The number is based on the column... 
-                        //E.g. password is column 6 and email is column 5
-                        toDecryptPassword = reader.GetString( 6 ) ;
-                        role = (int)reader.GetValue( 11 );
-
-                        //Department
-                        depName = reader.GetString( 12 );
-                        depID = (int)reader.GetValue(13);
-                        Department department = new Department( depName, depID );
-
-                        // Get the contract
-                        dbContract = ( int ) reader.GetValue( 14 );
-                        if( dbContract == 1 )
+                        age++;
+                    }
+                    else if( birthDate.Month == DateTime.Now.Month )
+                    {
+                        if( birthDate.Day >= DateTime.Now.Day )
                         {
-                            contract = Contract.FullTime;
+                            age++;
                         }
-                        else
-                        {
-                            contract = Contract.PartTime;
-                        }
+                    }
 
-                        // Decrypt password and check if password is equal to the password user filled in
-                        if( Cryptography.Decrypt( toDecryptPassword ) == password )
-                        {
-                            if(role == 1) // Manager
-                            {
-                                int ID = (int)reader.GetValue(0);
-                                String firstName = reader.GetString(1);
-                                String lastName = reader.GetString(2);
-                                DateTime birthDateWithTime = (DateTime)reader.GetValue(3);
-                                DateTime birthDate = birthDateWithTime.Date;
+                    //Department
+                    String depName = reader.GetString( 12 );
+                    int depID = ( int ) reader.GetValue( 13 );
+                    Department department = new Department( depName, depID );
 
-                                //Calculate age
-                                int age = DateTime.Now.Year - birthDate.Year - 1;
-                                if (birthDate.Month > DateTime.Now.Month)
-                                {
-                                    age++;
-                                }
-                                else if (birthDate.Month == DateTime.Now.Month)
-                                {
-                                    if (birthDate.Day >= DateTime.Now.Day)
-                                    {
-                                        age++;
-                                    }
-                                }
-
-                                String address = reader.GetString(4);
-                                String charge = "Manager";
-                                double salary = reader.GetDouble(7);
-                                int hoursavailable = (int)reader.GetValue(9);
-
-                                Manager manager = new Manager( ID, firstName, lastName, age, birthDate, address, charge, salary, hoursavailable, email, contract );
-                                AdministrationSystem administrationSystem = new AdministrationSystem( department, manager );
-
-                                administrationSystem.Show();
-                                this.Hide();
-                            }
-                            else if(role == 2) // Employee
-                            {
-                                int ID = (int)reader.GetValue(0);
-                                String firstName = reader.GetString(1);
-                                String lastName = reader.GetString(2);
-                                DateTime birthDateWithTime = (DateTime)reader.GetValue(3);
-                                DateTime birthDate = birthDateWithTime.Date;
-
-                                //Calculate age
-                                int age = DateTime.Now.Year - birthDate.Year - 1;
-                                if(birthDate.Month > DateTime.Now.Month)
-                                {
-                                    age++;
-                                }
-                                else if(birthDate.Month == DateTime.Now.Month)
-                                {
-                                    if(birthDate.Day >= DateTime.Now.Day)
-                                    {
-                                        age++;
-                                    }
-                                }
-
-                                String address = reader.GetString(4);
-                                String charge = "Manager";
-                                double salary = reader.GetDouble(7);
-                                int hoursavailable = (int)reader.GetValue(9);
-
-                                Employee employee = new Employee(ID, firstName, lastName, age, birthDate, address, charge, salary, hoursavailable, email, contract);
-                                EmployeeSystem employeeSystem = new EmployeeSystem(department, employee);
-
-                                employeeSystem.Show();
-                                this.Hide();
-                            }
-                        }
-                        else if( (Cryptography.Decrypt( toDecryptPassword ) != password) || (password == null) )
-                        {
-                            MessageBox.Show( "Email or password is incorrect. Please try again." );
-                        }
+                    // Get the contract
+                    int dbContract = ( int ) reader.GetValue( 14 );
+                    if( dbContract == 1 )
+                    {
+                        contract = Contract.FullTime;
                     }
                     else
                     {
-                        MessageBox.Show("Unable to connect to the database. Please contact your administrator.");
+                        contract = Contract.PartTime;
+                    }
+
+                    // Decrypt password and check if password is equal to the password user filled in
+                    if( Cryptography.Decrypt( toDecryptPassword ) == password )
+                    {
+                        if( role == 1 ) // Manager
+                        {
+                            Manager manager = new Manager( ID, firstName, lastName, birthDate, address, salary, hoursavailable, email, contract );
+                            AdministrationSystem administrationSystem = new AdministrationSystem( department, manager );
+                            administrationSystem.Show();
+                        }
+                        else if( role == 2 ) // Employee
+                        {
+                            Employee employee = new Employee( ID, firstName, lastName, birthDate, address, salary, hoursavailable, email, contract );
+                            EmployeeSystem employeeSystem = new EmployeeSystem( department, employee );
+                            employeeSystem.Show();
+                        }
+                        this.Hide();
+                    }
+                    else if( ( Cryptography.Decrypt( toDecryptPassword ) != password ) || ( password == null ) )
+                    {
+                        MessageBox.Show( "Email or password is incorrect. Please try again.");
                     }
                 }
-                catch( FormatException ex )
+                else
                 {
-                    MessageBox.Show( ex.ToString() );
+                    MessageBox.Show( "Unable to connect to the database. Please contact your administrator." );
                 }
-                connection.Close();
             }
+            catch(ArgumentException ex)
+            {
+                MessageBox.Show( ex.Message );
+            }
+
         }
     }
 }

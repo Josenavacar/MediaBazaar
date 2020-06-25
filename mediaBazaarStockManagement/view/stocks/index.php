@@ -1,68 +1,65 @@
-        <div class="container-fluid">
-            <div class="request-form">
+<div class="container-fluid">
+    <div class="request-form">
+        <div id="jsonResponse"></div>
 
-                <div id="jsonResponse"></div>
+        <form id="stockRequestForm">
+            <h2 class="text-center">Make A New Stock Request</h2>
+            <hr>   
+            <div class="form-group">
+                <div class="input-group">
+                    <div class="col-lg-6 mb-3">
+                        <div class="form-label-group">
+                            <input id="email" name="email" placeholder="Email" type="text" class="form-control" required="true">
+                            <label>Email</label>
+                        </div>                                
+                    </div>
 
-                <form id="stockRequestForm">
-                    <h2 class="text-center">Make A New Stock Request</h2>
-                    <hr>   
-                    <div class="form-group">
-                        <div class="input-group">
-                            <div class="col-lg-6 mb-3">
-                                <div class="form-label-group">
-                                    <input id="email" name="email" placeholder="Email" type="text" class="form-control" required="true">
-                                    <label>Email</label>
-                                </div>                                
-                            </div>
+                    <select id="departments" class="form-control" required="true">
+                        <option hidden >Departments</option>
+                        <?php foreach($departments as $department) { ?>
+                            <option data-id="<?php echo $department["Name"]; ?>" value="<?php echo $department["Name"] ?>" id="department"><?php echo $department["Name"] ?></option>
+                        <?php } ?>
+                    </select>
+                </div>
 
-                            <select id="departments" class="form-control" required="true">
-                                <option hidden >Departments</option>
-                                <?php foreach($departments as $department) { ?>
-                                    <option data-id="<?php echo $department["Name"]; ?>" value="<?php echo $department["Name"] ?>" id="department"><?php echo $department["Name"] ?></option>
-                                <?php } ?>
-                            </select>
-                        </div>
+                <div class="input-group">
+                    <div class="col-lg-6 mb-3">
+                        <select id="products" class="form-control" required="true">
+                            <option hidden >Products</option>
+                            <?php foreach($products as $product) { ?>
+                                <option data-toggle="tooltip" title="Price: &euro; <?php echo number_format($product['Price'], 2); ?>" data-price="<?php echo $product["Price"]; ?>" value="<?php echo $product["Name"]; ?>" id="product"> <?php echo $product["Name"] ?></option>
+                            <?php } ?>
+                        </select>                              
+                    </div>
 
-                        <div class="input-group">
-                            <div class="col-lg-6 mb-3">
-                                <select id="products" class="form-control" required="true">
-                                    <option hidden >Products</option>
-                                    <?php foreach($products as $product) { ?>
-                                        <option data-toggle="tooltip" title="Price: &euro; <?php echo $product["Price"]; ?>" data-price="<?php echo $product["Price"]; ?>" value="<?php echo $product["Name"]; ?>" id="product"> <?php echo $product["Name"] ?></option>
-                                    <?php } ?>
-                                </select>                              
-                            </div>
+                    <select id="quantity" class="form-control" required="true">
+                        <option hidden >Quantity</option>
+                        <option value="100">100</option>
+                        <option value="200">200</option>
+                        <option value="300">300</option>
+                        <option value="400">400</option>
+                        <option value="500">500</option>
+                    </select>
+                </div>
 
-                            <select id="quantity" class="form-control" required="true">
-                                <option hidden >Quantity</option>
-                                <option value="100">100</option>
-                                <option value="200">200</option>
-                                <option value="300">300</option>
-                                <option value="400">400</option>
-                                <option value="500">500</option>
-                            </select>
-                        </div>
-
-                        <div class="input-group">
-                            <div class="col-lg-6 mb-3">
-                                <div class="form-label-group">
-                                    <input id="total_price" placeholder="Total Price in euros" type="text" class="form-control" readonly>
-                                    <label>Total Price in &euro;</label>
-                                </div>    
-                            </div>
-                        </div>
-                    </div>     
-                    <div class="input-group">
-                        <div class="col-lg-6 mb-3">
-                            <button id="submit" type="submit" class="btn btn-md btn-outline-info btn-block submit">Submit</button>
-                        </div>
-                    </div>  
-                </form>
-            </div>
-        </div>
+                <div class="input-group">
+                    <div class="col-lg-6 mb-3">
+                        <div class="form-label-group">
+                            <input id="total_price" placeholder="Total Price in euros" type="text" class="form-control" readonly>
+                            <label>Total Price in &euro;</label>
+                        </div>    
+                    </div>
+                </div>
+            </div>     
+            <div class="input-group">
+                <div class="col-lg-6 mb-3">
+                    <button id="submit" type="submit" class="btn btn-md btn-outline-info btn-block submit">Submit</button>
+                </div>
+            </div>  
+        </form>
     </div>
-    <!-- /#page-content-wrapper -->
 </div>
+<br>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js" type="text/javascript"></script>
 <script type="text/javascript">
@@ -105,6 +102,11 @@
             quantity: quantity
         };
 
+        let url = $(location).attr("href")
+        let parts = url.split("/")
+        let last_part = '/' + parts[parts.length-1]
+        url = url.replace(last_part, '/stock/stockRequest');
+
         if ((email === "") ||( quantity === "Quantity") || (product === "Products")) 
         {
             Swal.fire
@@ -119,7 +121,7 @@
             $.ajax
             ({
                 type: "POST",
-                url: "http://localhost/mediabazaar/mediaBazaarStockManagement/stock/stockrequest",
+                url: url,
                 data: 
                 {
                     data: data
@@ -152,6 +154,4 @@
             });
         }
     });
-
-
 </script>

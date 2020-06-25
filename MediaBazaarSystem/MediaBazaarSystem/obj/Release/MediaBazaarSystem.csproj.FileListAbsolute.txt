@@ -72,3 +72,47 @@ C:\Users\Jose\Desktop\Semester 2\ProjectGIT\mediabazaar\MediaBazaarSystem\MediaB
 C:\Users\Jose\Desktop\Semester 2\ProjectGIT\mediabazaar\MediaBazaarSystem\MediaBazaarSystem\obj\Release\MediaBazaarSystem.csproj.CopyComplete
 C:\Users\Jose\Desktop\Semester 2\ProjectGIT\mediabazaar\MediaBazaarSystem\MediaBazaarSystem\obj\Release\MediaBazaarSystem.exe
 C:\Users\Jose\Desktop\Semester 2\ProjectGIT\mediabazaar\MediaBazaarSystem\MediaBazaarSystem\obj\Release\MediaBazaarSystem.pdb
+C:\wamp64\www\mediabazaar\MediaBazaarSystem\MediaBazaarSystem\bin\Release\MediaBazaarSystem.exe.config
+C:\wamp64\www\mediabazaar\MediaBazaarSystem\MediaBazaarSystem\bin\Release\MediaBazaarSystem.exe
+C:\wamp64\www\mediabazaar\MediaBazaarSystem\MediaBazaarSystem\bin\Release\MediaBazaarSystem.pdb
+C:\wamp64\www\mediabazaar\MediaBazaarSystem\MediaBazaarSystem\bin\Release\BouncyCastle.Crypto.dll
+C:\wamp64\www\mediabazaar\MediaBazaarSystem\MediaBazaarSystem\bin\Release\Google.Protobuf.dll
+C:\wamp64\www\mediabazaar\MediaBazaarSystem\MediaBazaarSystem\bin\Release\LiveCharts.dll
+C:\wamp64\www\mediabazaar\MediaBazaarSystem\MediaBazaarSystem\bin\Release\LiveCharts.WinForms.dll
+C:\wamp64\www\mediabazaar\MediaBazaarSystem\MediaBazaarSystem\bin\Release\LiveCharts.Wpf.dll
+C:\wamp64\www\mediabazaar\MediaBazaarSystem\MediaBazaarSystem\bin\Release\MySql.Data.dll
+C:\wamp64\www\mediabazaar\MediaBazaarSystem\MediaBazaarSystem\bin\Release\Renci.SshNet.dll
+C:\wamp64\www\mediabazaar\MediaBazaarSystem\MediaBazaarSystem\bin\Release\System.Buffers.dll
+C:\wamp64\www\mediabazaar\MediaBazaarSystem\MediaBazaarSystem\bin\Release\System.Memory.dll
+C:\wamp64\www\mediabazaar\MediaBazaarSystem\MediaBazaarSystem\bin\Release\System.Numerics.Vectors.dll
+C:\wamp64\www\mediabazaar\MediaBazaarSystem\MediaBazaarSystem\bin\Release\System.Runtime.CompilerServices.Unsafe.dll
+C:\wamp64\www\mediabazaar\MediaBazaarSystem\MediaBazaarSystem\bin\Release\Ubiety.Dns.Core.dll
+C:\wamp64\www\mediabazaar\MediaBazaarSystem\MediaBazaarSystem\bin\Release\Google.Protobuf.pdb
+C:\wamp64\www\mediabazaar\MediaBazaarSystem\MediaBazaarSystem\bin\Release\Google.Protobuf.xml
+C:\wamp64\www\mediabazaar\MediaBazaarSystem\MediaBazaarSystem\bin\Release\LiveCharts.pdb
+C:\wamp64\www\mediabazaar\MediaBazaarSystem\MediaBazaarSystem\bin\Release\LiveCharts.xml
+C:\wamp64\www\mediabazaar\MediaBazaarSystem\MediaBazaarSystem\bin\Release\LiveCharts.WinForms.pdb
+C:\wamp64\www\mediabazaar\MediaBazaarSystem\MediaBazaarSystem\bin\Release\LiveCharts.WinForms.xml
+C:\wamp64\www\mediabazaar\MediaBazaarSystem\MediaBazaarSystem\bin\Release\LiveCharts.Wpf.pdb
+C:\wamp64\www\mediabazaar\MediaBazaarSystem\MediaBazaarSystem\bin\Release\LiveCharts.Wpf.xml
+C:\wamp64\www\mediabazaar\MediaBazaarSystem\MediaBazaarSystem\bin\Release\MySql.Data.xml
+C:\wamp64\www\mediabazaar\MediaBazaarSystem\MediaBazaarSystem\bin\Release\Renci.SshNet.xml
+C:\wamp64\www\mediabazaar\MediaBazaarSystem\MediaBazaarSystem\bin\Release\System.Buffers.xml
+C:\wamp64\www\mediabazaar\MediaBazaarSystem\MediaBazaarSystem\bin\Release\System.Memory.xml
+C:\wamp64\www\mediabazaar\MediaBazaarSystem\MediaBazaarSystem\bin\Release\System.Numerics.Vectors.xml
+C:\wamp64\www\mediabazaar\MediaBazaarSystem\MediaBazaarSystem\bin\Release\System.Runtime.CompilerServices.Unsafe.xml
+C:\wamp64\www\mediabazaar\MediaBazaarSystem\MediaBazaarSystem\obj\Release\MediaBazaarSystem.csprojAssemblyReference.cache
+C:\wamp64\www\mediabazaar\MediaBazaarSystem\MediaBazaarSystem\obj\Release\MediaBazaarSystem.UpdateOrAdd.resources
+C:\wamp64\www\mediabazaar\MediaBazaarSystem\MediaBazaarSystem\obj\Release\MediaBazaarSystem.AdministrationSystem.resources
+C:\wamp64\www\mediabazaar\MediaBazaarSystem\MediaBazaarSystem\obj\Release\MediaBazaarSystem.AssignEmployeeSystem.resources
+C:\wamp64\www\mediabazaar\MediaBazaarSystem\MediaBazaarSystem\obj\Release\MediaBazaarSystem.ChangePassword.resources
+C:\wamp64\www\mediabazaar\MediaBazaarSystem\MediaBazaarSystem\obj\Release\MediaBazaarSystem.DeleteForm.resources
+C:\wamp64\www\mediabazaar\MediaBazaarSystem\MediaBazaarSystem\obj\Release\MediaBazaarSystem.EmployeeSystem.resources
+C:\wamp64\www\mediabazaar\MediaBazaarSystem\MediaBazaarSystem\obj\Release\MediaBazaarSystem.LoginForm.resources
+C:\wamp64\www\mediabazaar\MediaBazaarSystem\MediaBazaarSystem\obj\Release\MediaBazaarSystem.Properties.Resources.resources
+C:\wamp64\www\mediabazaar\MediaBazaarSystem\MediaBazaarSystem\obj\Release\MediaBazaarSystem.ViewEmployee.resources
+C:\wamp64\www\mediabazaar\MediaBazaarSystem\MediaBazaarSystem\obj\Release\MediaBazaarSystem.csproj.GenerateResource.cache
+C:\wamp64\www\mediabazaar\MediaBazaarSystem\MediaBazaarSystem\obj\Release\MediaBazaarSystem.csproj.CoreCompileInputs.cache
+C:\wamp64\www\mediabazaar\MediaBazaarSystem\MediaBazaarSystem\obj\Release\MediaBazaarSystem.csproj.CopyComplete
+C:\wamp64\www\mediabazaar\MediaBazaarSystem\MediaBazaarSystem\obj\Release\MediaBazaarSystem.exe
+C:\wamp64\www\mediabazaar\MediaBazaarSystem\MediaBazaarSystem\obj\Release\MediaBazaarSystem.pdb

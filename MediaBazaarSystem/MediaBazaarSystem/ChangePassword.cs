@@ -14,11 +14,13 @@ namespace MediaBazaarSystem
 {
     public partial class ChangePassword : Form
     {
-        Manager man;
-        Employee emp;
+        private Manager man;
+        private Employee emp;
+        private String active = "";
 
-        String active = "";
-
+        /**
+         * Constructor
+         */
         public ChangePassword(Manager man, Employee emp)
         {
             InitializeComponent();
@@ -39,6 +41,9 @@ namespace MediaBazaarSystem
             }
         }
 
+        /**
+         * Method to update password
+         */
         private void btnConfirm_Click(object sender, EventArgs e)
         {
             String toDecryptPassword = "";
@@ -67,11 +72,11 @@ namespace MediaBazaarSystem
 
             while (reader.Read())
             {
-                toDecryptPassword = reader.GetString(0);
+                toDecryptPassword = reader.GetString( 0 );
             }
             reader.Close();
 
-            if (Cryptography.Decrypt(toDecryptPassword) == introducedPassword)
+            if( Cryptography.Decrypt( toDecryptPassword ) == introducedPassword )
             {
                 if (tbNewPwd.Text.ToString() == tbConfirmPwd.Text.ToString())
                 {
@@ -91,11 +96,14 @@ namespace MediaBazaarSystem
             }
             else
             {
-                MessageBox.Show("Current password incorrect");
+                MessageBox.Show( "Current password incorrect" );
             }
             conn.Close();
         }
 
+        /**
+         * Method to cancel and close form
+         */
         private void btnCancel_Click(object sender, EventArgs e)
         {
             MessageBox.Show("Operation canceled");

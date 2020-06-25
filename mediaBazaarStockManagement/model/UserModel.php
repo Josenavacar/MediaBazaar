@@ -1,4 +1,21 @@
 <?php
+	require_once(ROOT . "model/EmailModel.php");
+
+	/**
+	 * Method to generate a special login code for two step verification 
+	 * @return [type] [description]
+	 */
+	function generateLoginCode()
+	{
+		$length = 6;    
+		$sessionID = substr(str_shuffle('0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ'),1,$length);
+		return $sessionID;
+	}
+
+	/**
+	 * Method to get all users
+	 * @return [type] [description]
+	 */
 	function getAllUsers()
 	{
 		$db = openDatabaseConnection();
@@ -11,23 +28,54 @@
 		return $query->fetchAll();
 	}
 
-	function userLogin()
+	/**
+	 * Method to get user and log user in 
+	 * @param  [type] $data [description]
+	 * @return [type]       [description]
+	 */
+	function userLogin($data)
 	{
-		$users = getAllUsers();
-		foreach ($users as $user) 
+		$db = openDatabaseConnection();
+		$sql = "SELECT * FROM person WHERE email = :email";
+		$query = $db->prepare($sql);
+		$query->execute(array(":email" => $data['email']));
+		$row = $query->fetch(PDO::FETCH_ASSOC);
+
+		if(!empty($row))
 		{
-			if($_POST['passcode'] == $user['Passcode'])
+			if(($row['Email'] == $data['email']) AND ($row['Passcode'] == $data['passcode']))
 			{
-				session_start();
-				$_SESSION["user_id"] = $user['Id'];
-				$_SESSION["user_name"] = $user['Email'];
-				$_SESSION['loggedin_time'] = time();    
-				return true;
+				$_SESSION["user_id"] = $row['Id'];
+				$_SESSION["user_name"] = $row['Email'];
+				$_SESSION['loggedin_time'] = time();
+
+				echo "success";  
+				sendLoginCode($row['Email'], generateLoginCode());
+			}
+			else
+			{
+				echo "User not found";
 			}
 		}
-		return false;
+		else
+		{
+			// Initialize the session			 
+			// Unset all of the session variables
+			session_unset();
+			 
+			// Destroy the session.
+			session_destroy();
+			echo "User not found";
+		}
+
+		$db = null;
 	}
 
+	/**
+	 * Method to get user by email
+	 * @param  [type] $email [description]
+	 * @return [type]        [description]
+	 */
 	function getUserByEmail($email)
 	{
 		$db = openDatabaseConnection();

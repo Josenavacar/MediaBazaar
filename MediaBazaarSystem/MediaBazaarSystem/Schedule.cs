@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MediaBazaarSystem
 {
-    public class Schedule : Staff
+    public class Schedule
     {
         private bool isAvailable;
 
@@ -70,7 +70,13 @@ namespace MediaBazaarSystem
             set;
         }
 
-        public Schedule(int dbID, String firstName, String lastName, String role, DateTime startTime, DateTime endTime, DateTime workDate, String departmentName)
+        public int EmployeeID
+        {
+            get;
+            private set;
+        }
+
+        public Schedule(int dbID, String firstName, String lastName, String role, DateTime startTime, DateTime endTime, DateTime workDate, String departmentName, int employeeID)
         {
             this.dbID = dbID;
             this.FirstName = firstName;
@@ -81,6 +87,7 @@ namespace MediaBazaarSystem
             this.WorkDate = workDate;
             this.IsAvailable = true;
             this.DepartmentName = departmentName;
+            this.EmployeeID = employeeID;
         }
 
         public void UpdateSchedule( int dbID, String firstName, String lastName, String role, DateTime startTime, DateTime endTime, DateTime workDate, String departmentName )
@@ -98,7 +105,7 @@ namespace MediaBazaarSystem
 
         public override string ToString()
         {
-            return this.FirstName + " " + this.Role + " " + this.StartTime + " " + this.EndTime + " " + this.WorkDate + " " + this.IsAvailable + " " + this.DepartmentName;
+            return this.FirstName + " " + this.Role + " " + this.StartTime.ToString( "hh:mm tt" ) + " " + this.EndTime.ToString( "hh:mm tt" ) + " " + this.WorkDate.ToString( "dddd, dd MMMM yyyy" ) + " " + this.IsAvailable + " " + this.DepartmentName;
         }
     }
 }

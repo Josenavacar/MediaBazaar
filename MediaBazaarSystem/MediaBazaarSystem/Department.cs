@@ -1,8 +1,10 @@
-﻿using System;
+﻿using MySql.Data.MySqlClient;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Navigation;
 
 namespace MediaBazaarSystem
 {
@@ -10,9 +12,8 @@ namespace MediaBazaarSystem
     {
         private int ID;
         private String name;
-        private List<Employee> employees;
-        private List<Manager> managers;
         private List<Schedule> schedules;
+        private List<Staff> staff;
 
         public int DepartmentID
         {
@@ -26,82 +27,106 @@ namespace MediaBazaarSystem
             private set { this.name = value; }
         }
 
+        /**
+         * Constructor
+         */
         public Department(String name, int ID)
         {
             this.Name = name;
-            employees = new List<Employee>();
-            managers = new List<Manager>();
+            this.DepartmentID = ID;
+            staff = new List<Staff>();
             schedules = new List<Schedule>();
-            DepartmentID = ID;
         }
 
-        public void AddEmployee(Employee employee)
+        /**
+         * Method to add staff 
+         */
+        public void AddStaffMember(Staff employed)
         {
-            employees.Add(employee);
-        }
-        public void DeleteEmployee(Employee employee)
-        {
-            employees.Remove(employee);
-        }
-        public void DeleteManager(Manager manager)
-        {
-            managers.Remove(manager);
+            staff.Add(employed);
         }
 
-        public void AddManager(Manager manager)
+        /**
+         * Method to delete staff
+         */
+        public void DeleteStaffMember(Staff unemployed)
         {
-            managers.Add(manager);
+            staff.Remove(unemployed);
         }
 
-        public List<Employee> GetEmployees()
+        /**
+         * Method to get staff 
+         */
+        public Staff GetStaffMember(String firstname, String lastname)
         {
-            return employees;
-        }
-
-        public List<Manager> GetManagers()
-        {
-            return managers;
-        }
-
-        public Employee GetEmployee(String firstname, String lastname)
-        {
-            Employee emp = null;
-            foreach(Employee employee in employees)
+            foreach(Staff person in staff)
             {
-                if( employee.FirstName == firstname && employee.LastName == lastname)
+                if(person.FirstName == firstname && person.LastName == lastname)
                 {
-                    emp = employee;
+                    return person;
                 }
             }
-            return emp;
+            return null;
         }
 
-        public Manager GetManager( String firstname, String lastname )
+        /**
+         * Overload method to get staff
+         */
+        public Staff GetStaffMember( String name )
         {
-            Manager man = null;
-            foreach( Manager manager in managers )
+            foreach( Staff person in staff )
             {
-                if( manager.FirstName == firstname && manager.LastName == lastname )
+                if( person.FirstName + " " + person.LastName == name )
                 {
-                    man = manager;
+                    return person;
                 }
             }
-            return man;
+            return null;
+        }
+
+        /**
+         * Method to get schedule
+         */
+        public Schedule GetSchedule(int employeeID, DateTime workDate )
+        {
+            foreach(Schedule schedule in schedules)
+            {
+                if(schedule.EmployeeID == employeeID && schedule.WorkDate == workDate)
+                {
+                    return schedule;
+                }
+            }
+
+            return null;
+        }
+
+        /**
+         * Method to return all staff members
+         */
+        public List<Staff> GetStaff()
+        {
+            return this.staff;
+        }
+
+        /**
+         * Method to add schedule
+         */
+        public void AddSchedule(Schedule schedule)
+        {
+            schedules.Add(schedule);
+        }
+
+        /**
+         * Method to return schedules
+         */
+        public List<Schedule> GetSchedules()
+        {
+            return this.schedules;
         }
 
         public override string ToString()
         {
             return this.Name;
-        }
-
-        public void AddSchedule( Schedule schedule )
-        {
-            schedules.Add( schedule );
-        }
-
-        public List<Schedule> GetSchedules()
-        {
-            return this.schedules;
         }
     }
 }
