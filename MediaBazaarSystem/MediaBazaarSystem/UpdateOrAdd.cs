@@ -50,6 +50,7 @@ namespace MediaBazaarSystem
             {
                 if( comBoxRole.SelectedItem.ToString() != "StockManager" )
                 {
+                    txtBoxPasscode.Text = 0.ToString();
                     txtBoxPasscode.ReadOnly = true;
                 }
                 else
@@ -108,6 +109,7 @@ namespace MediaBazaarSystem
         }
 
         /**
+         * JOSE WHY IS THIS NOT WORKING???
          * Method to add staff member
          */
         private void btnAddStaff_Click(object sender, EventArgs e)
@@ -134,14 +136,17 @@ namespace MediaBazaarSystem
                 }
 
                 dataBase.addStaffToDB(newStaffMember, DepartmentID);
-                newStaffMember.dbID = dataBase.getStaffID();
+               
+                MessageBox.Show("Staff member added successfully");
 
-                if (this.department.DepartmentID == DepartmentID)
+                //newStaffMember.dbID = dataBase.getStaffID();
+
+                if( this.department.DepartmentID == DepartmentID )
                 {
-                    department.AddStaffMember(newStaffMember);
+                    
+                    department.AddStaffMember( newStaffMember );
                 }
 
-                MessageBox.Show("Staff member added successfully");
                 this.Close();
             }
             catch(Exception)
@@ -156,8 +161,8 @@ namespace MediaBazaarSystem
          */
         private void ReadInfoFromForm()
         {
-            try
-            {
+            //try
+            //{
                 this.FirstName = txtBoxFirstName.Text.ToString(); //First name
                 this.LastName = txtBoxLastName.Text.ToString(); //Last name
                 this.birthDate = Convert.ToDateTime(tbBirthDate.Text); //Date of Birth
@@ -169,10 +174,12 @@ namespace MediaBazaarSystem
                 this.role = (Position)roleID; //Role (as a string instead of an ID for ease of use and clarity in a list of C#)
                 this.DepartmentID = cmboBoxDepartment.SelectedIndex + 1;
                 this.contract = (Contract)Enum.Parse(typeof(Contract), cmboBoxContract.SelectedItem.ToString());
-                this.passcode = Convert.ToInt32(txtBoxPasscode.Text);
-            }
-            catch(Exception)
-            {}
+                this.passcode = Convert.ToInt32( txtBoxPasscode.Text );
+            //}
+            //catch(Exception)
+            //{
+            //    MessageBox.Show( "Error, please contact your administrator" );
+            //}
         }
     }
 }

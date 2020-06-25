@@ -66,7 +66,7 @@ namespace MediaBazaarSystem
                 if(roleID == 1 || roleID == 2)
                 {
                     cmd.CommandText = "INSERT INTO person(Firstname, Lastname, Age, Address, Email, Password, Salary, HoursWorked, HoursAvailable, IsAvailable, RoleID, DepartmentID, ContractID) " +
-                                        "VALUES(@FirstN, @LastN, @Age, @Address, @Email, @Password, @Salary, @HoursWorked, @HoursAvailable, @IsAvailable, @RoleID, @DepartmentID, @ContractID) ";
+                                        "VALUES(@FirstN, @LastN, @Age, @Address, @Email, @Password, @Salary, @HoursWorked, @HoursAvailable, @IsAvailable, @PassCode, @RoleID, @DepartmentID, @ContractID) ";
 
                     cmd.Parameters.AddWithValue( "@FirstN", staff.FirstName );
                     cmd.Parameters.AddWithValue( "@LastN", staff.LastName );
@@ -81,8 +81,10 @@ namespace MediaBazaarSystem
                     cmd.Parameters.AddWithValue( "@RoleID", roleID );
                     cmd.Parameters.AddWithValue( "@DepartmentID", departmentID );
                     cmd.Parameters.AddWithValue( "@ContractID", staff.Contract );
+                    cmd.Parameters.AddWithValue( "@PassCode", 0 );
                     cmd.ExecuteNonQuery(); //Inserted into database.
-                }else if(roleID == 3)
+                }
+                else if(roleID == 3)
                 {
                     cmd.CommandText = "INSERT INTO person(Firstname, Lastname, Age, Address, Email, Password, Salary, HoursWorked, HoursAvailable, IsAvailable, PassCode, RoleID, DepartmentID, ContractID) " +
                                         "VALUES(@FirstN, @LastN, @Age, @Address, @Email, @Password, @Salary, @HoursWorked, @HoursAvailable, @IsAvailable, @PassCode, @RoleID, @DepartmentID, @ContractID) ";
@@ -202,14 +204,14 @@ namespace MediaBazaarSystem
             MySqlDataReader reader = cmd.ExecuteReader();
 
             int ID = 0;
+
             while (reader.Read())
             {
                 ID = (int)reader.GetValue(0);
             }
-
             conn.Close();
-
             return ID;
+            
         }
 
         /**
@@ -371,27 +373,21 @@ namespace MediaBazaarSystem
          */
         public MySqlDataReader getShift()
         {
-            try
-            {
-                string sql = "SELECT Person.Id, Person.FirstName, Person.LastName, Role.Name, Schedule.StartTime, Schedule.EndTime, Schedule.WorkDate, Department.Name FROM Person " +
+            string sql = "SELECT Person.Id, Person.FirstName, Person.LastName, Role.Name, Schedule.StartTime, Schedule.EndTime, Schedule.WorkDate, Department.Name FROM Person " +
                 "INNER JOIN Role ON Person.RoleId = Role.Id " +
                 "INNER JOIN Schedule ON Person.Id = Schedule.PersonID " +
                 "INNER JOIN Department ON Person.DepartmentID = Department.Id";
 
-                MySqlConnection connection = new MySqlConnection(connString);
-                // Start mysql objects
-                MySqlCommand cmd = new MySqlCommand(sql, connection);
+            MySqlConnection connection = new MySqlConnection( connString );
+            // Start mysql objects
+            MySqlCommand cmd = new MySqlCommand( sql, connection );
 
-                connection.Open();
-                MySqlDataReader reader = cmd.ExecuteReader();
+            connection.Open();
+            MySqlDataReader reader = cmd.ExecuteReader();
 
-                connection.Close();
-
-                return reader;
-            }
-            catch(Exception)
-            { return null; }
+            return reader;
         }
+
 
         /**
          * Method to refresh department's schedules 

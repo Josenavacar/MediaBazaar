@@ -392,49 +392,45 @@ namespace MediaBazaarSystem
             lblWorkHistory.Text = "Your work history: morning shifts";
             lBoxEmpHistory.Items.Clear();
 
-            try
+            MySqlDataReader reader = dataBase.getShift();
+
+            if( reader.HasRows )
             {
-                MySqlDataReader reader = dataBase.getShift();
-
-                if (reader.HasRows)
+                // Get the data
+                while( reader.Read() )
                 {
-                    // Get the data
-                    while (reader.Read())
-                    {
-                        int employeeID = (int)reader.GetValue(0);
-                        String firstName = reader.GetValue(1).ToString();
-                        String lastName = reader.GetValue(2).ToString();
-                        String role = reader.GetValue(3).ToString();
-                        String startTime = reader.GetValue(4).ToString();
-                        String endTime = reader.GetValue(5).ToString();
-                        String workDate = reader.GetValue(6).ToString();
-                        String departmentName = reader.GetValue(7).ToString();
-                        DateTime workStartTime = Convert.ToDateTime(startTime);
-                        DateTime workEndTime = Convert.ToDateTime(endTime);
-                        DateTime convertedWorkDate = Convert.ToDateTime(workDate);
+                    int employeeID = ( int ) reader.GetValue( 0 );
+                    String firstName = reader.GetValue( 1 ).ToString();
+                    String lastName = reader.GetValue( 2 ).ToString();
+                    String role = reader.GetValue( 3 ).ToString();
+                    String startTime = reader.GetValue( 4 ).ToString();
+                    String endTime = reader.GetValue( 5 ).ToString();
+                    String workDate = reader.GetValue( 6 ).ToString();
+                    String departmentName = reader.GetValue( 7 ).ToString();
+                    DateTime workStartTime = Convert.ToDateTime( startTime );
+                    DateTime workEndTime = Convert.ToDateTime( endTime );
+                    DateTime convertedWorkDate = Convert.ToDateTime( workDate );
 
-                        if ((this.employee.FirstName == firstName) && (department.Name == departmentName))
+                    if( ( this.employee.FirstName == firstName ) && ( department.Name == departmentName ) )
+                    {
+                        if( ( workStartTime.ToString( "hh:mm tt" ) == "08:00 AM" ) && ( workEndTime.ToString( "hh:mm tt" ) == "11:00 AM" ) )
                         {
-                            if ((workStartTime.ToString("hh:mm tt") == "08:00 AM") && (workEndTime.ToString("hh:mm tt") == "11:00 AM"))
-                            {
-                                lBoxEmpHistory.Items.Add(
-                                    "Date: " + convertedWorkDate.ToString("dddd, dd MMMM yyyy") +
-                                    " --- Start time: " + workStartTime.ToString("hh:mm tt") +
-                                    " --- End time: " + workEndTime.ToString("hh:mm tt")
-                                );
-                            }
+                            lBoxEmpHistory.Items.Add(
+                                "Date: " + convertedWorkDate.ToString( "dddd, dd MMMM yyyy" ) +
+                                " --- Start time: " + workStartTime.ToString( "hh:mm tt" ) +
+                                " --- End time: " + workEndTime.ToString( "hh:mm tt" )
+                            );
                         }
                     }
                 }
-
-                reader.Close();
-                //connection.Close();
             }
-            catch(Exception)
+            else
             {
-
+                MessageBox.Show( "Problem with database. Please contact your administrator" );
             }
 
+            reader.Close();
+            //connection.Close();
 
         }
 
@@ -447,48 +443,46 @@ namespace MediaBazaarSystem
             lblWorkHistory.Text = "Your work history: afternoon shifts";
             lBoxEmpHistory.Items.Clear();
 
-            try
+            MySqlDataReader reader = dataBase.getShift();
+
+            if( reader.HasRows )
             {
-                MySqlDataReader reader = dataBase.getShift();
-
-                if (reader.HasRows)
+                // Get the data
+                while( reader.Read() )
                 {
-                    // Get the data
-                    while (reader.Read())
-                    {
-                        int employeeID = (int)reader.GetValue(0);
-                        String firstName = reader.GetValue(1).ToString();
-                        String lastName = reader.GetValue(2).ToString();
-                        String role = reader.GetValue(3).ToString();
-                        String startTime = reader.GetValue(4).ToString();
-                        String endTime = reader.GetValue(5).ToString();
-                        String workDate = reader.GetValue(6).ToString();
-                        String departmentName = reader.GetValue(7).ToString();
-                        DateTime workStartTime = Convert.ToDateTime(startTime);
-                        DateTime workEndTime = Convert.ToDateTime(endTime);
-                        DateTime convertedWorkDate = Convert.ToDateTime(workDate);
+                    int employeeID = ( int ) reader.GetValue( 0 );
+                    String firstName = reader.GetValue( 1 ).ToString();
+                    String lastName = reader.GetValue( 2 ).ToString();
+                    String role = reader.GetValue( 3 ).ToString();
+                    String startTime = reader.GetValue( 4 ).ToString();
+                    String endTime = reader.GetValue( 5 ).ToString();
+                    String workDate = reader.GetValue( 6 ).ToString();
+                    String departmentName = reader.GetValue( 7 ).ToString();
+                    DateTime workStartTime = Convert.ToDateTime( startTime );
+                    DateTime workEndTime = Convert.ToDateTime( endTime );
+                    DateTime convertedWorkDate = Convert.ToDateTime( workDate );
 
-                        if ((this.employee.FirstName == firstName) && (department.Name == departmentName))
+                    if( ( this.employee.FirstName == firstName ) && ( department.Name == departmentName ) )
+                    {
+                        if( ( workStartTime.ToString( "hh:mm tt" ) == "12:00 PM" ) && ( workEndTime.ToString( "hh:mm tt" ) == "04:00 PM" ) )
                         {
-                            if ((workStartTime.ToString("hh:mm tt") == "12:00 PM") && (workEndTime.ToString("hh:mm tt") == "04:00 PM"))
-                            {
-                                lBoxEmpHistory.Items.Add(
-                                    "Date: " + convertedWorkDate.ToString("dddd, dd MMMM yyyy") +
-                                    " --- Start time: " + workStartTime.ToString("hh:mm tt") +
-                                    " --- End time: " + workEndTime.ToString("hh:mm tt")
-                                );
-                            }
+                            lBoxEmpHistory.Items.Add(
+                                "Date: " + convertedWorkDate.ToString( "dddd, dd MMMM yyyy" ) +
+                                " --- Start time: " + workStartTime.ToString( "hh:mm tt" ) +
+                                " --- End time: " + workEndTime.ToString( "hh:mm tt" )
+                            );
                         }
                     }
                 }
-
-                reader.Close();
-                //connection.Close();
             }
-            catch(Exception)
+            else
             {
-
+                MessageBox.Show( "Problem with database. Please contact your administrator" );
             }
+
+            reader.Close();
+            //connection.Close();
+
         }
 
         /**
@@ -500,46 +494,45 @@ namespace MediaBazaarSystem
             lblWorkHistory.Text = "Your work history: evening shifts";
             lBoxEmpHistory.Items.Clear();
 
-            try
+            MySqlDataReader reader = dataBase.getShift();
+
+            if( reader.HasRows )
             {
-                MySqlDataReader reader = dataBase.getShift();
-
-                if (reader.HasRows)
+                // Get the data
+                while( reader.Read() )
                 {
-                    // Get the data
-                    while (reader.Read())
-                    {
-                        int employeeID = (int)reader.GetValue(0);
-                        String firstName = reader.GetValue(1).ToString();
-                        String lastName = reader.GetValue(2).ToString();
-                        String role = reader.GetValue(3).ToString();
-                        String startTime = reader.GetValue(4).ToString();
-                        String endTime = reader.GetValue(5).ToString();
-                        String workDate = reader.GetValue(6).ToString();
-                        String departmentName = reader.GetValue(7).ToString();
-                        DateTime workStartTime = Convert.ToDateTime(startTime);
-                        DateTime workEndTime = Convert.ToDateTime(endTime);
-                        DateTime convertedWorkDate = Convert.ToDateTime(workDate);
+                    int employeeID = ( int ) reader.GetValue( 0 );
+                    String firstName = reader.GetValue( 1 ).ToString();
+                    String lastName = reader.GetValue( 2 ).ToString();
+                    String role = reader.GetValue( 3 ).ToString();
+                    String startTime = reader.GetValue( 4 ).ToString();
+                    String endTime = reader.GetValue( 5 ).ToString();
+                    String workDate = reader.GetValue( 6 ).ToString();
+                    String departmentName = reader.GetValue( 7 ).ToString();
+                    DateTime workStartTime = Convert.ToDateTime( startTime );
+                    DateTime workEndTime = Convert.ToDateTime( endTime );
+                    DateTime convertedWorkDate = Convert.ToDateTime( workDate );
 
-                        if ((this.employee.FirstName == firstName) && (department.Name == departmentName))
+                    if( ( this.employee.FirstName == firstName ) && ( department.Name == departmentName ) )
+                    {
+                        if( ( workStartTime.ToString( "hh:mm tt" ) == "05:00 PM" ) && ( workEndTime.ToString( "hh:mm tt" ) == "09:00 PM" ) )
                         {
-                            if ((workStartTime.ToString("hh:mm tt") == "05:00 PM") && (workEndTime.ToString("hh:mm tt") == "09:00 PM"))
-                            {
-                                lBoxEmpHistory.Items.Add(
-                                    "Date: " + convertedWorkDate.ToString("dddd, dd MMMM yyyy") +
-                                    " --- Start time: " + workStartTime.ToString("hh:mm tt") +
-                                    " --- End time: " + workEndTime.ToString("hh:mm tt")
-                                );
-                            }
+                            lBoxEmpHistory.Items.Add(
+                                "Date: " + convertedWorkDate.ToString( "dddd, dd MMMM yyyy" ) +
+                                " --- Start time: " + workStartTime.ToString( "hh:mm tt" ) +
+                                " --- End time: " + workEndTime.ToString( "hh:mm tt" )
+                            );
                         }
                     }
                 }
-
-                reader.Close();
-                //connection.Close();
             }
-            catch(Exception)
-            { }
+            else
+            {
+                MessageBox.Show( "Problem with database. Please contact your administrator" );
+            }
+
+            reader.Close();
+            //connection.Close();
 
         }
 
