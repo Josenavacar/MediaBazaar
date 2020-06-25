@@ -84,7 +84,7 @@ namespace MediaBazaarSystem
                     cmd.ExecuteNonQuery(); //Inserted into database.
                 }else if(roleID == 3)
                 {
-                    cmd.CommandText = "INSERT INTO person(Firstname, Lastname, Age, Address, Email, Password, Salary, HoursWorked, HoursAvailable, IsAvailable, PassCode RoleID, DepartmentID, ContractID) " +
+                    cmd.CommandText = "INSERT INTO person(Firstname, Lastname, Age, Address, Email, Password, Salary, HoursWorked, HoursAvailable, IsAvailable, PassCode, RoleID, DepartmentID, ContractID) " +
                                         "VALUES(@FirstN, @LastN, @Age, @Address, @Email, @Password, @Salary, @HoursWorked, @HoursAvailable, @IsAvailable, @PassCode, @RoleID, @DepartmentID, @ContractID) ";
 
                     cmd.Parameters.AddWithValue( "@FirstN", staff.FirstName );
@@ -195,6 +195,7 @@ namespace MediaBazaarSystem
         public int getStaffID()
         {
             MySqlConnection conn = new MySqlConnection(connString);
+            conn.Open();
             String sql = "SELECT Id FROM person ORDER BY Id DESC LIMIT 1"; //Extracts the Id assigned from the database.
 
             MySqlCommand cmd = new MySqlCommand(sql, conn);
@@ -205,6 +206,8 @@ namespace MediaBazaarSystem
             {
                 ID = (int)reader.GetValue(0);
             }
+
+            conn.Close();
 
             return ID;
         }
@@ -368,19 +371,26 @@ namespace MediaBazaarSystem
          */
         public MySqlDataReader getShift()
         {
-            string sql = "SELECT Person.Id, Person.FirstName, Person.LastName, Role.Name, Schedule.StartTime, Schedule.EndTime, Schedule.WorkDate, Department.Name FROM Person " +
+            try
+            {
+                string sql = "SELECT Person.Id, Person.FirstName, Person.LastName, Role.Name, Schedule.StartTime, Schedule.EndTime, Schedule.WorkDate, Department.Name FROM Person " +
                 "INNER JOIN Role ON Person.RoleId = Role.Id " +
                 "INNER JOIN Schedule ON Person.Id = Schedule.PersonID " +
                 "INNER JOIN Department ON Person.DepartmentID = Department.Id";
 
-            MySqlConnection connection = new MySqlConnection(connString);
-            // Start mysql objects
-            MySqlCommand cmd = new MySqlCommand(sql, connection);
+                MySqlConnection connection = new MySqlConnection(connString);
+                // Start mysql objects
+                MySqlCommand cmd = new MySqlCommand(sql, connection);
 
-            connection.Open();
-            MySqlDataReader reader = cmd.ExecuteReader();
+                connection.Open();
+                MySqlDataReader reader = cmd.ExecuteReader();
 
-            return reader;
+                connection.Close();
+
+                return reader;
+            }
+            catch(Exception)
+            { return null; }
         }
 
         /**
@@ -388,20 +398,27 @@ namespace MediaBazaarSystem
          */
         public MySqlDataReader updateSchedules()
         {
-            string sql = "SELECT Person.Id, Person.FirstName, Person.LastName, Role.Name, Schedule.StartTime, Schedule.EndTime, Schedule.WorkDate, Department.Name, Schedule.Id FROM Person " +
-                "INNER JOIN Role ON Person.RoleId = Role.Id " +
-                "INNER JOIN Schedule ON Person.Id = Schedule.PersonID " +
-                "INNER JOIN Department ON Person.DepartmentID = Department.Id";
+            try
+            {
+                string sql = "SELECT Person.Id, Person.FirstName, Person.LastName, Role.Name, Schedule.StartTime, Schedule.EndTime, Schedule.WorkDate, Department.Name, Schedule.Id FROM Person " +
+                    "INNER JOIN Role ON Person.RoleId = Role.Id " +
+                    "INNER JOIN Schedule ON Person.Id = Schedule.PersonID " +
+                    "INNER JOIN Department ON Person.DepartmentID = Department.Id";
 
-            // Start mysql objects
-            MySqlConnection connection = new MySqlConnection(connString);
-            MySqlCommand cmd = new MySqlCommand(sql, connection);
+                // Start mysql objects
+                MySqlConnection connection = new MySqlConnection(connString);
+                MySqlCommand cmd = new MySqlCommand(sql, connection);
 
-            // Open connection
-            connection.Open();
-            MySqlDataReader reader = cmd.ExecuteReader();
+                // Open connection
+                connection.Open();
+                MySqlDataReader reader = cmd.ExecuteReader();
 
-            return reader;
+                return reader;
+            }
+            catch(Exception)
+            {
+                return null;
+            }
         }
 
         /**

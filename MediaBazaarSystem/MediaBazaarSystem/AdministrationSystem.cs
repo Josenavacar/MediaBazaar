@@ -52,6 +52,9 @@ namespace MediaBazaarSystem
             this.refreshProfile();
             lblAdminName.Text += " " + manager.FirstName + " " + manager.LastName;
             comBoxWorkDate.Visible = true;
+            showEmployees();
+            getDepInfo();
+            viewShifts();
         }
 
         /**
@@ -121,17 +124,22 @@ namespace MediaBazaarSystem
 
         private void LoadStaff()
         {
+            lbManagers.Items.Clear();
+            lbEmployees.Items.Clear();
             List<Staff> staff = dataBase.getStaffFromDB(department);
             foreach (Staff staffmember in staff)
             {
                 String staffname = staffmember.FirstName + " " + staffmember.LastName;
-                if (staffmember is Employee) //staffmember.Role == Position.Employee
+                if(staffmember.dbID != manager.dbID)
                 {
-                    lbEmployees.Items.Add(staffname);
-                }
-                else if(staffmember is Manager) //staffmember.Role == Position.HRManager || staffmember.Role == Position.StockManager
-                {
-                    lbManagers.Items.Add(staffname);
+                    if (staffmember.Role == Position.Employee) //staffmember.Role == Position.Employee
+                    {
+                        lbEmployees.Items.Add(staffname);
+                    }
+                    else if (staffmember.Role == Position.HRManager || staffmember.Role == Position.StockManager) //staffmember.Role == Position.HRManager || staffmember.Role == Position.StockManager
+                    {
+                        lbManagers.Items.Add(staffname);
+                    }
                 }
             }
         }
@@ -357,33 +365,39 @@ namespace MediaBazaarSystem
          */
         private void dataAdminWorkSchedule_CellDoubleClick( object sender, DataGridViewCellEventArgs e )
         {
-            // Get the row index and employee's schedule info
-            int index = e.RowIndex;
-            DataGridViewRow selectedRow = dataAdminWorkSchedule.Rows[ index ];
-            employeeName = selectedRow.Cells[ 0 ].Value.ToString();
-            employeeRole = selectedRow.Cells[ 1 ].Value.ToString();
-            employeeStartTime = selectedRow.Cells[ 2 ].Value.ToString();
-            employeeEndTime = selectedRow.Cells[ 3 ].Value.ToString();
-            employeeWorkDate = selectedRow.Cells[ 4 ].Value.ToString();
+            try
+            {
+                // Get the row index and employee's schedule info
+                int index = e.RowIndex;
+                DataGridViewRow selectedRow = dataAdminWorkSchedule.Rows[index];
+                employeeName = selectedRow.Cells[0].Value.ToString();
+                employeeRole = selectedRow.Cells[1].Value.ToString();
+                employeeStartTime = selectedRow.Cells[2].Value.ToString();
+                employeeEndTime = selectedRow.Cells[3].Value.ToString();
+                employeeWorkDate = selectedRow.Cells[4].Value.ToString();
 
-            if( employeeRole == "Manager" || employeeRole == "Stock Manager" )
-            {
-                MessageBox.Show( "You can't assign a top ranking manager to a shift! Please contact your administrator." );
-            }
-            else if(employeeRole == "Employee")
-            {
-                foreach( Schedule s in department.GetSchedules() )
+                if (employeeRole == "Manager" || employeeRole == "Stock Manager")
                 {
-                    if( ( s.FirstName + " " + s.LastName == employeeName ) && ( s.StartTime.ToString( "hh:mm tt" ) == employeeStartTime ) && ( s.EndTime.ToString( "hh:mm tt" ) == employeeEndTime ) )
-                    {
-                        schedule = s;
-                    }
+                    MessageBox.Show("You can't assign a top ranking manager to a shift! Please contact your administrator.");
                 }
+                else if (employeeRole == "Employee")
+                {
+                    foreach (Schedule s in department.GetSchedules())
+                    {
+                        if ((s.FirstName + " " + s.LastName == employeeName) && (s.StartTime.ToString("hh:mm tt") == employeeStartTime) && (s.EndTime.ToString("hh:mm tt") == employeeEndTime))
+                        {
+                            schedule = s;
+                        }
+                    }
 
-                // Open the assign employee form
-                assignEmployeeForm = new UpdateEmployeeSchedule( department, schedule );
-                assignEmployeeForm.Show();
+                    // Open the assign employee form
+                    assignEmployeeForm = new UpdateEmployeeSchedule(department, schedule);
+                    assignEmployeeForm.Show();
+                }
             }
+            catch(Exception)
+            { }
+            
         }
 
         /**
@@ -400,22 +414,27 @@ namespace MediaBazaarSystem
          */
         private void btnViewAllShifts_Click( object sender, EventArgs e )
         {
+            viewShifts();
+        }
+
+        private void viewShifts()
+        {
             this.dataAdminWorkSchedule.Rows.Clear();
 
-            foreach( Schedule schedule in department.GetSchedules() )
+            foreach (Schedule schedule in department.GetSchedules())
             {
-                if(department.Name == schedule.DepartmentName)
+                if (department.Name == schedule.DepartmentName)
                 {
-                    DataGridViewRow row = ( DataGridViewRow ) dataAdminWorkSchedule.Rows[ 0 ].Clone();
-                    dataAdminWorkSchedule.Columns[ "clmnWorkDate" ].DefaultCellStyle.BackColor = Color.LightSteelBlue;
-                    dataAdminWorkSchedule.Columns[ "clmnStartTime" ].DefaultCellStyle.BackColor = Color.PaleGreen;
-                    dataAdminWorkSchedule.Columns[ "clmnEndTime" ].DefaultCellStyle.BackColor = Color.PaleVioletRed;
-                    row.Cells[ 0 ].Value = schedule.FirstName + " " + schedule.LastName; // First Name
-                    row.Cells[ 1 ].Value = schedule.Role; // Name (Role)
-                    row.Cells[ 2 ].Value = schedule.StartTime.ToString( "hh:mm tt" );// Start Time
-                    row.Cells[ 3 ].Value = schedule.EndTime.ToString( "hh:mm tt" ); // End Time
-                    row.Cells[ 4 ].Value = schedule.WorkDate.ToString( "dddd, dd MMMM yyyy" ); // Work Date
-                    dataAdminWorkSchedule.Rows.Add( row );
+                    DataGridViewRow row = (DataGridViewRow)dataAdminWorkSchedule.Rows[0].Clone();
+                    dataAdminWorkSchedule.Columns["clmnWorkDate"].DefaultCellStyle.BackColor = Color.LightSteelBlue;
+                    dataAdminWorkSchedule.Columns["clmnStartTime"].DefaultCellStyle.BackColor = Color.PaleGreen;
+                    dataAdminWorkSchedule.Columns["clmnEndTime"].DefaultCellStyle.BackColor = Color.PaleVioletRed;
+                    row.Cells[0].Value = schedule.FirstName + " " + schedule.LastName; // First Name
+                    row.Cells[1].Value = schedule.Role; // Name (Role)
+                    row.Cells[2].Value = schedule.StartTime.ToString("hh:mm tt");// Start Time
+                    row.Cells[3].Value = schedule.EndTime.ToString("hh:mm tt"); // End Time
+                    row.Cells[4].Value = schedule.WorkDate.ToString("dddd, dd MMMM yyyy"); // Work Date
+                    dataAdminWorkSchedule.Rows.Add(row);
                 }
             }
         }
@@ -435,10 +454,15 @@ namespace MediaBazaarSystem
          */
         private void btnViewDepartmentInfo_Click( object sender, EventArgs e )
         {
+            getDepInfo();
+        }
+
+        private void getDepInfo()
+        {
             lBoxDepartmentStats.Items.Clear();
-            
+
             int length = department.GetStaff().Count;
-            lBoxDepartmentStats.Items.Add( "# of employees and managers that are employed: " + length + "  " );
+            lBoxDepartmentStats.Items.Add("# of employees and managers that are employed: " + length + "  ");
 
             int empfullTime = 0;
             int empPartTime = 0;
@@ -446,48 +470,48 @@ namespace MediaBazaarSystem
             int manPartTime = 0;
             int managers = 0;
 
-            foreach(Staff staff in department.GetStaff())
+            foreach (Staff staff in department.GetStaff())
             {
-                if(staff is Employee)
+                if (staff is Employee)
                 {
-                    if( staff.Contract == Contract.FullTime )
+                    if (staff.Contract == Contract.FullTime)
                     {
                         empfullTime++;
                     }
-                    else if( staff.Contract == Contract.PartTime )
+                    else if (staff.Contract == Contract.PartTime)
                     {
                         empPartTime++;
                     }
                 }
-                else if( staff is Manager )
+                else if (staff is Manager)
                 {
                     managers++;
 
-                    if( staff.Contract == Contract.FullTime )
+                    if (staff.Contract == Contract.FullTime)
                     {
                         manfullTime++;
                     }
-                    else if( staff.Contract == Contract.PartTime )
+                    else if (staff.Contract == Contract.PartTime)
                     {
                         manPartTime++;
                     }
                 }
             }
 
-            lBoxDepartmentStats.Items.Add( manfullTime + empfullTime + " Fulltime workers." );
-            lBoxDepartmentStats.Items.Add( manPartTime + empPartTime + " Parttime workers." );
+            lBoxDepartmentStats.Items.Add(manfullTime + empfullTime + " Fulltime workers.");
+            lBoxDepartmentStats.Items.Add(manPartTime + empPartTime + " Parttime workers.");
 
             int dep = 0;
-            for(int i = 0; i < department.GetSchedules().Count; i++ )
+            for (int i = 0; i < department.GetSchedules().Count; i++)
             {
-                if(department.GetSchedules()[i].DepartmentName == department.Name)
+                if (department.GetSchedules()[i].DepartmentName == department.Name)
                 {
                     dep++;
                 }
             }
-            lBoxDepartmentStats.Items.Add( "# of schedules related to this department: " + dep );
+            lBoxDepartmentStats.Items.Add("# of schedules related to this department: " + dep);
 
-            lBoxDepartmentStats.Items.Add( "# of managers: " + managers );
+            lBoxDepartmentStats.Items.Add("# of managers: " + managers);
         }
 
         /**
@@ -495,15 +519,20 @@ namespace MediaBazaarSystem
          */
         private void btnViewAllEmployees_Click( object sender, EventArgs e )
         {
+            showEmployees();
+        }
+
+        private void showEmployees()
+        {
             lBoxEmpStats.Items.Clear();
 
-            foreach(Staff staff in department.GetStaff())
+            foreach (Staff staff in department.GetStaff())
             {
-                if(staff is Employee)
+                if (staff is Employee)
                 {
-                    if( ( !lBoxEmpStats.Items.Contains( staff.FirstName ) ) && ( staff.Role == Position.Employee ) )
+                    if ((!lBoxEmpStats.Items.Contains(staff.FirstName)) && (staff.Role == Position.Employee))
                     {
-                        lBoxEmpStats.Items.Add( staff.FirstName + " " + staff.LastName );
+                        lBoxEmpStats.Items.Add(staff.FirstName + " " + staff.LastName);
                     }
                 }
             }
@@ -682,6 +711,7 @@ namespace MediaBazaarSystem
             if(checkProfileChange())
             {
                 dataBase.updateProfile(manager, txtBoxFirstName.Text, txtBoxLastName.Text, Convert.ToDateTime(txtBoxAge.Text), txtBoxAddress.Text, txtBoxEmail.Text);
+                manager.editStaffMember(txtBoxFirstName.Text, txtBoxLastName.Text, Convert.ToDateTime(txtBoxAge.Text), txtBoxAddress.Text, txtBoxEmail.Text);
 
                 //Updates profile.
                 lbEmployeeInfo.Items.Clear();
@@ -780,6 +810,11 @@ namespace MediaBazaarSystem
             informationForm.Show();
         }
 
+        private void btnRefresh_Click(object sender, EventArgs e)
+        {
+            lbManagers.Items.Clear();
+        }
+
         /**
          * Method to load schedule information when form is loaded
          */
@@ -810,7 +845,8 @@ namespace MediaBazaarSystem
             Staff staff = department.GetStaffMember( comBoxEmployees.SelectedItem.ToString() );
             String startTime = comBoxStartTime.SelectedItem.ToString();
             String endTime = comBoxEndTime.SelectedItem.ToString();
-            String workDate = comBoxWorkDate.SelectedItem.ToString();
+            DateTime workDateTime = DateTime.Parse(comBoxWorkDate.SelectedItem.ToString());
+            String workDate = workDateTime.ToString("dd/MM/yyyy");
             DateTime updateStartTime = DateTime.Parse( startTime );
             DateTime updateEndTime = DateTime.Parse( endTime );
             DateTime updateWorkDate = DateTime.Parse( workDate );
@@ -844,7 +880,7 @@ namespace MediaBazaarSystem
 
                         MessageBox.Show( "Schedule successfully added!" );
                     }
-                    catch(Exception ex)
+                    catch(Exception)
                     {
                         MessageBox.Show( "Sorry request failed." ) ;
                     }

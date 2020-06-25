@@ -35,6 +35,7 @@ namespace MediaBazaarSystem
             dtpAvailableWorkDates.MinDate = DateTime.Now;
             dtpAvailableWorkDates.MaxDate = DateTime.Now.AddDays( 7 );
             LoadDateInformation();
+            viewShifts();
         }
 
         /**
@@ -103,59 +104,64 @@ namespace MediaBazaarSystem
          */
         private void GetWorkScheduleDB( MySqlDataReader reader )
         {
-            if( reader.HasRows )
+            try
             {
-                // Get the data
-                while( reader.Read() )
+                if (reader.HasRows)
                 {
-                    int employeeID = (int)reader.GetValue( 0 );
-                    String firstName = reader.GetValue( 1 ).ToString();
-                    String lastName = reader.GetValue(2).ToString();
-                    String role = reader.GetValue( 3 ).ToString();
-                    String startTime = reader.GetValue( 4 ).ToString();
-                    String endTime = reader.GetValue( 5 ).ToString();
-                    String workDate = reader.GetValue( 6 ).ToString();
-                    String departmentName = reader.GetValue( 7 ).ToString();
-                    DateTime workStartTime = Convert.ToDateTime( startTime );
-                    DateTime workEndTime = Convert.ToDateTime( endTime );
-                    DateTime convertedWorkDate = Convert.ToDateTime( workDate );
-                    int scheduleID = ( int ) reader.GetValue( 8 );
-
-                    if( (dtpWorkSchedule.Value.Date == convertedWorkDate.Date) && ( department.Name == departmentName))
+                    // Get the data
+                    while (reader.Read())
                     {
-                        // Add data to data grid view table
-                        DataGridViewRow row = ( DataGridViewRow ) dataEmpWorkSchedule.Rows[ 0 ].Clone();
-                        dataEmpWorkSchedule.Columns[ "clmnWorkDate" ].DefaultCellStyle.BackColor = Color.LightSteelBlue;
-                        dataEmpWorkSchedule.Columns[ "clmnStartTime" ].DefaultCellStyle.BackColor = Color.PaleGreen;
-                        dataEmpWorkSchedule.Columns[ "clmnEndTime" ].DefaultCellStyle.BackColor = Color.PaleVioletRed;
-                        row.Cells[ 0 ].Value = firstName + " " + lastName; // First Name
-                        row.Cells[ 1 ].Value = role; // Name (Role)
-                        row.Cells[ 2 ].Value = workStartTime.ToString( "hh:mm tt" );// Start Time
-                        row.Cells[ 3 ].Value = workEndTime.ToString( "hh:mm tt" ); // End Time
-                        row.Cells[ 4 ].Value = convertedWorkDate.ToString( "dddd, dd MMMM yyyy" ); // Work Date
-                        dataEmpWorkSchedule.Rows.Add( row );
-                    }
+                        int employeeID = (int)reader.GetValue(0);
+                        String firstName = reader.GetValue(1).ToString();
+                        String lastName = reader.GetValue(2).ToString();
+                        String role = reader.GetValue(3).ToString();
+                        String startTime = reader.GetValue(4).ToString();
+                        String endTime = reader.GetValue(5).ToString();
+                        String workDate = reader.GetValue(6).ToString();
+                        String departmentName = reader.GetValue(7).ToString();
+                        DateTime workStartTime = Convert.ToDateTime(startTime);
+                        DateTime workEndTime = Convert.ToDateTime(endTime);
+                        DateTime convertedWorkDate = Convert.ToDateTime(workDate);
+                        int scheduleID = (int)reader.GetValue(8);
 
-                    schedule = new Schedule(scheduleID, firstName, lastName, role, workStartTime, workEndTime, convertedWorkDate, departmentName, employeeID );
-                    department.AddSchedule( schedule );
+                        if ((dtpWorkSchedule.Value.Date == convertedWorkDate.Date) && (department.Name == departmentName))
+                        {
+                            // Add data to data grid view table
+                            DataGridViewRow row = (DataGridViewRow)dataEmpWorkSchedule.Rows[0].Clone();
+                            dataEmpWorkSchedule.Columns["clmnWorkDate"].DefaultCellStyle.BackColor = Color.LightSteelBlue;
+                            dataEmpWorkSchedule.Columns["clmnStartTime"].DefaultCellStyle.BackColor = Color.PaleGreen;
+                            dataEmpWorkSchedule.Columns["clmnEndTime"].DefaultCellStyle.BackColor = Color.PaleVioletRed;
+                            row.Cells[0].Value = firstName + " " + lastName; // First Name
+                            row.Cells[1].Value = role; // Name (Role)
+                            row.Cells[2].Value = workStartTime.ToString("hh:mm tt");// Start Time
+                            row.Cells[3].Value = workEndTime.ToString("hh:mm tt"); // End Time
+                            row.Cells[4].Value = convertedWorkDate.ToString("dddd, dd MMMM yyyy"); // Work Date
+                            dataEmpWorkSchedule.Rows.Add(row);
+                        }
 
-                    if( employeeID == employee.dbID )
-                    {
-                        lBoxEmpHistory.Items.Add(
-                            convertedWorkDate.ToString( "dddd, dd MMMM yyyy" ) + " - " +
-                            workStartTime.ToString( "hh:mm tt" ) + " - " +
-                            workEndTime.ToString( "hh:mm tt" ) 
-                        );
+                        schedule = new Schedule(scheduleID, firstName, lastName, role, workStartTime, workEndTime, convertedWorkDate, departmentName, employeeID);
+                        department.AddSchedule(schedule);
+
+                        if (employeeID == employee.dbID)
+                        {
+                            lBoxEmpHistory.Items.Add(
+                                convertedWorkDate.ToString("dddd, dd MMMM yyyy") + " - " +
+                                workStartTime.ToString("hh:mm tt") + " - " +
+                                workEndTime.ToString("hh:mm tt")
+                            );
+                        }
                     }
                 }
-            }
-            else
-            {
-                MessageBox.Show( "Sorry there's no data. Contact your administrator for more information." );
-            }
+                else
+                {
+                    MessageBox.Show("Sorry there's no data. Contact your administrator for more information.");
+                }
 
-            reader.Close();
-            //connection.Close();
+                reader.Close();
+                //connection.Close();
+            }
+            catch(Exception)
+            { }
         }
 
         /**
@@ -236,22 +242,27 @@ namespace MediaBazaarSystem
          */
         private void btnViewAllShifts_Click( object sender, EventArgs e )
         {
+            viewShifts();
+        }
+
+        private void viewShifts()
+        {
             this.dataEmpWorkSchedule.Rows.Clear();
 
-            foreach(Schedule schedule in department.GetSchedules())
+            foreach (Schedule schedule in department.GetSchedules())
             {
-                if( department.Name == schedule.DepartmentName )
+                if (department.Name == schedule.DepartmentName)
                 {
-                    DataGridViewRow row = ( DataGridViewRow ) dataEmpWorkSchedule.Rows[ 0 ].Clone();
-                    dataEmpWorkSchedule.Columns[ "clmnWorkDate" ].DefaultCellStyle.BackColor = Color.LightSteelBlue;
-                    dataEmpWorkSchedule.Columns[ "clmnStartTime" ].DefaultCellStyle.BackColor = Color.PaleGreen;
-                    dataEmpWorkSchedule.Columns[ "clmnEndTime" ].DefaultCellStyle.BackColor = Color.PaleVioletRed;
-                    row.Cells[ 0 ].Value = schedule.FirstName + " " + schedule.LastName; // First Name
-                    row.Cells[ 1 ].Value = schedule.Role; // Name (Role)
-                    row.Cells[ 2 ].Value = schedule.StartTime.ToString( "hh:mm tt" );// Start Time
-                    row.Cells[ 3 ].Value = schedule.EndTime.ToString( "hh:mm tt" ); // End Time
-                    row.Cells[ 4 ].Value = schedule.WorkDate.ToString( "dddd, dd MMMM yyyy" ); // Work Date
-                    dataEmpWorkSchedule.Rows.Add( row );
+                    DataGridViewRow row = (DataGridViewRow)dataEmpWorkSchedule.Rows[0].Clone();
+                    dataEmpWorkSchedule.Columns["clmnWorkDate"].DefaultCellStyle.BackColor = Color.LightSteelBlue;
+                    dataEmpWorkSchedule.Columns["clmnStartTime"].DefaultCellStyle.BackColor = Color.PaleGreen;
+                    dataEmpWorkSchedule.Columns["clmnEndTime"].DefaultCellStyle.BackColor = Color.PaleVioletRed;
+                    row.Cells[0].Value = schedule.FirstName + " " + schedule.LastName; // First Name
+                    row.Cells[1].Value = schedule.Role; // Name (Role)
+                    row.Cells[2].Value = schedule.StartTime.ToString("hh:mm tt");// Start Time
+                    row.Cells[3].Value = schedule.EndTime.ToString("hh:mm tt"); // End Time
+                    row.Cells[4].Value = schedule.WorkDate.ToString("dddd, dd MMMM yyyy"); // Work Date
+                    dataEmpWorkSchedule.Rows.Add(row);
                 }
             }
         }
@@ -381,41 +392,50 @@ namespace MediaBazaarSystem
             lblWorkHistory.Text = "Your work history: morning shifts";
             lBoxEmpHistory.Items.Clear();
 
-            MySqlDataReader reader = dataBase.getShift();
-
-            if ( reader.HasRows )
+            try
             {
-                // Get the data
-                while( reader.Read() )
-                {
-                    int employeeID = ( int ) reader.GetValue( 0 );
-                    String firstName = reader.GetValue( 1 ).ToString();
-                    String lastName = reader.GetValue( 2 ).ToString();
-                    String role = reader.GetValue( 3 ).ToString();
-                    String startTime = reader.GetValue( 4 ).ToString();
-                    String endTime = reader.GetValue( 5 ).ToString();
-                    String workDate = reader.GetValue( 6 ).ToString();
-                    String departmentName = reader.GetValue( 7 ).ToString();
-                    DateTime workStartTime = Convert.ToDateTime( startTime );
-                    DateTime workEndTime = Convert.ToDateTime( endTime );
-                    DateTime convertedWorkDate = Convert.ToDateTime( workDate );
+                MySqlDataReader reader = dataBase.getShift();
 
-                    if( ( this.employee.FirstName == firstName ) && ( department.Name == departmentName ) )
+                if (reader.HasRows)
+                {
+                    // Get the data
+                    while (reader.Read())
                     {
-                        if( ( workStartTime.ToString( "hh:mm tt" ) == "08:00 AM" ) && ( workEndTime.ToString( "hh:mm tt" ) == "11:00 AM" ) )
+                        int employeeID = (int)reader.GetValue(0);
+                        String firstName = reader.GetValue(1).ToString();
+                        String lastName = reader.GetValue(2).ToString();
+                        String role = reader.GetValue(3).ToString();
+                        String startTime = reader.GetValue(4).ToString();
+                        String endTime = reader.GetValue(5).ToString();
+                        String workDate = reader.GetValue(6).ToString();
+                        String departmentName = reader.GetValue(7).ToString();
+                        DateTime workStartTime = Convert.ToDateTime(startTime);
+                        DateTime workEndTime = Convert.ToDateTime(endTime);
+                        DateTime convertedWorkDate = Convert.ToDateTime(workDate);
+
+                        if ((this.employee.FirstName == firstName) && (department.Name == departmentName))
                         {
-                            lBoxEmpHistory.Items.Add(
-                                "Date: " + convertedWorkDate.ToString( "dddd, dd MMMM yyyy" ) +
-                                " --- Start time: " + workStartTime.ToString( "hh:mm tt" ) +
-                                " --- End time: " + workEndTime.ToString( "hh:mm tt" )
-                            );
+                            if ((workStartTime.ToString("hh:mm tt") == "08:00 AM") && (workEndTime.ToString("hh:mm tt") == "11:00 AM"))
+                            {
+                                lBoxEmpHistory.Items.Add(
+                                    "Date: " + convertedWorkDate.ToString("dddd, dd MMMM yyyy") +
+                                    " --- Start time: " + workStartTime.ToString("hh:mm tt") +
+                                    " --- End time: " + workEndTime.ToString("hh:mm tt")
+                                );
+                            }
                         }
                     }
                 }
+
+                reader.Close();
+                //connection.Close();
+            }
+            catch(Exception)
+            {
+
             }
 
-            reader.Close();
-            //connection.Close();
+
         }
 
         /**
@@ -427,41 +447,48 @@ namespace MediaBazaarSystem
             lblWorkHistory.Text = "Your work history: afternoon shifts";
             lBoxEmpHistory.Items.Clear();
 
-            MySqlDataReader reader = dataBase.getShift();
-
-            if ( reader.HasRows )
+            try
             {
-                // Get the data
-                while( reader.Read() )
-                {
-                    int employeeID = ( int ) reader.GetValue( 0 );
-                    String firstName = reader.GetValue( 1 ).ToString();
-                    String lastName = reader.GetValue( 2 ).ToString();
-                    String role = reader.GetValue( 3 ).ToString();
-                    String startTime = reader.GetValue( 4 ).ToString();
-                    String endTime = reader.GetValue( 5 ).ToString();
-                    String workDate = reader.GetValue( 6 ).ToString();
-                    String departmentName = reader.GetValue( 7 ).ToString();
-                    DateTime workStartTime = Convert.ToDateTime( startTime );
-                    DateTime workEndTime = Convert.ToDateTime( endTime );
-                    DateTime convertedWorkDate = Convert.ToDateTime( workDate );
+                MySqlDataReader reader = dataBase.getShift();
 
-                    if( ( this.employee.FirstName == firstName ) && ( department.Name == departmentName ) )
+                if (reader.HasRows)
+                {
+                    // Get the data
+                    while (reader.Read())
                     {
-                        if( ( workStartTime.ToString( "hh:mm tt" ) == "12:00 PM" ) && ( workEndTime.ToString( "hh:mm tt" ) == "04:00 PM" ) )
+                        int employeeID = (int)reader.GetValue(0);
+                        String firstName = reader.GetValue(1).ToString();
+                        String lastName = reader.GetValue(2).ToString();
+                        String role = reader.GetValue(3).ToString();
+                        String startTime = reader.GetValue(4).ToString();
+                        String endTime = reader.GetValue(5).ToString();
+                        String workDate = reader.GetValue(6).ToString();
+                        String departmentName = reader.GetValue(7).ToString();
+                        DateTime workStartTime = Convert.ToDateTime(startTime);
+                        DateTime workEndTime = Convert.ToDateTime(endTime);
+                        DateTime convertedWorkDate = Convert.ToDateTime(workDate);
+
+                        if ((this.employee.FirstName == firstName) && (department.Name == departmentName))
                         {
-                            lBoxEmpHistory.Items.Add(
-                                "Date: " + convertedWorkDate.ToString( "dddd, dd MMMM yyyy" ) +
-                                " --- Start time: " + workStartTime.ToString( "hh:mm tt" ) +
-                                " --- End time: " + workEndTime.ToString( "hh:mm tt" )
-                            );
+                            if ((workStartTime.ToString("hh:mm tt") == "12:00 PM") && (workEndTime.ToString("hh:mm tt") == "04:00 PM"))
+                            {
+                                lBoxEmpHistory.Items.Add(
+                                    "Date: " + convertedWorkDate.ToString("dddd, dd MMMM yyyy") +
+                                    " --- Start time: " + workStartTime.ToString("hh:mm tt") +
+                                    " --- End time: " + workEndTime.ToString("hh:mm tt")
+                                );
+                            }
                         }
                     }
                 }
-            }
 
-            reader.Close();
-            //connection.Close();
+                reader.Close();
+                //connection.Close();
+            }
+            catch(Exception)
+            {
+
+            }
         }
 
         /**
@@ -473,41 +500,47 @@ namespace MediaBazaarSystem
             lblWorkHistory.Text = "Your work history: evening shifts";
             lBoxEmpHistory.Items.Clear();
 
-            MySqlDataReader reader = dataBase.getShift();
-
-            if ( reader.HasRows )
+            try
             {
-                // Get the data
-                while( reader.Read() )
-                {
-                    int employeeID = ( int ) reader.GetValue( 0 );
-                    String firstName = reader.GetValue( 1 ).ToString();
-                    String lastName = reader.GetValue( 2 ).ToString();
-                    String role = reader.GetValue( 3 ).ToString();
-                    String startTime = reader.GetValue( 4 ).ToString();
-                    String endTime = reader.GetValue( 5 ).ToString();
-                    String workDate = reader.GetValue( 6 ).ToString();
-                    String departmentName = reader.GetValue( 7 ).ToString();
-                    DateTime workStartTime = Convert.ToDateTime( startTime );
-                    DateTime workEndTime = Convert.ToDateTime( endTime );
-                    DateTime convertedWorkDate = Convert.ToDateTime( workDate );
+                MySqlDataReader reader = dataBase.getShift();
 
-                    if( ( this.employee.FirstName == firstName ) && ( department.Name == departmentName ) )
+                if (reader.HasRows)
+                {
+                    // Get the data
+                    while (reader.Read())
                     {
-                        if( ( workStartTime.ToString( "hh:mm tt" ) == "05:00 PM" ) && ( workEndTime.ToString( "hh:mm tt" ) == "09:00 PM" ) )
+                        int employeeID = (int)reader.GetValue(0);
+                        String firstName = reader.GetValue(1).ToString();
+                        String lastName = reader.GetValue(2).ToString();
+                        String role = reader.GetValue(3).ToString();
+                        String startTime = reader.GetValue(4).ToString();
+                        String endTime = reader.GetValue(5).ToString();
+                        String workDate = reader.GetValue(6).ToString();
+                        String departmentName = reader.GetValue(7).ToString();
+                        DateTime workStartTime = Convert.ToDateTime(startTime);
+                        DateTime workEndTime = Convert.ToDateTime(endTime);
+                        DateTime convertedWorkDate = Convert.ToDateTime(workDate);
+
+                        if ((this.employee.FirstName == firstName) && (department.Name == departmentName))
                         {
-                            lBoxEmpHistory.Items.Add(
-                                "Date: " + convertedWorkDate.ToString( "dddd, dd MMMM yyyy" ) +
-                                " --- Start time: " + workStartTime.ToString( "hh:mm tt" ) +
-                                " --- End time: " + workEndTime.ToString( "hh:mm tt" )
-                            );
+                            if ((workStartTime.ToString("hh:mm tt") == "05:00 PM") && (workEndTime.ToString("hh:mm tt") == "09:00 PM"))
+                            {
+                                lBoxEmpHistory.Items.Add(
+                                    "Date: " + convertedWorkDate.ToString("dddd, dd MMMM yyyy") +
+                                    " --- Start time: " + workStartTime.ToString("hh:mm tt") +
+                                    " --- End time: " + workEndTime.ToString("hh:mm tt")
+                                );
+                            }
                         }
                     }
                 }
-            }
 
-            reader.Close();
-            //connection.Close();
+                reader.Close();
+                //connection.Close();
+            }
+            catch(Exception)
+            { }
+
         }
 
 

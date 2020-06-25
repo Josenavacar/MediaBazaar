@@ -195,7 +195,6 @@ C:\xampp\htdocs\mediabazaar\MediaBazaarSystem\MediaBazaarSystem\bin\Debug\System
 C:\xampp\htdocs\mediabazaar\MediaBazaarSystem\MediaBazaarSystem\obj\Debug\MediaBazaarSystem.csprojAssemblyReference.cache
 C:\xampp\htdocs\mediabazaar\MediaBazaarSystem\MediaBazaarSystem\obj\Debug\MediaBazaarSystem.UpdateOrAdd.resources
 C:\xampp\htdocs\mediabazaar\MediaBazaarSystem\MediaBazaarSystem\obj\Debug\MediaBazaarSystem.AdministrationSystem.resources
-C:\xampp\htdocs\mediabazaar\MediaBazaarSystem\MediaBazaarSystem\obj\Debug\MediaBazaarSystem.AssignEmployeeSystem.resources
 C:\xampp\htdocs\mediabazaar\MediaBazaarSystem\MediaBazaarSystem\obj\Debug\MediaBazaarSystem.ChangePassword.resources
 C:\xampp\htdocs\mediabazaar\MediaBazaarSystem\MediaBazaarSystem\obj\Debug\MediaBazaarSystem.DeleteForm.resources
 C:\xampp\htdocs\mediabazaar\MediaBazaarSystem\MediaBazaarSystem\obj\Debug\MediaBazaarSystem.EmployeeSystem.resources
@@ -316,3 +315,19 @@ C:\wamp64\www\mediabazaar\MediaBazaarSystem\MediaBazaarSystem\bin\Debug\MailKit.
 C:\wamp64\www\mediabazaar\MediaBazaarSystem\MediaBazaarSystem\bin\Debug\MimeKit.pdb
 C:\wamp64\www\mediabazaar\MediaBazaarSystem\MediaBazaarSystem\bin\Debug\MimeKit.xml
 C:\wamp64\www\mediabazaar\MediaBazaarSystem\MediaBazaarSystem\obj\Debug\MediaBazaarSystem.UpdateEmployeeSchedule.resources
+C:\xampp\htdocs\mediabazaar\MediaBazaarSystem\MediaBazaarSystem\bin\Debug\K4os.Compression.LZ4.dll
+C:\xampp\htdocs\mediabazaar\MediaBazaarSystem\MediaBazaarSystem\bin\Debug\K4os.Compression.LZ4.Streams.dll
+C:\xampp\htdocs\mediabazaar\MediaBazaarSystem\MediaBazaarSystem\bin\Debug\K4os.Hash.xxHash.dll
+C:\xampp\htdocs\mediabazaar\MediaBazaarSystem\MediaBazaarSystem\bin\Debug\MailKit.dll
+C:\xampp\htdocs\mediabazaar\MediaBazaarSystem\MediaBazaarSystem\bin\Debug\MimeKit.dll
+C:\xampp\htdocs\mediabazaar\MediaBazaarSystem\MediaBazaarSystem\bin\Debug\Zstandard.Net.dll
+C:\xampp\htdocs\mediabazaar\MediaBazaarSystem\MediaBazaarSystem\bin\Debug\BouncyCastle.Crypto.xml
+C:\xampp\htdocs\mediabazaar\MediaBazaarSystem\MediaBazaarSystem\bin\Debug\K4os.Compression.LZ4.xml
+C:\xampp\htdocs\mediabazaar\MediaBazaarSystem\MediaBazaarSystem\bin\Debug\K4os.Compression.LZ4.Streams.xml
+C:\xampp\htdocs\mediabazaar\MediaBazaarSystem\MediaBazaarSystem\bin\Debug\K4os.Hash.xxHash.xml
+C:\xampp\htdocs\mediabazaar\MediaBazaarSystem\MediaBazaarSystem\bin\Debug\MailKit.pdb
+C:\xampp\htdocs\mediabazaar\MediaBazaarSystem\MediaBazaarSystem\bin\Debug\MailKit.xml
+C:\xampp\htdocs\mediabazaar\MediaBazaarSystem\MediaBazaarSystem\bin\Debug\MimeKit.pdb
+C:\xampp\htdocs\mediabazaar\MediaBazaarSystem\MediaBazaarSystem\bin\Debug\MimeKit.xml
+C:\xampp\htdocs\mediabazaar\MediaBazaarSystem\MediaBazaarSystem\obj\Debug\MediaBazaarSystem.InformationForm.resources
+C:\xampp\htdocs\mediabazaar\MediaBazaarSystem\MediaBazaarSystem\obj\Debug\MediaBazaarSystem.UpdateEmployeeSchedule.resources

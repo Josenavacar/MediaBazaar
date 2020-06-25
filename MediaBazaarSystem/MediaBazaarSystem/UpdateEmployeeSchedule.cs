@@ -66,26 +66,26 @@ namespace MediaBazaarSystem
          */
         private void btnDone_Click( object sender, EventArgs e )
         {
-            updateTimer.Enabled = true;
-            lBoxAssignEmployee.Items.Clear();
-            Staff staff = department.GetStaffMember( txtBoxEmployeeName.Text );
-            String startTime = comBoxStartTime.SelectedItem.ToString();
-            String endTime = comBoxEndTime.SelectedItem.ToString();
-            String workDate = dtpWorkDates.Value.ToString();
-            DateTime updateStartTime = DateTime.Parse( startTime );
-            DateTime updateEndTime = DateTime.Parse( endTime );
-            DateTime updateWorkDate = DateTime.Parse( workDate );
-            String body = "Your shift has been updated. This is your new shift start time: " + startTime + " end time: " + endTime + " work date: " + workDate;
 
             try
             {
+                updateTimer.Enabled = true;
+                lBoxAssignEmployee.Items.Clear();
+                Staff staff = department.GetStaffMember(txtBoxEmployeeName.Text);
+                String startTime = comBoxStartTime.SelectedItem.ToString();
+                String endTime = comBoxEndTime.SelectedItem.ToString();
+                String workDate = dtpWorkDates.Value.ToString();
+                DateTime updateStartTime = DateTime.Parse(startTime);
+                DateTime updateEndTime = DateTime.Parse(endTime);
+                DateTime updateWorkDate = DateTime.Parse(workDate);
+                String body = "Your shift has been updated. This is your new shift start time: " + startTime + " end time: " + endTime + " work date: " + workDate;
                 databaseHelper.UpdateEmployeeSchedule( schedule, startTime, endTime, workDate );
                 emailHelper.SendScheduleEmail( body, staff.Email );
                 schedule.UpdateSchedule( schedule.dbID, schedule.FirstName, schedule.LastName, schedule.Role, updateStartTime, updateEndTime, updateWorkDate, this.department.Name );
                 this.Hide();
                 MessageBox.Show( "Schedule successfully added!" );
             }
-            catch( Exception ex )
+            catch( Exception )
             {
                 MessageBox.Show( "Sorry request failed." );
             }

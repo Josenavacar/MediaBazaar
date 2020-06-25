@@ -81,7 +81,7 @@ namespace MediaBazaarSystem
         {
             txtBoxFirstName.Text = staffMember.FirstName;
             txtBoxLastName.Text = staffMember.LastName;
-            tbBirthDate.Text = staffMember.dateOfBirth.ToString();
+            tbBirthDate.Text = staffMember.dateOfBirth.ToString("dd/MM/yyyy");
             tbAddress.Text = staffMember.Address;
             comBoxRole.SelectedItem = staffMember.Role;
             txtBoxSalary.Text = staffMember.Salary.ToString();
@@ -90,14 +90,6 @@ namespace MediaBazaarSystem
             comBoxRole.SelectedIndex = (int)staffMember.Role - 1;
             cmboBoxDepartment.SelectedIndex = this.department.DepartmentID - 1;
             cmboBoxContract.SelectedIndex = (int)staffMember.Contract - 1;
-        }
-
-        /**
-         * Method to focus out birthday
-         */
-        private void tbBirthDate_Click(object sender, EventArgs e)
-        {
-            tbBirthDate.Text = "";
         }
 
         /**
@@ -120,35 +112,43 @@ namespace MediaBazaarSystem
          */
         private void btnAddStaff_Click(object sender, EventArgs e)
         {
-            ReadInfoFromForm();
-            int tempID = -1;
-
-
-            Staff newStaffMember = null;
-
-            if (role == Position.Employee)
+            try
             {
-                newStaffMember = new Employee(tempID, FirstName, LastName, birthDate, address, salary, hoursAvailable, email, contract);
+                ReadInfoFromForm();
+                int tempID = -1;
+
+
+                Staff newStaffMember = null;
+
+                if (role == Position.Employee)
+                {
+                    newStaffMember = new Employee(tempID, FirstName, LastName, birthDate, address, salary, hoursAvailable, email, contract);
+                }
+                else if (role == Position.HRManager)
+                {
+                    newStaffMember = new Manager(tempID, FirstName, LastName, birthDate, address, salary, hoursAvailable, email, contract);
+                }
+                else if (role == Position.StockManager)
+                {
+                    newStaffMember = new Manager(tempID, FirstName, LastName, birthDate, address, salary, hoursAvailable, email, contract, passcode);
+                }
+
+                dataBase.addStaffToDB(newStaffMember, DepartmentID);
+                newStaffMember.dbID = dataBase.getStaffID();
+
+                if (this.department.DepartmentID == DepartmentID)
+                {
+                    department.AddStaffMember(newStaffMember);
+                }
+
+                MessageBox.Show("Staff member added successfully");
+                this.Close();
             }
-            else if (role == Position.HRManager)
+            catch(Exception)
             {
-                newStaffMember = new Manager(tempID, FirstName, LastName, birthDate, address, salary, hoursAvailable, email, contract);
-            }
-            else if( role == Position.StockManager )
-            {
-                newStaffMember = new Manager( tempID, FirstName, LastName, birthDate, address, salary, hoursAvailable, email, contract, passcode);
+                MessageBox.Show("Information not filled correctly");
             }
             
-            dataBase.addStaffToDB(newStaffMember, DepartmentID);
-            newStaffMember.dbID = dataBase.getStaffID();
-
-            if(this.department.DepartmentID == DepartmentID)
-            {
-                department.AddStaffMember(newStaffMember);
-            }
-
-            MessageBox.Show("Staff member added successfully");
-            this.Close();
         }
 
         /**
@@ -156,18 +156,23 @@ namespace MediaBazaarSystem
          */
         private void ReadInfoFromForm()
         {
-            this.FirstName = txtBoxFirstName.Text.ToString(); //First name
-            this.LastName = txtBoxLastName.Text.ToString(); //Last name
-            this.birthDate = Convert.ToDateTime(tbBirthDate.Text); //Date of Birth
-            this.address = tbAddress.Text.ToString(); //Address
-            this.email = txtBoxEmail.Text.ToString(); //Email
-            this.salary = Convert.ToDouble(txtBoxSalary.Text); //Salary
-            this.hoursAvailable = Convert.ToInt32(txtBoxHoursAvailable.Text); //Hours available
-            this.roleID = comBoxRole.SelectedIndex + 1;
-            this.role = (Position)roleID; //Role (as a string instead of an ID for ease of use and clarity in a list of C#)
-            this.DepartmentID = cmboBoxDepartment.SelectedIndex + 1;
-            this.contract = (Contract)Enum.Parse(typeof(Contract), cmboBoxContract.SelectedItem.ToString());
-            this.passcode = Convert.ToInt32( txtBoxPasscode.Text );
+            try
+            {
+                this.FirstName = txtBoxFirstName.Text.ToString(); //First name
+                this.LastName = txtBoxLastName.Text.ToString(); //Last name
+                this.birthDate = Convert.ToDateTime(tbBirthDate.Text); //Date of Birth
+                this.address = tbAddress.Text.ToString(); //Address
+                this.email = txtBoxEmail.Text.ToString(); //Email
+                this.salary = Convert.ToDouble(txtBoxSalary.Text); //Salary
+                this.hoursAvailable = Convert.ToInt32(txtBoxHoursAvailable.Text); //Hours available
+                this.roleID = comBoxRole.SelectedIndex + 1;
+                this.role = (Position)roleID; //Role (as a string instead of an ID for ease of use and clarity in a list of C#)
+                this.DepartmentID = cmboBoxDepartment.SelectedIndex + 1;
+                this.contract = (Contract)Enum.Parse(typeof(Contract), cmboBoxContract.SelectedItem.ToString());
+                this.passcode = Convert.ToInt32(txtBoxPasscode.Text);
+            }
+            catch(Exception)
+            {}
         }
     }
 }
